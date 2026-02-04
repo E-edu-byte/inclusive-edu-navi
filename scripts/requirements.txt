@@ -1,0 +1,7 @@
+# 特別支援教育ニュース収集システム 依存パッケージ
+feedparser>=6.0.0
+requests>=2.28.0
+
+# AI記事生成用
+google-genai>=1.0.0
+python-dotenv>=1.0.0

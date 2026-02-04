@@ -1,0 +1,76 @@
+# 毎日のニュース収集 & AI記事生成ワークフロー
+name: Daily Update
+
+on:
+  # 毎日午前6時（日本時間）に実行 = UTC 21:00
+  schedule:
+    - cron: "0 21 * * *"
+  # 手動実行も可能
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  # GitHub Secrets から GEMINI_API_KEY を読み込む
+  GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. リポジトリをチェックアウト
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Python環境のセットアップ
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: scripts/requirements.txt
+
+      # 3. ライブラリのインストール
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r scripts/requirements.txt
+
+      # 4. ニュース収集（fetch-news.py）
+      - name: Fetch news articles
+        run: python scripts/fetch-news.py
+
+      # 5. AI記事生成（generate-articles.py）
+      - name: Generate AI picks
+        run: python scripts/generate-articles.py
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+      # 6. 変更があるかチェック
+      - name: Check for changes
+        id: git-check
+        run: |
+          git add -A
+          if git diff --staged --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      # 7. 変更をコミット＆プッシュ
+      - name: Commit and push changes
+        if: steps.git-check.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add public/data/articles.json public/data/ai-picks.json
+          git commit -m "chore: daily update - news & AI picks $(date +'%Y-%m-%d')"
+          git push
+
+      # 8. デプロイをトリガー（オプション）
+      - name: Trigger deploy
+        if: steps.git-check.outputs.changed == 'true'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          event-type: daily-update-completed

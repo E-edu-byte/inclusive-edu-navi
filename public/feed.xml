@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>インクルーシブ教育ナビ</title>
+    <link>https://example.github.io/inclusive-edu-navi</link>
+    <description>すべての子どもの学びを支える最新情報。特別支援教育に関するニュース、研究、実践事例をお届けします。</description>
+    <language>ja</language>
+    <lastBuildDate>Tue, 04 Feb 2025 00:00:00 GMT</lastBuildDate>
+    <atom:link href="https://example.github.io/inclusive-edu-navi/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title><![CDATA[文部科学省、特別支援教育の新ガイドラインを発表 ― インクルーシブ教育の推進を強化]]></title>
+      <link>https://example.github.io/inclusive-edu-navi/article/mext-new-guidelines-2024/</link>
+      <guid>https://example.github.io/inclusive-edu-navi/article/mext-new-guidelines-2024/</guid>
+      <description><![CDATA[文部科学省は、2024年度からの特別支援教育に関する新たなガイドラインを発表しました。通常学級における合理的配慮の具体例や、個別の教育支援計画の作成ポイントなど、現場で活用できる実践的な内容が盛り込まれています。]]></description>
+      <category>制度・法改正</category>
+      <pubDate>Fri, 15 Mar 2024 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[発達障害児の学習支援に関する最新研究 ― エビデンスに基づく効果的なアプローチ]]></title>
+      <link>https://example.github.io/inclusive-edu-navi/article/latest-research-learning-support/</link>
+      <guid>https://example.github.io/inclusive-edu-navi/article/latest-research-learning-support/</guid>
+      <description><![CDATA[国立特別支援教育総合研究所の最新研究により、発達障害のある児童の学習支援において、視覚的支援とスモールステップ指導の組み合わせが特に効果的であることが明らかになりました。]]></description>
+      <category>研究・学術</category>
+      <pubDate>Sun, 10 Mar 2024 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title><![CDATA[通級指導の実践例 ― A市立B小学校の取り組みから学ぶ]]></title>
+      <link>https://example.github.io/inclusive-edu-navi/article/tsukyu-practice-example/</link>
+      <guid>https://example.github.io/inclusive-edu-navi/article/tsukyu-practice-example/</guid>
+      <description><![CDATA[A市立B小学校では、通級指導教室と通常学級の連携を強化し、児童の学びの連続性を確保する取り組みを行っています。その具体的な実践と成果を紹介します。]]></description>
+      <category>実践・事例</category>
+      <pubDate>Tue, 05 Mar 2024 00:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>
