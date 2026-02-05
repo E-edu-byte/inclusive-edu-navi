@@ -2,11 +2,17 @@
 
 import { useState, useEffect } from 'react';
 import Sidebar from '@/components/Sidebar';
+import NewsCard from '@/components/NewsCard';
 import { Article, AIPick, ArticlesData, AIPicksData, BASE_PATH } from '@/lib/types';
+
+// 編集部ピックアップに画像情報を追加した型
+type EnrichedPick = AIPick & {
+  imageUrl?: string;
+};
 
 export default function Home() {
   const [articles, setArticles] = useState<Article[]>([]);
-  const [editorPicks, setEditorPicks] = useState<AIPick[]>([]);
+  const [editorPicks, setEditorPicks] = useState<EnrichedPick[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -17,13 +23,23 @@ export default function Home() {
         const articlesRes = await fetch(`${BASE_PATH}/data/articles.json`);
         if (!articlesRes.ok) throw new Error('記事データの取得に失敗しました');
         const articlesData: ArticlesData = await articlesRes.json();
-        setArticles(articlesData.articles || []);
+        const articlesArray = articlesData.articles || [];
+        setArticles(articlesArray);
 
         // 編集部ピックアップデータを取得
         const picksRes = await fetch(`${BASE_PATH}/data/ai-picks.json`);
         if (!picksRes.ok) throw new Error('ピックアップデータの取得に失敗しました');
         const picksData: AIPicksData = await picksRes.json();
-        setEditorPicks(picksData.picks || []);
+
+        // ピックアップに元記事の画像を紐付け
+        const enrichedPicks: EnrichedPick[] = (picksData.picks || []).map((pick) => {
+          const sourceArticle = articlesArray.find((a) => a.id === pick.sourceArticleId);
+          return {
+            ...pick,
+            imageUrl: sourceArticle?.imageUrl,
+          };
+        });
+        setEditorPicks(enrichedPicks);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'データの取得に失敗しました');
       } finally {
@@ -79,7 +95,7 @@ export default function Home() {
 
       <div className="flex flex-col lg:flex-row gap-8">
         {/* メインコンテンツ */}
-        <div className="flex-1">
+        <div className="flex-1 min-w-0">
           {/* 編集部ピックアップセクション */}
           {editorPicks.length > 0 && (
             <section className="mb-12">
@@ -89,57 +105,26 @@ export default function Home() {
                 </svg>
                 編集部ピックアップ
               </h2>
-              <div className="space-y-6">
+              <div className="space-y-5">
                 {editorPicks.map((pick) => (
-                  <article
+                  <NewsCard
                     key={pick.id}
-                    className="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-6 shadow-sm"
-                  >
-                    {/* ピックアップ理由 */}
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="inline-flex items-center gap-1 px-3 py-1 text-sm font-medium bg-amber-100 text-amber-800 rounded-full">
-                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                        {pick.reason}
-                      </span>
-                      <span className="text-sm text-gray-500">{pick.category}</span>
-                    </div>
-
-                    {/* タイトル */}
-                    <h3 className="text-lg font-bold text-gray-900 mb-3 leading-relaxed">
-                      {pick.title}
-                    </h3>
-
-                    {/* 要約（全文表示） */}
-                    <p className="text-gray-700 leading-relaxed mb-4">
-                      {pick.summary}
-                    </p>
-
-                    {/* メタ情報と外部リンク */}
-                    <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-amber-200">
-                      <span className="text-sm text-gray-500">
-                        {pick.originalDate}
-                      </span>
-                      <a
-                        href={pick.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white text-sm font-medium rounded-lg transition-colors"
-                      >
-                        元記事を読む
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                      </a>
-                    </div>
-                  </article>
+                    title={pick.title}
+                    summary={pick.summary}
+                    imageUrl={pick.imageUrl}
+                    category={pick.category}
+                    date={pick.originalDate}
+                    url={pick.url}
+                    isPickup={true}
+                    pickupReason={pick.reason}
+                    summaryLines={0}
+                  />
                 ))}
               </div>
             </section>
           )}
 
-          {/* 最新記事セクション */}
+          {/* 最新ニュースセクション */}
           <section>
             <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
               <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -148,64 +133,20 @@ export default function Home() {
               最新ニュース
             </h2>
 
-            <div className="space-y-6">
+            <div className="space-y-5">
               {displayArticles.map((article) => (
-                <article
+                <NewsCard
                   key={article.id}
-                  className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-                >
-                  <div className="flex flex-col sm:flex-row">
-                    {/* サムネイル画像 */}
-                    {article.imageUrl && (
-                      <div className="sm:w-48 sm:flex-shrink-0">
-                        <div className="aspect-video sm:aspect-square h-full bg-gray-100 overflow-hidden">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={article.imageUrl}
-                            alt={article.title}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                      </div>
-                    )}
-
-                    {/* コンテンツ */}
-                    <div className="flex-1 p-5">
-                      {/* カテゴリとメタ情報 */}
-                      <div className="flex flex-wrap items-center gap-2 mb-3">
-                        <span className="inline-block px-2.5 py-1 text-xs font-medium bg-primary-100 text-primary-800 rounded-full">
-                          {article.category}
-                        </span>
-                        <span className="text-xs text-gray-500">
-                          {article.source} • {article.date}
-                        </span>
-                      </div>
-
-                      {/* タイトル */}
-                      <h3 className="text-lg font-bold text-gray-900 mb-3 leading-relaxed">
-                        {article.title}
-                      </h3>
-
-                      {/* 要約（全文表示） */}
-                      <p className="text-gray-600 leading-relaxed mb-4">
-                        {article.summary}
-                      </p>
-
-                      {/* 続きを読むボタン */}
-                      <a
-                        href={article.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-lg transition-colors"
-                      >
-                        続きを読む
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                </article>
+                  title={article.title}
+                  summary={article.summary}
+                  imageUrl={article.imageUrl}
+                  category={article.category}
+                  source={article.source}
+                  date={article.date}
+                  url={article.url}
+                  isPickup={false}
+                  summaryLines={3}
+                />
               ))}
             </div>
 

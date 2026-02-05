@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Article, BASE_PATH, getCategoryByName, Category } from '@/lib/types';
+import NewsCard from '@/components/NewsCard';
 
 type Props = {
   category: Category;
@@ -70,64 +71,20 @@ export default function CategoryArticleList({ category }: Props) {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       {articles.map((article) => (
-        <article
+        <NewsCard
           key={article.id}
-          className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-        >
-          <div className="flex flex-col sm:flex-row">
-            {/* サムネイル画像 */}
-            {article.imageUrl && (
-              <div className="sm:w-48 sm:flex-shrink-0">
-                <div className="aspect-video sm:aspect-square h-full bg-gray-100 overflow-hidden">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={article.imageUrl}
-                    alt={article.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-            )}
-
-            {/* コンテンツ */}
-            <div className="flex-1 p-5">
-              {/* カテゴリとメタ情報 */}
-              <div className="flex flex-wrap items-center gap-2 mb-3">
-                <span className={`inline-block px-2.5 py-1 text-xs font-medium rounded-full ${category.color}`}>
-                  {category.name}
-                </span>
-                <span className="text-xs text-gray-500">
-                  {article.source} • {article.date}
-                </span>
-              </div>
-
-              {/* タイトル */}
-              <h3 className="text-lg font-bold text-gray-900 mb-3 leading-relaxed">
-                {article.title}
-              </h3>
-
-              {/* 要約（全文表示） */}
-              <p className="text-gray-600 leading-relaxed mb-4">
-                {article.summary}
-              </p>
-
-              {/* 続きを読むボタン */}
-              <a
-                href={article.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-lg transition-colors"
-              >
-                続きを読む
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </article>
+          title={article.title}
+          summary={article.summary}
+          imageUrl={article.imageUrl}
+          category={category.name}
+          source={article.source}
+          date={article.date}
+          url={article.url}
+          isPickup={false}
+          summaryLines={3}
+        />
       ))}
     </div>
   );
