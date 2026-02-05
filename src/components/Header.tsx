@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { categories } from '@/data/articles';
+import { categories } from '@/lib/types';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

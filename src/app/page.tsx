@@ -1,47 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import Sidebar from '@/components/Sidebar';
-
-// JSONから読み込む記事の型
-type Article = {
-  id: string;
-  title: string;
-  summary: string;
-  category: string;
-  date: string;
-  url: string;
-  imageUrl: string;
-  source: string;
-};
-
-// AIおすすめ記事の型
-type AIPick = {
-  id: string;
-  sourceArticleId: string;
-  title: string;
-  url: string;
-  category: string;
-  originalDate: string;
-  reason: string;
-  summary: string;
-  generatedAt: string;
-  model: string;
-};
-
-type ArticlesData = {
-  articles: Article[];
-};
-
-type AIPicksData = {
-  picks: AIPick[];
-  lastUpdated: string;
-  totalCount: number;
-};
-
-// basePath設定
-const BASE_PATH = '/inclusive-edu-navi';
+import { Article, AIPick, ArticlesData, AIPicksData, BASE_PATH } from '@/lib/types';
 
 export default function Home() {
   const [articles, setArticles] = useState<Article[]>([]);

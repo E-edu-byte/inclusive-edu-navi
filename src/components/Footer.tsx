@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { categories } from '@/data/articles';
+import { categories, BASE_PATH } from '@/lib/types';
 
 export default function Footer() {
   return (
@@ -55,7 +55,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="/feed.xml"
+                  href={`${BASE_PATH}/feed.xml`}
                   className="text-sm text-gray-600 hover:text-primary-600"
                   target="_blank"
                   rel="noopener noreferrer"

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { categories } from '@/data/articles';
+import { categories, BASE_PATH } from '@/lib/types';
 
 export default function Sidebar() {
   return (
@@ -41,7 +41,7 @@ export default function Sidebar() {
           最新情報はRSSフィードでも購読できます。
         </p>
         <a
-          href="/feed.xml"
+          href={`${BASE_PATH}/feed.xml`}
           className="inline-flex items-center gap-2 mt-4 text-sm font-medium text-primary-700 hover:text-primary-800"
         >
           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
