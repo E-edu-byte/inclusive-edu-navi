@@ -98,6 +98,31 @@ EXCLUDE_KEYWORDS = [
     "[PR]", "【PR】", "【広告】", "[AD]"
 ]
 
+# 細かすぎる実践情報の除外キーワード（教員向けテクニック）
+PRACTICE_EXCLUDE_KEYWORDS = [
+    "板書", "指導案", "学級開き", "学級づくり", "授業開き",
+    "ワークシート", "プリント", "時短学習", "京女式",
+    "〇年国語", "〇年算数", "小１国語", "小２国語", "小３国語",
+    "小４国語", "小５国語", "小６国語", "小1国語", "小2国語",
+    "小3国語", "小4国語", "小5国語", "小6国語"
+]
+
+# 小規模イベント検出キーワード
+EVENT_KEYWORDS = [
+    "セミナー", "研修", "講座", "開催", "募集", "ワークショップ",
+    "オンライン講座", "参加者募集", "申込", "フォーラム"
+]
+
+# 公的機関キーワード（イベント記事の例外許可）
+PUBLIC_INSTITUTION_KEYWORDS = [
+    "文部科学省", "文科省", "OECD", "ユネスコ", "UNESCO",
+    "教育委員会", "内閣府", "厚生労働省", "総務省",
+    "国立", "都道府県", "市区町村", "自治体",
+    "東京大学", "京都大学", "大阪大学", "名古屋大学",
+    "東北大学", "九州大学", "北海道大学", "筑波大学",
+    "早稲田大学", "慶應義塾大学", "上智大学"
+]
+
 # カテゴリ分類のキーワード
 CATEGORY_KEYWORDS = {
     "制度・法改正": [
@@ -259,16 +284,38 @@ def fetch_page_metadata(url: str, timeout: int = 15) -> dict:
     """
     記事ページからOGP画像と要約を取得
     【鉄壁ルール】相対パスは絶対URLに変換
+    【朝日新聞対策】特殊なヘッダー設定で確実に取得
     """
     result = {'image': None, 'description': None}
     base_url = get_base_url(url)
+    domain = get_domain(url)
 
     try:
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-            'Accept-Language': 'ja,en-US;q=0.7,en;q=0.3',
-        }
+        # 【朝日新聞対策】より本格的なブラウザを模倣
+        if 'asahi.com' in domain:
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+                'Accept-Language': 'ja-JP,ja;q=0.9,en-US;q=0.8,en;q=0.7',
+                'Accept-Encoding': 'gzip, deflate, br',
+                'Cache-Control': 'no-cache',
+                'Pragma': 'no-cache',
+                'Sec-Ch-Ua': '"Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"',
+                'Sec-Ch-Ua-Mobile': '?0',
+                'Sec-Ch-Ua-Platform': '"Windows"',
+                'Sec-Fetch-Dest': 'document',
+                'Sec-Fetch-Mode': 'navigate',
+                'Sec-Fetch-Site': 'none',
+                'Sec-Fetch-User': '?1',
+                'Upgrade-Insecure-Requests': '1',
+            }
+        else:
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                'Accept-Language': 'ja,en-US;q=0.7,en;q=0.3',
+            }
+
         response = requests.get(url, headers=headers, timeout=timeout, allow_redirects=True)
         response.raise_for_status()
 
@@ -295,7 +342,38 @@ def fetch_page_metadata(url: str, timeout: int = 15) -> dict:
                     result['image'] = img_url
                     print(f"        → Twitter画像取得成功")
 
-        # ③ 記事内の大きそうな画像
+        # 【朝日新聞対策】③ 朝日新聞専用の画像パターン
+        if not result['image'] and 'asahi.com' in domain:
+            # 朝日新聞のimgopt URLパターンから画像を探す
+            for meta in soup.find_all('meta'):
+                content = meta.get('content', '')
+                if 'imgopt.asahi.com' in content or 'www.asahicom.jp' in content:
+                    if is_valid_image_url(content):
+                        result['image'] = content
+                        print(f"        → 朝日新聞専用パターンで画像取得")
+                        break
+
+            # JSON-LDからも探す
+            if not result['image']:
+                for script in soup.find_all('script', type='application/ld+json'):
+                    try:
+                        import json
+                        data = json.loads(script.string)
+                        if isinstance(data, dict):
+                            img = data.get('image') or data.get('thumbnailUrl')
+                            if img:
+                                if isinstance(img, list):
+                                    img = img[0]
+                                if isinstance(img, dict):
+                                    img = img.get('url', '')
+                                if img and is_valid_image_url(str(img)):
+                                    result['image'] = str(img)
+                                    print(f"        → JSON-LDから画像取得")
+                                    break
+                    except:
+                        pass
+
+        # ④ 記事内の大きそうな画像
         if not result['image']:
             article_area = soup.find('article') or soup.find('main') or soup.find(class_=re.compile(r'article|content|entry|post', re.I))
             search_area = article_area if article_area else soup
@@ -378,6 +456,36 @@ def contains_exclude_keyword(title: str, summary: str) -> bool:
     return any(keyword in text for keyword in EXCLUDE_KEYWORDS)
 
 
+def contains_practice_exclude_keyword(title: str, summary: str) -> bool:
+    """
+    【除外フィルタ】細かすぎる実践情報をスキップ
+    板書、指導案、学級開き等の教員向けテクニック記事を除外
+    """
+    text = f"{title} {summary}"
+    return any(keyword in text for keyword in PRACTICE_EXCLUDE_KEYWORDS)
+
+
+def is_small_event_article(title: str, summary: str) -> bool:
+    """
+    【イベントフィルタ】小規模な研修・イベント記事かどうかを判定
+    公的機関が絡むもの以外はTrueを返す（除外対象）
+    """
+    text = f"{title} {summary}"
+
+    # イベント系キーワードを含むかチェック
+    is_event = any(keyword in text for keyword in EVENT_KEYWORDS)
+    if not is_event:
+        return False  # イベント記事ではない
+
+    # 公的機関キーワードを含むかチェック
+    has_public_institution = any(keyword in text for keyword in PUBLIC_INSTITUTION_KEYWORDS)
+    if has_public_institution:
+        return False  # 公的機関のイベントなので除外しない
+
+    # 小規模イベント（個人の教育実践家など）と判定
+    return True
+
+
 def fetch_rss_feed(feed_info: dict) -> list:
     """RSSフィードから記事を取得"""
     articles = []
@@ -418,6 +526,14 @@ def fetch_rss_feed(feed_info: dict) -> list:
 
             # 【除外フィルタ】広告・PR記事をスキップ
             if contains_exclude_keyword(title, rss_summary):
+                continue
+
+            # 【除外フィルタ】細かすぎる実践情報をスキップ
+            if contains_practice_exclude_keyword(title, rss_summary):
+                continue
+
+            # 【除外フィルタ】小規模な研修・イベント記事をスキップ（公的機関は例外）
+            if is_small_event_article(title, rss_summary):
                 continue
 
             # 【理念フィルタ】教育専門サイト以外は理念キーワードを含む記事のみ採用
