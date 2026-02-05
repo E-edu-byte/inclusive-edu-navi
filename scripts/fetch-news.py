@@ -17,6 +17,7 @@ from typing import Optional
 from urllib.parse import urlparse, quote
 from collections import defaultdict
 import requests
+from bs4 import BeautifulSoup
 
 # Windows環境での文字化け対策
 if sys.platform == 'win32':
@@ -117,8 +118,62 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 OUTPUT_FILE = os.path.join(PROJECT_ROOT, "public", "data", "articles.json")
 
-# デフォルト画像
-DEFAULT_IMAGE = "/images/default-article.png"
+# デフォルト画像（空文字列にしてフロントエンドでプレースホルダー表示）
+DEFAULT_IMAGE = ""
+
+# カテゴリ別のプレースホルダー画像URL（Unsplash）
+CATEGORY_IMAGES = {
+    "制度・法改正": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&h=300&fit=crop",
+    "研究・学術": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=300&fit=crop",
+    "実践・事例": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=300&fit=crop",
+    "教材・ツール": "https://images.unsplash.com/photo-1588072432836-e10032774350?w=400&h=300&fit=crop",
+    "イベント・研修": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=300&fit=crop",
+    "注目トピックス": "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=300&fit=crop",
+}
+
+
+def fetch_ogp_image(url: str, timeout: int = 10) -> Optional[str]:
+    """URLからOGP画像を取得"""
+    try:
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        }
+        response = requests.get(url, headers=headers, timeout=timeout, allow_redirects=True)
+        response.raise_for_status()
+
+        soup = BeautifulSoup(response.content, 'html.parser')
+
+        # OGP画像を探す
+        og_image = soup.find('meta', property='og:image')
+        if og_image and og_image.get('content'):
+            img_url = og_image['content']
+            # 相対URLを絶対URLに変換
+            if img_url.startswith('//'):
+                img_url = 'https:' + img_url
+            elif img_url.startswith('/'):
+                parsed = urlparse(url)
+                img_url = f"{parsed.scheme}://{parsed.netloc}{img_url}"
+            return img_url
+
+        # Twitter Card画像を探す
+        twitter_image = soup.find('meta', attrs={'name': 'twitter:image'})
+        if twitter_image and twitter_image.get('content'):
+            return twitter_image['content']
+
+        # 最初の大きな画像を探す
+        for img in soup.find_all('img', src=True):
+            src = img.get('src', '')
+            if any(x in src.lower() for x in ['thumbnail', 'ogp', 'og-image', 'featured']):
+                if src.startswith('//'):
+                    src = 'https:' + src
+                elif src.startswith('/'):
+                    parsed = urlparse(url)
+                    src = f"{parsed.scheme}://{parsed.netloc}{src}"
+                return src
+
+        return None
+    except Exception:
+        return None
 
 
 def get_domain(url: str) -> str:
@@ -168,23 +223,29 @@ def parse_date(date_str: str) -> Optional[str]:
     return datetime.now().strftime("%Y-%m-%d")
 
 
-def extract_image_url(entry: dict, feed_info: dict) -> str:
+def extract_image_url(entry: dict, feed_info: dict, category: str = "注目トピックス") -> str:
     """記事からサムネイル画像URLを抽出"""
     # media:content から取得
     if hasattr(entry, 'media_content') and entry.media_content:
         for media in entry.media_content:
             if media.get('type', '').startswith('image'):
-                return media.get('url', '')
+                url = media.get('url', '')
+                if url and not url.startswith('/images/'):
+                    return url
 
     # media:thumbnail から取得
     if hasattr(entry, 'media_thumbnail') and entry.media_thumbnail:
-        return entry.media_thumbnail[0].get('url', '')
+        url = entry.media_thumbnail[0].get('url', '')
+        if url and not url.startswith('/images/'):
+            return url
 
     # enclosure から取得
     if hasattr(entry, 'enclosures') and entry.enclosures:
         for enc in entry.enclosures:
             if enc.get('type', '').startswith('image'):
-                return enc.get('href', '')
+                url = enc.get('href', '')
+                if url and not url.startswith('/images/'):
+                    return url
 
     # content内のimg要素から取得
     content = entry.get('content', [{}])[0].get('value', '') if entry.get('content') else ''
@@ -193,10 +254,19 @@ def extract_image_url(entry: dict, feed_info: dict) -> str:
 
     img_match = re.search(r'<img[^>]+src=["\']([^"\']+)["\']', content)
     if img_match:
-        return img_match.group(1)
+        url = img_match.group(1)
+        if url and not url.startswith('/images/') and url.startswith('http'):
+            return url
 
-    # デフォルト画像を返す
-    return feed_info.get('default_image', DEFAULT_IMAGE)
+    # 記事ページからOGP画像を取得を試みる
+    link = entry.get('link', '')
+    if link:
+        ogp_image = fetch_ogp_image(link, timeout=5)
+        if ogp_image:
+            return ogp_image
+
+    # カテゴリ別のフォールバック画像を返す
+    return CATEGORY_IMAGES.get(category, CATEGORY_IMAGES["注目トピックス"])
 
 
 def truncate_text(text: str, max_length: int = 200) -> str:
@@ -287,11 +357,11 @@ def fetch_feed(feed_info: dict, strict_filter: bool = False) -> list:
             date_parsed = entry.get('published_parsed') or entry.get('updated_parsed')
             date_str = parse_date(date_parsed)
 
-            # 画像URLを取得
-            image_url = extract_image_url(entry, feed_info)
-
-            # カテゴリを判定
+            # カテゴリを判定（画像取得より先に）
             category = classify_category(title, summary)
+
+            # 画像URLを取得（カテゴリを渡してフォールバック画像に使用）
+            image_url = extract_image_url(entry, feed_info, category)
 
             article = {
                 "id": generate_article_id(link),
@@ -365,6 +435,20 @@ def fetch_google_news(keyword: str) -> list:
             # カテゴリを判定
             category = classify_category(title, summary)
 
+            # OGP画像を取得を試みる（Googleニュースのリダイレクト先から）
+            image_url = None
+            try:
+                # Googleニュースのリダイレクトを解決
+                redirect_response = requests.head(link, headers=headers, timeout=5, allow_redirects=True)
+                actual_url = redirect_response.url if redirect_response.url != link else link
+                image_url = fetch_ogp_image(actual_url, timeout=5)
+            except Exception:
+                pass
+
+            # 画像が取得できなかった場合はカテゴリ別の画像を使用
+            if not image_url:
+                image_url = CATEGORY_IMAGES.get(category, CATEGORY_IMAGES["注目トピックス"])
+
             article = {
                 "id": generate_article_id(link),
                 "title": title,
@@ -372,7 +456,7 @@ def fetch_google_news(keyword: str) -> list:
                 "category": category,
                 "date": date_str,
                 "url": link,
-                "imageUrl": DEFAULT_IMAGE,
+                "imageUrl": image_url,
                 "source": source_name
             }
 
