@@ -73,4 +73,4 @@ jobs:
         if: steps.git-check.outputs.changed == 'true'
         uses: peter-evans/repository-dispatch@v3
         with:
-          event-type: daily-update-completed
+          event-type: news-updated
