@@ -71,7 +71,7 @@ export default function CategoryArticleList({ category }: Props) {
   }
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-4">
       {articles.map((article) => (
         <NewsCard
           key={article.id}
@@ -83,7 +83,6 @@ export default function CategoryArticleList({ category }: Props) {
           date={article.date}
           url={article.url}
           isPickup={false}
-          summaryLines={3}
         />
       ))}
     </div>

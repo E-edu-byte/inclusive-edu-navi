@@ -105,7 +105,7 @@ export default function Home() {
                 </svg>
                 編集部ピックアップ
               </h2>
-              <div className="space-y-5">
+              <div className="space-y-4">
                 {editorPicks.map((pick) => (
                   <NewsCard
                     key={pick.id}
@@ -117,7 +117,6 @@ export default function Home() {
                     url={pick.url}
                     isPickup={true}
                     pickupReason={pick.reason}
-                    summaryLines={0}
                   />
                 ))}
               </div>
@@ -133,7 +132,7 @@ export default function Home() {
               最新ニュース
             </h2>
 
-            <div className="space-y-5">
+            <div className="space-y-4">
               {displayArticles.map((article) => (
                 <NewsCard
                   key={article.id}
@@ -145,7 +144,6 @@ export default function Home() {
                   date={article.date}
                   url={article.url}
                   isPickup={false}
-                  summaryLines={3}
                 />
               ))}
             </div>
