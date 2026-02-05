@@ -1,6 +1,18 @@
 {
   "picks": [
     {
+      "id": "03bfeea3cbbe",
+      "sourceArticleId": "1fe5244aa22c",
+      "title": "学校教育課 会計年度任用職員（特別支援教育支援員）を募集します",
+      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNX1JYNFFZM0Z4Zl8yeVpJM2RKZ2h1TE9BaHpQU3ZqYXkyOUdIYUpNejFjcXFYckQ2R0N5ZWUwYlFjeUJxaXBiZU9SSmtrUzFwMlZhYW9xRWVTSHNhQkJPbm40U1U4WVpUZVczYUQ1aVlQcEFZcEw1cDNUdXg1M25fSVZ3?oc=5",
+      "category": "実践・事例",
+      "originalDate": "2026-02-03",
+      "reason": "特別支援教育支援員の人材募集",
+      "summary": "特別支援教育支援員の募集は、子どもたちの学びを支える重要な役割とその必要性を改めて示しています。特別支援教育に関心を持つ方にとってのキャリア情報はもちろん、学校がどのような体制で支援を強化しようとしているのか、その地域の教育支援の状況を知る上で貴重な情報となります。",
+      "generatedAt": "2026-02-05T18:32:49.913854",
+      "model": "gemini-2.5-flash"
+    },
+    {
       "id": "2394834e16ab",
       "sourceArticleId": "af60dd426e5c",
       "title": "特別支援の実践知が教材に、インクルーシブ教育教材コンテスト入賞作が決定（こどもとIT）",
@@ -73,6 +85,6 @@
       "model": "gemini-2.5-flash"
     }
   ],
-  "lastUpdated": "2026-02-05T18:08:19.195262",
-  "totalCount": 6
+  "lastUpdated": "2026-02-05T18:32:49.943354",
+  "totalCount": 7
 }
