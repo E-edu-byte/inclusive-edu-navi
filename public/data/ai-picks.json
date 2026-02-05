@@ -1,6 +1,42 @@
 {
   "picks": [
     {
+      "id": "2394834e16ab",
+      "sourceArticleId": "af60dd426e5c",
+      "title": "特別支援の実践知が教材に、インクルーシブ教育教材コンテスト入賞作が決定（こどもとIT）",
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1paGJLOTRSN2V1YnJtTmxjZFpnNklVRk5QZHQ4SUROMDJwVWF3d3YyV1NLaFRreWVNSzFaaUZQUlFFQVlPVnZVNEpNLVJqZ3RaWUp3eFRrZVQtaHFiN2k2SFk2WmZBakxRMVVkRzZUOGc3ZUdETEVhQUpMUHdwbzg?oc=5",
+      "category": "実践・事例",
+      "originalDate": "2026-02-04",
+      "reason": "インクルーシブ教育教材",
+      "summary": "インクルーシブ教育の実践知から生まれた教材の入賞作が紹介されています。教育現場の具体的な創意工夫が詰まっており、日々の指導や家庭での学びを豊かにするヒントが得られるでしょう。障害のある子どもの特性に応じた支援の参考になります。",
+      "generatedAt": "2026-02-05T17:49:47.936287",
+      "model": "gemini-2.5-flash"
+    },
+    {
+      "id": "ca4ceadae8da",
+      "sourceArticleId": "37ff4fc9ec78",
+      "title": "学校で荒れがちな発達障害の息子。対応に悩んだ母は、スクールカウンセラーを頼ることに/発達障害の子ども、受け入れられない私たち 第86回 (2026年2月4日掲載)",
+      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5NelpvdHJzR2ZRei1UaXItbjBfdGd3Wlg1QkdpWkR5NFh3RWQwNVR6ZG1KSlVWcDRxdVpmNGtjZGNDblR0V0F5T1ZGYk80eGRSVmNEY0NPV0N3dHlCbVE?oc=5",
+      "category": "注目トピックス",
+      "originalDate": "2026-02-04",
+      "reason": "発達障害児の保護者支援",
+      "summary": "発達障害のあるお子さんの学校生活での課題と、保護者がスクールカウンセラーを頼る具体的な事例です。同じ悩みを抱える保護者の方にとって共感が得られ、専門機関への相談の第一歩を踏み出す勇気を与えてくれる情報となるでしょう。",
+      "generatedAt": "2026-02-05T17:49:47.936340",
+      "model": "gemini-2.5-flash"
+    },
+    {
+      "id": "82645229f492",
+      "sourceArticleId": "2cf72690d8dd",
+      "title": "「第3回インクルーシブ教育教材コンテスト」入賞作品決定― 教育現場の創意工夫が集結、最優秀賞は2月21日の最終審査プレゼンテーションで決定 ―（PR TIMES）",
+      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE0yQ0R4QmJneEF4VWtWa3YtdmFWM2llelhVVnFncDR6NXBZaDYtSEhMck92WUs0MkYyWDVKX3ZSWEs0WHhBeWpFLUNkNVVHcUF3eHdoZDQ4eE9YajFSYlFkd2R6V3U2T1Fj?oc=5",
+      "category": "教材・ツール",
+      "originalDate": "2026-02-03",
+      "reason": "実践知が詰まった教材",
+      "summary": "全国から寄せられたインクルーシブ教育教材の入賞作品が決定しました。教育現場での知恵や工夫が凝縮されており、障害のある子どもの学びを支援するための具体的なアプローチやアイデアを知ることができます。実践的な教材開発のヒントにもなります。",
+      "generatedAt": "2026-02-05T17:49:47.936373",
+      "model": "gemini-2.5-flash"
+    },
+    {
       "id": "5ac4fbc55f5b",
       "sourceArticleId": "fc75cbc42be5",
       "title": "通信制サポート校を新設、日米英語学院が語学×高卒を支援",
@@ -37,6 +73,6 @@
       "model": "gemini-2.5-flash"
     }
   ],
-  "lastUpdated": "2026-02-05T04:01:36.915688",
-  "totalCount": 3
+  "lastUpdated": "2026-02-05T17:49:47.971425",
+  "totalCount": 6
 }

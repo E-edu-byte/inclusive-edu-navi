@@ -14,8 +14,9 @@ import sys
 import io
 from datetime import datetime
 from typing import Optional
+from urllib.parse import urlparse, quote
+from collections import defaultdict
 import requests
-from urllib.parse import urljoin
 
 # Windows環境での文字化け対策
 if sys.platform == 'win32':
@@ -24,22 +25,51 @@ if sys.platform == 'win32':
 
 # 収集対象のRSSフィード
 RSS_FEEDS = [
+    # 教育専門サイト
     {
         "name": "リセマム",
         "url": "https://resemom.jp/rss20/index.rdf",
         "default_image": "/images/sources/resemom.png"
     },
     {
-        "name": "Impress Watch",
-        "url": "https://www.watch.impress.co.jp/data/rss/1.0/ipw/feed.rdf",
-        "default_image": "/images/sources/impress.png"
+        "name": "EdTechZine",
+        "url": "https://edtechzine.jp/rss/new/20",
+        "default_image": "/images/sources/edtechzine.png"
     },
+    {
+        "name": "こどもとIT",
+        "url": "https://edu.watch.impress.co.jp/data/rss/1.0/edu/feed.rdf",
+        "default_image": "/images/sources/kodomo-it.png"
+    },
+    {
+        "name": "教育新聞",
+        "url": "https://www.kyobun.co.jp/feed/",
+        "default_image": "/images/sources/kyobun.png"
+    },
+    # 一般ニュースサイト
     {
         "name": "NHK NEWS WEB",
         "url": "https://www.nhk.or.jp/rss/news/cat6.xml",
         "default_image": "/images/sources/nhk.png"
-    }
+    },
+    {
+        "name": "Impress Watch",
+        "url": "https://www.watch.impress.co.jp/data/rss/1.0/ipw/feed.rdf",
+        "default_image": "/images/sources/impress.png"
+    },
 ]
+
+# Googleニュース検索RSS（キーワード別）
+GOOGLE_NEWS_KEYWORDS = [
+    "インクルーシブ教育",
+    "特別支援教育",
+    "合理的配慮",
+    "発達障害 学校",
+    "通級指導",
+]
+
+# ドメインごとの最大記事数
+MAX_ARTICLES_PER_DOMAIN = 3
 
 # カテゴリ分類のキーワード
 CATEGORY_KEYWORDS = {
@@ -65,18 +95,21 @@ CATEGORY_KEYWORDS = {
     ]
 }
 
-# 特別支援教育関連のキーワード（フィルタリング用）
-SPECIAL_NEEDS_KEYWORDS = [
-    # 特別支援教育の中核キーワード
-    "特別支援", "発達障害", "障害", "インクルーシブ", "合理的配慮",
+# 特別支援教育関連のキーワード（フィルタリング用）- より厳格に
+SPECIAL_NEEDS_KEYWORDS_STRICT = [
+    # 特別支援教育の中核キーワード（必須）
+    "特別支援", "発達障害", "インクルーシブ", "合理的配慮",
     "ユニバーサルデザイン", "個別支援", "通級", "特別支援学級",
     "自閉症", "ADHD", "LD", "学習障害", "知的障害", "肢体不自由",
     "視覚障害", "聴覚障害", "病弱", "重複障害", "医療的ケア",
     "支援教育", "特別なニーズ", "多様な学び", "バリアフリー",
-    # 教育一般キーワード（教育ニュースサイト用）
+    "障害児", "障がい", "療育", "放課後デイ", "個別の教育支援計画"
+]
+
+# 教育一般キーワード（緩め）
+SPECIAL_NEEDS_KEYWORDS_LOOSE = [
     "教育", "学校", "文科省", "文部科学省", "GIGAスクール", "ICT教育",
-    "不登校", "いじめ", "教員", "教師", "学習指導", "カリキュラム",
-    "プログラミング教育", "英語教育", "道徳", "探究学習", "アクティブラーニング"
+    "不登校", "いじめ", "教員", "教師", "学習指導", "カリキュラム"
 ]
 
 # 出力ファイルパス
@@ -86,6 +119,15 @@ OUTPUT_FILE = os.path.join(PROJECT_ROOT, "public", "data", "articles.json")
 
 # デフォルト画像
 DEFAULT_IMAGE = "/images/default-article.png"
+
+
+def get_domain(url: str) -> str:
+    """URLからドメインを取得"""
+    try:
+        parsed = urlparse(url)
+        return parsed.netloc.lower()
+    except Exception:
+        return ""
 
 
 def generate_article_id(url: str) -> str:
@@ -186,22 +228,28 @@ def classify_category(title: str, summary: str) -> str:
     return "注目トピックス"
 
 
-def is_special_needs_related(title: str, summary: str, source_name: str) -> bool:
+def is_special_needs_related(title: str, summary: str, source_name: str, strict: bool = False) -> bool:
     """特別支援教育関連の記事かどうかを判定"""
-    # 教育専門サイトはすべて関連とみなす（フィルタリングは緩めに）
-    if source_name in ["文部科学省", "国立特別支援教育総合研究所", "EdTechZine", "こどもとIT"]:
-        return True
-
     text = f"{title} {summary}".lower()
-    return any(keyword.lower() in text for keyword in SPECIAL_NEEDS_KEYWORDS)
+
+    # 厳格モード: 中核キーワードのみ
+    if strict:
+        return any(keyword.lower() in text for keyword in SPECIAL_NEEDS_KEYWORDS_STRICT)
+
+    # 緩いモード: 教育専門サイトはすべて関連とみなす
+    if source_name in ["文部科学省", "国立特別支援教育総合研究所", "EdTechZine", "こどもとIT", "教育新聞"]:
+        return any(keyword.lower() in text for keyword in SPECIAL_NEEDS_KEYWORDS_STRICT + SPECIAL_NEEDS_KEYWORDS_LOOSE)
+
+    # それ以外は中核キーワードで判定
+    return any(keyword.lower() in text for keyword in SPECIAL_NEEDS_KEYWORDS_STRICT)
 
 
-def fetch_feed(feed_info: dict) -> list:
+def fetch_feed(feed_info: dict, strict_filter: bool = False) -> list:
     """RSSフィードを取得して記事リストを返す"""
     articles = []
 
     try:
-        print(f"  取得中: {feed_info['name']} ({feed_info['url']})")
+        print(f"  取得中: {feed_info['name']}")
 
         # User-Agentを設定してリクエスト
         headers = {
@@ -232,7 +280,7 @@ def fetch_feed(feed_info: dict) -> list:
             summary = truncate_text(summary)
 
             # 特別支援教育関連かチェック
-            if not is_special_needs_related(title, summary, feed_info['name']):
+            if not is_special_needs_related(title, summary, feed_info['name'], strict=strict_filter):
                 continue
 
             # 公開日を取得
@@ -258,7 +306,7 @@ def fetch_feed(feed_info: dict) -> list:
 
             articles.append(article)
 
-        print(f"    {len(articles)}件の関連記事を抽出")
+        print(f"    → {len(articles)}件の関連記事を抽出")
 
     except requests.exceptions.RequestException as e:
         print(f"    エラー: {feed_info['name']}の取得に失敗 - {e}")
@@ -266,6 +314,90 @@ def fetch_feed(feed_info: dict) -> list:
         print(f"    エラー: {feed_info['name']}の処理中にエラー - {e}")
 
     return articles
+
+
+def fetch_google_news(keyword: str) -> list:
+    """GoogleニュースRSSから記事を取得"""
+    articles = []
+
+    try:
+        encoded_keyword = quote(keyword)
+        url = f"https://news.google.com/rss/search?q={encoded_keyword}&hl=ja&gl=JP&ceid=JP:ja"
+
+        print(f"  取得中: Googleニュース「{keyword}」")
+
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        }
+
+        response = requests.get(url, headers=headers, timeout=30)
+        response.raise_for_status()
+
+        feed = feedparser.parse(response.content)
+
+        if feed.bozo and not feed.entries:
+            print(f"    警告: Googleニュースフィードの解析に問題がありました")
+            return articles
+
+        print(f"    {len(feed.entries)}件のエントリを取得")
+
+        for entry in feed.entries[:10]:  # 各キーワードから最大10件
+            title = entry.get('title', '').strip()
+            link = entry.get('link', '').strip()
+
+            if not title or not link:
+                continue
+
+            # Googleニュースのソース名を抽出（タイトルから）
+            source_match = re.search(r' - ([^-]+)$', title)
+            source_name = source_match.group(1).strip() if source_match else "Googleニュース"
+            # タイトルからソース名を除去
+            title = re.sub(r' - [^-]+$', '', title).strip()
+
+            # 要約を取得
+            summary = entry.get('summary', '') or entry.get('description', '')
+            summary = truncate_text(summary)
+
+            # 公開日を取得
+            date_parsed = entry.get('published_parsed') or entry.get('updated_parsed')
+            date_str = parse_date(date_parsed)
+
+            # カテゴリを判定
+            category = classify_category(title, summary)
+
+            article = {
+                "id": generate_article_id(link),
+                "title": title,
+                "summary": summary if summary else f"{source_name}からの記事です。",
+                "category": category,
+                "date": date_str,
+                "url": link,
+                "imageUrl": DEFAULT_IMAGE,
+                "source": source_name
+            }
+
+            articles.append(article)
+
+        print(f"    → {len(articles)}件の記事を抽出")
+
+    except Exception as e:
+        print(f"    エラー: Googleニュース「{keyword}」の取得に失敗 - {e}")
+
+    return articles
+
+
+def apply_domain_limit(articles: list, max_per_domain: int = MAX_ARTICLES_PER_DOMAIN) -> list:
+    """ドメインごとの記事数を制限"""
+    domain_counts = defaultdict(int)
+    filtered_articles = []
+
+    for article in articles:
+        domain = get_domain(article.get('url', ''))
+        if domain_counts[domain] < max_per_domain:
+            filtered_articles.append(article)
+            domain_counts[domain] += 1
+
+    return filtered_articles
 
 
 def load_existing_articles() -> dict:
@@ -294,65 +426,90 @@ def save_articles(data: dict) -> None:
 def main():
     """メイン処理"""
     print("=" * 60)
-    print("特別支援教育ニュース収集システム")
+    print("特別支援教育ニュース収集システム（強化版）")
     print("=" * 60)
     print(f"実行日時: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print()
 
-    # 既存データを読み込む
-    existing_data = load_existing_articles()
-    existing_urls = {article['url'] for article in existing_data.get('articles', [])}
-    print(f"既存記事数: {len(existing_urls)}件")
-    print()
+    all_new_articles = []
 
-    # 各フィードから記事を収集
-    print("RSSフィードを取得中...")
-    new_articles = []
-
+    # 1. 通常のRSSフィードから収集
+    print("【1】RSSフィードを取得中...")
+    print("-" * 40)
     for feed_info in RSS_FEEDS:
-        articles = fetch_feed(feed_info)
-        for article in articles:
-            if article['url'] not in existing_urls:
-                new_articles.append(article)
-                existing_urls.add(article['url'])
+        articles = fetch_feed(feed_info, strict_filter=False)
+        all_new_articles.extend(articles)
 
     print()
-    print(f"新規記事数: {len(new_articles)}件")
 
-    # 既存記事と新規記事をマージ
-    all_articles = new_articles + existing_data.get('articles', [])
+    # 2. GoogleニュースRSSから収集
+    print("【2】Googleニュースを取得中...")
+    print("-" * 40)
+    for keyword in GOOGLE_NEWS_KEYWORDS:
+        articles = fetch_google_news(keyword)
+        all_new_articles.extend(articles)
 
-    # 日付でソート（新しい順）
-    all_articles.sort(key=lambda x: x.get('date', ''), reverse=True)
-
-    # 最大500件に制限
-    all_articles = all_articles[:500]
-
-    # 保存データを作成
-    output_data = {
-        "articles": all_articles,
-        "lastUpdated": datetime.now().isoformat(),
-        "totalCount": len(all_articles),
-        "sources": [feed['name'] for feed in RSS_FEEDS]
-    }
-
-    # ファイルに保存
-    save_articles(output_data)
-
-    # カテゴリ別の集計を表示
     print()
-    print("カテゴリ別記事数:")
-    categories = {}
-    for article in all_articles:
-        cat = article.get('category', '不明')
-        categories[cat] = categories.get(cat, 0) + 1
+
+    # 3. 重複除去（URLベース）
+    print("【3】重複を除去中...")
+    seen_urls = set()
+    unique_articles = []
+    for article in all_new_articles:
+        if article['url'] not in seen_urls:
+            unique_articles.append(article)
+            seen_urls.add(article['url'])
+    print(f"  重複除去後: {len(unique_articles)}件")
+
+    # 4. 日付でソート（新しい順）
+    unique_articles.sort(key=lambda x: x.get('date', ''), reverse=True)
+
+    # 5. ドメインごとの制限を適用
+    print()
+    print("【4】ドメイン制限を適用中...")
+    print(f"  （各ドメイン最大{MAX_ARTICLES_PER_DOMAIN}件）")
+    limited_articles = apply_domain_limit(unique_articles, MAX_ARTICLES_PER_DOMAIN)
+    print(f"  制限適用後: {len(limited_articles)}件")
+
+    # 6. 最大100件に制限（新しいデータで上書き）
+    final_articles = limited_articles[:100]
+
+    # 7. ソース別の集計を表示
+    print()
+    print("【5】ソース別記事数:")
+    print("-" * 40)
+    sources = defaultdict(int)
+    for article in final_articles:
+        sources[article.get('source', '不明')] += 1
+
+    for source, count in sorted(sources.items(), key=lambda x: -x[1]):
+        print(f"  {source}: {count}件")
+
+    # 8. カテゴリ別の集計を表示
+    print()
+    print("【6】カテゴリ別記事数:")
+    print("-" * 40)
+    categories = defaultdict(int)
+    for article in final_articles:
+        categories[article.get('category', '不明')] += 1
 
     for cat, count in sorted(categories.items(), key=lambda x: -x[1]):
         print(f"  {cat}: {count}件")
 
+    # 9. 保存データを作成
+    output_data = {
+        "articles": final_articles,
+        "lastUpdated": datetime.now().isoformat(),
+        "totalCount": len(final_articles),
+        "sources": list(sources.keys())
+    }
+
+    # 10. ファイルに保存
+    save_articles(output_data)
+
     print()
     print("=" * 60)
-    print("処理完了")
+    print(f"処理完了: 合計 {len(final_articles)}件 の記事を保存")
     print("=" * 60)
 
 
