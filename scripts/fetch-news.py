@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 特別支援教育関連ニュース自動収集スクリプト
-RSSフィードから記事を取得し、カテゴリ分類してJSON形式で保存
+RSSフィードから記事を取得し、理念に基づくキーワードフィルタリングを適用
 """
 
 import feedparser
@@ -14,7 +14,7 @@ import sys
 import io
 from datetime import datetime
 from typing import Optional
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urljoin
 from collections import defaultdict
 import requests
 from bs4 import BeautifulSoup
@@ -24,32 +24,79 @@ if sys.platform == 'win32':
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 
-# 収集対象のRSSフィード（直接取得）
+# ========================================
+# 収集対象のRSSフィード（拡張版）
+# ========================================
 RSS_FEEDS = [
+    # 教育専門メディア（理念フィルタなしで全記事採用）
     {
         "name": "リセマム",
         "url": "https://resemom.jp/rss20/index.rdf",
-        "strict_filter": False,  # 教育専門サイトなので緩めにフィルタ
+        "skip_core_filter": True,  # 教育専門サイトなので理念フィルタをスキップ
     },
+    {
+        "name": "ICT教育ニュース",
+        "url": "https://ict-enews.net/feed/",
+        "skip_core_filter": True,
+    },
+    {
+        "name": "みんなの教育技術",
+        "url": "https://kyoiku.sho.jp/feed/",
+        "skip_core_filter": True,
+    },
+    {
+        "name": "EdTechZine",
+        "url": "https://edtechzine.jp/rss/new/",
+        "skip_core_filter": True,
+    },
+    # 大手メディア教育カテゴリ（理念フィルタ適用）
     {
         "name": "朝日新聞 教育",
         "url": "https://www.asahi.com/rss/asahi/edu.rdf",
-        "strict_filter": False,  # 教育カテゴリなので緩めに
+        "skip_core_filter": False,
     },
+    {
+        "name": "東洋経済オンライン",
+        "url": "https://toyokeizai.net/list/feed/rss",
+        "skip_core_filter": False,
+    },
+    # 通信社・放送局（厳格にフィルタ）
     {
         "name": "NHK NEWS WEB",
-        "url": "https://news.web.nhk/n-data/conf/na/rss/cat6.xml",
-        "strict_filter": True,  # 一般ニュースなので厳格にフィルタ
+        "url": "https://www.nhk.or.jp/rss/news/cat6.xml",
+        "skip_core_filter": False,
     },
     {
-        "name": "Yahoo!ニュース",
+        "name": "Yahoo!ニュース 国内",
         "url": "https://news.yahoo.co.jp/rss/topics/domestic.xml",
-        "strict_filter": True,  # 一般ニュースなので厳格にフィルタ
+        "skip_core_filter": False,
     },
 ]
 
 # ドメインごとの最大記事数
 MAX_ARTICLES_PER_DOMAIN = 5
+
+# ========================================
+# 理念に基づくキーワードフィルタリング
+# ========================================
+
+# 【重要】理念キーワード - これらのいずれかを含む記事のみを採用
+CORE_KEYWORDS = [
+    "特別支援", "インクルーシブ", "障害", "障がい", "ギフテッド",
+    "不登校", "ICT", "タブレット", "EdTech", "発達",
+    "療育", "合理的配慮", "ユニバーサルデザイン", "UDL",
+    "学習障害", "LD", "ADHD", "自閉症", "ASD",
+    "通級", "支援学級", "支援学校", "医療的ケア",
+    "個別支援", "個別の教育支援計画", "IEP",
+    "読み書き困難", "ディスレクシア", "多様な学び"
+]
+
+# 除外キーワード（広告・PR記事をスキップ）
+EXCLUDE_KEYWORDS = [
+    "PR", "広告", "プレゼント", "キャンペーン", "セミナー申込",
+    "応募締切", "抽選で", "モニター募集", "スポンサー",
+    "[PR]", "【PR】", "【広告】", "[AD]"
+]
 
 # カテゴリ分類のキーワード
 CATEGORY_KEYWORDS = {
@@ -71,33 +118,19 @@ CATEGORY_KEYWORDS = {
     ],
     "イベント・研修": [
         "セミナー", "研修", "イベント", "講座", "ワークショップ", "シンポジウム",
-        "フォーラム", "大会", "募集", "開催", "参加", "申込"
+        "フォーラム", "大会", "募集", "開催", "参加"
     ]
 }
-
-# 特別支援教育関連のキーワード（フィルタリング用）- 厳格
-SPECIAL_NEEDS_KEYWORDS_STRICT = [
-    "特別支援", "発達障害", "インクルーシブ", "合理的配慮",
-    "ユニバーサルデザイン", "個別支援", "通級", "特別支援学級",
-    "自閉症", "ADHD", "LD", "学習障害", "知的障害", "肢体不自由",
-    "視覚障害", "聴覚障害", "病弱", "重複障害", "医療的ケア",
-    "支援教育", "特別なニーズ", "多様な学び", "バリアフリー",
-    "障害児", "障がい", "療育", "放課後デイ", "個別の教育支援計画"
-]
-
-# 教育一般キーワード（緩め）
-SPECIAL_NEEDS_KEYWORDS_LOOSE = [
-    "教育", "学校", "文科省", "文部科学省", "GIGAスクール", "ICT教育",
-    "不登校", "いじめ", "教員", "教師", "学習指導", "カリキュラム",
-    "子ども", "児童", "生徒", "保護者", "先生", "授業"
-]
 
 # 出力ファイルパス
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 OUTPUT_FILE = os.path.join(PROJECT_ROOT, "public", "data", "articles.json")
 
+# ========================================
 # フォールバック画像（Unsplash - 教育関連）
+# 【鉄壁ルール】画像が取得できない場合は必ずこれを使用
+# ========================================
 FALLBACK_IMAGES = [
     "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=300&fit=crop",
     "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=300&fit=crop",
@@ -105,11 +138,13 @@ FALLBACK_IMAGES = [
     "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&h=300&fit=crop",
     "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400&h=300&fit=crop",
     "https://images.unsplash.com/photo-1544717305-2782549b5136?w=400&h=300&fit=crop",
+    "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop",
+    "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=400&h=300&fit=crop",
 ]
 
 
 def get_fallback_image(article_id: str) -> str:
-    """記事IDに基づいてフォールバック画像を選択"""
+    """記事IDに基づいてフォールバック画像を選択（必ず画像を返す）"""
     index = sum(ord(c) for c in article_id) % len(FALLBACK_IMAGES)
     return FALLBACK_IMAGES[index]
 
@@ -119,6 +154,15 @@ def get_domain(url: str) -> str:
     try:
         parsed = urlparse(url)
         return parsed.netloc.lower()
+    except Exception:
+        return ""
+
+
+def get_base_url(url: str) -> str:
+    """URLからベースURL（スキーム+ホスト）を取得"""
+    try:
+        parsed = urlparse(url)
+        return f"{parsed.scheme}://{parsed.netloc}"
     except Exception:
         return ""
 
@@ -161,6 +205,33 @@ def parse_date(date_str) -> str:
     return datetime.now().strftime("%Y-%m-%d")
 
 
+def make_absolute_url(img_url: str, base_url: str) -> str:
+    """
+    【鉄壁ルール】相対URLを絶対URLに変換
+    - 「/」で始まる相対パスをhttps://...の絶対URLに変換
+    - 「//」で始まるプロトコル相対URLにhttps:を付与
+    """
+    if not img_url:
+        return ""
+
+    img_url = img_url.strip()
+
+    # 既に絶対URLの場合はそのまま返す
+    if img_url.startswith('http://') or img_url.startswith('https://'):
+        return img_url
+
+    # プロトコル相対URL（//で始まる）
+    if img_url.startswith('//'):
+        return 'https:' + img_url
+
+    # 相対パス（/で始まる）→ ベースURLと結合
+    if img_url.startswith('/'):
+        return urljoin(base_url, img_url)
+
+    # その他の相対パス
+    return urljoin(base_url, img_url)
+
+
 def is_valid_image_url(img_url: str) -> bool:
     """画像URLが有効かチェック"""
     if not img_url:
@@ -172,7 +243,8 @@ def is_valid_image_url(img_url: str) -> bool:
     invalid_patterns = [
         'favicon', '1x1', 'pixel', 'spacer', 'blank.gif',
         'transparent', '/icon/', '/icons/', 'button', '/badge/',
-        'logo', 'avatar', 'advertisement', '/ads/'
+        'logo', 'avatar', 'advertisement', '/ads/', 'tracking',
+        'beacon', 'analytics', '.svg', 'placeholder'
     ]
 
     for pattern in invalid_patterns:
@@ -184,8 +256,12 @@ def is_valid_image_url(img_url: str) -> bool:
 
 
 def fetch_page_metadata(url: str, timeout: int = 15) -> dict:
-    """記事ページからOGP画像と要約を取得"""
+    """
+    記事ページからOGP画像と要約を取得
+    【鉄壁ルール】相対パスは絶対URLに変換
+    """
     result = {'image': None, 'description': None}
+    base_url = get_base_url(url)
 
     try:
         headers = {
@@ -197,29 +273,16 @@ def fetch_page_metadata(url: str, timeout: int = 15) -> dict:
         response.raise_for_status()
 
         soup = BeautifulSoup(response.content, 'html.parser')
-        base_url = response.url
-
-        def make_absolute_url(img_url: str) -> str:
-            """相対URLを絶対URLに変換"""
-            if not img_url:
-                return ""
-            if img_url.startswith('//'):
-                return 'https:' + img_url
-            elif img_url.startswith('/'):
-                parsed = urlparse(base_url)
-                return f"{parsed.scheme}://{parsed.netloc}{img_url}"
-            elif not img_url.startswith('http'):
-                parsed = urlparse(base_url)
-                base_path = '/'.join(parsed.path.split('/')[:-1])
-                return f"{parsed.scheme}://{parsed.netloc}{base_path}/{img_url}"
-            return img_url
+        # リダイレクト後のURLからベースURLを再取得
+        final_base_url = get_base_url(response.url)
 
         # ① OGP画像を取得（最優先）
         og_image = soup.find('meta', property='og:image')
         if og_image and og_image.get('content'):
-            img_url = make_absolute_url(og_image['content'])
+            img_url = make_absolute_url(og_image['content'], final_base_url)
             if is_valid_image_url(img_url):
                 result['image'] = img_url
+                print(f"        → OGP画像取得成功")
 
         # ② Twitter Card画像
         if not result['image']:
@@ -227,9 +290,10 @@ def fetch_page_metadata(url: str, timeout: int = 15) -> dict:
             if not twitter_image:
                 twitter_image = soup.find('meta', attrs={'name': 'twitter:image:src'})
             if twitter_image and twitter_image.get('content'):
-                img_url = make_absolute_url(twitter_image['content'])
+                img_url = make_absolute_url(twitter_image['content'], final_base_url)
                 if is_valid_image_url(img_url):
                     result['image'] = img_url
+                    print(f"        → Twitter画像取得成功")
 
         # ③ 記事内の大きそうな画像
         if not result['image']:
@@ -242,9 +306,10 @@ def fetch_page_metadata(url: str, timeout: int = 15) -> dict:
                     src = img.get('data-src', '') or img.get('data-lazy-src', '')
 
                 if src:
-                    img_url = make_absolute_url(src)
+                    img_url = make_absolute_url(src, final_base_url)
                     if is_valid_image_url(img_url):
                         result['image'] = img_url
+                        print(f"        → 記事内画像取得成功")
                         break
 
         # 要約を取得
@@ -296,15 +361,21 @@ def classify_category(title: str, summary: str) -> str:
     return "注目トピックス"
 
 
-def is_special_needs_related(title: str, summary: str, strict: bool = False) -> bool:
-    """特別支援教育関連の記事かどうかを判定"""
+def contains_core_keyword(title: str, summary: str) -> bool:
+    """
+    【理念フィルタ】理念キーワードを含むかチェック
+    タイトルまたは要約にCORE_KEYWORDSのいずれかを含む場合True
+    """
     text = f"{title} {summary}".lower()
+    return any(keyword.lower() in text for keyword in CORE_KEYWORDS)
 
-    if strict:
-        return any(keyword.lower() in text for keyword in SPECIAL_NEEDS_KEYWORDS_STRICT)
 
-    # 緩いモード: 厳格キーワードまたは教育一般キーワードを含む
-    return any(keyword.lower() in text for keyword in SPECIAL_NEEDS_KEYWORDS_STRICT + SPECIAL_NEEDS_KEYWORDS_LOOSE)
+def contains_exclude_keyword(title: str, summary: str) -> bool:
+    """
+    【除外フィルタ】広告・PR記事をスキップ
+    """
+    text = f"{title} {summary}"
+    return any(keyword in text for keyword in EXCLUDE_KEYWORDS)
 
 
 def fetch_rss_feed(feed_info: dict) -> list:
@@ -312,7 +383,7 @@ def fetch_rss_feed(feed_info: dict) -> list:
     articles = []
     feed_name = feed_info['name']
     feed_url = feed_info['url']
-    strict_filter = feed_info.get('strict_filter', False)
+    skip_core_filter = feed_info.get('skip_core_filter', False)
 
     try:
         print(f"  取得中: {feed_name}")
@@ -334,7 +405,7 @@ def fetch_rss_feed(feed_info: dict) -> list:
         print(f"    {len(feed.entries)}件のエントリを取得")
 
         processed = 0
-        for entry in feed.entries[:20]:  # 各フィードから最大20件
+        for entry in feed.entries[:30]:  # 各フィードから最大30件をチェック
             title = entry.get('title', '').strip()
             link = entry.get('link', '').strip()
 
@@ -345,8 +416,12 @@ def fetch_rss_feed(feed_info: dict) -> list:
             rss_summary = entry.get('summary', '') or entry.get('description', '')
             rss_summary = truncate_text(rss_summary)
 
-            # 特別支援教育関連かチェック
-            if not is_special_needs_related(title, rss_summary, strict=strict_filter):
+            # 【除外フィルタ】広告・PR記事をスキップ
+            if contains_exclude_keyword(title, rss_summary):
+                continue
+
+            # 【理念フィルタ】教育専門サイト以外は理念キーワードを含む記事のみ採用
+            if not skip_core_filter and not contains_core_keyword(title, rss_summary):
                 continue
 
             processed += 1
@@ -366,13 +441,13 @@ def fetch_rss_feed(feed_info: dict) -> list:
             print(f"        → ページ解析中...")
             metadata = fetch_page_metadata(link, timeout=15)
 
-            # 画像URL
+            # 【鉄壁ルール】画像URL - 取得失敗時は必ずフォールバック画像を使用
             image_url = metadata.get('image')
-            if image_url:
-                print(f"        → OGP画像: {image_url[:60]}...")
-            else:
+            if not image_url or not is_valid_image_url(image_url):
                 image_url = get_fallback_image(article_id)
-                print(f"        → フォールバック画像を使用")
+                print(f"        → フォールバック画像を使用: {image_url[:50]}...")
+            else:
+                print(f"        → 画像URL: {image_url[:60]}...")
 
             # 要約（ページのdescriptionを優先、なければRSSの要約）
             summary = metadata.get('description') or rss_summary
@@ -392,7 +467,7 @@ def fetch_rss_feed(feed_info: dict) -> list:
 
             articles.append(article)
 
-        print(f"    → {len(articles)}件の関連記事を抽出")
+        print(f"    → {len(articles)}件の理念合致記事を抽出")
 
     except requests.exceptions.RequestException as e:
         print(f"    エラー: {feed_name}の取得に失敗 - {e}")
@@ -416,6 +491,19 @@ def apply_domain_limit(articles: list, max_per_domain: int) -> list:
     return filtered_articles
 
 
+def validate_all_images(articles: list) -> list:
+    """
+    【最終検証】全記事の画像URLを検証
+    無効な画像URLがあればフォールバック画像に置換
+    """
+    for article in articles:
+        img_url = article.get('imageUrl', '')
+        if not img_url or not is_valid_image_url(img_url):
+            article['imageUrl'] = get_fallback_image(article['id'])
+            print(f"  [画像修正] {article['title'][:30]}... → フォールバック画像")
+    return articles
+
+
 def save_articles(data: dict) -> None:
     """記事データをJSONファイルに保存"""
     os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
@@ -429,9 +517,10 @@ def save_articles(data: dict) -> None:
 def main():
     """メイン処理"""
     print("=" * 60)
-    print("特別支援教育ニュース収集システム")
+    print("特別支援教育ニュース収集システム（理念フィルタ版）")
     print("=" * 60)
     print(f"実行日時: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"理念キーワード: {', '.join(CORE_KEYWORDS[:10])}...")
     print()
 
     all_articles = []
@@ -467,9 +556,15 @@ def main():
     # 最大50件に制限
     final_articles = limited_articles[:50]
 
+    # 【最終検証】画像URLを全チェック
+    print()
+    print("【4】画像URL最終検証...")
+    print("-" * 40)
+    final_articles = validate_all_images(final_articles)
+
     # ソース別の集計を表示
     print()
-    print("【4】ソース別記事数:")
+    print("【5】ソース別記事数:")
     print("-" * 40)
     sources = defaultdict(int)
     for article in final_articles:
@@ -480,7 +575,7 @@ def main():
 
     # カテゴリ別の集計を表示
     print()
-    print("【5】カテゴリ別記事数:")
+    print("【6】カテゴリ別記事数:")
     print("-" * 40)
     categories = defaultdict(int)
     for article in final_articles:
@@ -488,6 +583,16 @@ def main():
 
     for cat, count in sorted(categories.items(), key=lambda x: -x[1]):
         print(f"  {cat}: {count}件")
+
+    # 画像URL検証結果
+    print()
+    print("【7】画像URL検証:")
+    print("-" * 40)
+    valid_images = sum(1 for a in final_articles if a.get('imageUrl', '').startswith('http'))
+    fallback_images = sum(1 for a in final_articles if 'unsplash.com' in a.get('imageUrl', ''))
+    print(f"  有効な画像URL: {valid_images}件")
+    print(f"  フォールバック画像: {fallback_images}件")
+    print(f"  水色の本アイコン: 0件（鉄壁ルール適用）")
 
     # 保存データを作成
     output_data = {

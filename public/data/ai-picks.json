@@ -1,6 +1,30 @@
 {
   "picks": [
     {
+      "id": "268a495368ed",
+      "sourceArticleId": "84fef0eed9fb",
+      "title": "不登校の子を｢励ます｣ほど心を閉ざす納得理由 | 子育て | 東洋経済オンライン",
+      "url": "https://toyokeizai.net/articles/-/931969?utm_source=rss&utm_medium=http&utm_campaign=link_back",
+      "category": "注目トピックス",
+      "originalDate": "2026-02-05",
+      "reason": "不登校支援の視点",
+      "summary": "不登校の子どもへの接し方について、従来の「励まし」が逆効果になる可能性を指摘しています。保護者や教員が陥りがちな言動を見直し、子どもが心を閉ざさないための具体的なヒントが得られるでしょう。不登校支援のあり方を深く考えるきっかけとなります。",
+      "generatedAt": "2026-02-05T22:49:25.223040",
+      "model": "gemini-2.5-flash"
+    },
+    {
+      "id": "f31482ccefc4",
+      "sourceArticleId": "f7e4f169e0e9",
+      "title": "菊池省三  教育の「王道」 学級づくりを語る！（全3回）／第１回「学級開き～１学期末までの学級づくり」＜４月４日(土)18:00～19:30開催＞",
+      "url": "https://kyoiku.sho.jp/424583/",
+      "category": "実践・事例",
+      "originalDate": "2026-02-05",
+      "reason": "インクルーシブな学級づくり",
+      "summary": "学級づくりの「王道」について語る教員向けオンライン講座です。特別支援教育を必要とする子どもを含む全ての児童生徒が安心して学び、成長できるインクルーシブな学級環境を構築するためのヒントが得られます。新学期に向けた準備に役立つでしょう。",
+      "generatedAt": "2026-02-05T22:49:25.223068",
+      "model": "gemini-2.5-flash"
+    },
+    {
       "id": "3a5b171d270d",
       "sourceArticleId": "f413aacb31aa",
       "title": "調査書不要の高校入試が広がる　不登校や病気の生徒に「チャンスを」",
@@ -37,6 +61,6 @@
       "model": "gemini-2.5-flash"
     }
   ],
-  "lastUpdated": "2026-02-05T22:24:20.312458",
-  "totalCount": 3
+  "lastUpdated": "2026-02-05T22:49:25.223458",
+  "totalCount": 5
 }
