@@ -1,41 +1,110 @@
 {
   "articles": [
     {
-      "id": "af60dd426e5c",
-      "title": "特別支援の実践知が教材に、インクルーシブ教育教材コンテスト入賞作が決定（こどもとIT）",
-      "summary": "特別支援の実践知が教材に、インクルーシブ教育教材コンテスト入賞作が決定（こどもとIT）。Yahoo!ニュースより。",
+      "id": "51a3ac07d215",
+      "title": "【高校受験2026】千葉県公立高、一般選抜の志願状況（2/5時点）県立船橋（理数）2.23倍",
+      "summary": "千葉県教育委員会は2026年2月5日、2026年度（令和8年度）千葉県公立高等学校入学者選抜について、一般入学者選抜等の志願状況（志願変更前）を発表した。志願倍率は、全日制の課程が1.11倍、定時制の課程が0.66倍だった。",
       "category": "実践・事例",
-      "date": "2026-02-04",
-      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1paGJLOTRSN2V1YnJtTmxjZFpnNklVRk5QZHQ4SUROMDJwVWF3d3YyV1NLaFRreWVNSzFaaUZQUlFFQVlPVnZVNEpNLVJqZ3RaWUp3eFRrZVQtaHFiN2k2SFk2WmZBakxRMVVkRzZUOGc3ZUdETEVhQUpMUHdwbzg?oc=5",
-      "imageUrl": "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400&h=300&fit=crop",
-      "source": "Yahoo!ニュース"
+      "date": "2026-02-05",
+      "url": "https://resemom.jp/article/2026/02/05/84937.html",
+      "imageUrl": "https://resemom.jp/imgs/ogp_f/391419.jpg",
+      "source": "リセマム"
     },
     {
-      "id": "37ff4fc9ec78",
-      "title": "学校で荒れがちな発達障害の息子。対応に悩んだ母は、スクールカウンセラーを頼ることに/発達障害の子ども、受け入れられない私たち 第86回 (2026年2月4日掲載)",
-      "summary": "学校で荒れがちな発達障害の息子。対応に悩んだ母は、スクールカウンセラーを頼ることに/発達障害の子ども、受け入れられない私たち 第86回 (2026年2月4日掲載)。ライブドアニュースより。",
+      "id": "1fead34f521c",
+      "title": "【高校受験2026】群馬県公立高、志願倍率（2/5現在）沼田（文理探究）1.58倍",
+      "summary": "群馬県教育委員会は2026年2月5日、2026年度（令和8年度）群馬県公立高等学校入学者選抜における全日制課程・フレックススクール選抜の志願状況を公表した。第1回志願先変更後の志願倍率は、沼田（文理探究）1.58倍など。平均志願倍率は0.97倍であった。",
+      "category": "実践・事例",
+      "date": "2026-02-05",
+      "url": "https://resemom.jp/article/2026/02/05/84936.html",
+      "imageUrl": "https://resemom.jp/imgs/ogp_f/391425.jpg",
+      "source": "リセマム"
+    },
+    {
+      "id": "567d1125af22",
+      "title": "【高校受験2026】兵庫県公立高、推薦入試の志願倍率（2/5時点）市西宮2.53倍など",
+      "summary": "兵庫県教育委員会は2026年2月4日、2026年度（令和8年度）兵庫県公立高等学校入学者選抜における推薦入学などの志願状況を公表した。2月4日午後3時時点の推薦入学実施校の平均志願倍率は1.22倍。市西宮（グローバル・サイエンス）2.53倍がもっとも高い。",
+      "category": "実践・事例",
+      "date": "2026-02-05",
+      "url": "https://resemom.jp/article/2026/02/05/84935.html",
+      "imageUrl": "https://resemom.jp/imgs/ogp_f/391418.jpg",
+      "source": "リセマム"
+    },
+    {
+      "id": "870a39f00ebd",
+      "title": "全国開催「まるごと通信制フェスタ2026」2/14-3/1",
+      "summary": "リクメディアは、通信制高校・サポート校の学校説明をまとめて視聴できる合同説明会「まるごと通信制フェスタ2026」を2026年2月14日から3月1日にかけて開催する。対象地域は全国47都道府県となり、参加対象は中学生や高校生、中学校の教職員や保護者など。参加は無料で、事前申込みが必要となる。",
+      "category": "イベント・研修",
+      "date": "2026-02-05",
+      "url": "https://resemom.jp/article/2026/02/05/84934.html",
+      "imageUrl": "https://resemom.jp/imgs/ogp_f/391355.jpg",
+      "source": "リセマム"
+    },
+    {
+      "id": "b780c56097df",
+      "title": "【高校受験2026】大阪私立高1次応募状況…大阪星光3.2倍など",
+      "summary": "大阪私立中学校高等学校連合会は2026年2月5日、2026年度（令和8年度）高等学校生徒応募（1次）状況を公表した。2月3日現在の応募倍率は、大阪星光学院（普通）3.2倍、清風南海（普通・3か年特進）4.8倍、四天王寺（普通・文理選抜）10.0倍など。",
+      "category": "実践・事例",
+      "date": "2026-02-05",
+      "url": "https://resemom.jp/article/2026/02/05/84932.html",
+      "imageUrl": "https://resemom.jp/imgs/ogp_f/391400.jpg",
+      "source": "リセマム"
+    },
+    {
+      "id": "f413aacb31aa",
+      "title": "調査書不要の高校入試が広がる　不登校や病気の生徒に「チャンスを」",
+      "summary": "本格的な高校入試シーズンが始まった。調査書や、評定（内申点）を用いず合格者を選ぶ高校入試が増えている。背景には、不登校の子の増加などがある。ただ、長期欠席者に限らず、受験生全員を、評定を使った場合と…",
+      "category": "実践・事例",
+      "date": "2026-01-31",
+      "url": "https://www.asahi.com/articles/ASV1X2J4XV1XUTIL00DM.html?ref=rss",
+      "imageUrl": "https://imgopt.asahi.com/ogp/AS20260128002670_comm.jpg",
+      "source": "朝日新聞 教育"
+    },
+    {
+      "id": "fb550a6aea1c",
+      "title": "救急で心の手当ても　子どもの自殺未遂、声を聴くゲートキーパーに",
+      "summary": "オーバードーズ（薬の過量服用）やリストカットなどの自殺未遂をした子どもたちが救急搬送される救急医療の現場。解毒や傷の治療など「体の手当て」が一義的な役割だが、子どもの声を聴き、「心の手当て」を重視し…",
       "category": "注目トピックス",
-      "date": "2026-02-04",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5NelpvdHJzR2ZRei1UaXItbjBfdGd3Wlg1QkdpWkR5NFh3RWQwNVR6ZG1KSlVWcDRxdVpmNGtjZGNDblR0V0F5T1ZGYk80eGRSVmNEY0NPV0N3dHlCbVE?oc=5",
-      "imageUrl": "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=300&fit=crop",
-      "source": "ライブドアニュース"
+      "date": "2026-01-31",
+      "url": "https://www.asahi.com/articles/ASV1V1G5MV1VUTFL004M.html?ref=rss",
+      "imageUrl": "https://imgopt.asahi.com/ogp/AS20260126001577_comm.jpg",
+      "source": "朝日新聞 教育"
     },
     {
-      "id": "2cf72690d8dd",
-      "title": "「第3回インクルーシブ教育教材コンテスト」入賞作品決定― 教育現場の創意工夫が集結、最優秀賞は2月21日の最終審査プレゼンテーションで決定 ―（PR TIMES）",
-      "summary": "「第3回インクルーシブ教育教材コンテスト」入賞作品決定― 教育現場の創意工夫が集結、最優秀賞は2月21日の最終審査プレゼンテーションで決定 ―（PR TIMES）。毎日新聞より。",
-      "category": "教材・ツール",
-      "date": "2026-02-03",
-      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE0yQ0R4QmJneEF4VWtWa3YtdmFWM2llelhVVnFncDR6NXBZaDYtSEhMck92WUs0MkYyWDVKX3ZSWEs0WHhBeWpFLUNkNVVHcUF3eHdoZDQ4eE9YajFSYlFkd2R6V3U2T1Fj?oc=5",
-      "imageUrl": "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=300&fit=crop",
-      "source": "毎日新聞"
+      "id": "e648ddeb68d6",
+      "title": "STEAM教育×探究で未来を変える　入賞13団体が実践を報告",
+      "summary": "科学・技術・工学・アート（教養）・数学を融合させた「STEAM教育」×「探究学習」――。地域の産学官と連携して未来につながる教育を実践する学校や団体を表彰する一般社団法人学びのイノベーション・プラッ…",
+      "category": "実践・事例",
+      "date": "2026-01-30",
+      "url": "https://www.asahi.com/articles/ASV1Z2FH6V1ZUTIL018M.html?ref=rss",
+      "imageUrl": "https://imgopt.asahi.com/ogp/AS20260130002400_comm.jpg",
+      "source": "朝日新聞 教育"
+    },
+    {
+      "id": "7d0dbac3c4c0",
+      "title": "国公立大入試の2次試験出願　文科省が中間集計を発表",
+      "summary": "文部科学省は30日、国公立大学入試の2次試験の出願状況（中間集計）を発表した。 志願者数（30日午前10時時点）は、175大学625学部で計8万1978人（国立6万1471人、公立2万507人）。前…",
+      "category": "制度・法改正",
+      "date": "2026-01-30",
+      "url": "https://www.asahi.com/articles/ASV1Z3Q66V1ZUTIL02KM.html?ref=rss",
+      "imageUrl": "https://imgopt.asahi.com/ogp/AS20260130003878_comm.jpg",
+      "source": "朝日新聞 教育"
+    },
+    {
+      "id": "56edfde39639",
+      "title": "短歌に向き合う時間が力に　定時制高元教員が最後の授業で伝えたこと",
+      "summary": "31年前の阪神・淡路大震災で失ったものや経験したことは人それぞれ違うけど、31文字で心情を表現し、自分と向き合おう――。夜間定時制高校の国語の授業で「短歌づくり」を長年実践してきた教員が今月20日、…",
+      "category": "実践・事例",
+      "date": "2026-01-29",
+      "url": "https://www.asahi.com/articles/ASV1Y32NYV1YPIHB00XM.html?ref=rss",
+      "imageUrl": "https://imgopt.asahi.com/ogp/AS20260129003222_comm.jpg",
+      "source": "朝日新聞 教育"
     }
   ],
-  "lastUpdated": "2026-02-05T18:50:51.098286",
-  "totalCount": 3,
+  "lastUpdated": "2026-02-05T19:09:07.481470",
+  "totalCount": 10,
   "sources": [
-    "Yahoo!ニュース",
-    "ライブドアニュース",
-    "毎日新聞"
+    "リセマム",
+    "朝日新聞 教育"
   ]
 }
