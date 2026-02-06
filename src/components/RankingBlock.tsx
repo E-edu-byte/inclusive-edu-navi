@@ -9,6 +9,7 @@ type RankedArticle = {
   id: string;
   title: string;
   url: string;
+  source: string;
   totalScore: number;
 };
 
@@ -51,6 +52,7 @@ export default function RankingBlock() {
             id: article.id,
             title: article.title,
             url: article.url,
+            source: article.source || '',
             totalScore,
           };
         });
@@ -124,9 +126,16 @@ export default function RankingBlock() {
               >
                 {index + 1}
               </span>
-              <span className="text-xs text-gray-700 leading-relaxed group-hover:text-primary-600 transition-colors line-clamp-2">
-                {article.title}
-              </span>
+              <div className="flex-1 min-w-0">
+                <span className="text-xs text-gray-700 leading-relaxed group-hover:text-primary-600 transition-colors line-clamp-2">
+                  {article.title}
+                </span>
+                {article.source && (
+                  <span className="block text-[10px] text-gray-400 mt-0.5">
+                    {article.source}
+                  </span>
+                )}
+              </div>
             </a>
           </li>
         ))}

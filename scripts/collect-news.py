@@ -119,6 +119,20 @@ def score_article_with_ai(article: dict, api_key: str) -> int:
 
 def categorize_with_ai(article: dict, api_key: str) -> str:
     """AIでカテゴリを判定"""
+    title = article.get('title', '')
+    summary = article.get('summary', '')
+    text = f"{title} {summary}".lower()
+
+    # 優先キーワードチェック：不登校・多様な学び関連
+    diverse_learning_keywords = [
+        '不登校', 'フリースクール', 'オルタナティブ', 'オルティナブル',
+        '通信制高校', 'ホームスクール', 'ホームエデュケーション',
+        '多様な学び', '学校外', '居場所', 'サポート校'
+    ]
+    for keyword in diverse_learning_keywords:
+        if keyword in text:
+            return "diverse-learning"
+
     if not api_key:
         return article.get("category", "support")
 
@@ -129,9 +143,15 @@ def categorize_with_ai(article: dict, api_key: str) -> str:
         prompt = f"""
 以下の記事を最も適切なカテゴリに分類してください。
 
+【重要】以下のキーワードが含まれる場合は必ず対応するカテゴリを選んでください：
+- 「不登校」「フリースクール」「オルタナティブスクール」「通信制高校」「ホームスクール」→ diverse-learning
+- 「文部科学省」「法律」「条例」「ガイドライン」「通知」→ policy
+- 「アプリ」「AI」「ICT」「デジタル」「EdTech」→ ict
+- 「セミナー」「研修」「講演会」「ワークショップ」→ events
+
 カテゴリ選択肢：
 - support: 合理的配慮・支援（学校や現場での具体的な支援方法）
-- diverse-learning: 不登校・多様な学び（フリースクール、通信制高校等）
+- diverse-learning: 不登校・多様な学び（フリースクール、通信制高校、オルタナティブ教育）
 - policy: 制度・行政（文科省の通知、法律、自治体の施策）
 - ict: ICT・教材（支援技術、デジタル教科書、学習アプリ）
 - events: イベント・研修（セミナー、ワークショップ、講演会）
