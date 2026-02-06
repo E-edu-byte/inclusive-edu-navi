@@ -165,28 +165,13 @@ PUBLIC_INSTITUTION_KEYWORDS = [
     "早稲田大学", "慶應義塾大学", "上智大学"
 ]
 
-# カテゴリ分類のキーワード
-CATEGORY_KEYWORDS = {
-    "制度・法改正": [
-        "文科省", "文部科学省", "法律", "法改正", "ガイドライン", "制度",
-        "通知", "告示", "省令", "政策", "答申", "報告書", "指針", "基準"
-    ],
-    "研究・学術": [
-        "研究", "調査", "大学", "学会", "論文", "分析", "統計",
-        "エビデンス", "実証", "検証", "学術", "科研", "博士", "教授"
-    ],
-    "実践・事例": [
-        "実践", "事例", "取り組み", "小学校", "中学校", "高校", "高等学校",
-        "学級", "授業", "指導", "支援", "児童", "生徒", "教員", "先生"
-    ],
-    "教材・ツール": [
-        "教材", "ツール", "アプリ", "ICT", "タブレット", "デジタル",
-        "ソフト", "システム", "機器", "支援技術", "AT", "アシスティブ"
-    ],
-    "イベント・研修": [
-        "セミナー", "研修", "イベント", "講座", "ワークショップ", "シンポジウム",
-        "フォーラム", "大会", "募集", "開催", "参加"
-    ]
+# 【新カテゴリー定義】AI判定用（5カテゴリー）
+CATEGORIES = {
+    "合理的配慮・支援": "学校や現場での具体的な支援方法、個別の配慮事例、発達障害・学習障害への対応など",
+    "不登校・多様な学び": "不登校支援、フリースクール、通信制高校、オルタナティブ教育、ギフテッド教育など",
+    "制度・行政": "文科省の通知、法律・法改正、自治体の施策、予算、ガイドラインなど",
+    "ICT・教材": "支援技術、デジタル教科書、学習アプリ、タブレット活用、EdTechなど",
+    "イベント・研修": "セミナー、ワークショップ、講演会、研修会、フォーラムなどの情報",
 }
 
 # 出力ファイルパス
@@ -507,42 +492,62 @@ def truncate_text(text: str, max_length: int = 200) -> str:
     return text[:max_length - 3] + "..."
 
 
-def generate_ai_summary(title: str, original_summary: str, source: str, url: str = "") -> str:
+def generate_ai_summary_and_category(title: str, original_summary: str, source: str, url: str = "") -> dict:
     """
-    【AI要約 + 理念適合性判定】Gemini APIを使用
-    - 理念に合致する記事：優しいトーンの要約を生成
-    - 理念に合致しない記事：「SKIP」を返す
-    【キャッシュ対応】既存の要約があれば再利用してAPIコールを節約
+    【AI要約 + カテゴリー判定】Gemini APIを使用
+    - 理念に合致する記事：要約とカテゴリーを返す
+    - 理念に合致しない記事：{"skip": True}を返す
+    【キャッシュ対応】既存の要約があれば再利用（カテゴリーは再判定）
     """
     global FAILED_SUMMARIES
 
-    # 【キャッシュチェック】既存の有効な要約があれば再利用
+    # カテゴリー一覧を文字列化
+    category_list = "\n".join([f"- {cat}: {desc}" for cat, desc in CATEGORIES.items()])
+
+    # 【キャッシュチェック】既存の有効な要約があれば再利用（カテゴリーのみ再判定）
+    cached_summary = None
     if url and url in SUMMARY_CACHE:
-        print(f"        → キャッシュから要約を再利用")
-        return SUMMARY_CACHE[url]
+        cached_summary = SUMMARY_CACHE[url]
+        print(f"        → キャッシュから要約を再利用（カテゴリーは再判定）")
 
     if not gemini_client:
-        return original_summary  # Gemini API無効時は元の要約を返す
+        return {"summary": original_summary, "category": "合理的配慮・支援", "skip": False}
 
     try:
-        prompt = f"""あなたはインクルーシブ教育の専門編集者です。
-提供された記事が以下の「理念」に合致するか判定し、合致する場合は要約を作成してください。
+        if cached_summary:
+            # キャッシュがある場合はカテゴリーのみ判定
+            prompt = f"""あなたはインクルーシブ教育の専門編集者です。
+以下の記事に最も合致するカテゴリーを1つだけ選んでください。
 
-【理念】
-・特別支援教育、合理的配慮、発達障害、不登校支援、インクルーシブな社会づくりに関するもの。
-・たとえ「受験」や「進学」の話であっても、障害のある子への配慮や支援、教育の多様性に関する内容であれば「合致」とみなします。
-・子どもの多様な学びを支援するICT・EdTech、通信制高校、オルタナティブスクールなども「合致」です。
+【カテゴリー一覧】
+{category_list}
+
+## 記事情報
+タイトル: {title}
+要約: {cached_summary}
+
+## 出力形式
+カテゴリー名のみを出力してください（例：「不登校・多様な学び」）。"""
+        else:
+            # 新規の場合は要約とカテゴリーを同時に判定
+            prompt = f"""あなたはインクルーシブ教育の専門編集者です。
+提供された記事を判定し、要約とカテゴリーを返してください。
+
+【理念】インクルーシブ教育ナビは以下のテーマを扱います：
+・特別支援教育、合理的配慮、発達障害、不登校支援
+・子どもの多様な学びを支援するICT・EdTech
+・通信制高校、オルタナティブスクール、ギフテッド教育
+
+【カテゴリー一覧】
+{category_list}
 
 【判定ルール】
-・理念に合致する場合：その内容を80〜120文字程度で優しく要約して返してください。
-  - 保護者や教員にとっての価値を伝える
-  - 専門用語は避け、分かりやすい言葉を使う
-  - 「です・ます」調で統一する
-・理念に全く関係ない場合：『SKIP』という文字列だけを返してください。
-  - 例：一般の入試倍率・出願状況のみのニュース
-  - 例：プログラミング技術解説（Scratch入門など）
-  - 例：一般的な学校行事・教員採用試験
-  - 例：大学ランキング・偏差値情報
+1. 理念に合致する記事：要約とカテゴリーをJSON形式で返す
+2. 理念に全く関係ない記事：「SKIP」のみ返す
+   - 例：一般の入試倍率・出願状況のみ（不登校支援と無関係）
+   - 例：インフルエンザ等の健康ニュース
+   - 例：プログラミング技術解説
+   - 例：大学ランキング・偏差値情報
 
 ## 記事情報
 タイトル: {title}
@@ -550,51 +555,71 @@ def generate_ai_summary(title: str, original_summary: str, source: str, url: str
 概要: {original_summary}
 
 ## 出力形式
-要約文のみを出力してください（説明や前置きは不要）。理念に合致しない場合は「SKIP」のみ。"""
+理念に合致する場合、以下のJSON形式で出力（他の説明文は不要）：
+```json
+{{"summary": "80〜120文字の優しい要約（です・ます調）", "category": "カテゴリー名"}}
+```
+理念に合致しない場合は「SKIP」のみ。"""
 
         response = gemini_client.models.generate_content(
             model="gemini-2.5-flash",
             contents=prompt
         )
 
-        ai_summary = response.text.strip()
-        # 余計な引用符やマークダウンを削除
-        ai_summary = re.sub(r'^[「"\']+|[」"\']+$', '', ai_summary)
-        ai_summary = re.sub(r'^\*\*|\*\*$', '', ai_summary)
+        ai_response = response.text.strip()
 
-        # 【レート制限対策】API呼び出し後に3秒待機
-        time.sleep(3)
+        # 【レート制限対策】API呼び出し後に15秒待機（無料プランは1分5回制限）
+        time.sleep(15)
 
-        # SKIPの場合はそのまま返す（呼び出し元で除外処理）
-        if ai_summary.upper() == 'SKIP' or ai_summary == 'SKIP':
+        # SKIPの場合
+        if ai_response.upper() == 'SKIP' or 'SKIP' in ai_response.upper()[:10]:
             print(f"        → AI判定: 理念に合致しないためSKIP")
-            return "SKIP"
+            return {"skip": True}
 
-        if len(ai_summary) > 10:
-            return ai_summary
+        # キャッシュがある場合（カテゴリーのみ返ってくる）
+        if cached_summary:
+            # カテゴリー名を抽出
+            category = ai_response.strip().replace('「', '').replace('」', '')
+            if category in CATEGORIES:
+                return {"summary": cached_summary, "category": category, "skip": False}
+            else:
+                return {"summary": cached_summary, "category": "合理的配慮・支援", "skip": False}
+
+        # JSONを抽出してパース
+        if "```json" in ai_response:
+            json_str = ai_response.split("```json")[1].split("```")[0].strip()
+        elif "```" in ai_response:
+            json_str = ai_response.split("```")[1].split("```")[0].strip()
+        elif "{" in ai_response:
+            # JSON部分を抽出
+            start = ai_response.index("{")
+            end = ai_response.rindex("}") + 1
+            json_str = ai_response[start:end]
+        else:
+            json_str = ai_response
+
+        result = json.loads(json_str)
+        summary = result.get("summary", original_summary)
+        category = result.get("category", "合理的配慮・支援")
+
+        # カテゴリーが有効か確認
+        if category not in CATEGORIES:
+            category = "合理的配慮・支援"
+
+        if len(summary) > 10:
+            return {"summary": summary, "category": category, "skip": False}
         else:
             FAILED_SUMMARIES.append({"title": title, "url": url, "reason": "要約が短すぎる"})
-            return original_summary
+            return {"summary": original_summary, "category": category, "skip": False}
 
+    except json.JSONDecodeError as e:
+        print(f"        [JSONパースエラー] {e}")
+        FAILED_SUMMARIES.append({"title": title, "url": url, "reason": "JSONパースエラー"})
+        return {"summary": original_summary, "category": "合理的配慮・支援", "skip": False}
     except Exception as e:
-        print(f"        [AI要約エラー] {e}")
+        print(f"        [AI判定エラー] {e}")
         FAILED_SUMMARIES.append({"title": title, "url": url, "reason": str(e)[:50]})
-        return original_summary
-
-
-def classify_category(title: str, summary: str) -> str:
-    """タイトルと要約からカテゴリを判定"""
-    text = f"{title} {summary}".lower()
-
-    scores = {}
-    for category, keywords in CATEGORY_KEYWORDS.items():
-        score = sum(1 for keyword in keywords if keyword.lower() in text)
-        scores[category] = score
-
-    if max(scores.values()) > 0:
-        return max(scores, key=scores.get)
-
-    return "注目トピックス"
+        return {"summary": original_summary, "category": "合理的配慮・支援", "skip": False}
 
 
 def contains_core_keyword(title: str, summary: str) -> bool:
@@ -746,9 +771,6 @@ def fetch_rss_feed(feed_info: dict) -> list:
             date_parsed = entry.get('published_parsed') or entry.get('updated_parsed')
             date_str = parse_date(date_parsed)
 
-            # カテゴリを判定
-            category = classify_category(title, rss_summary)
-
             # 記事ページからOGP画像と詳細な要約を取得
             print(f"        → ページ解析中...")
             metadata = fetch_page_metadata(link, timeout=15)
@@ -766,16 +788,21 @@ def fetch_rss_feed(feed_info: dict) -> list:
             if not original_summary:
                 original_summary = f"{feed_name}の記事です。詳しくは元記事をご覧ください。"
 
-            # 【AI要約 + 理念適合性判定】
+            # 【AI要約 + カテゴリー判定】
             if gemini_client:
-                print(f"        → AI判定 & 要約生成中...")
-                summary = generate_ai_summary(title, original_summary, feed_name, link)
+                print(f"        → AI判定（要約＆カテゴリー）...")
+                ai_result = generate_ai_summary_and_category(title, original_summary, feed_name, link)
 
                 # 【SKIP判定】AIが理念に合致しないと判断した記事は除外
-                if summary == "SKIP":
+                if ai_result.get("skip"):
                     continue
+
+                summary = ai_result.get("summary", original_summary)
+                category = ai_result.get("category", "合理的配慮・支援")
+                print(f"        → カテゴリー: {category}")
             else:
                 summary = original_summary
+                category = "合理的配慮・支援"
 
             article = {
                 "id": article_id,

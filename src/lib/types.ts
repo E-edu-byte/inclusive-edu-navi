@@ -46,43 +46,37 @@ export type AIPicksData = {
 // basePath設定
 export const BASE_PATH = '/inclusive-edu-navi';
 
-// カテゴリ定義（静的）
+// カテゴリ定義（新5カテゴリー）
 export const categories: Category[] = [
   {
-    id: 'policy',
-    name: '制度・法改正',
-    description: '特別支援教育に関する法律、制度、ガイドラインの最新情報',
-    color: 'bg-blue-100 text-blue-800',
-  },
-  {
-    id: 'research',
-    name: '研究・学術',
-    description: '発達障害、学習支援に関する最新の研究成果',
-    color: 'bg-purple-100 text-purple-800',
-  },
-  {
-    id: 'practice',
-    name: '実践・事例',
-    description: '学校現場での実践例、成功事例の紹介',
+    id: 'support',
+    name: '合理的配慮・支援',
+    description: '学校や現場での具体的な支援方法、個別の配慮事例',
     color: 'bg-green-100 text-green-800',
   },
   {
-    id: 'tools',
-    name: '教材・ツール',
-    description: '特別支援教育に役立つ教材、ICTツールの紹介',
+    id: 'diverse-learning',
+    name: '不登校・多様な学び',
+    description: '不登校支援、フリースクール、通信制高校、ギフテッド教育',
+    color: 'bg-purple-100 text-purple-800',
+  },
+  {
+    id: 'policy',
+    name: '制度・行政',
+    description: '文科省の通知、法律、自治体の施策、ガイドライン',
+    color: 'bg-blue-100 text-blue-800',
+  },
+  {
+    id: 'ict',
+    name: 'ICT・教材',
+    description: '支援技術、デジタル教科書、学習アプリ、EdTech',
     color: 'bg-orange-100 text-orange-800',
   },
   {
     id: 'events',
     name: 'イベント・研修',
-    description: 'セミナー、研修会、学会情報',
+    description: 'セミナー、ワークショップ、講演会、研修会情報',
     color: 'bg-pink-100 text-pink-800',
-  },
-  {
-    id: 'topics',
-    name: '注目トピックス',
-    description: '今注目の話題、トレンド情報',
-    color: 'bg-yellow-100 text-yellow-800',
   },
 ];
 
