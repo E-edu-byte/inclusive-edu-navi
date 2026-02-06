@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { categories, BASE_PATH, Article } from '@/lib/types';
 import { generateAmazonSearchUrl, generateRakutenSearchUrl } from '@/data/articles';
+import SupportCard from './SupportCard';
 
 // 書籍検索用のキーワード情報
 type BookKeyword = {
@@ -193,6 +194,9 @@ export default function Sidebar() {
           </div>
         </div>
       )}
+
+      {/* 応援メッセージ枠 */}
+      <SupportCard />
 
       {/* お知らせ */}
       <div className="bg-primary-50 rounded-lg border border-primary-100 p-5">

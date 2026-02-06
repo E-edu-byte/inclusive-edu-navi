@@ -160,6 +160,72 @@ export default function AboutPage() {
             </div>
           </section>
 
+          {/* サイトの運営維持について */}
+          <section id="support" className="space-y-4">
+            <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+              <span className="w-1 h-6 bg-slate-500 rounded-full"></span>
+              サイトの運営維持について
+            </h2>
+
+            <div className="bg-[#f8fafc] rounded-xl p-6 border border-slate-200">
+              <div className="flex items-start gap-3 mb-4">
+                <span className="text-3xl" role="img" aria-label="コーヒー">☕️</span>
+                <div>
+                  <h3 className="font-bold text-slate-800 mb-2">広告に頼らない運営方針</h3>
+                  <p className="text-slate-600 text-sm leading-relaxed">
+                    インクルーシブ教育ナビは、教育現場にふさわしくない広告や、読者の体験を妨げる広告を一切掲載しない方針を掲げています。
+                    マンガ広告、ポップアップ広告、自動再生動画広告などは使用せず、
+                    読者の皆様が安心して情報収集できる環境づくりを最優先としています。
+                  </p>
+                </div>
+              </div>
+
+              <div className="border-t border-slate-200 pt-4 mt-4">
+                <h3 className="font-bold text-slate-800 mb-2">API・サーバー維持費へのご協力のお願い</h3>
+                <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                  このサイトは、最新の教育ニュースを自動収集するためにAI APIを使用し、
+                  GitHub Pagesを活用して運営しています。
+                  継続的な情報提供のためには、API利用料やドメイン維持費などの運営コストが発生します。
+                </p>
+                <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                  もしこのサイトが皆様のお役に立っているなら、
+                  コーヒー1杯分からの応援をご検討いただけると幸いです。
+                  いただいたご支援は、すべてサイトの運営維持と機能改善に活用させていただきます。
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-3 mt-6">
+                  <a
+                    href="https://www.buymeacoffee.com/inclusive-edu"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 bg-slate-700 hover:bg-slate-800 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                  >
+                    <span>☕️</span>
+                    コーヒー1杯分から応援する
+                  </a>
+                </div>
+              </div>
+
+              <div className="border-t border-slate-200 pt-4 mt-4">
+                <h4 className="font-medium text-slate-700 mb-2 text-sm">運営費の主な用途</h4>
+                <ul className="text-slate-500 text-xs space-y-1">
+                  <li className="flex items-center gap-2">
+                    <span className="w-1 h-1 bg-slate-400 rounded-full"></span>
+                    AI API利用料（ニュースの自動収集・要約）
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1 h-1 bg-slate-400 rounded-full"></span>
+                    ドメイン維持費
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1 h-1 bg-slate-400 rounded-full"></span>
+                    サイトの機能改善・新機能開発
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
           {/* お問い合わせ */}
           <section className="bg-sky-50 rounded-xl p-6 border border-sky-100">
             <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
