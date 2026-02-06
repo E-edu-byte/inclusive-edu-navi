@@ -1058,9 +1058,29 @@ def fetch_mext_press_releases(max_articles: int = 3) -> list:
     return articles
 
 
+def clean_article_data(article: dict) -> dict:
+    """
+    記事データを軽量化（必要なフィールドのみ保持）
+    content, raw_html, description等の長いフィールドを削除
+    """
+    # 必要なフィールドのみを抽出（軽量化）
+    allowed_fields = {'id', 'title', 'summary', 'category', 'date', 'url', 'imageUrl', 'source'}
+    cleaned = {k: v for k, v in article.items() if k in allowed_fields}
+
+    # summary は200文字以内に制限
+    if 'summary' in cleaned and len(cleaned['summary']) > 200:
+        cleaned['summary'] = cleaned['summary'][:197] + '...'
+
+    return cleaned
+
+
 def save_articles(data: dict) -> None:
-    """記事データをJSONファイルに保存"""
+    """記事データをJSONファイルに保存（軽量化済み）"""
     os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
+
+    # 記事データを軽量化
+    if 'articles' in data:
+        data['articles'] = [clean_article_data(a) for a in data['articles']]
 
     with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
@@ -1130,8 +1150,14 @@ def main():
     limited_articles = apply_domain_limit(unique_articles, MAX_ARTICLES_PER_DOMAIN)
     print(f"  制限適用後: {len(limited_articles)}件")
 
-    # 最大50件に制限
-    final_articles = limited_articles[:50]
+    # 【厳格ルール】最大50件に制限
+    print()
+    print("【3.5】最大50件ルールを適用中...")
+    MAX_ARTICLES_TOTAL = 50
+    if len(limited_articles) > MAX_ARTICLES_TOTAL:
+        print(f"  {len(limited_articles)}件 → {MAX_ARTICLES_TOTAL}件に制限")
+    final_articles = limited_articles[:MAX_ARTICLES_TOTAL]
+    print(f"  最終記事数: {len(final_articles)}件")
 
     # 【最終検証】画像URLを全チェック
     print()

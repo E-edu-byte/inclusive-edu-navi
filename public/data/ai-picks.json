@@ -1,30 +1,66 @@
 {
   "picks": [
     {
-      "id": "280c0d55e220",
+      "id": "pick-1",
+      "sourceArticleId": "fdb4ef8a2ff6",
+      "title": "令和7年度インクルーシブな学校運営モデル事業中間成果報告会を開催します",
+      "url": "https://www.mext.go.jp/b_menu/houdou/mext_01599.html",
+      "category": "制度・行政",
+      "originalDate": "2026-02-06",
+      "reason": "文科省の重要政策",
+      "summary": "文部科学省がインクルーシブな学校運営モデル事業の中間成果報告会を開催します。障害のある子もない子も共に学ぶインクルーシブ教育の最新動向を知る重要な機会です。",
+      "generatedAt": "2026-02-06T19:15:00.000000",
+      "model": "gemini-2.5-flash"
+    },
+    {
+      "id": "pick-2",
       "sourceArticleId": "f413aacb31aa",
       "title": "調査書不要の高校入試が広がる　不登校や病気の生徒に「チャンスを」",
       "url": "https://www.asahi.com/articles/ASV1X2J4XV1XUTIL00DM.html?ref=rss",
       "category": "合理的配慮・支援",
       "originalDate": "2026-01-31",
       "reason": "多様な入試制度の拡大",
-      "summary": "不登校や病気で調査書（内申点）が不利になる生徒のために、調査書不要の高校入試が広まっています。この動きは、多様な背景を持つ生徒にも平等な進学のチャンスを与えるもので、教育現場と保護者にとって大きな関心事となるでしょう。",
-      "generatedAt": "2026-02-06T18:18:13.056445",
+      "summary": "不登校や病気で調査書（内申点）が不利になる生徒のために、調査書不要の高校入試が広まっています。多様な背景を持つ生徒にも平等な進学のチャンスを与える動きです。",
+      "generatedAt": "2026-02-06T19:15:00.000000",
       "model": "gemini-2.5-flash"
     },
     {
-      "id": "945691566c41",
+      "id": "pick-3",
       "sourceArticleId": "c1426ad9fcd3",
       "title": "不登校オルティナブルスクール「NIJINアカデミー」、東北2校目のリアル校「福島校」4月開校",
       "url": "https://ict-enews.net/2026/02/06nijin-8/",
       "category": "合理的配慮・支援",
       "originalDate": "2026-02-05",
-      "reason": "不登校支援の新拠点開校",
-      "summary": "不登校の子どもたちを支援するオルタナティブスクール「NIJINアカデミー」が、東北で2校目となるリアル校を福島に開校。多様な学びの選択肢として、不登校の子を持つ保護者や教育関係者にとって、地域の新たな支援の形を知る上で重要なニュースです。",
-      "generatedAt": "2026-02-06T18:18:13.056455",
+      "reason": "不登校支援の新拠点",
+      "summary": "不登校の子どもたちを支援するオルタナティブスクール「NIJINアカデミー」が、東北で2校目となるリアル校を福島に開校します。多様な学びの選択肢が広がっています。",
+      "generatedAt": "2026-02-06T19:15:00.000000",
+      "model": "gemini-2.5-flash"
+    },
+    {
+      "id": "pick-4",
+      "sourceArticleId": "73c1456a8a55",
+      "title": "東京大学メタバース工学部、小学生から保護者・教員まで対象別に生成AIを学べる無料講座3月開講",
+      "url": "https://ict-enews.net/2026/02/06meta-school/",
+      "category": "ICT・教材",
+      "originalDate": "2026-02-05",
+      "reason": "東大のAI無料講座",
+      "summary": "東京大学メタバース工学部が、小学生から保護者、教員まで幅広い方を対象に、生成AIについてわかりやすく学べる無料オンライン講座を3月に開講します。",
+      "generatedAt": "2026-02-06T19:15:00.000000",
+      "model": "gemini-2.5-flash"
+    },
+    {
+      "id": "pick-5",
+      "sourceArticleId": "fb201f651df1",
+      "title": "教育機関向け「mikan for School」、茨城県立鹿島高等学校・附属中学校の導入事例公開",
+      "url": "https://ict-enews.net/2026/02/06mikan/",
+      "category": "ICT・教材",
+      "originalDate": "2026-02-05",
+      "reason": "学習アプリ導入事例",
+      "summary": "英語学習アプリ「mikan」の教育機関向けサービスが茨城県立鹿島高等学校・附属中学校で導入されました。ICTを活用した個別最適な学びの実践事例です。",
+      "generatedAt": "2026-02-06T19:15:00.000000",
       "model": "gemini-2.5-flash"
     }
   ],
-  "lastUpdated": "2026-02-06T19:05:00.000000",
-  "totalCount": 2
+  "lastUpdated": "2026-02-06T19:15:00.000000",
+  "totalCount": 5
 }
