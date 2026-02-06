@@ -90,9 +90,6 @@ export default function Sidebar() {
 
   return (
     <aside className="space-y-6">
-      {/* 活動を応援する（運営からのお知らせ） */}
-      <SupportCard />
-
       {/* カテゴリ一覧 */}
       <div className="bg-white rounded-lg border border-gray-200 p-5">
         <h2 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
@@ -119,6 +116,9 @@ export default function Sidebar() {
           ))}
         </ul>
       </div>
+
+      {/* 活動を応援する */}
+      <SupportCard />
 
       {/* 注目の関連書籍（自動生成） */}
       {bookKeywords.length > 0 && (
