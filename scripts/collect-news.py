@@ -33,6 +33,26 @@ RSS_SOURCES = [
         "url": "https://www.nhk.or.jp/rss/news/cat6.xml",
         "category": "support"
     },
+    {
+        "name": "リセマム",
+        "url": "https://resemom.jp/rss20/index.rdf",
+        "category": "support"
+    },
+    {
+        "name": "ICT教育ニュース",
+        "url": "https://ict-enews.net/feed/",
+        "category": "ict"
+    },
+    {
+        "name": "EdTechZine",
+        "url": "https://edtechzine.jp/rss/new/20/index.xml",
+        "category": "ict"
+    },
+    {
+        "name": "朝日新聞 教育",
+        "url": "https://www.asahi.com/rss/asahi/edu.rdf",
+        "category": "support"
+    },
 ]
 
 # カテゴリマッピング

@@ -59,10 +59,25 @@ RSS_FEEDS = [
         "url": "https://ict-enews.net/feed/",
         "skip_core_filter": True,
     },
+    {
+        "name": "教育新聞",
+        "url": "https://www.kyobun.co.jp/feed/",
+        "skip_core_filter": True,
+    },
+    {
+        "name": "EdTechZine",
+        "url": "https://edtechzine.jp/rss/new/20/index.xml",
+        "skip_core_filter": True,
+    },
     # === 大手メディア教育カテゴリ ===
     {
         "name": "朝日新聞 教育",
         "url": "https://www.asahi.com/rss/asahi/edu.rdf",
+        "skip_core_filter": False,
+    },
+    {
+        "name": "読売新聞 教育",
+        "url": "https://www.yomiuri.co.jp/feed/kyoiku/",
         "skip_core_filter": False,
     },
     # === 通信社・放送局 ===
@@ -75,11 +90,11 @@ RSS_FEEDS = [
 ]
 
 # ドメインごとの最大記事数
-MAX_ARTICLES_PER_DOMAIN = 5
+MAX_ARTICLES_PER_DOMAIN = 8
 
 # 軽量化モード設定
 LIGHT_MODE = True  # 軽量化モード
-MAX_ARTICLES_PER_SOURCE = 10  # 各ソースからの最大取得数（フィルタ後5件以上残るように）
+MAX_ARTICLES_PER_SOURCE = 15  # 各ソースからの最大取得数（増量）
 
 # ========================================
 # 理念に基づくキーワードフィルタリング
@@ -937,6 +952,33 @@ def fetch_rss_feed(feed_info: dict) -> list:
                 summary = ai_result.get("summary", original_summary)
                 category = ai_result.get("category", "合理的配慮・支援")
                 main_keyword = ai_result.get("mainKeyword", "")
+
+                # 【キーワードベースのカテゴリ上書き】AIの判定を補完
+                text_for_category = f"{title} {summary}".lower()
+                diverse_learning_keywords = [
+                    '不登校', 'フリースクール', 'オルタナティブ', 'オルティナブル',
+                    '通信制高校', 'ホームスクール', 'ホームエデュケーション',
+                    '多様な学び', '学校外', 'サポート校', 'nijin', 'ニジン'
+                ]
+                ict_keywords = ['ict', 'edtech', 'タブレット', 'デジタル教科書', 'アプリ', 'ai活用', '生成ai']
+                policy_keywords = ['文部科学省', '文科省', '法改正', '通知', 'ガイドライン', '実証事業']
+
+                for kw in diverse_learning_keywords:
+                    if kw in text_for_category:
+                        category = "不登校・多様な学び"
+                        print(f"        → カテゴリ上書き: 不登校・多様な学び（キーワード: {kw}）")
+                        break
+                else:
+                    for kw in ict_keywords:
+                        if kw in text_for_category:
+                            category = "ICT・教材"
+                            break
+                    else:
+                        for kw in policy_keywords:
+                            if kw in text_for_category:
+                                category = "制度・行政"
+                                break
+
                 print(f"        → カテゴリー: {category}")
                 if main_keyword:
                     print(f"        → メインキーワード: {main_keyword}")
