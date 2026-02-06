@@ -3,7 +3,7 @@ import { articles, categories, getCategoryById } from '@/data/articles';
 
 const SITE_URL = 'https://example.github.io/inclusive-edu-navi';
 const SITE_TITLE = 'インクルーシブ教育ナビ';
-const SITE_DESCRIPTION = 'すべての子どもの学びを支える最新情報。特別支援教育に関するニュース、研究、実践事例をお届けします。';
+const SITE_DESCRIPTION = 'すべての子どもの学びを支える最新情報。インクルーシブ教育に関するニュース、研究、実践事例をお届けします。';
 
 export function generateRssFeed(): string {
   const feed = new Feed({

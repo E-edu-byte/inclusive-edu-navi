@@ -204,7 +204,7 @@ export default function Sidebar() {
           お知らせ
         </h2>
         <p className="text-sm text-primary-800 leading-relaxed">
-          このサイトは特別支援教育に関する情報を自動的に収集・整理してお届けしています。
+          このサイトはインクルーシブ教育に関する情報を自動的に収集・整理してお届けしています。
           最新情報はRSSフィードでも購読できます。
         </p>
         <a

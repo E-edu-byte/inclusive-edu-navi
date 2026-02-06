@@ -12,7 +12,7 @@ export default function Footer() {
               インクルーシブ教育ナビ
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              特別支援教育に関する最新のニュース、研究、実践事例をお届けします。
+              インクルーシブ教育に関する最新のニュース、研究、実践事例をお届けします。
               すべての子どもたちの学びを支えるための情報プラットフォームです。
             </p>
           </div>

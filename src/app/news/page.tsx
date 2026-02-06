@@ -85,7 +85,7 @@ export default function NewsPage() {
             </h1>
 
             <p className="text-gray-600 mb-6">
-              過去1週間の特別支援教育に関するニュースを日付順に掲載しています。
+              過去1週間のインクルーシブ教育に関するニュースを日付順に掲載しています。
             </p>
 
             <div className="space-y-3">

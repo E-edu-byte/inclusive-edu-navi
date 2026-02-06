@@ -59,7 +59,7 @@ export const categories: Category[] = [
   {
     id: 'policy',
     name: '制度・法改正',
-    description: '特別支援教育に関する法律、制度、ガイドラインの最新情報',
+    description: 'インクルーシブ教育に関する法律、制度、ガイドラインの最新情報',
     color: 'bg-blue-100 text-blue-800',
   },
   {

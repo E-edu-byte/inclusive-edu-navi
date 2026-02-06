@@ -173,7 +173,7 @@ export default function Home() {
               すべての子どもの学びを支える
             </h1>
             <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-2xl">
-              特別支援教育に関する最新のニュース、研究成果、実践事例を
+              インクルーシブ教育に関する最新のニュース、研究成果、実践事例を
               わかりやすくお届けします。教育現場で役立つ情報を厳選してご紹介。
             </p>
           </div>
