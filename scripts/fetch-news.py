@@ -96,6 +96,10 @@ RSS_FEEDS = [
 # ドメインごとの最大記事数
 MAX_ARTICLES_PER_DOMAIN = 5
 
+# 軽量化モード設定
+LIGHT_MODE = True  # 軽量化モード（各ソース最大3件）
+MAX_ARTICLES_PER_SOURCE = 3  # 各ソースからの最大取得数
+
 # ========================================
 # 理念に基づくキーワードフィルタリング
 # ========================================
@@ -108,7 +112,10 @@ CORE_KEYWORDS = [
     "学習障害", "LD", "ADHD", "自閉症", "ASD",
     "通級", "支援学級", "支援学校", "医療的ケア",
     "個別支援", "個別の教育支援計画", "IEP",
-    "読み書き困難", "ディスレクシア", "多様な学び"
+    "読み書き困難", "ディスレクシア", "多様な学び",
+    # ギフテッド・特異な才能関連（重要トピック）
+    "特異な才能", "2e", "二重の特別", "才能児", "高IQ",
+    "個別最適", "個別最適化", "過度激動", "OE"
 ]
 
 # 除外キーワード（広告・PR記事をスキップ）
@@ -116,6 +123,39 @@ EXCLUDE_KEYWORDS = [
     "PR", "広告", "プレゼント", "キャンペーン", "セミナー申込",
     "応募締切", "抽選で", "モニター募集", "スポンサー",
     "[PR]", "【PR】", "【広告】", "[AD]"
+]
+
+# 有料記事URLパターン（AI判定前に弾く）
+PAID_URL_PATTERNS = [
+    "/paid/", "/member/", "/premium/", "/subscription/",
+    "/login", "?login", "/register", "/subscribe",
+    "membership", "shimbun.com", "nikkei.com/article",
+    "toyokeizai.net/articles/-/", "premium.toyokeizai"
+]
+
+# 【塾・予備校広告の事前除外キーワード】AI判定前に弾く（タイトル・要約）
+CRAM_SCHOOL_KEYWORDS = [
+    # 塾名・予備校名・塾関連サービス
+    "フリーステップ", "TOMAS", "トーマス", "サピックス", "SAPIX",
+    "早稲田アカデミー", "早稲アカ", "日能研", "四谷大塚", "栄光ゼミナール",
+    "河合塾", "駿台", "東進", "代ゼミ", "Z会", "進研ゼミ",
+    "明光義塾", "個別指導", "家庭教師", "スクールIE",
+    "塾探し", "塾選び", "塾比較", "塾ナビ",
+    # 英才教育・競争系キーワード
+    "合格戦略", "合格実績", "偏差値アップ", "点数up", "点数UP",
+    "最難関", "難関突破", "志望校合格", "合格率", "合格者数",
+    "先取り学習", "飛び級", "英才教育",
+    # 講習・模試
+    "夏期講習", "冬期講習", "春期講習", "季節講習",
+    "模試申込", "模試のお知らせ", "テスト対策",
+    # 入試情報（一般）
+    "出願状況", "志願状況", "確定志願", "競争率", "実質倍率"
+]
+
+# 塾広告の例外キーワード（これらがあれば塾広告でも除外しない）
+CRAM_SCHOOL_EXCEPTION_KEYWORDS = [
+    "不登校", "特別支援", "発達障害", "学習障害", "ギフテッド",
+    "合理的配慮", "インクルーシブ", "通信制", "フリースクール"
 ]
 
 # 細かすぎる実践情報の除外キーワード（教員向けテクニック）
@@ -167,9 +207,9 @@ PUBLIC_INSTITUTION_KEYWORDS = [
 
 # 【新カテゴリー定義】AI判定用（5カテゴリー）
 CATEGORIES = {
-    "合理的配慮・支援": "学校や現場での具体的な支援方法、個別の配慮事例、発達障害・学習障害への対応など",
-    "不登校・多様な学び": "不登校支援、フリースクール、通信制高校、オルタナティブ教育、ギフテッド教育など",
-    "制度・行政": "文科省の通知、法律・法改正、自治体の施策、予算、ガイドラインなど",
+    "合理的配慮・支援": "学校や現場での具体的な支援方法、個別の配慮事例、発達障害・学習障害への対応、ギフテッド・2eへの合理的配慮など",
+    "不登校・多様な学び": "不登校支援、フリースクール、通信制高校、オルタナティブ教育、ギフテッド（特異な才能）支援、個別最適な学びなど",
+    "制度・行政": "文科省の通知、法律・法改正、自治体の施策、予算、ガイドライン、ギフテッド実証事業など",
     "ICT・教材": "支援技術、デジタル教科書、学習アプリ、タブレット活用、EdTechなど",
     "イベント・研修": "セミナー、ワークショップ、講演会、研修会、フォーラムなどの情報",
 }
@@ -522,11 +562,21 @@ def generate_ai_summary_and_category(title: str, original_summary: str, source: 
 【カテゴリー一覧】
 {category_list}
 
+【ギフテッド・特異な才能に関する採用基準】
+・「ギフテッド」「特異な才能」「2e（二重の特別ニーズ）」に関する記事は積極的に採用
+・不登校傾向にあるギフテッド児への支援、公教育での個別最適化、自治体の実証事業は重要トピック
+・これらは「不登校・多様な学び」または「合理的配慮・支援」カテゴリーで採用
+
 【厳格な除外ルール】以下は「SKIP」と判定：
-・特定の塾・予備校の宣伝（TOMAS、サピックス、フリーステップ等）
-・早期教育・英才教育・最難関大学受験対策の誇張記事
-・模試の申し込み案内、季節講習の告知
-・エリート教育のみを目的とした記事
+・特定の塾・予備校の宣伝（TOMAS、サピックス、フリーステップ、早稲田アカデミー等）
+・受験競争での優位性を強調する「先取り学習」「最難関対策」
+・「偏差値」「合格率」「合格実績」が主役の記事
+・夏期講習、冬期講習、模試の申し込み案内
+・たとえ「才能」という言葉を使っていても、競争に勝つための教育サービスはSKIP
+
+【判定のコツ】
+その記事が「困り感に寄り添う支援」なら採用、「競争に勝つための教育サービス」ならSKIPです。
+ギフテッド支援はインクルーシブ教育の重要な一部として扱ってください。
 
 ## 記事情報
 タイトル: {title}
@@ -544,9 +594,15 @@ def generate_ai_summary_and_category(title: str, original_summary: str, source: 
 ・特別支援教育、合理的配慮、発達障害、不登校支援
 ・子どもの多様な学びを支援するICT・EdTech
 ・通信制高校、オルタナティブスクール
+・ギフテッド（特異な才能）支援、2e支援
 
 【カテゴリー一覧】
 {category_list}
+
+【ギフテッド・特異な才能に関する採用基準】（重要）
+・「ギフテッド」「特異な才能」「2e（二重の特別ニーズ）」に関する記事は積極的に採用
+・不登校傾向にあるギフテッド児への支援、公教育での個別最適化、自治体の実証事業は重要トピック
+・これらは「不登校・多様な学び」または「合理的配慮・支援」カテゴリーで採用
 
 【判定ルール】
 1. 理念に合致する記事：要約とカテゴリーをJSON形式で返す
@@ -557,10 +613,15 @@ def generate_ai_summary_and_category(title: str, original_summary: str, source: 
    - 大学ランキング・偏差値情報
 
 【厳格な除外ルール】以下は本サイトの理念に反するため、必ず「SKIP」と判定：
-・特定の塾・予備校の開校案内、コース紹介（TOMAS、サピックス、フリーステップ等の宣伝）
-・早期教育・英才教育・最難関大学受験対策の誇張記事（例：「中学生で数IAを完成」）
-・模試の申し込み案内、季節講習の告知
-・エリート教育のみを目的とした記事
+・特定の塾・予備校の開校案内、コース紹介（TOMAS、サピックス、フリーステップ、早稲田アカデミー等の宣伝）
+・受験競争での優位性を強調する「先取り学習」「最難関対策」
+・「偏差値」「合格率」「合格実績」が主役になっている記事
+・夏期講習、冬期講習、模試の申し込み案内
+・たとえ「才能」という言葉を使っていても、競争に勝つための教育サービスはSKIP
+
+【判定のコツ】
+その記事が「困り感に寄り添う支援」なら採用、「競争に勝つための教育サービス」ならSKIPです。
+ギフテッド支援はインクルーシブ教育の重要な一部として扱ってください。
 
 ## 記事情報
 タイトル: {title}
@@ -581,8 +642,8 @@ def generate_ai_summary_and_category(title: str, original_summary: str, source: 
 
         ai_response = response.text.strip()
 
-        # 【レート制限対策】API呼び出し後に15秒待機（無料プランは1分5回制限）
-        time.sleep(15)
+        # 【軽量化】待機時間を短縮（3秒）
+        time.sleep(3)
 
         # SKIPの場合
         if ai_response.upper() == 'SKIP' or 'SKIP' in ai_response.upper()[:10]:
@@ -712,6 +773,37 @@ def is_general_exam_article(title: str, summary: str) -> bool:
     return True
 
 
+def is_paid_article_url(url: str) -> bool:
+    """
+    【除外フィルタ】有料記事URLパターンをスキップ
+    AI判定前に弾くことで処理を高速化
+    """
+    url_lower = url.lower()
+    return any(pattern in url_lower for pattern in PAID_URL_PATTERNS)
+
+
+def is_cram_school_ad(title: str, summary: str) -> bool:
+    """
+    【除外フィルタ】塾・予備校広告をスキップ
+    AI判定前にキーワードベースで弾く
+    「困り感に寄り添う支援」ではなく「競争に勝つための教育サービス」を除外
+    """
+    text = f"{title} {summary}"
+
+    # 塾広告キーワードを含むかチェック
+    has_cram_keyword = any(keyword in text for keyword in CRAM_SCHOOL_KEYWORDS)
+    if not has_cram_keyword:
+        return False  # 塾広告ではない
+
+    # 例外キーワード（不登校支援・特別支援等）を含むかチェック
+    has_exception = any(keyword in text for keyword in CRAM_SCHOOL_EXCEPTION_KEYWORDS)
+    if has_exception:
+        return False  # 不登校支援等の文脈なので除外しない
+
+    # 塾広告と判定（除外対象）
+    return True
+
+
 def fetch_rss_feed(feed_info: dict) -> list:
     """RSSフィードから記事を取得"""
     articles = []
@@ -739,11 +831,21 @@ def fetch_rss_feed(feed_info: dict) -> list:
         print(f"    {len(feed.entries)}件のエントリを取得")
 
         processed = 0
-        for entry in feed.entries[:30]:  # 各フィードから最大30件をチェック
+        max_check = 10 if LIGHT_MODE else 30  # 軽量化モードでは10件までチェック
+        for entry in feed.entries[:max_check]:
+            # 【軽量化モード】記事数上限チェック
+            if LIGHT_MODE and len(articles) >= MAX_ARTICLES_PER_SOURCE:
+                print(f"    [軽量化] {MAX_ARTICLES_PER_SOURCE}件に達したため次のソースへ")
+                break
+
             title = entry.get('title', '').strip()
             link = entry.get('link', '').strip()
 
             if not title or not link:
+                continue
+
+            # 【除外フィルタ】有料記事URLパターンをスキップ（AI判定前に弾く）
+            if is_paid_article_url(link):
                 continue
 
             # RSS内の要約を取得
@@ -752,6 +854,11 @@ def fetch_rss_feed(feed_info: dict) -> list:
 
             # 【除外フィルタ】広告・PR記事をスキップ
             if contains_exclude_keyword(title, rss_summary):
+                continue
+
+            # 【除外フィルタ】塾・予備校広告をスキップ（AI判定前に弾く）
+            if is_cram_school_ad(title, rss_summary):
+                print(f"    [除外] 塾広告: {title[:40]}...")
                 continue
 
             # 【除外フィルタ】細かすぎる実践情報をスキップ
@@ -894,6 +1001,8 @@ def main():
 
     # RSSフィードから収集
     print("【1】RSSフィードを取得中...")
+    if LIGHT_MODE:
+        print(f"    ★ 軽量化モード: 各ソース最大{MAX_ARTICLES_PER_SOURCE}件")
     print("-" * 40)
     for feed_info in RSS_FEEDS:
         articles = fetch_rss_feed(feed_info)

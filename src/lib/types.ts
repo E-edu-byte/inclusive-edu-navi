@@ -51,13 +51,13 @@ export const categories: Category[] = [
   {
     id: 'support',
     name: '合理的配慮・支援',
-    description: '学校や現場での具体的な支援方法、個別の配慮事例',
+    description: '学校や現場での具体的な支援方法、個別の配慮事例、ギフテッド・2eへの配慮',
     color: 'bg-green-100 text-green-800',
   },
   {
     id: 'diverse-learning',
     name: '不登校・多様な学び',
-    description: '不登校支援、フリースクール、通信制高校、ギフテッド教育',
+    description: '不登校支援、フリースクール、通信制高校、ギフテッド（特異な才能）支援',
     color: 'bg-purple-100 text-purple-800',
   },
   {
