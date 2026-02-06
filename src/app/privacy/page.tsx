@@ -28,7 +28,7 @@ export default function PrivacyPage() {
         <article className="prose prose-lg prose-gray max-w-none">
           <h1 className="text-3xl font-bold text-gray-900 mb-8">プライバシーポリシー</h1>
 
-          <p className="text-gray-600 text-sm mb-8">最終更新日: 2024年3月1日</p>
+          <p className="text-gray-600 text-sm mb-8">最終更新日: 2026年2月1日</p>
 
           <section className="mb-8">
             <h2 className="text-xl font-bold text-gray-900 mb-4">1. 個人情報の取り扱いについて</h2>
