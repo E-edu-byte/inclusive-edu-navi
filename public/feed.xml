@@ -2,37 +2,211 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>インクルーシブ教育ナビ</title>
-    <link>https://example.github.io/inclusive-edu-navi</link>
+    <link>https://e-edu-byte.github.io/inclusive-edu-navi</link>
     <description>すべての子どもの学びを支える最新情報。インクルーシブ教育に関するニュース、研究、実践事例をお届けします。</description>
     <language>ja</language>
-    <lastBuildDate>Tue, 04 Feb 2025 00:00:00 GMT</lastBuildDate>
-    <atom:link href="https://example.github.io/inclusive-edu-navi/feed.xml" rel="self" type="application/rss+xml"/>
+    <lastBuildDate>Fri, 06 Feb 2026 23:54:00 GMT</lastBuildDate>
+    <atom:link href="https://e-edu-byte.github.io/inclusive-edu-navi/feed.xml" rel="self" type="application/rss+xml"/>
 
     <item>
-      <title><![CDATA[文部科学省、特別支援教育の新ガイドラインを発表 ― インクルーシブ教育の推進を強化]]></title>
-      <link>https://example.github.io/inclusive-edu-navi/article/mext-new-guidelines-2024/</link>
-      <guid>https://example.github.io/inclusive-edu-navi/article/mext-new-guidelines-2024/</guid>
-      <description><![CDATA[文部科学省は、2024年度からの特別支援教育に関する新たなガイドラインを発表しました。通常学級における合理的配慮の具体例や、個別の教育支援計画の作成ポイントなど、現場で活用できる実践的な内容が盛り込まれています。]]></description>
-      <category>制度・法改正</category>
-      <pubDate>Fri, 15 Mar 2024 00:00:00 GMT</pubDate>
+      <title><![CDATA[日米合意の80兆円規模の対米投資 3プロジェクトが第1弾候補に]]></title>
+      <link>https://news.web.nhk/newsweb/na/na-k10015045291000</link>
+      <guid>https://news.web.nhk/newsweb/na/na-k10015045291000</guid>
+      <description><![CDATA[先の日米合意に基づくアメリカへの80兆円規模の投資で、ガス火力発電所の建設など3つのプロジェクトが第1弾の候補となっていることが、関係者への取材で分かりました。近く日米の閣僚が詰めの協議を行う見通しで…]]></description>
+      <category>support</category>
+      <pubDate>Sat, 07 Feb 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
     </item>
 
     <item>
-      <title><![CDATA[発達障害児の学習支援に関する最新研究 ― エビデンスに基づく効果的なアプローチ]]></title>
-      <link>https://example.github.io/inclusive-edu-navi/article/latest-research-learning-support/</link>
-      <guid>https://example.github.io/inclusive-edu-navi/article/latest-research-learning-support/</guid>
-      <description><![CDATA[国立特別支援教育総合研究所の最新研究により、発達障害のある児童の学習支援において、視覚的支援とスモールステップ指導の組み合わせが特に効果的であることが明らかになりました。]]></description>
-      <category>研究・学術</category>
-      <pubDate>Sun, 10 Mar 2024 00:00:00 GMT</pubDate>
+      <title><![CDATA[米とイラン 核開発などで高官協議 イラン“協議継続で一致”]]></title>
+      <link>https://news.web.nhk/newsweb/na/na-k10015045341000</link>
+      <guid>https://news.web.nhk/newsweb/na/na-k10015045341000</guid>
+      <description><![CDATA[アメリカがイランへの軍事的な圧力を強める中、イランの核開発などをめぐる両国の高官による協議が、中東のオマーンで行われました。イラン側は「よいスタートだった」と評価し、協議を継続することで一致したと明ら…]]></description>
+      <category>support</category>
+      <pubDate>Sat, 07 Feb 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
     </item>
 
     <item>
-      <title><![CDATA[通級指導の実践例 ― A市立B小学校の取り組みから学ぶ]]></title>
-      <link>https://example.github.io/inclusive-edu-navi/article/tsukyu-practice-example/</link>
-      <guid>https://example.github.io/inclusive-edu-navi/article/tsukyu-practice-example/</guid>
-      <description><![CDATA[A市立B小学校では、通級指導教室と通常学級の連携を強化し、児童の学びの連続性を確保する取り組みを行っています。その具体的な実践と成果を紹介します。]]></description>
-      <category>実践・事例</category>
-      <pubDate>Tue, 05 Mar 2024 00:00:00 GMT</pubDate>
+      <title><![CDATA[パキスタン 19年ぶりのたこ揚げ祭り 数多くのたこが大空を彩る]]></title>
+      <link>https://news.web.nhk/newsweb/na/na-k10015045321000</link>
+      <guid>https://news.web.nhk/newsweb/na/na-k10015045321000</guid>
+      <description><![CDATA[パキスタン東部の都市ラホールで、春の訪れを祝う伝統のたこ揚げ祭りが19年ぶりに開かれ、数多くのたこが大空を彩りました。]]></description>
+      <category>support</category>
+      <pubDate>Sat, 07 Feb 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
     </item>
+
+    <item>
+      <title><![CDATA[ロシア 軍幹部が銃撃される ラブロフ外相“ウクライナが関与”]]></title>
+      <link>https://news.web.nhk/newsweb/na/na-k10015045351000</link>
+      <guid>https://news.web.nhk/newsweb/na/na-k10015045351000</guid>
+      <description><![CDATA[ロシアで軍参謀本部情報総局の幹部が銃撃され、ラブロフ外相は、ウクライナ側が和平協議の妨害をねらったものだと強く非難しました。]]></description>
+      <category>support</category>
+      <pubDate>Sat, 07 Feb 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[グリーンランドにカナダとフランスが領事館をそれぞれ開設]]></title>
+      <link>https://news.web.nhk/newsweb/na/na-k10015045501000</link>
+      <guid>https://news.web.nhk/newsweb/na/na-k10015045501000</guid>
+      <description><![CDATA[アメリカのトランプ大統領が領有に意欲を示してきた、デンマーク自治領のグリーンランドに、6日、カナダとフランスがそれぞれ領事館を開設し、デンマークとより緊密な関係を築く立場を鮮明にしています。]]></description>
+      <category>support</category>
+      <pubDate>Sat, 07 Feb 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[“安保理が北朝鮮への人道支援事業を承認”国連外交筋明かす]]></title>
+      <link>https://news.web.nhk/newsweb/na/na-k10015045481000</link>
+      <guid>https://news.web.nhk/newsweb/na/na-k10015045481000</guid>
+      <description><![CDATA[国連の安全保障理事会の北朝鮮制裁委員会が、判断を保留していた北朝鮮への人道支援事業を承認したと、国連の外交筋が明らかにしました。アメリカが賛成したことによるものだということですが、北朝鮮が支援事業の受…]]></description>
+      <category>support</category>
+      <pubDate>Sat, 07 Feb 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[ステランティス 米でのEVなど事業見直し 約4兆円の費用を計上]]></title>
+      <link>https://news.web.nhk/newsweb/na/na-k10015045431000</link>
+      <guid>https://news.web.nhk/newsweb/na/na-k10015045431000</guid>
+      <description><![CDATA[クライスラーなどのブランドを傘下に持つ、ヨーロッパの自動車メーカー、ステランティスは、アメリカでのEV＝電気自動車の普及の遅れなどに伴う事業の見直しにより、日本円にしておよそ4兆円の費用を計上すると発…]]></description>
+      <category>support</category>
+      <pubDate>Sat, 07 Feb 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[【随時更新】ロシア ウクライナに軍事侵攻（2月7日の動き）]]></title>
+      <link>https://news.web.nhk/newsweb/na/na-k10015021871000</link>
+      <guid>https://news.web.nhk/newsweb/na/na-k10015021871000</guid>
+      <description><![CDATA[ロシアによるウクライナに対する軍事侵攻が続いています。ウクライナの各地でロシア軍とウクライナ軍が戦闘を続けていて、大勢の市民が国外へ避難しています。戦闘の状況や関係各国の外交など、ウクライナ情勢をめぐ…]]></description>
+      <category>support</category>
+      <pubDate>Sat, 07 Feb 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[ミラノ 米移民税関捜査局職員の五輪派遣に対し各地で抗議活動]]></title>
+      <link>https://news.web.nhk/newsweb/na/na-k10015045331000</link>
+      <guid>https://news.web.nhk/newsweb/na/na-k10015045331000</guid>
+      <description><![CDATA[イタリアでミラノ・コルティナオリンピックが開幕した6日、開催都市の1つ、ミラノでは、アメリカがICE＝移民税関捜査局の職員をオリンピックに派遣することへの抗議活動が行われました。]]></description>
+      <category>support</category>
+      <pubDate>Sat, 07 Feb 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[NYダウ 終値で初の5万ドル突破 米景気先行きに楽観的見方で]]></title>
+      <link>https://news.web.nhk/newsweb/na/na-k10015045441000</link>
+      <guid>https://news.web.nhk/newsweb/na/na-k10015045441000</guid>
+      <description><![CDATA[6日のニューヨーク株式市場のダウ平均株価は前日から1200ドル余り値上がりし、終値としても初めて5万ドルの大台に乗せました。アメリカの景気の先行きに対する楽観的な見方が広がる中で買い注文が増え、株価を…]]></description>
+      <category>support</category>
+      <pubDate>Sat, 07 Feb 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[令和7年度インクルーシブな学校運営モデル事業中間成果報告会を開催します]]></title>
+      <link>https://www.mext.go.jp/b_menu/houdou/mext_01599.html</link>
+      <guid>https://www.mext.go.jp/b_menu/houdou/mext_01599.html</guid>
+      <description><![CDATA[文部科学省のプレスリリースです。令和7年度インクルーシブな学校運営モデル事業中間成果報告会を開催します]]></description>
+      <category>制度・行政</category>
+      <pubDate>Sat, 07 Feb 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[「スマホに政策届ける努力を」　18歳投票から10年、望む選挙とは]]></title>
+      <link>https://www.asahi.com/articles/ASV250BNLV25UTIL00WM.html?ref=rss</link>
+      <guid>https://www.asahi.com/articles/ASV250BNLV25UTIL00WM.html?ref=rss</guid>
+      <description><![CDATA[]]></description>
+      <category>support</category>
+      <pubDate>Fri, 06 Feb 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[【高校受験2026】大阪私立高1.5次入試、清風南海など60校]]></title>
+      <link>https://resemom.jp/article/2026/02/06/84953.html</link>
+      <guid>https://resemom.jp/article/2026/02/06/84953.html</guid>
+      <description><![CDATA[大阪私立中学校高等学校連合会は2026年2月6日、2026年度（令和8年度）私立高校の1.5次募集状況を公表した。1.5次入試は清風、明星、清風南海、桃山学院など60校が実施する。]]></description>
+      <category>support</category>
+      <pubDate>Fri, 06 Feb 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[洛星ノートルダム誕生へ…ヴィアトール学園が事業譲渡契約締結]]></title>
+      <link>https://resemom.jp/article/2026/02/06/84954.html</link>
+      <guid>https://resemom.jp/article/2026/02/06/84954.html</guid>
+      <description><![CDATA[ヴィアトール学園とノートルダム女学院は2026年1月21日、事業譲渡契約書に調印した。2026年4月1日付でノートルダム学院小学校ならびにノートルダム女学院中学高等学校は、ヴィアトール学園の設置校となる。校名は「洛星ノートルダム女学院中学高等学校」に変更する。]]></description>
+      <category>support</category>
+      <pubDate>Fri, 06 Feb 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[【高校受験2026】福井県立高、一般選抜の出願状況（初日2/5時点）羽水（探究特進）1.58倍]]></title>
+      <link>https://resemom.jp/article/2026/02/06/84955.html</link>
+      <guid>https://resemom.jp/article/2026/02/06/84955.html</guid>
+      <description><![CDATA[福井県教育委員会は2026年2月5日、2026年度（令和8年度）福井県立高等学校一般入学者選抜について、出願1日目の出願状況を公表した。全日制の一般選抜募集人員3,316人に対し、出願初日は1,319人が出願し、倍率は0.40倍。学校・学科別では、羽水（探究特進）1.58倍がもっとも高い。出願受付は2月9日まで。]]></description>
+      <category>support</category>
+      <pubDate>Fri, 06 Feb 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[【中学受験】【高校受験】首都圏約200校「よみうりGENKIフェスタ」3/22]]></title>
+      <link>https://resemom.jp/article/2026/02/06/84956.html</link>
+      <guid>https://resemom.jp/article/2026/02/06/84956.html</guid>
+      <description><![CDATA[首都圏を中心とした約200の中学校・高等学校が集まる進学相談会「よみうりGENKIフェスタ2026」が2026年3月22日、東京国際フォーラムにて開催される。特別座談会やセミナー、個別相談会など。入場無料、定員は各回1,000組2,000名。入場時間指定による完全予約制、抽選。申込みは3月10日まで。]]></description>
+      <category>support</category>
+      <pubDate>Fri, 06 Feb 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[【高校受験2026】京都府公立高、前期選抜の出願状況（確定）堀川（探究）1.55倍]]></title>
+      <link>https://resemom.jp/article/2026/02/06/84957.html</link>
+      <guid>https://resemom.jp/article/2026/02/06/84957.html</guid>
+      <description><![CDATA[京都府教育委員会は2026年2月6日、2026年度（令和8年度）京都府公立高等学校入学者選抜について、前期選抜の出願状況を発表した。全日制の出願倍率は1.88倍で、前年度（2025年度）より0.12ポイント減少。学校・学科別では、田辺（普通科・A方式）の5.61倍がもっとも高かった。]]></description>
+      <category>support</category>
+      <pubDate>Fri, 06 Feb 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[【共通テスト2026】データネット「合格可能性判定基準」医学部医学科]]></title>
+      <link>https://resemom.jp/article/2026/02/06/84958.html</link>
+      <guid>https://resemom.jp/article/2026/02/06/84958.html</guid>
+      <description><![CDATA[駿台・ベネッセデータネットは2026年1月21日、2026年度（令和8年度）大学入学共通テスト（以下、共通テスト）における「合格可能性判定基準」を公開した。国公立大学、共通テスト利用私立大学の判定基準や得点率、一次通過情報などが各校の試験ごとに確認できる。]]></description>
+      <category>support</category>
+      <pubDate>Fri, 06 Feb 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[【大学受験】地元進学の多い都道府県1位は愛知…旺文社]]></title>
+      <link>https://resemom.jp/article/2026/02/06/84959.html</link>
+      <guid>https://resemom.jp/article/2026/02/06/84959.html</guid>
+      <description><![CDATA[旺文社は2026年1月30日、「2025年度 都道府県別 大学・短大進学状況」を公表した。地元の大学進学率は全国平均で45.4％。都道府県別では、1位が愛知県（72.5％）、2位が東京都（69.8％）であった。]]></description>
+      <category>support</category>
+      <pubDate>Fri, 06 Feb 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[【大学受験2026】国立2次・早慶の解答速報…河合塾が公開]]></title>
+      <link>https://resemom.jp/article/2026/02/06/84960.html</link>
+      <guid>https://resemom.jp/article/2026/02/06/84960.html</guid>
+      <description><![CDATA[河合塾は、2026年度の国立大二次試験および私立大入試の解答速報を順次Webで公開する。各大学の入試問題の徹底分析に基づき作成した「解答例」「分析コメント」と「入試問題」を速報として掲載する。]]></description>
+      <category>support</category>
+      <pubDate>Fri, 06 Feb 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
   </channel>
 </rss>
