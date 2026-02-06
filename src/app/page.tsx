@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Sidebar from '@/components/Sidebar';
 import NewsCard from '@/components/NewsCard';
+import RankingBlock from '@/components/RankingBlock';
 import { Article, AIPick, ArticlesData, AIPicksData, BASE_PATH } from '@/lib/types';
 
 // 編集部ピックアップ用の統一型（AI選出 or 自動選出）
@@ -213,6 +214,11 @@ export default function Home() {
               </div>
             </section>
           )}
+
+          {/* スマホ用：人気記事ランキング（PCではサイドバーに表示） */}
+          <div className="lg:hidden my-6">
+            <RankingBlock />
+          </div>
 
           {/* 最新ニュースセクション（常に5件表示） */}
           {latestNews.length > 0 && (

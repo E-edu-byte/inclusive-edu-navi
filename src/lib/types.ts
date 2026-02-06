@@ -9,6 +9,14 @@ export type Article = {
   imageUrl: string;
   source: string;
   mainKeyword?: string; // Amazon検索用キーワード（AI抽出）
+  importanceScore?: number; // AI重要度スコア（1-100）
+};
+
+// ランキング用の記事型
+export type RankedArticle = Article & {
+  totalScore: number; // 総合スコア（重要度 + 閲覧数 + しおり数）
+  viewCount: number;
+  bookmarkCount: number;
 };
 
 // AIおすすめ記事の型

@@ -1,0 +1,56 @@
+name: Auto Update News
+
+on:
+  schedule:
+    # 1日2回（JST 8:00 と 20:00）
+    - cron: '0 23 * * *'  # UTC 23:00 = JST 8:00
+    - cron: '0 11 * * *'  # UTC 11:00 = JST 20:00
+  workflow_dispatch:  # 手動実行も可能
+
+jobs:
+  update-news:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install requests feedparser google-generativeai python-dateutil
+
+      - name: Run news collector
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python scripts/collect-news.py
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Generate RSS feed
+        run: npm run generate-rss
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: 自動更新 - $(date +'%Y-%m-%d %H:%M')"
+            git push
+          fi

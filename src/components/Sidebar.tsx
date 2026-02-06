@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { categories, BASE_PATH, Article } from '@/lib/types';
 import { generateAmazonSearchUrl, generateRakutenSearchUrl } from '@/data/articles';
 import SupportCard from './SupportCard';
+import RankingBlock from './RankingBlock';
 
 // 書籍検索用のキーワード情報
 type BookKeyword = {
@@ -116,6 +117,9 @@ export default function Sidebar() {
           ))}
         </ul>
       </div>
+
+      {/* 人気記事ランキング */}
+      <RankingBlock />
 
       {/* 活動を応援する */}
       <SupportCard />
