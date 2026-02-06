@@ -112,6 +112,11 @@ export default function AboutPage() {
                   <span>ポップアップ広告や自動再生動画広告は使用しません</span>
                 </li>
               </ul>
+              <div className="mt-4 pt-4 border-t border-slate-200">
+                <p className="text-slate-500 text-xs leading-relaxed">
+                  【免責事項】本サイトは情報の正確性に細心の注意を払っていますが、その内容を保証するものではありません。本サイトの利用により生じたトラブル等については責任を負いかねますので、あらかじめご了承ください。
+                </p>
+              </div>
             </div>
           </section>
 
