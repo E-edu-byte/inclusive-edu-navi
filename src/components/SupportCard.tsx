@@ -16,7 +16,7 @@ export default function SupportCard() {
 
       {/* メッセージ */}
       <p className="text-xs text-slate-500 leading-relaxed mb-4">
-        広告を排除し、誠実な情報提供を続けるために。
+        広告のない、誠実な情報提供を続けるために。
         サポーターを募集しています。
       </p>
 
