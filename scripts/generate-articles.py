@@ -162,8 +162,8 @@ try:
 
     print("-" * 50)
     print(f"✓ 保存完了: {output_path}")
-    print(f"  - 新規追加: {len(new_picks)}件")
-    print(f"  - 合計: {len(all_picks)}件")
+    print(f"  - 生成件数: {len(output_picks)}件")
+    print(f"  - 保存件数: {len(all_picks)}件")
 
 except json.JSONDecodeError as e:
     print(f"エラー: AIの回答をJSONとしてパースできませんでした")
