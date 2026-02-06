@@ -1,5 +1,8 @@
 'use client';
 
+import Link from 'next/link';
+import { getCategoryByName } from '@/lib/types';
+
 type NewsCardProps = {
   title: string;
   summary: string;
@@ -104,10 +107,19 @@ export default function NewsCard({
                 {pickupReason}
               </span>
             )}
-            {/* カテゴリタグ */}
-            <span className={`inline-block px-2 py-0.5 text-xs font-medium rounded-full ${categoryClass}`}>
-              {category}
-            </span>
+            {/* カテゴリタグ（クリックでカテゴリページへ） */}
+            {(() => {
+              const cat = getCategoryByName(category);
+              const categoryId = cat?.id || 'topics';
+              return (
+                <Link
+                  href={`/category/${categoryId}`}
+                  className={`inline-block px-2 py-0.5 text-xs font-medium rounded-full hover:opacity-80 transition-opacity ${categoryClass}`}
+                >
+                  {category}
+                </Link>
+              );
+            })()}
             {/* ソースと日付 */}
             <span className="text-xs text-gray-500">
               {source && `${source} • `}{date}

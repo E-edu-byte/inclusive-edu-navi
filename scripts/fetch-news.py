@@ -14,7 +14,7 @@ import hashlib
 import sys
 import io
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Optional
 from urllib.parse import urlparse, urljoin
 from collections import defaultdict
@@ -869,6 +869,16 @@ def main():
             unique_articles.append(article)
             seen_urls.add(article['url'])
     print(f"  重複除去後: {len(unique_articles)}件")
+
+    # 【追加】1週間以上古い記事を除外
+    print()
+    print("【2.5】1週間以内の記事のみ保持...")
+    one_week_ago = (datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d")
+    fresh_articles = [a for a in unique_articles if a.get('date', '') >= one_week_ago]
+    removed_count = len(unique_articles) - len(fresh_articles)
+    print(f"  除外した古い記事: {removed_count}件")
+    print(f"  1週間以内の記事: {len(fresh_articles)}件")
+    unique_articles = fresh_articles
 
     # 日付でソート（新しい順）
     unique_articles.sort(key=lambda x: x.get('date', ''), reverse=True)
