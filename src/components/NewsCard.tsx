@@ -13,6 +13,21 @@ type NewsCardProps = {
   pickupReason?: string;
 };
 
+// インクルーシブ教育をイメージしたフォールバック画像（Unsplash）
+const FALLBACK_IMAGES = [
+  'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=300&fit=crop', // 子どもたちの学び
+  'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=300&fit=crop', // 教室
+  'https://images.unsplash.com/photo-1577896851231-70ef18881754?w=400&h=300&fit=crop', // 多様な学び
+  'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&h=300&fit=crop', // 支援
+  'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400&h=300&fit=crop', // 教育
+];
+
+// 記事タイトルからハッシュを生成してフォールバック画像を選択
+function getFallbackImage(title: string): string {
+  const hash = title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  return FALLBACK_IMAGES[hash % FALLBACK_IMAGES.length];
+}
+
 // 画像URLが有効かチェック（ローカルの存在しない画像パスは無効とみなす）
 function isValidImageUrl(url?: string): boolean {
   if (!url) return false;
@@ -51,6 +66,7 @@ export default function NewsCard({
   const pickupReasonClass = 'bg-amber-200 text-amber-900';
 
   const hasValidImage = isValidImageUrl(imageUrl);
+  const fallbackImage = getFallbackImage(title);
 
   return (
     <article className={`rounded-xl border shadow-sm hover:shadow-md transition-shadow ${cardBgClass}`}>
@@ -59,33 +75,19 @@ export default function NewsCard({
         {/* サムネイル画像エリア - 幅を統一 */}
         <div className="sm:flex-shrink-0 sm:w-32 md:w-36">
           <div className="h-44 sm:h-full sm:min-h-[160px] overflow-hidden rounded-t-xl sm:rounded-t-none sm:rounded-l-xl">
-            {hasValidImage ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={imageUrl}
-                alt=""
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  // 画像読み込みエラー時はプレースホルダーに切り替え
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  target.parentElement!.classList.add('bg-gradient-to-br', 'from-primary-100', 'to-primary-200');
-                  target.parentElement!.innerHTML = `
-                    <div class="w-full h-full flex items-center justify-center">
-                      <svg class="w-12 h-12 text-primary-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                      </svg>
-                    </div>
-                  `;
-                }}
-              />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary-100 to-primary-200">
-                <svg className="w-12 h-12 text-primary-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-              </div>
-            )}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={hasValidImage ? imageUrl : fallbackImage}
+              alt=""
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                // 画像読み込みエラー時はフォールバック画像に切り替え
+                const target = e.target as HTMLImageElement;
+                if (!target.src.includes('unsplash.com')) {
+                  target.src = fallbackImage;
+                }
+              }}
+            />
           </div>
         </div>
 
@@ -117,8 +119,8 @@ export default function NewsCard({
             {title}
           </h3>
 
-          {/* 要約 */}
-          <p className="text-sm text-gray-600 leading-relaxed mb-3 flex-grow line-clamp-3">
+          {/* 要約 - スマホでも全文表示 */}
+          <p className="text-sm text-gray-600 leading-relaxed mb-3 flex-grow">
             {summary}
           </p>
 

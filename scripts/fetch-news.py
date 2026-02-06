@@ -124,22 +124,26 @@ PRACTICE_EXCLUDE_KEYWORDS = [
     "ワークシート", "プリント", "時短学習", "京女式",
     "〇年国語", "〇年算数", "小１国語", "小２国語", "小３国語",
     "小４国語", "小５国語", "小６国語", "小1国語", "小2国語",
-    "小3国語", "小4国語", "小5国語", "小6国語"
+    "小3国語", "小4国語", "小5国語", "小6国語",
+    "教員採用試験", "教採", "採用試験対策", "面接対策"
 ]
 
 # マニアックな技術解説記事の除外キーワード
 TECH_EXCLUDE_KEYWORDS = [
     "Scratch", "スクラッチ", "プログラミング解説", "共通テスト解説",
-    "共テ", "Vol.", "Vol.1", "Vol.2", "Vol.3"
+    "共テ", "Vol.", "Vol.1", "Vol.2", "Vol.3", "Vol.4", "Vol.5",
+    "コーディング入門", "Python入門", "JavaScript入門"
 ]
 
 # 一般の受験情報の除外キーワード（特別支援・合理的配慮がない場合のみ除外）
 EXAM_EXCLUDE_KEYWORDS = [
-    "特別選抜", "出願状況", "倍率", "合格発表", "高校受験",
+    "特別選抜", "出願状況", "倍率", "合格発表", "高校受験", "高校入試",
     "入試解答", "確定志願者", "志願状況", "中学受験", "大学受験",
-    "共通テスト", "入学者選抜", "募集人員", "入試情報",
+    "共通テスト", "入学者選抜", "募集人員", "入試情報", "出願",
     "入試直前", "入試本番", "受験勉強", "受験生", "受験対策",
-    "大学ランキング", "就職率ランキング", "人気ランキング", "偏差値"
+    "大学ランキング", "就職率ランキング", "人気ランキング", "偏差値",
+    "合格者数", "合格実績", "進学実績", "国公立大", "難関大",
+    "センター試験", "二次試験", "前期試験", "後期試験", "推薦入試"
 ]
 
 # 受験情報の例外キーワード（これらがあれば除外しない）
@@ -197,6 +201,26 @@ OUTPUT_FILE = os.path.join(PROJECT_ROOT, "public", "data", "articles.json")
 SUMMARY_CACHE = {}
 FAILED_SUMMARIES = []  # AI要約に失敗した記事をトラッキング
 
+def is_ai_generated_summary(summary: str) -> bool:
+    """要約がAI生成かどうかを判定（です・ます調で終わっているか）"""
+    if not summary:
+        return False
+    # AI要約の特徴: です・ます調で終わる、[…]や...で終わらない
+    ai_endings = ['です。', 'ます。', 'ますね。', 'ますよ。', 'ください。', 'しょう。']
+    non_ai_patterns = ['[…]', '…', '...', '［…］', ' - ', '【', '】']
+
+    # 非AI要約のパターンを含む場合はFalse
+    for pattern in non_ai_patterns:
+        if pattern in summary[-20:]:
+            return False
+
+    # AI要約の終わり方をしている場合はTrue
+    for ending in ai_endings:
+        if summary.endswith(ending):
+            return True
+
+    return False
+
 def load_summary_cache():
     """既存のarticles.jsonからAI要約済みの要約をキャッシュに読み込む"""
     global SUMMARY_CACHE
@@ -207,10 +231,10 @@ def load_summary_cache():
                 for article in data.get('articles', []):
                     url = article.get('url', '')
                     summary = article.get('summary', '')
-                    # 有効な要約（80文字以上でRSSの短いdescriptionではない）をキャッシュ
-                    if url and summary and len(summary) > 60:
+                    # 有効なAI要約（80文字以上かつAI生成の特徴を持つ）のみキャッシュ
+                    if url and summary and len(summary) > 60 and is_ai_generated_summary(summary):
                         SUMMARY_CACHE[url] = summary
-            print(f"✓ キャッシュ読み込み: {len(SUMMARY_CACHE)}件の既存要約を再利用可能")
+            print(f"✓ キャッシュ読み込み: {len(SUMMARY_CACHE)}件の既存AI要約を再利用可能")
     except Exception as e:
         print(f"警告: キャッシュ読み込みエラー - {e}")
 
