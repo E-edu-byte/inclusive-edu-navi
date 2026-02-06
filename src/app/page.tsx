@@ -50,10 +50,13 @@ export default function Home() {
     fetchData();
   }, []);
 
-  // 日付でソート（新しい順）
-  const sortedArticles = [...articles].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
+  // ピックアップに含まれる記事のIDセットを作成
+  const pickedArticleIds = new Set(editorPicks.map((pick) => pick.sourceArticleId));
+
+  // 日付でソート（新しい順）し、ピックアップと重複する記事を除外
+  const sortedArticles = [...articles]
+    .filter((article) => !pickedArticleIds.has(article.id))
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   const displayArticles = sortedArticles.slice(0, 10); // 最新10件まで表示
 
