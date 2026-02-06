@@ -45,10 +45,11 @@ export default function SystemStatus() {
     return null;
   }
 
-  // 最終更新日時をフォーマット
+  // 最終更新日時をフォーマット（日本時間）
   const formatDate = (isoString: string) => {
     const date = new Date(isoString);
     return date.toLocaleString('ja-JP', {
+      timeZone: 'Asia/Tokyo',
       month: 'short',
       day: 'numeric',
       hour: '2-digit',
