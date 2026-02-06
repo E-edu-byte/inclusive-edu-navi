@@ -78,10 +78,11 @@ prompt = f"""あなたは「インクルーシブ教育ナビ」の編集長で�
 
 ## 出力形式
 
-上記の優先順位に従い、**必ず5件** 選んでください。
+【重要】記事の中から、インクルーシブ教育の観点で重要なものを **必ず上位5件** 選んでください。
+候補が少ない場合でも、関連性の高い順に **5件を維持** してください。5件未満は許可されません。
 大手メディアの重要ニュースを優先し、保護者や教員が「これは知っておきたい」と思う記事を選んでください。
 
-以下のJSON形式で出力してください（他の説明文は不要）：
+以下のJSON形式で **必ず5件** 出力してください（他の説明文は不要）：
 ```json
 {{
   "picks": [
@@ -153,7 +154,37 @@ try:
     # これにより、理念に合致しない古い記事が残り続けることを防ぐ
     all_picks = output_picks
 
-    # 最大5件に制限（厳選されたもののみ）
+    # 【フォールバック】5件未満の場合、最新記事から補填
+    if len(all_picks) < 5:
+        print(f"⚠ AI選定が{len(all_picks)}件のため、最新記事から補填します...")
+        # 既に選ばれた記事のIDを取得
+        picked_ids = {p.get('sourceArticleId') for p in all_picks}
+
+        # 日付順でソートした記事から補填
+        sorted_articles = sorted(articles, key=lambda x: x.get('date', ''), reverse=True)
+
+        for article in sorted_articles:
+            if len(all_picks) >= 5:
+                break
+            if article.get('id') not in picked_ids:
+                pick_id = hashlib.md5(f"{article['id']}-fallback-{datetime.now().isoformat()}".encode()).hexdigest()[:12]
+                fallback_pick = {
+                    "id": pick_id,
+                    "sourceArticleId": article.get('id'),
+                    "title": article.get('title'),
+                    "url": article.get('url'),
+                    "category": article.get('category', ''),
+                    "originalDate": article.get('date', ''),
+                    "reason": "最新の注目記事",
+                    "summary": article.get('summary', ''),
+                    "generatedAt": datetime.now().isoformat(),
+                    "model": "fallback"
+                }
+                all_picks.append(fallback_pick)
+                picked_ids.add(article.get('id'))
+                print(f"✓ 補填: {article.get('title')[:40]}...")
+
+    # 最大5件に制限
     all_picks = all_picks[:5]
 
     # 出力データを作成
