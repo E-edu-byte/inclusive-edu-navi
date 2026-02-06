@@ -61,7 +61,7 @@ export default function AboutPage() {
                 <svg className="w-5 h-5 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                信頼性の高い情報のみをお届けします
+                信頼性の高い情報提供を心がけています
               </h3>
               <p className="text-slate-600 text-sm leading-relaxed">
                 本サイトでは、文部科学省、国立特別支援教育総合研究所、各種学会、教育委員会などの
