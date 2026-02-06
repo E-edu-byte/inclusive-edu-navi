@@ -145,47 +145,46 @@ export default function Home() {
 
   return (
     <div className="container-main py-8">
-      {/* ヒーローセクション */}
-      <section className="mb-10">
-        <div className="relative overflow-hidden bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-50 rounded-xl shadow-sm border border-sky-100/50 p-6 sm:p-10">
-          {/* 装飾: 柔らかい幾何学模様 */}
-          <div className="absolute top-0 right-0 w-32 h-32 sm:w-48 sm:h-48 opacity-20">
-            <svg viewBox="0 0 100 100" className="w-full h-full text-sky-300">
-              <circle cx="80" cy="20" r="8" fill="currentColor" opacity="0.6" />
-              <circle cx="60" cy="40" r="5" fill="currentColor" opacity="0.4" />
-              <circle cx="90" cy="50" r="6" fill="currentColor" opacity="0.5" />
-              <circle cx="70" cy="70" r="4" fill="currentColor" opacity="0.3" />
-              <circle cx="50" cy="25" r="3" fill="currentColor" opacity="0.4" />
-            </svg>
-          </div>
-          <div className="absolute bottom-0 left-0 w-24 h-24 sm:w-36 sm:h-36 opacity-15">
-            <svg viewBox="0 0 100 100" className="w-full h-full text-indigo-300">
-              <circle cx="20" cy="80" r="7" fill="currentColor" opacity="0.5" />
-              <circle cx="40" cy="60" r="4" fill="currentColor" opacity="0.4" />
-              <circle cx="10" cy="50" r="5" fill="currentColor" opacity="0.3" />
-              <circle cx="35" cy="85" r="3" fill="currentColor" opacity="0.4" />
-            </svg>
-          </div>
-
-          {/* コンテンツ */}
-          <div className="relative z-10">
-            <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-3 tracking-tight">
-              すべての子どもの学びを支える
-            </h1>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-2xl">
-              インクルーシブ教育に関する最新のニュース、研究成果、実践事例を
-              わかりやすくお届けします。教育現場で役立つ情報を厳選してご紹介。
-            </p>
-          </div>
-
-          {/* アクセントライン */}
-          <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-sky-200 via-indigo-200 to-purple-200 opacity-60"></div>
-        </div>
-      </section>
-
       <div className="flex flex-col lg:flex-row gap-8">
         {/* メインコンテンツ */}
         <div className="flex-1 min-w-0">
+          {/* ヒーローセクション */}
+          <section className="mb-8">
+            <div className="relative overflow-hidden bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-50 rounded-xl shadow-sm border border-sky-100/50 p-6 sm:p-8">
+              {/* 装飾: 柔らかい幾何学模様 */}
+              <div className="absolute top-0 right-0 w-32 h-32 sm:w-40 sm:h-40 opacity-20">
+                <svg viewBox="0 0 100 100" className="w-full h-full text-sky-300">
+                  <circle cx="80" cy="20" r="8" fill="currentColor" opacity="0.6" />
+                  <circle cx="60" cy="40" r="5" fill="currentColor" opacity="0.4" />
+                  <circle cx="90" cy="50" r="6" fill="currentColor" opacity="0.5" />
+                  <circle cx="70" cy="70" r="4" fill="currentColor" opacity="0.3" />
+                  <circle cx="50" cy="25" r="3" fill="currentColor" opacity="0.4" />
+                </svg>
+              </div>
+              <div className="absolute bottom-0 left-0 w-24 h-24 sm:w-32 sm:h-32 opacity-15">
+                <svg viewBox="0 0 100 100" className="w-full h-full text-indigo-300">
+                  <circle cx="20" cy="80" r="7" fill="currentColor" opacity="0.5" />
+                  <circle cx="40" cy="60" r="4" fill="currentColor" opacity="0.4" />
+                  <circle cx="10" cy="50" r="5" fill="currentColor" opacity="0.3" />
+                  <circle cx="35" cy="85" r="3" fill="currentColor" opacity="0.4" />
+                </svg>
+              </div>
+
+              {/* コンテンツ */}
+              <div className="relative z-10">
+                <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-3 tracking-tight">
+                  すべての子どもの学びを支える
+                </h1>
+                <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                  インクルーシブ教育に関する最新のニュース、研究成果、実践事例を
+                  わかりやすくお届けします。教育現場で役立つ情報を厳選してご紹介。
+                </p>
+              </div>
+
+              {/* アクセントライン */}
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-sky-200 via-indigo-200 to-purple-200 opacity-60"></div>
+            </div>
+          </section>
           {/* 編集部ピックアップセクション（常に5件表示） */}
           {pickItems.length > 0 && (
             <section className="mb-8">
