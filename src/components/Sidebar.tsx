@@ -3,13 +3,14 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { categories, BASE_PATH, Article } from '@/lib/types';
-import { generateAmazonSearchUrl } from '@/data/articles';
+import { generateAmazonSearchUrl, generateRakutenSearchUrl } from '@/data/articles';
 
 // 書籍検索用のキーワード情報
 type BookKeyword = {
   keyword: string;
   label: string;
   amazonUrl: string;
+  rakutenUrl: string;
 };
 
 export default function Sidebar() {
@@ -35,6 +36,7 @@ export default function Sidebar() {
               keyword: article.mainKeyword,
               label: article.mainKeyword,
               amazonUrl: generateAmazonSearchUrl(article.mainKeyword, article.title),
+              rakutenUrl: generateRakutenSearchUrl(article.mainKeyword, article.title),
             });
           }
         }
@@ -57,6 +59,7 @@ export default function Sidebar() {
                 keyword: catKeyword,
                 label: catKeyword,
                 amazonUrl: generateAmazonSearchUrl(catKeyword, ''),
+                rakutenUrl: generateRakutenSearchUrl(catKeyword, ''),
               });
             }
           }
@@ -72,11 +75,13 @@ export default function Sidebar() {
             keyword: 'インクルーシブ教育',
             label: 'インクルーシブ教育',
             amazonUrl: generateAmazonSearchUrl('インクルーシブ教育', ''),
+            rakutenUrl: generateRakutenSearchUrl('インクルーシブ教育', ''),
           },
           {
             keyword: '特別支援教育',
             label: '特別支援教育',
             amazonUrl: generateAmazonSearchUrl('特別支援教育', ''),
+            rakutenUrl: generateRakutenSearchUrl('特別支援教育', ''),
           },
         ]);
       });
@@ -124,50 +129,66 @@ export default function Sidebar() {
             最新ニュースに関連する書籍をAmazonで探せます
           </p>
 
-          <div className="space-y-2">
+          <div className="space-y-3">
             {bookKeywords.map((item, index) => (
-              <a
+              <div
                 key={index}
-                href={item.amazonUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 p-3 bg-white/70 rounded-lg hover:bg-white transition-colors group"
+                className="p-3 bg-white/70 rounded-lg"
               >
-                <span className="flex-shrink-0 w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center">
-                  <svg className="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                  </svg>
-                </span>
-                <span className="flex-1 min-w-0">
-                  <span className="block text-sm font-medium text-gray-800 group-hover:text-amber-700 truncate">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="flex-shrink-0 w-6 h-6 bg-amber-100 rounded-full flex items-center justify-center">
+                    <svg className="w-3 h-3 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                  </span>
+                  <span className="text-sm font-medium text-gray-800 truncate">
                     「{item.label}」の本
                   </span>
-                  <span className="block text-xs text-gray-500">
-                    Amazonで探す
-                  </span>
-                </span>
-                <svg className="w-4 h-4 text-gray-400 group-hover:text-amber-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
+                </div>
+                <div className="flex items-center gap-3 pl-8 text-xs">
+                  <a
+                    href={item.amazonUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-500 hover:text-amber-700 transition-colors"
+                  >
+                    → Amazon
+                  </a>
+                  <a
+                    href={item.rakutenUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-500 hover:text-red-600 transition-colors"
+                  >
+                    → 楽天ブックス
+                  </a>
+                </div>
+              </div>
             ))}
           </div>
 
-          {/* Amazonへのリンク（全体） */}
+          {/* 書籍検索リンク（全体） */}
           <div className="mt-4 pt-4 border-t border-amber-200">
-            <a
-              href="https://www.amazon.co.jp/s?k=インクルーシブ教育+本&i=stripbooks"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full py-2.5 bg-amber-600 hover:bg-amber-700 text-white text-sm font-medium rounded-lg transition-colors"
-            >
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M13.958 10.09c0 1.232.029 2.256-.591 3.351-.502.891-1.301 1.438-2.186 1.438-1.214 0-1.922-.924-1.922-2.292 0-2.692 2.415-3.182 4.7-3.182v.685zm3.186 7.705c-.209.189-.512.201-.745.074-1.052-.872-1.238-1.276-1.814-2.106-1.736 1.769-2.965 2.297-5.209 2.297-2.66 0-4.731-1.641-4.731-4.925 0-2.565 1.391-4.309 3.37-5.164 1.715-.754 4.11-.891 5.942-1.095v-.41c0-.753.058-1.642-.385-2.294-.385-.579-1.124-.82-1.775-.82-1.205 0-2.277.618-2.54 1.897-.054.285-.261.567-.549.582l-3.061-.333c-.259-.056-.548-.266-.472-.66C6.073 1.612 9.196 0 12.025 0c1.446 0 3.336.385 4.475 1.482 1.446 1.385 1.308 3.234 1.308 5.244v4.749c0 1.428.593 2.054 1.15 2.827.196.274.24.603-.012.806-.629.524-1.752 1.5-2.369 2.046l-.433-.359z"/>
-              </svg>
-              Amazonで教育書籍を探す
-            </a>
+            <div className="flex gap-2">
+              <a
+                href="https://www.amazon.co.jp/s?k=インクルーシブ教育+本&i=stripbooks"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-amber-600 hover:bg-amber-700 text-white text-xs font-medium rounded-lg transition-colors"
+              >
+                Amazon
+              </a>
+              <a
+                href="https://books.rakuten.co.jp/search?sitem=インクルーシブ教育"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-red-500 hover:bg-red-600 text-white text-xs font-medium rounded-lg transition-colors"
+              >
+                楽天ブックス
+              </a>
+            </div>
             <p className="mt-2 text-xs text-amber-600 text-center">
-              ※ アフィリエイトリンクです
+              ※ 書籍購入でサイト運営を支援できます
             </p>
           </div>
         </div>

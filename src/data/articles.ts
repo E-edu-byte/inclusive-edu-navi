@@ -18,32 +18,36 @@ export type Article = {
   amazonLink?: string; // カスタムAmazonリンク（設定があればカテゴリー検索より優先）
 };
 
+// キーワードを抽出するヘルパー関数
+function extractKeyword(mainKeyword?: string, title?: string): string {
+  if (mainKeyword && mainKeyword.trim()) {
+    return mainKeyword.trim();
+  } else if (title && title.trim()) {
+    const cleanTitle = title
+      .replace(/【.*?】/g, '')
+      .replace(/\[.*?\]/g, '')
+      .replace(/[「」『』（）\(\)]/g, '')
+      .replace(/[―…]/g, '')
+      .trim();
+    return cleanTitle.slice(0, 12).trim();
+  }
+  return 'インクルーシブ教育';
+}
+
 // Amazon検索URLを生成（mainKeywordを優先、なければタイトルから抽出）
 export function generateAmazonSearchUrl(mainKeyword?: string, title?: string): string {
-  let keyword: string;
-
-  if (mainKeyword && mainKeyword.trim()) {
-    // mainKeywordがある場合はそれを使用
-    keyword = mainKeyword.trim();
-  } else if (title && title.trim()) {
-    // フォールバック: タイトルの最初の10文字程度を使用
-    // 記号や不要な文字を除去してキーワードを抽出
-    const cleanTitle = title
-      .replace(/【.*?】/g, '') // 【】内を除去
-      .replace(/\[.*?\]/g, '') // []内を除去
-      .replace(/[「」『』（）\(\)]/g, '') // 括弧を除去
-      .replace(/[―…]/g, '') // 記号を除去
-      .trim();
-    keyword = cleanTitle.slice(0, 12).trim();
-  } else {
-    // 両方ない場合のデフォルト
-    keyword = 'インクルーシブ教育';
-  }
-
-  // 「教育 本」を付加して書籍検索
+  const keyword = extractKeyword(mainKeyword, title);
   const searchQuery = `${keyword} 教育 本`;
   const encodedKeywords = encodeURIComponent(searchQuery);
   return `https://www.amazon.co.jp/s?k=${encodedKeywords}&i=stripbooks`;
+}
+
+// 楽天ブックス検索URLを生成（mainKeywordを優先、なければタイトルから抽出）
+export function generateRakutenSearchUrl(mainKeyword?: string, title?: string): string {
+  const keyword = extractKeyword(mainKeyword, title);
+  const searchQuery = `${keyword} 教育`;
+  const encodedKeywords = encodeURIComponent(searchQuery);
+  return `https://books.rakuten.co.jp/search?sitem=${encodedKeywords}`;
 }
 
 // 旧関数（後方互換性のため維持、カテゴリーIDは無視してデフォルトを返す）

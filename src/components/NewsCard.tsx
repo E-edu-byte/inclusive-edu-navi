@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { getCategoryByName } from '@/lib/types';
-import { generateAmazonSearchUrl } from '@/data/articles';
+import { generateAmazonSearchUrl, generateRakutenSearchUrl } from '@/data/articles';
 
 type NewsCardProps = {
   title: string;
@@ -153,15 +153,27 @@ export default function NewsCard({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
             </a>
-            {/* Amazon検索リンク（mainKeywordを優先、なければタイトルから抽出） */}
-            <a
-              href={generateAmazonSearchUrl(mainKeyword, title)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs sm:text-xs text-gray-500 hover:text-gray-700 transition-colors py-2 sm:py-0"
-            >
-              📖 このテーマの参考書籍（Amazon）
-            </a>
+            {/* 書籍検索リンク（控えめなテキストリンク） */}
+            <span className="text-xs text-gray-400 py-2 sm:py-0">
+              📖 関連書籍:
+              <a
+                href={generateAmazonSearchUrl(mainKeyword, title)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-1 text-gray-500 hover:text-gray-700 transition-colors"
+              >
+                Amazon
+              </a>
+              <span className="mx-1 text-gray-300">|</span>
+              <a
+                href={generateRakutenSearchUrl(mainKeyword, title)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 hover:text-gray-700 transition-colors"
+              >
+                楽天
+              </a>
+            </span>
           </div>
         </div>
       </div>
