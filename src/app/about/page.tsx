@@ -35,7 +35,7 @@ export default function AboutPage() {
               サイトの目的
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              「インクルーシブ教育ナビ」は、インクルーシブ教育な社会を共に創り、歩んでいくすべての方々に向けて、
+              「インクルーシブ教育ナビ」は、インクルーシブな社会を共に創り、歩んでいくすべての方々に向けて、
               最新のニュース、研究成果、実践事例をわかりやすくお届けすることを目的としたニュースサイトです。
             </p>
             <p className="text-gray-700 leading-relaxed">
