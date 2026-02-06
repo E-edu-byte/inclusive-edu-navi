@@ -1,16 +1,6 @@
 {
   "articles": [
     {
-      "id": "f1f28663de68",
-      "title": "【大学受験】地元進学の多い都道府県1位は愛知…旺文社",
-      "summary": "旺文社は2026年1月30日、「2025年度 都道府県別 大学・短大進学状況」を公表した。地元の大学進学率は全国平均で45.4％。都道府県別では、1位が愛知県（72.5％）、2位が東京都（69.8％）であった。",
-      "category": "合理的配慮・支援",
-      "date": "2026-02-06",
-      "url": "https://resemom.jp/article/2026/02/06/84959.html",
-      "imageUrl": "https://resemom.jp/imgs/ogp_f/391441.jpg",
-      "source": "リセマム"
-    },
-    {
       "id": "fdb4ef8a2ff6",
       "title": "令和7年度インクルーシブな学校運営モデル事業中間成果報告会を開催します",
       "summary": "文部科学省のプレスリリースです。令和7年度インクルーシブな学校運営モデル事業中間成果報告会を開催します",
@@ -23,12 +13,13 @@
     {
       "id": "73c1456a8a55",
       "title": "東京大学メタバース工学部、小学生から保護者・教員まで対象別に生成AIを学べる無料講座3月開講",
-      "summary": "東京大学メタバース工学部は4日、同学部が提供するジュニア講座にて、小学生、中学生、高校生、保護者、教員それぞれを対象に、生成AIについてわかりやすく学べる無料オンライン講座を3月に […]",
-      "category": "合理的配慮・支援",
+      "summary": "東京大学メタバース工学部が、小学生から保護者・教員まで幅広い方を対象に、生成AIをわかりやすく学べる無料オンライン講座を3月に開講します。最新のAI技術に触れ、未来の学びや教育の可能性を広げる貴重な機会となるでしょう。",
+      "category": "ICT・教材",
       "date": "2026-02-05",
       "url": "https://ict-enews.net/2026/02/06meta-school/",
       "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/162956-11-19211f3250e2f2d3690903ed3421747a-1920x1080-1-1200x630.webp",
-      "source": "ICT教育ニュース"
+      "source": "ICT教育ニュース",
+      "mainKeyword": "生成AI"
     },
     {
       "id": "c1426ad9fcd3",
@@ -38,7 +29,8 @@
       "date": "2026-02-05",
       "url": "https://ict-enews.net/2026/02/06nijin-8/",
       "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/99150-717-c48d3ef1d20dbf564ea345c479b5bad3-920x450-1.webp",
-      "source": "ICT教育ニュース"
+      "source": "ICT教育ニュース",
+      "mainKeyword": ""
     },
     {
       "id": "fb201f651df1",
@@ -48,7 +40,8 @@
       "date": "2026-02-05",
       "url": "https://ict-enews.net/2026/02/06mikan/",
       "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/54742-33-2887b91d3848ea68a17735a329128c4e-1920x1080-1-1200x630.webp",
-      "source": "ICT教育ニュース"
+      "source": "ICT教育ニュース",
+      "mainKeyword": ""
     },
     {
       "id": "4d0faf832164",
@@ -58,7 +51,8 @@
       "date": "2026-02-05",
       "url": "https://ict-enews.net/2026/02/06persol-bd/",
       "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/unnamed.png",
-      "source": "ICT教育ニュース"
+      "source": "ICT教育ニュース",
+      "mainKeyword": ""
     },
     {
       "id": "da96f16507ef",
@@ -68,7 +62,8 @@
       "date": "2026-02-05",
       "url": "https://ict-enews.net/2026/02/06gecipe-2/",
       "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/31716-117-f40103affe79c0668f7c53e770e85e90-1304x974-1-1200x630.webp",
-      "source": "ICT教育ニュース"
+      "source": "ICT教育ニュース",
+      "mainKeyword": ""
     },
     {
       "id": "f413aacb31aa",
@@ -78,13 +73,13 @@
       "date": "2026-01-31",
       "url": "https://www.asahi.com/articles/ASV1X2J4XV1XUTIL00DM.html?ref=rss",
       "imageUrl": "https://imgopt.asahi.com/ogp/AS20260128002670_comm.jpg",
-      "source": "朝日新聞 教育"
+      "source": "朝日新聞 教育",
+      "mainKeyword": ""
     }
   ],
-  "lastUpdated": "2026-02-06T19:16:30.461900",
-  "totalCount": 8,
+  "lastUpdated": "2026-02-06T20:27:57.025390",
+  "totalCount": 7,
   "sources": [
-    "リセマム",
     "文部科学省",
     "ICT教育ニュース",
     "朝日新聞 教育"
