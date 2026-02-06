@@ -51,6 +51,11 @@ export default function AboutPage() {
               運営ポリシー
             </h2>
 
+            <p className="text-gray-700 leading-relaxed">
+              本サイトは、インクルーシブな社会を創るために活動する有志によって運営されています。
+              現場で役立つ情報をお届けすることで、すべての子どもの学びを支える一助となることを目指しています。
+            </p>
+
             <div className="bg-gradient-to-br from-slate-50 to-sky-50 rounded-xl p-6 border border-slate-100">
               <h3 className="font-bold text-slate-800 mb-3 flex items-center gap-2">
                 <svg className="w-5 h-5 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
