@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useState } from 'react';
 import Link from 'next/link';
 import NewsCard from '@/components/NewsCard';
-import { getCategoryByName } from '@/lib/types';
+import { getCategoryByName, BASE_PATH } from '@/lib/types';
 
 type Article = {
   id: string;
@@ -18,34 +18,62 @@ type Article = {
   mainKeyword?: string;
 };
 
+// 検索用にテキストを正規化（全角→半角、大文字→小文字）
+function normalizeText(text: string): string {
+  return text
+    .toLowerCase()
+    // 全角英数字を半角に変換
+    .replace(/[Ａ-Ｚａ-ｚ０-９]/g, (s) => String.fromCharCode(s.charCodeAt(0) - 0xFEE0))
+    // 全角スペースを半角に
+    .replace(/　/g, ' ')
+    // 長音記号の統一
+    .replace(/[ー－―]/g, '-')
+    .trim();
+}
+
 function SearchResults() {
   const searchParams = useSearchParams();
   const query = searchParams.get('q') || '';
   const [articles, setArticles] = useState<Article[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [fetchError, setFetchError] = useState<string | null>(null);
 
   useEffect(() => {
-    // ニュースデータを取得
-    fetch('/data/articles.json')
-      .then(res => res.json())
+    // ニュースデータを取得（BASE_PATHを使用）
+    fetch(`${BASE_PATH}/data/articles.json`)
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
       .then(data => {
         setArticles(data.articles || []);
         setIsLoading(false);
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error('記事データ取得エラー:', err);
+        setFetchError(err.message);
         setArticles([]);
         setIsLoading(false);
       });
   }, []);
 
-  // 検索クエリで記事をフィルタリング
+  // 検索クエリで記事をフィルタリング（あいまい検索対応）
   const searchResults = query
     ? articles.filter((article) => {
-        const searchLower = query.toLowerCase();
+        const normalizedQuery = normalizeText(query);
+        const normalizedTitle = normalizeText(article.title);
+        const normalizedSummary = normalizeText(article.summary);
+        const normalizedCategory = normalizeText(article.category);
+        const normalizedSource = normalizeText(article.source || '');
+        const normalizedKeyword = normalizeText(article.mainKeyword || '');
+
+        // 部分一致検索（タイトル、要約、カテゴリ、ソース、キーワード）
         return (
-          article.title.toLowerCase().includes(searchLower) ||
-          article.summary.toLowerCase().includes(searchLower) ||
-          article.category.toLowerCase().includes(searchLower)
+          normalizedTitle.includes(normalizedQuery) ||
+          normalizedSummary.includes(normalizedQuery) ||
+          normalizedCategory.includes(normalizedQuery) ||
+          normalizedSource.includes(normalizedQuery) ||
+          normalizedKeyword.includes(normalizedQuery)
         );
       })
     : [];
@@ -106,6 +134,16 @@ function SearchResults() {
           <p className="text-gray-600 mb-6">
             別のキーワードで検索するか、カテゴリから探してみてください。
           </p>
+          {fetchError && (
+            <p className="text-xs text-red-400 mb-4">
+              データ取得エラー: {fetchError}
+            </p>
+          )}
+          {articles.length === 0 && !fetchError && (
+            <p className="text-xs text-gray-400 mb-4">
+              検索対象の記事数: 0件（データ読み込み中の可能性があります）
+            </p>
+          )}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/"
