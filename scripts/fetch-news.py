@@ -78,8 +78,8 @@ RSS_FEEDS = [
 MAX_ARTICLES_PER_DOMAIN = 5
 
 # 軽量化モード設定
-LIGHT_MODE = True  # 軽量化モード（各ソース最大3件）
-MAX_ARTICLES_PER_SOURCE = 3  # 各ソースからの最大取得数
+LIGHT_MODE = True  # 軽量化モード
+MAX_ARTICLES_PER_SOURCE = 10  # 各ソースからの最大取得数（フィルタ後5件以上残るように）
 
 # ========================================
 # 理念に基づくキーワードフィルタリング
@@ -567,13 +567,19 @@ def generate_ai_summary_and_category(title: str, original_summary: str, source: 
 その記事が「困り感に寄り添う支援」なら採用、「競争に勝つための教育サービス」ならSKIPです。
 ギフテッド支援はインクルーシブ教育の重要な一部として扱ってください。
 
+【緩和ルール】以下のトピックは広くインクルーシブ教育に関連するため、迷った場合は採用：
+・一般的な教育改革・学校運営の話題
+・デジタル教科書やICT活用（全般）
+・学習アプリ・EdTech全般
+・多様な学びを支える教育制度の話題
+
 ## 記事情報
 タイトル: {title}
 要約: {cached_summary}
 
 ## 出力形式
-除外ルールに該当する場合は「SKIP」のみ。
-該当しない場合はカテゴリー名のみを出力（例：「不登校・多様な学び」）。"""
+除外ルールに明確に該当する場合のみ「SKIP」。
+それ以外はカテゴリー名のみを出力（例：「不登校・多様な学び」）。"""
         else:
             # 新規の場合は要約とカテゴリーを同時に判定
             prompt = f"""あなたは公共性の高い教育メディア「インクルーシブ教育ナビ」の編集長です。
@@ -612,6 +618,12 @@ def generate_ai_summary_and_category(title: str, original_summary: str, source: 
 その記事が「困り感に寄り添う支援」なら採用、「競争に勝つための教育サービス」ならSKIPです。
 ギフテッド支援はインクルーシブ教育の重要な一部として扱ってください。
 
+【緩和ルール】以下のトピックは広くインクルーシブ教育に関連するため、迷った場合は採用：
+・一般的な教育改革・学校運営の話題
+・デジタル教科書やICT活用（全般）
+・学習アプリ・EdTech全般
+・多様な学びを支える教育制度の話題
+
 ## 記事情報
 タイトル: {title}
 出典: {source}
@@ -622,7 +634,7 @@ def generate_ai_summary_and_category(title: str, original_summary: str, source: 
 ```json
 {{"summary": "80〜120文字の優しい要約（です・ます調）", "category": "カテゴリー名"}}
 ```
-理念に合致しない場合は「SKIP」のみ。"""
+除外ルールに明確に該当する場合のみ「SKIP」。迷ったら採用側に傾ける。"""
 
         response = gemini_client.models.generate_content(
             model="gemini-2.5-flash",
