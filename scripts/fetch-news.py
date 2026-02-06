@@ -60,11 +60,6 @@ RSS_FEEDS = [
         "skip_core_filter": True,
     },
     {
-        "name": "みんなの教育技術",
-        "url": "https://kyoiku.sho.jp/feed/",
-        "skip_core_filter": True,
-    },
-    {
         "name": "EdTechZine",
         "url": "https://edtechzine.jp/rss/new/",
         "skip_core_filter": True,
@@ -131,6 +126,11 @@ PAID_URL_PATTERNS = [
     "/login", "?login", "/register", "/subscribe",
     "membership", "shimbun.com", "nikkei.com/article",
     "toyokeizai.net/articles/-/", "premium.toyokeizai"
+]
+
+# 除外ドメイン（ログイン制限等で閲覧不可）
+EXCLUDED_DOMAINS = [
+    "kyoiku.sho.jp",  # みんなの教育技術（ログイン必須）
 ]
 
 # 【塾・予備校広告の事前除外キーワード】AI判定前に弾く（タイトル・要約）
@@ -785,6 +785,15 @@ def is_paid_article_url(url: str) -> bool:
     return any(pattern in url_lower for pattern in PAID_URL_PATTERNS)
 
 
+def is_excluded_domain(url: str) -> bool:
+    """
+    【除外フィルタ】除外ドメインをスキップ
+    ログイン制限等で閲覧不可のサイト
+    """
+    domain = get_domain(url)
+    return any(excluded in domain for excluded in EXCLUDED_DOMAINS)
+
+
 def is_cram_school_ad(title: str, summary: str) -> bool:
     """
     【除外フィルタ】塾・予備校広告をスキップ
@@ -849,6 +858,10 @@ def fetch_rss_feed(feed_info: dict) -> list:
 
             # 【除外フィルタ】有料記事URLパターンをスキップ（AI判定前に弾く）
             if is_paid_article_url(link):
+                continue
+
+            # 【除外フィルタ】除外ドメインをスキップ（ログイン制限等）
+            if is_excluded_domain(link):
                 continue
 
             # RSS内の要約を取得
