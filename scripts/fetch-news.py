@@ -48,44 +48,30 @@ if sys.platform == 'win32':
 # 収集対象のRSSフィード（拡張版）
 # ========================================
 RSS_FEEDS = [
-    # 教育専門メディア（理念フィルタなしで全記事採用）
+    # === 教育専門メディア ===
     {
         "name": "リセマム",
         "url": "https://resemom.jp/rss20/index.rdf",
-        "skip_core_filter": True,  # 教育専門サイトなので理念フィルタをスキップ
+        "skip_core_filter": True,
     },
     {
         "name": "ICT教育ニュース",
         "url": "https://ict-enews.net/feed/",
         "skip_core_filter": True,
     },
-    {
-        "name": "EdTechZine",
-        "url": "https://edtechzine.jp/rss/new/",
-        "skip_core_filter": True,
-    },
-    # 大手メディア教育カテゴリ（理念フィルタ適用）
+    # === 大手メディア教育カテゴリ ===
     {
         "name": "朝日新聞 教育",
         "url": "https://www.asahi.com/rss/asahi/edu.rdf",
         "skip_core_filter": False,
     },
-    {
-        "name": "東洋経済オンライン",
-        "url": "https://toyokeizai.net/list/feed/rss",
-        "skip_core_filter": False,
-    },
-    # 通信社・放送局（厳格にフィルタ）
+    # === 通信社・放送局 ===
     {
         "name": "NHK NEWS WEB",
         "url": "https://www.nhk.or.jp/rss/news/cat6.xml",
         "skip_core_filter": False,
     },
-    {
-        "name": "Yahoo!ニュース 国内",
-        "url": "https://news.yahoo.co.jp/rss/topics/domestic.xml",
-        "skip_core_filter": False,
-    },
+    # ※ 文部科学省はRSSがないため、別途スクレイピングで取得
 ]
 
 # ドメインごとの最大記事数
@@ -990,6 +976,76 @@ def validate_all_images(articles: list) -> list:
     return articles
 
 
+def fetch_mext_press_releases(max_articles: int = 3) -> list:
+    """
+    文部科学省プレスリリースをスクレイピング（RSSがないため）
+    教育関連の重要な政策発表を取得
+    """
+    articles = []
+    mext_url = "https://www.mext.go.jp/b_menu/houdou/index.htm"
+
+    try:
+        print("  取得中: 文部科学省 プレスリリース")
+        print(f"    URL: {mext_url}")
+
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        }
+
+        response = requests.get(mext_url, headers=headers, timeout=15)
+        response.raise_for_status()
+        response.encoding = 'utf-8'
+
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        # プレスリリースのリンクを探す
+        links = soup.find_all('a', href=True)
+        count = 0
+
+        for link in links:
+            if count >= max_articles:
+                break
+
+            href = link.get('href', '')
+            text = link.get_text(strip=True)
+
+            # プレスリリースのリンクパターンをチェック
+            if '/b_menu/houdou/' in href and text and len(text) > 10:
+                # 相対URLを絶対URLに変換
+                if href.startswith('/'):
+                    full_url = f"https://www.mext.go.jp{href}"
+                else:
+                    full_url = href
+
+                # 理念キーワードを含むかチェック
+                if not contains_core_keyword(text, ""):
+                    continue
+
+                count += 1
+                print(f"    [{count}] {text[:50]}...")
+
+                article_id = generate_article_id(full_url)
+
+                article = {
+                    "id": article_id,
+                    "title": text,
+                    "summary": f"文部科学省のプレスリリースです。{text}",
+                    "category": "制度・行政",
+                    "date": datetime.now().strftime("%Y-%m-%d"),
+                    "url": full_url,
+                    "imageUrl": get_fallback_image(article_id),
+                    "source": "文部科学省"
+                }
+                articles.append(article)
+
+        print(f"    → {len(articles)}件の理念合致記事を抽出")
+
+    except Exception as e:
+        print(f"    エラー: 文部科学省の取得に失敗 - {e}")
+
+    return articles
+
+
 def save_articles(data: dict) -> None:
     """記事データをJSONファイルに保存"""
     os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
@@ -1024,6 +1080,13 @@ def main():
         articles = fetch_rss_feed(feed_info)
         all_articles.extend(articles)
         print()
+
+    # 文部科学省プレスリリース（RSSなし、スクレイピング）
+    print("【1.5】文部科学省プレスリリースを取得中...")
+    print("-" * 40)
+    mext_articles = fetch_mext_press_releases(max_articles=3)
+    all_articles.extend(mext_articles)
+    print()
 
     # 重複除去（URLベース）
     print("【2】重複を除去中...")
