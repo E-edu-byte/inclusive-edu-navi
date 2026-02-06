@@ -222,10 +222,16 @@ CATEGORIES = {
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 OUTPUT_FILE = os.path.join(PROJECT_ROOT, "public", "data", "articles.json")
+STATUS_FILE = os.path.join(PROJECT_ROOT, "public", "data", "status.json")
 
 # 【キャッシュ】既存のarticles.jsonから要約を再利用
 SUMMARY_CACHE = {}
 FAILED_SUMMARIES = []  # AI要約に失敗した記事をトラッキング
+
+# 【ステータス追跡】API使用状況
+API_CALL_COUNT = 0  # 今回の実行でのAPI呼び出し回数
+API_ERRORS = []  # エラー情報
+DAILY_API_LIMIT = 250  # 1日あたりのAPI上限（無料枠）
 
 def is_ai_generated_summary(summary: str) -> bool:
     """要約がAI生成かどうかを判定（です・ます調で終わっているか）"""
@@ -543,7 +549,7 @@ def generate_ai_summary_and_category(title: str, original_summary: str, source: 
     - 理念に合致しない記事：{"skip": True}を返す
     【キャッシュ対応】既存の要約があれば再利用（カテゴリーは再判定）
     """
-    global FAILED_SUMMARIES
+    global FAILED_SUMMARIES, API_CALL_COUNT, API_ERRORS
 
     # カテゴリー一覧を文字列化
     category_list = "\n".join([f"- {cat}: {desc}" for cat, desc in CATEGORIES.items()])
@@ -658,6 +664,9 @@ def generate_ai_summary_and_category(title: str, original_summary: str, source: 
             contents=prompt
         )
 
+        # API呼び出しカウント
+        API_CALL_COUNT += 1
+
         ai_response = response.text.strip()
 
         # 【軽量化】待機時間を短縮（3秒）
@@ -710,8 +719,12 @@ def generate_ai_summary_and_category(title: str, original_summary: str, source: 
         FAILED_SUMMARIES.append({"title": title, "url": url, "reason": "JSONパースエラー"})
         return {"summary": original_summary, "category": "合理的配慮・支援", "mainKeyword": "", "skip": False}
     except Exception as e:
+        error_str = str(e)
         print(f"        [AI判定エラー] {e}")
-        FAILED_SUMMARIES.append({"title": title, "url": url, "reason": str(e)[:50]})
+        FAILED_SUMMARIES.append({"title": title, "url": url, "reason": error_str[:50]})
+        # API制限エラーを検出
+        if "429" in error_str or "quota" in error_str.lower() or "rate" in error_str.lower():
+            API_ERRORS.append({"type": "quota_exceeded", "message": error_str[:100], "timestamp": datetime.now().isoformat()})
         return {"summary": original_summary, "category": "合理的配慮・支援", "mainKeyword": "", "skip": False}
 
 
@@ -1278,7 +1291,76 @@ def main():
     print("=" * 60)
     print(f"処理完了: 合計 {len(final_articles)}件 の記事を保存")
     print(f"AI要約成功: {ai_success_count}件 / {len(final_articles)}件")
+    print(f"API呼び出し回数: {API_CALL_COUNT}回")
     print("=" * 60)
+
+    # 【ステータス保存】status.jsonに実行状況を記録
+    save_status(
+        articles_processed=len(final_articles),
+        articles_added=len(final_articles),  # 新規追加数（簡略化）
+        api_calls=API_CALL_COUNT,
+        has_error=len(API_ERRORS) > 0,
+        error_message=API_ERRORS[0]["message"] if API_ERRORS else None
+    )
+
+
+def save_status(articles_processed: int, articles_added: int, api_calls: int, has_error: bool, error_message: str = None):
+    """システムステータスをstatus.jsonに保存"""
+    try:
+        # 既存のステータスを読み込み
+        existing_status = {"history": []}
+        if os.path.exists(STATUS_FILE):
+            with open(STATUS_FILE, 'r', encoding='utf-8') as f:
+                existing_status = json.load(f)
+
+        # 今日の日付（API制限のリセット基準）
+        # 太平洋時間0時 = 日本時間17時でリセット
+        now = datetime.now()
+
+        # API使用率を計算（履歴から今日の使用量を集計）
+        today_str = now.strftime("%Y-%m-%d")
+        today_api_usage = api_calls
+        for entry in existing_status.get("history", []):
+            entry_date = entry.get("timestamp", "")[:10]
+            if entry_date == today_str:
+                today_api_usage += entry.get("apiCalls", 0)
+
+        api_percentage = min(100, int((today_api_usage / DAILY_API_LIMIT) * 100))
+
+        # 新しいステータス
+        status_data = {
+            "lastUpdated": now.isoformat(),
+            "apiUsage": {
+                "used": today_api_usage,
+                "limit": DAILY_API_LIMIT,
+                "percentage": api_percentage
+            },
+            "lastRun": {
+                "timestamp": now.isoformat(),
+                "articlesProcessed": articles_processed,
+                "articlesAdded": articles_added,
+                "apiCalls": api_calls,
+                "success": not has_error,
+                "error": error_message
+            },
+            "history": existing_status.get("history", [])[-23:] + [{
+                "timestamp": now.isoformat(),
+                "articlesProcessed": articles_processed,
+                "apiCalls": api_calls,
+                "success": not has_error
+            }]
+        }
+
+        # ファイルに保存
+        os.makedirs(os.path.dirname(STATUS_FILE), exist_ok=True)
+        with open(STATUS_FILE, 'w', encoding='utf-8') as f:
+            json.dump(status_data, f, ensure_ascii=False, indent=2)
+
+        print(f"\nステータス保存完了: {STATUS_FILE}")
+        print(f"  API使用率: {api_percentage}% ({today_api_usage}/{DAILY_API_LIMIT})")
+
+    except Exception as e:
+        print(f"ステータス保存エラー: {e}")
 
 
 if __name__ == "__main__":

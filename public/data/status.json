@@ -1,0 +1,30 @@
+{
+  "lastUpdated": "2026-02-07T16:00:00.000000",
+  "apiUsage": {
+    "used": 45,
+    "limit": 250,
+    "percentage": 18
+  },
+  "lastRun": {
+    "timestamp": "2026-02-07T16:00:00.000000",
+    "articlesProcessed": 7,
+    "articlesAdded": 7,
+    "apiCalls": 15,
+    "success": true,
+    "error": null
+  },
+  "history": [
+    {
+      "timestamp": "2026-02-07T10:09:00.000000",
+      "articlesProcessed": 8,
+      "apiCalls": 15,
+      "success": true
+    },
+    {
+      "timestamp": "2026-02-07T15:55:00.000000",
+      "articlesProcessed": 7,
+      "apiCalls": 15,
+      "success": true
+    }
+  ]
+}
