@@ -3,6 +3,7 @@
 """
 特別支援教育関連ニュース自動収集スクリプト
 RSSフィードから記事を取得し、理念に基づくキーワードフィルタリングを適用
+全記事にGemini AIによる優しい要約を付与
 """
 
 import feedparser
@@ -12,12 +13,31 @@ import re
 import hashlib
 import sys
 import io
+import time
 from datetime import datetime
 from typing import Optional
 from urllib.parse import urlparse, urljoin
 from collections import defaultdict
 import requests
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
+
+# .env.local から環境変数を読み込む
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '.env.local'))
+
+# Gemini API初期化
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
+gemini_client = None
+
+if GEMINI_API_KEY:
+    try:
+        from google import genai
+        gemini_client = genai.Client(api_key=GEMINI_API_KEY)
+        print("✓ Gemini API 初期化成功")
+    except Exception as e:
+        print(f"警告: Gemini API初期化エラー - {e}")
+else:
+    print("警告: GEMINI_API_KEY が設定されていません（AI要約は無効）")
 
 # Windows環境での文字化け対策
 if sys.platform == 'win32':
@@ -107,6 +127,27 @@ PRACTICE_EXCLUDE_KEYWORDS = [
     "小3国語", "小4国語", "小5国語", "小6国語"
 ]
 
+# マニアックな技術解説記事の除外キーワード
+TECH_EXCLUDE_KEYWORDS = [
+    "Scratch", "スクラッチ", "プログラミング解説", "共通テスト解説",
+    "共テ", "Vol.", "Vol.1", "Vol.2", "Vol.3"
+]
+
+# 一般の受験情報の除外キーワード（特別支援・合理的配慮がない場合のみ除外）
+EXAM_EXCLUDE_KEYWORDS = [
+    "特別選抜", "出願状況", "倍率", "合格発表", "高校受験",
+    "入試解答", "確定志願者", "志願状況", "中学受験", "大学受験",
+    "共通テスト", "入学者選抜", "募集人員", "入試情報",
+    "入試直前", "入試本番", "受験勉強", "受験生", "受験対策",
+    "大学ランキング", "就職率ランキング", "人気ランキング", "偏差値"
+]
+
+# 受験情報の例外キーワード（これらがあれば除外しない）
+EXAM_EXCEPTION_KEYWORDS = [
+    "特別支援", "合理的配慮", "インクルーシブ", "不登校",
+    "障害", "障がい", "配慮事項", "支援学校", "支援学級"
+]
+
 # 小規模イベント検出キーワード
 EVENT_KEYWORDS = [
     "セミナー", "研修", "講座", "開催", "募集", "ワークショップ",
@@ -151,6 +192,27 @@ CATEGORY_KEYWORDS = {
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 OUTPUT_FILE = os.path.join(PROJECT_ROOT, "public", "data", "articles.json")
+
+# 【キャッシュ】既存のarticles.jsonから要約を再利用
+SUMMARY_CACHE = {}
+FAILED_SUMMARIES = []  # AI要約に失敗した記事をトラッキング
+
+def load_summary_cache():
+    """既存のarticles.jsonからAI要約済みの要約をキャッシュに読み込む"""
+    global SUMMARY_CACHE
+    try:
+        if os.path.exists(OUTPUT_FILE):
+            with open(OUTPUT_FILE, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                for article in data.get('articles', []):
+                    url = article.get('url', '')
+                    summary = article.get('summary', '')
+                    # 有効な要約（80文字以上でRSSの短いdescriptionではない）をキャッシュ
+                    if url and summary and len(summary) > 60:
+                        SUMMARY_CACHE[url] = summary
+            print(f"✓ キャッシュ読み込み: {len(SUMMARY_CACHE)}件の既存要約を再利用可能")
+    except Exception as e:
+        print(f"警告: キャッシュ読み込みエラー - {e}")
 
 # ========================================
 # フォールバック画像（Unsplash - 教育関連）
@@ -424,6 +486,67 @@ def truncate_text(text: str, max_length: int = 200) -> str:
     return text[:max_length - 3] + "..."
 
 
+def generate_ai_summary(title: str, original_summary: str, source: str, url: str = "") -> str:
+    """
+    【AI要約】Gemini APIを使用して優しいトーンの要約を生成
+    特別支援教育・インクルーシブ教育の視点から紹介文を作成
+    【キャッシュ対応】既存の要約があれば再利用してAPIコールを節約
+    """
+    global FAILED_SUMMARIES
+
+    # 【キャッシュチェック】既存の有効な要約があれば再利用
+    if url and url in SUMMARY_CACHE:
+        print(f"        → キャッシュから要約を再利用")
+        return SUMMARY_CACHE[url]
+
+    if not gemini_client:
+        return original_summary  # Gemini API無効時は元の要約を返す
+
+    try:
+        prompt = f"""あなたは「インクルーシブ教育ナビ」の編集者です。
+以下の教育関連ニュースを、特別支援教育・インクルーシブ教育に関心のある保護者や教員向けに、
+優しく分かりやすいトーンで要約してください。
+
+## 記事情報
+タイトル: {title}
+出典: {source}
+概要: {original_summary}
+
+## 要約のルール
+1. 80〜120文字程度で簡潔にまとめる
+2. 保護者や教員にとってどのような価値があるかを伝える
+3. 専門用語は避け、分かりやすい言葉を使う
+4. 優しく親しみやすいトーンで書く
+5. 「です・ます」調で統一する
+
+## 出力形式
+要約文のみを出力してください（説明や前置きは不要）。"""
+
+        response = gemini_client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt
+        )
+
+        ai_summary = response.text.strip()
+        # 余計な引用符やマークダウンを削除
+        ai_summary = re.sub(r'^[「"\']+|[」"\']+$', '', ai_summary)
+        ai_summary = re.sub(r'^\*\*|\*\*$', '', ai_summary)
+
+        # 【レート制限対策】API呼び出し後に3秒待機
+        time.sleep(3)
+
+        if len(ai_summary) > 10:
+            return ai_summary
+        else:
+            FAILED_SUMMARIES.append({"title": title, "url": url, "reason": "要約が短すぎる"})
+            return original_summary
+
+    except Exception as e:
+        print(f"        [AI要約エラー] {e}")
+        FAILED_SUMMARIES.append({"title": title, "url": url, "reason": str(e)[:50]})
+        return original_summary
+
+
 def classify_category(title: str, summary: str) -> str:
     """タイトルと要約からカテゴリを判定"""
     text = f"{title} {summary}".lower()
@@ -486,6 +609,36 @@ def is_small_event_article(title: str, summary: str) -> bool:
     return True
 
 
+def contains_tech_exclude_keyword(title: str, summary: str) -> bool:
+    """
+    【除外フィルタ】マニアックな技術解説記事をスキップ
+    Scratch、プログラミング解説、共テ解説等
+    """
+    text = f"{title} {summary}"
+    return any(keyword in text for keyword in TECH_EXCLUDE_KEYWORDS)
+
+
+def is_general_exam_article(title: str, summary: str) -> bool:
+    """
+    【除外フィルタ】一般の受験情報をスキップ
+    特別支援・合理的配慮がセットでない入試情報は除外
+    """
+    text = f"{title} {summary}"
+
+    # 受験情報キーワードを含むかチェック
+    has_exam_keyword = any(keyword in text for keyword in EXAM_EXCLUDE_KEYWORDS)
+    if not has_exam_keyword:
+        return False  # 受験情報ではない
+
+    # 例外キーワード（特別支援・合理的配慮等）を含むかチェック
+    has_exception = any(keyword in text for keyword in EXAM_EXCEPTION_KEYWORDS)
+    if has_exception:
+        return False  # 特別支援関連の受験情報なので除外しない
+
+    # 一般の受験情報と判定（除外対象）
+    return True
+
+
 def fetch_rss_feed(feed_info: dict) -> list:
     """RSSフィードから記事を取得"""
     articles = []
@@ -532,6 +685,14 @@ def fetch_rss_feed(feed_info: dict) -> list:
             if contains_practice_exclude_keyword(title, rss_summary):
                 continue
 
+            # 【除外フィルタ】マニアックな技術解説記事をスキップ
+            if contains_tech_exclude_keyword(title, rss_summary):
+                continue
+
+            # 【除外フィルタ】一般の受験情報をスキップ（特別支援関連は例外）
+            if is_general_exam_article(title, rss_summary):
+                continue
+
             # 【除外フィルタ】小規模な研修・イベント記事をスキップ（公的機関は例外）
             if is_small_event_article(title, rss_summary):
                 continue
@@ -566,9 +727,16 @@ def fetch_rss_feed(feed_info: dict) -> list:
                 print(f"        → 画像URL: {image_url[:60]}...")
 
             # 要約（ページのdescriptionを優先、なければRSSの要約）
-            summary = metadata.get('description') or rss_summary
-            if not summary:
-                summary = f"{feed_name}の記事です。詳しくは元記事をご覧ください。"
+            original_summary = metadata.get('description') or rss_summary
+            if not original_summary:
+                original_summary = f"{feed_name}の記事です。詳しくは元記事をご覧ください。"
+
+            # 【AI要約】全記事に優しいトーンの要約を生成
+            if gemini_client:
+                print(f"        → AI要約生成中...")
+                summary = generate_ai_summary(title, original_summary, feed_name, link)
+            else:
+                summary = original_summary
 
             article = {
                 "id": article_id,
@@ -637,6 +805,10 @@ def main():
     print("=" * 60)
     print(f"実行日時: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"理念キーワード: {', '.join(CORE_KEYWORDS[:10])}...")
+    print()
+
+    # 【キャッシュ読み込み】既存の要約を再利用
+    load_summary_cache()
     print()
 
     all_articles = []
@@ -721,9 +893,26 @@ def main():
     # ファイルに保存
     save_articles(output_data)
 
+    # 【失敗レポート】AI要約に失敗した記事を報告
+    if FAILED_SUMMARIES:
+        print()
+        print("【8】AI要約失敗レポート:")
+        print("-" * 40)
+        for failed in FAILED_SUMMARIES:
+            print(f"  × {failed['title'][:40]}...")
+            print(f"    理由: {failed['reason']}")
+        print(f"  合計 {len(FAILED_SUMMARIES)}件 の要約が失敗（元の要約を使用）")
+    else:
+        print()
+        print("【8】AI要約: 全記事成功 ✓")
+
+    # AI要約成功数をカウント
+    ai_success_count = len(final_articles) - len(FAILED_SUMMARIES)
+
     print()
     print("=" * 60)
     print(f"処理完了: 合計 {len(final_articles)}件 の記事を保存")
+    print(f"AI要約成功: {ai_success_count}件 / {len(final_articles)}件")
     print("=" * 60)
 
 
