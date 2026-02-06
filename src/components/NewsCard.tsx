@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { getCategoryByName } from '@/lib/types';
+import { generateAmazonSearchUrl } from '@/data/articles';
 
 type NewsCardProps = {
   title: string;
@@ -136,8 +137,8 @@ export default function NewsCard({
             {summary}
           </p>
 
-          {/* 元記事を読むボタン */}
-          <div className="mt-auto pt-2">
+          {/* 元記事を読むボタン + Amazon検索リンク */}
+          <div className="mt-auto pt-2 flex flex-wrap items-center gap-x-4 gap-y-2">
             <a
               href={url}
               target="_blank"
@@ -149,6 +150,22 @@ export default function NewsCard({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
             </a>
+            {/* Amazon検索リンク（カテゴリに応じた書籍検索） */}
+            {(() => {
+              const cat = getCategoryByName(category);
+              const categoryId = cat?.id || 'topics';
+              const amazonUrl = generateAmazonSearchUrl(categoryId);
+              return (
+                <a
+                  href={amazonUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-gray-500 hover:text-gray-700 transition-colors"
+                >
+                  📖 このテーマの参考書籍（Amazon）
+                </a>
+              );
+            })()}
           </div>
         </div>
       </div>
