@@ -99,6 +99,7 @@ export default function NewsPage() {
                   source={article.source}
                   date={article.date}
                   url={article.url}
+                  mainKeyword={article.mainKeyword}
                   isPickup={false}
                 />
               ))}

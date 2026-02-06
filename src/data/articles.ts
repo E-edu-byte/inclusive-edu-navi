@@ -18,25 +18,37 @@ export type Article = {
   amazonLink?: string; // カスタムAmazonリンク（設定があればカテゴリー検索より優先）
 };
 
-// カテゴリー別のAmazon検索キーワード
-export const categoryAmazonKeywords: Record<string, string> = {
-  'policy': '特別支援教育 制度 法律 専門書',
-  'research': '発達障害 学習支援 研究 専門書',
-  'practice': '特別支援教育 実践 事例集',
-  'tools': '特別支援 教材 ICT 教育',
-  'events': '特別支援教育 研修 セミナー',
-  'topics': 'インクルーシブ教育 入門書',
-  // 新カテゴリー（lib/types.ts の定義に対応）
-  'support': '合理的配慮 特別支援教育 専門書',
-  'diverse-learning': '不登校 フリースクール オルタナティブ教育',
-  'ict': 'EdTech 学習支援 デジタル教材',
-};
+// Amazon検索URLを生成（mainKeywordを優先、なければタイトルから抽出）
+export function generateAmazonSearchUrl(mainKeyword?: string, title?: string): string {
+  let keyword: string;
 
-// Amazon検索URLを生成
-export function generateAmazonSearchUrl(categoryId: string): string {
-  const keywords = categoryAmazonKeywords[categoryId] || 'インクルーシブ教育 入門書';
-  const encodedKeywords = encodeURIComponent(keywords);
+  if (mainKeyword && mainKeyword.trim()) {
+    // mainKeywordがある場合はそれを使用
+    keyword = mainKeyword.trim();
+  } else if (title && title.trim()) {
+    // フォールバック: タイトルの最初の10文字程度を使用
+    // 記号や不要な文字を除去してキーワードを抽出
+    const cleanTitle = title
+      .replace(/【.*?】/g, '') // 【】内を除去
+      .replace(/\[.*?\]/g, '') // []内を除去
+      .replace(/[「」『』（）\(\)]/g, '') // 括弧を除去
+      .replace(/[―…]/g, '') // 記号を除去
+      .trim();
+    keyword = cleanTitle.slice(0, 12).trim();
+  } else {
+    // 両方ない場合のデフォルト
+    keyword = 'インクルーシブ教育';
+  }
+
+  // 「教育 本」を付加して書籍検索
+  const searchQuery = `${keyword} 教育 本`;
+  const encodedKeywords = encodeURIComponent(searchQuery);
   return `https://www.amazon.co.jp/s?k=${encodedKeywords}&i=stripbooks`;
+}
+
+// 旧関数（後方互換性のため維持、カテゴリーIDは無視してデフォルトを返す）
+export function generateAmazonSearchUrlByCategory(categoryId: string): string {
+  return generateAmazonSearchUrl(undefined, undefined);
 }
 
 export const categories: Category[] = [

@@ -540,7 +540,7 @@ def generate_ai_summary_and_category(title: str, original_summary: str, source: 
         print(f"        → キャッシュから要約を再利用（カテゴリーは再判定）")
 
     if not gemini_client:
-        return {"summary": original_summary, "category": "合理的配慮・支援", "skip": False}
+        return {"summary": original_summary, "category": "合理的配慮・支援", "mainKeyword": "", "skip": False}
 
     try:
         if cached_summary:
@@ -632,8 +632,10 @@ def generate_ai_summary_and_category(title: str, original_summary: str, source: 
 ## 出力形式
 理念に合致する場合、以下のJSON形式で出力（他の説明文は不要）：
 ```json
-{{"summary": "80〜120文字の優しい要約（です・ます調）", "category": "カテゴリー名"}}
+{{"summary": "80〜120文字の優しい要約（です・ます調）", "category": "カテゴリー名", "mainKeyword": "記事を象徴する単語1つ"}}
 ```
+- mainKeyword: その記事の核心を表す単語を1つだけ抽出（例：「メタバース」「合理的配慮」「生成AI」「不登校」「フリースクール」「ICT」「発達障害」など）
+- 専門用語や固有名詞を優先し、一般的すぎる言葉（「教育」「学校」など）は避ける
 除外ルールに明確に該当する場合のみ「SKIP」。迷ったら採用側に傾ける。"""
 
         response = gemini_client.models.generate_content(
@@ -656,9 +658,9 @@ def generate_ai_summary_and_category(title: str, original_summary: str, source: 
             # カテゴリー名を抽出
             category = ai_response.strip().replace('「', '').replace('」', '')
             if category in CATEGORIES:
-                return {"summary": cached_summary, "category": category, "skip": False}
+                return {"summary": cached_summary, "category": category, "mainKeyword": "", "skip": False}
             else:
-                return {"summary": cached_summary, "category": "合理的配慮・支援", "skip": False}
+                return {"summary": cached_summary, "category": "合理的配慮・支援", "mainKeyword": "", "skip": False}
 
         # JSONを抽出してパース
         if "```json" in ai_response:
@@ -676,25 +678,26 @@ def generate_ai_summary_and_category(title: str, original_summary: str, source: 
         result = json.loads(json_str)
         summary = result.get("summary", original_summary)
         category = result.get("category", "合理的配慮・支援")
+        main_keyword = result.get("mainKeyword", "")
 
         # カテゴリーが有効か確認
         if category not in CATEGORIES:
             category = "合理的配慮・支援"
 
         if len(summary) > 10:
-            return {"summary": summary, "category": category, "skip": False}
+            return {"summary": summary, "category": category, "mainKeyword": main_keyword, "skip": False}
         else:
             FAILED_SUMMARIES.append({"title": title, "url": url, "reason": "要約が短すぎる"})
-            return {"summary": original_summary, "category": category, "skip": False}
+            return {"summary": original_summary, "category": category, "mainKeyword": main_keyword, "skip": False}
 
     except json.JSONDecodeError as e:
         print(f"        [JSONパースエラー] {e}")
         FAILED_SUMMARIES.append({"title": title, "url": url, "reason": "JSONパースエラー"})
-        return {"summary": original_summary, "category": "合理的配慮・支援", "skip": False}
+        return {"summary": original_summary, "category": "合理的配慮・支援", "mainKeyword": "", "skip": False}
     except Exception as e:
         print(f"        [AI判定エラー] {e}")
         FAILED_SUMMARIES.append({"title": title, "url": url, "reason": str(e)[:50]})
-        return {"summary": original_summary, "category": "合理的配慮・支援", "skip": False}
+        return {"summary": original_summary, "category": "合理的配慮・支援", "mainKeyword": "", "skip": False}
 
 
 def contains_core_keyword(title: str, summary: str) -> bool:
@@ -922,9 +925,9 @@ def fetch_rss_feed(feed_info: dict) -> list:
             if not original_summary:
                 original_summary = f"{feed_name}の記事です。詳しくは元記事をご覧ください。"
 
-            # 【AI要約 + カテゴリー判定】
+            # 【AI要約 + カテゴリー + mainKeyword判定】
             if gemini_client:
-                print(f"        → AI判定（要約＆カテゴリー）...")
+                print(f"        → AI判定（要約＆カテゴリー＆キーワード）...")
                 ai_result = generate_ai_summary_and_category(title, original_summary, feed_name, link)
 
                 # 【SKIP判定】AIが理念に合致しないと判断した記事は除外
@@ -933,10 +936,14 @@ def fetch_rss_feed(feed_info: dict) -> list:
 
                 summary = ai_result.get("summary", original_summary)
                 category = ai_result.get("category", "合理的配慮・支援")
+                main_keyword = ai_result.get("mainKeyword", "")
                 print(f"        → カテゴリー: {category}")
+                if main_keyword:
+                    print(f"        → メインキーワード: {main_keyword}")
             else:
                 summary = original_summary
                 category = "合理的配慮・支援"
+                main_keyword = ""
 
             article = {
                 "id": article_id,
@@ -946,7 +953,8 @@ def fetch_rss_feed(feed_info: dict) -> list:
                 "date": date_str,
                 "url": link,  # 直接記事URLを保存
                 "imageUrl": image_url,
-                "source": feed_name
+                "source": feed_name,
+                "mainKeyword": main_keyword  # Amazon検索用キーワード
             }
 
             articles.append(article)
@@ -1064,7 +1072,7 @@ def clean_article_data(article: dict) -> dict:
     content, raw_html, description等の長いフィールドを削除
     """
     # 必要なフィールドのみを抽出（軽量化）
-    allowed_fields = {'id', 'title', 'summary', 'category', 'date', 'url', 'imageUrl', 'source'}
+    allowed_fields = {'id', 'title', 'summary', 'category', 'date', 'url', 'imageUrl', 'source', 'mainKeyword'}
     cleaned = {k: v for k, v in article.items() if k in allowed_fields}
 
     # summary は200文字以内に制限

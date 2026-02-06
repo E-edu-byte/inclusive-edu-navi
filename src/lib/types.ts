@@ -8,6 +8,7 @@ export type Article = {
   url: string;
   imageUrl: string;
   source: string;
+  mainKeyword?: string; // Amazon検索用キーワード（AI抽出）
 };
 
 // AIおすすめ記事の型

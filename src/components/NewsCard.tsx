@@ -12,6 +12,8 @@ type NewsCardProps = {
   source?: string;
   date: string;
   url: string;
+  // Amazon検索用キーワード（AI抽出）
+  mainKeyword?: string;
   // 編集部ピックアップ用
   isPickup?: boolean;
   pickupReason?: string;
@@ -48,6 +50,7 @@ export default function NewsCard({
   source,
   date,
   url,
+  mainKeyword,
   isPickup = false,
   pickupReason,
 }: NewsCardProps) {
@@ -150,22 +153,15 @@ export default function NewsCard({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
             </a>
-            {/* Amazon検索リンク（カテゴリに応じた書籍検索） */}
-            {(() => {
-              const cat = getCategoryByName(category);
-              const categoryId = cat?.id || 'topics';
-              const amazonUrl = generateAmazonSearchUrl(categoryId);
-              return (
-                <a
-                  href={amazonUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs sm:text-xs text-gray-500 hover:text-gray-700 transition-colors py-2 sm:py-0"
-                >
-                  📖 このテーマの参考書籍（Amazon）
-                </a>
-              );
-            })()}
+            {/* Amazon検索リンク（mainKeywordを優先、なければタイトルから抽出） */}
+            <a
+              href={generateAmazonSearchUrl(mainKeyword, title)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs sm:text-xs text-gray-500 hover:text-gray-700 transition-colors py-2 sm:py-0"
+            >
+              📖 このテーマの参考書籍（Amazon）
+            </a>
           </div>
         </div>
       </div>

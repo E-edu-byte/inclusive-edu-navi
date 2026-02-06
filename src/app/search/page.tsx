@@ -15,6 +15,7 @@ type Article = {
   source?: string;
   date: string;
   url: string;
+  mainKeyword?: string;
 };
 
 function SearchResults() {
@@ -134,6 +135,7 @@ function SearchResults() {
                 source={article.source}
                 date={article.date}
                 url={article.url}
+                mainKeyword={article.mainKeyword}
               />
             );
           })}

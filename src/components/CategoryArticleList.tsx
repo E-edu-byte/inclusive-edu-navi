@@ -82,6 +82,7 @@ export default function CategoryArticleList({ category }: Props) {
           source={article.source}
           date={article.date}
           url={article.url}
+          mainKeyword={article.mainKeyword}
           isPickup={false}
         />
       ))}

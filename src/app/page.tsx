@@ -16,6 +16,7 @@ type PickItem = {
   url: string;
   imageUrl?: string;
   source?: string;
+  mainKeyword?: string;
   isAIPick: boolean;
   pickupReason?: string;
 };
@@ -76,6 +77,7 @@ export default function Home() {
               url: pick.url,
               imageUrl: sourceArticle.imageUrl,
               source: sourceArticle.source,
+              mainKeyword: sourceArticle.mainKeyword,
               isAIPick: true,
               pickupReason: pick.reason,
             });
@@ -97,6 +99,7 @@ export default function Home() {
                 url: article.url,
                 imageUrl: article.imageUrl,
                 source: article.source,
+                mainKeyword: article.mainKeyword,
                 isAIPick: false,
               });
               usedIds.add(article.id);
@@ -203,6 +206,7 @@ export default function Home() {
                     source={pick.source}
                     date={pick.date}
                     url={pick.url}
+                    mainKeyword={pick.mainKeyword}
                     isPickup={pick.isAIPick}
                     pickupReason={pick.pickupReason}
                   />
@@ -232,6 +236,7 @@ export default function Home() {
                     source={article.source}
                     date={article.date}
                     url={article.url}
+                    mainKeyword={article.mainKeyword}
                     isPickup={false}
                   />
                 ))}
