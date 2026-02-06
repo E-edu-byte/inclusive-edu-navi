@@ -95,16 +95,21 @@ prompt = f"""あなたは「インクルーシブ教育ナビ」の編集者で�
 print("Gemini APIに問い合わせ中...")
 print("-" * 50)
 
-# Gemini APIに問い合わせ
-response = client.models.generate_content(
-    model="gemini-2.5-flash",
-    contents=prompt
-)
-
-response_text = response.text
-print("【AIの回答】")
-print(response_text)
-print("-" * 50)
+# Gemini APIに問い合わせ（エラーハンドリング付き）
+try:
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=prompt
+    )
+    response_text = response.text
+    print("【AIの回答】")
+    print(response_text)
+    print("-" * 50)
+except Exception as api_error:
+    print(f"警告: Gemini API呼び出しエラー - {api_error}")
+    print("既存のai-picks.jsonを維持します")
+    # エラー時は正常終了（既存データを維持）
+    exit(0)
 
 # JSONを抽出してパース
 try:
@@ -166,7 +171,13 @@ try:
     print(f"  - 保存件数: {len(all_picks)}件")
 
 except json.JSONDecodeError as e:
-    print(f"エラー: AIの回答をJSONとしてパースできませんでした")
+    print(f"警告: AIの回答をJSONとしてパースできませんでした")
     print(f"詳細: {e}")
+    print("既存のai-picks.jsonを維持します")
+    # パースエラー時も正常終了（既存データを維持）
+    exit(0)
 except Exception as e:
-    print(f"エラー: {e}")
+    print(f"警告: {e}")
+    print("既存のai-picks.jsonを維持します")
+    # エラー時も正常終了
+    exit(0)
