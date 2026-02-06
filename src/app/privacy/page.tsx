@@ -46,7 +46,6 @@ export default function PrivacyPage() {
             <ul className="list-disc list-inside text-gray-700 space-y-2">
               <li>アクセスログ（IPアドレス、ブラウザ情報、閲覧ページ等）</li>
               <li>Cookie情報</li>
-              <li>お問い合わせ時にご提供いただく情報（メールアドレス等）</li>
             </ul>
           </section>
 
@@ -58,7 +57,6 @@ export default function PrivacyPage() {
             <ul className="list-disc list-inside text-gray-700 space-y-2">
               <li>サイトの運営・改善</li>
               <li>アクセス解析</li>
-              <li>お問い合わせへの対応</li>
             </ul>
           </section>
 
@@ -86,21 +84,6 @@ export default function PrivacyPage() {
             </p>
           </section>
 
-          <section className="bg-gray-50 rounded-lg p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">7. お問い合わせ</h2>
-            <p className="text-gray-700 leading-relaxed mb-4">
-              本ポリシーに関するお問い合わせは、お問い合わせページよりご連絡ください。
-            </p>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 font-medium"
-            >
-              お問い合わせはこちら
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
-          </section>
         </article>
       </div>
     </div>
