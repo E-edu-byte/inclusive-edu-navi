@@ -15,7 +15,29 @@ export type Article = {
   publishedAt: string;
   image: string;
   sources: { title: string; url: string }[];
+  amazonLink?: string; // カスタムAmazonリンク（設定があればカテゴリー検索より優先）
 };
+
+// カテゴリー別のAmazon検索キーワード
+export const categoryAmazonKeywords: Record<string, string> = {
+  'policy': '特別支援教育 制度 法律 専門書',
+  'research': '発達障害 学習支援 研究 専門書',
+  'practice': '特別支援教育 実践 事例集',
+  'tools': '特別支援 教材 ICT 教育',
+  'events': '特別支援教育 研修 セミナー',
+  'topics': 'インクルーシブ教育 入門書',
+  // 新カテゴリー（lib/types.ts の定義に対応）
+  'support': '合理的配慮 特別支援教育 専門書',
+  'diverse-learning': '不登校 フリースクール オルタナティブ教育',
+  'ict': 'EdTech 学習支援 デジタル教材',
+};
+
+// Amazon検索URLを生成
+export function generateAmazonSearchUrl(categoryId: string): string {
+  const keywords = categoryAmazonKeywords[categoryId] || 'インクルーシブ教育 入門書';
+  const encodedKeywords = encodeURIComponent(keywords);
+  return `https://www.amazon.co.jp/s?k=${encodedKeywords}&i=stripbooks`;
+}
 
 export const categories: Category[] = [
   {
