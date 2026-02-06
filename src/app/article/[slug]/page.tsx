@@ -159,6 +159,85 @@ export default function ArticlePage({ params }: Props) {
           </section>
         )}
 
+        {/* おすすめリソース（プレースホルダー） */}
+        <section className="mb-12">
+          <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <svg className="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            この記事に関連するおすすめの書籍・教材
+          </h2>
+
+          {/* プレースホルダーカード */}
+          <div className="grid gap-4 sm:grid-cols-2">
+            {/* 書籍カード1（プレースホルダー） */}
+            <div className="bg-gradient-to-br from-slate-50 to-amber-50/30 rounded-xl p-4 border border-slate-100 hover:border-amber-200 transition-colors">
+              <div className="flex gap-4">
+                {/* 書籍画像プレースホルダー */}
+                <div className="w-20 h-28 bg-gradient-to-br from-slate-200 to-slate-100 rounded-lg flex-shrink-0 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs text-amber-600 font-medium mb-1">編集部おすすめ</p>
+                  <h3 className="font-medium text-slate-800 text-sm mb-1 line-clamp-2">
+                    関連書籍タイトル
+                  </h3>
+                  <p className="text-xs text-slate-500 mb-2 line-clamp-2">
+                    書籍の簡単な説明文がここに入ります。
+                  </p>
+                  {/* Amazonリンク用プレースホルダー */}
+                  <span className="inline-flex items-center gap-1 text-xs text-amber-600 font-medium">
+                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                    </svg>
+                    Amazonで見る
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* 書籍カード2（プレースホルダー） */}
+            <div className="bg-gradient-to-br from-slate-50 to-sky-50/30 rounded-xl p-4 border border-slate-100 hover:border-sky-200 transition-colors">
+              <div className="flex gap-4">
+                {/* 書籍画像プレースホルダー */}
+                <div className="w-20 h-28 bg-gradient-to-br from-slate-200 to-slate-100 rounded-lg flex-shrink-0 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs text-sky-600 font-medium mb-1">参考教材</p>
+                  <h3 className="font-medium text-slate-800 text-sm mb-1 line-clamp-2">
+                    関連教材タイトル
+                  </h3>
+                  <p className="text-xs text-slate-500 mb-2 line-clamp-2">
+                    教材の簡単な説明文がここに入ります。
+                  </p>
+                  {/* Amazonリンク用プレースホルダー */}
+                  <span className="inline-flex items-center gap-1 text-xs text-sky-600 font-medium">
+                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                    </svg>
+                    Amazonで見る
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 注意書き */}
+          <p className="text-xs text-slate-500 mt-3 flex items-center gap-1">
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            ※ 上記リンクはアフィリエイトリンクを含む場合があります。詳しくは
+            <a href="/about" className="text-primary-600 hover:underline">運営ポリシー</a>
+            をご確認ください。
+          </p>
+        </section>
+
         {/* 関連記事 */}
         {relatedArticles.length > 0 && (
           <section className="border-t border-gray-200 pt-8">
