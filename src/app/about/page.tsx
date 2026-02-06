@@ -165,11 +165,11 @@ export default function AboutPage() {
             </div>
           </section>
 
-          {/* インクルーシブ教育ナビのページを維持するためのご協力のお願い */}
+          {/* インクルーシブ教育ナビの運営を維持するためのご協力のお願い */}
           <section id="support" className="space-y-4">
             <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
               <span className="w-1 h-6 bg-slate-500 rounded-full"></span>
-              インクルーシブ教育ナビのページを維持するためのご協力のお願い
+              インクルーシブ教育ナビの運営を維持するためのご協力のお願い
             </h2>
 
             <div className="bg-[#f8fafc] rounded-xl p-6 border border-slate-200">
