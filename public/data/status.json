@@ -1,17 +1,17 @@
 {
-  "lastUpdated": "2026-02-07T10:14:06.749604",
+  "lastUpdated": "2026-02-07T18:57:41.560889",
   "apiUsage": {
-    "used": 36,
+    "used": 44,
     "limit": 250,
-    "percentage": 14
+    "percentage": 17
   },
   "lastRun": {
-    "timestamp": "2026-02-07T10:14:06.749604",
+    "timestamp": "2026-02-07T18:57:41.560889",
     "articlesProcessed": 7,
     "articlesAdded": 7,
-    "apiCalls": 0,
-    "success": false,
-    "error": "429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please "
+    "apiCalls": 8,
+    "success": true,
+    "error": null
   },
   "history": [
     {
@@ -61,6 +61,12 @@
       "articlesProcessed": 7,
       "apiCalls": 0,
       "success": false
+    },
+    {
+      "timestamp": "2026-02-07T18:57:41.560889",
+      "articlesProcessed": 7,
+      "apiCalls": 8,
+      "success": true
     }
   ]
 }
