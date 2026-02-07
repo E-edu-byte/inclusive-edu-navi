@@ -4,6 +4,11 @@
 特別支援教育関連ニュース自動収集スクリプト
 RSSフィードから記事を取得し、理念に基づくキーワードフィルタリングを適用
 全記事にGemini AIによる優しい要約を付与
+
+【省エネモード】
+- 開発環境ではAPIを叩かずキャッシュを使用
+- --force-fetch フラグで強制再取得
+- 重複記事はAI処理をスキップ
 """
 
 import feedparser
@@ -14,8 +19,9 @@ import hashlib
 import sys
 import io
 import time
+import argparse
 from datetime import datetime, timedelta
-from typing import Optional
+from typing import Optional, Set
 from urllib.parse import urlparse, urljoin
 from collections import defaultdict
 import requests
@@ -24,6 +30,28 @@ from dotenv import load_dotenv
 
 # .env.local から環境変数を読み込む
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '.env.local'))
+
+# ========================================
+# 省エネモード設定
+# ========================================
+def parse_args():
+    parser = argparse.ArgumentParser(description='ニュース収集スクリプト')
+    parser.add_argument('--force-fetch', action='store_true', help='キャッシュを無視して強制的に再取得')
+    parser.add_argument('--dev', action='store_true', help='開発モード（APIを使用しない）')
+    return parser.parse_args()
+
+ARGS = parse_args()
+
+# 環境判定: CI/GitHub Actions = 本番、それ以外 = 開発
+IS_CI = os.getenv('CI', 'false').lower() == 'true' or os.getenv('GITHUB_ACTIONS', 'false').lower() == 'true'
+IS_DEV_MODE = ARGS.dev or (not IS_CI and not ARGS.force_fetch)
+FORCE_FETCH = ARGS.force_fetch
+
+if IS_DEV_MODE:
+    print("=" * 50)
+    print("【省エネモード】開発環境 - APIを使用しません")
+    print("  強制取得: --force-fetch フラグを使用")
+    print("=" * 50)
 
 # Gemini API初期化
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
@@ -90,11 +118,15 @@ RSS_FEEDS = [
 ]
 
 # ドメインごとの最大記事数
-MAX_ARTICLES_PER_DOMAIN = 8
+MAX_ARTICLES_PER_DOMAIN = 4
 
-# 軽量化モード設定
-LIGHT_MODE = True  # 軽量化モード
-MAX_ARTICLES_PER_SOURCE = 15  # 各ソースからの最大取得数（増量）
+# 【省エネ設定】取得件数を大幅削減
+LIGHT_MODE = True
+MAX_ARTICLES_PER_SOURCE = 4  # 各ソースから最大4件（API節約）
+MAX_NEW_ARTICLES_PER_RUN = 15  # 1回の実行で追加する最大記事数
+
+# 既存記事のタイトル（重複チェック用）
+EXISTING_TITLES: Set[str] = set()
 
 # ========================================
 # 理念に基づくキーワードフィルタリング
@@ -269,6 +301,27 @@ def load_summary_cache():
             print(f"✓ キャッシュ読み込み: {len(SUMMARY_CACHE)}件の既存AI要約を再利用可能")
     except Exception as e:
         print(f"警告: キャッシュ読み込みエラー - {e}")
+
+
+def load_existing_titles():
+    """既存記事のタイトルを読み込み（重複チェック用）"""
+    global EXISTING_TITLES
+    try:
+        if os.path.exists(OUTPUT_FILE):
+            with open(OUTPUT_FILE, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                for article in data.get('articles', []):
+                    title = article.get('title', '').strip()
+                    if title:
+                        EXISTING_TITLES.add(title)
+            print(f"✓ 重複チェック用: {len(EXISTING_TITLES)}件の既存タイトルを読み込み")
+    except Exception as e:
+        print(f"警告: 既存タイトル読み込みエラー - {e}")
+
+
+def is_duplicate_title(title: str) -> bool:
+    """タイトルが既存記事と重複しているかチェック"""
+    return title.strip() in EXISTING_TITLES
 
 # ========================================
 # フォールバック画像（Unsplash - 教育関連）
@@ -547,12 +600,29 @@ def generate_ai_summary_and_category(title: str, original_summary: str, source: 
     【AI要約 + カテゴリー判定】Gemini APIを使用
     - 理念に合致する記事：要約とカテゴリーを返す
     - 理念に合致しない記事：{"skip": True}を返す
-    【キャッシュ対応】既存の要約があれば再利用（カテゴリーは再判定）
+    【省エネモード】開発環境ではAPIを使用しない
+    【軽量化】タイトル+冒頭100文字のみをAIに送信
     """
     global FAILED_SUMMARIES, API_CALL_COUNT, API_ERRORS
 
-    # カテゴリー一覧を文字列化
-    category_list = "\n".join([f"- {cat}: {desc}" for cat, desc in CATEGORIES.items()])
+    # 【省エネモード】開発環境ではAIを使用しない
+    if IS_DEV_MODE:
+        # キーワードベースで簡易カテゴリ判定
+        text = f"{title} {original_summary}".lower()
+        category = "合理的配慮・支援"
+        if any(kw in text for kw in ['不登校', 'フリースクール', 'オルタナティブ', '通信制']):
+            category = "不登校・多様な学び"
+        elif any(kw in text for kw in ['ict', 'アプリ', 'デジタル', 'ai', 'edtech']):
+            category = "ICT・教材"
+        elif any(kw in text for kw in ['文部科学省', '文科省', '法改正', '通知']):
+            category = "制度・行政"
+        return {"summary": original_summary[:150], "category": category, "mainKeyword": "", "skip": False}
+
+    # 【軽量化】入力テキストを100文字に制限
+    short_summary = original_summary[:100] if original_summary else ""
+
+    # カテゴリー一覧を簡素化
+    category_list = "support(支援), diverse-learning(不登校), policy(行政), ict(ICT), events(イベント)"
 
     # 【キャッシュチェック】既存の有効な要約があれば再利用（カテゴリーのみ再判定）
     cached_summary = None
@@ -565,99 +635,21 @@ def generate_ai_summary_and_category(title: str, original_summary: str, source: 
 
     try:
         if cached_summary:
-            # キャッシュがある場合はカテゴリー判定 + 除外チェック
-            prompt = f"""あなたは公共性の高い教育メディアの編集長です。
-以下の記事を判定してください。
-
-【カテゴリー一覧】
-{category_list}
-
-【ギフテッド・特異な才能に関する採用基準】
-・「ギフテッド」「特異な才能」「2e（二重の特別ニーズ）」に関する記事は積極的に採用
-・不登校傾向にあるギフテッド児への支援、公教育での個別最適化、自治体の実証事業は重要トピック
-・これらは「不登校・多様な学び」または「合理的配慮・支援」カテゴリーで採用
-
-【厳格な除外ルール】以下は「SKIP」と判定：
-・特定の塾・予備校の宣伝（TOMAS、サピックス、フリーステップ、早稲田アカデミー等）
-・受験競争での優位性を強調する「先取り学習」「最難関対策」
-・「偏差値」「合格率」「合格実績」が主役の記事
-・夏期講習、冬期講習、模試の申し込み案内
-・たとえ「才能」という言葉を使っていても、競争に勝つための教育サービスはSKIP
-
-【判定のコツ】
-その記事が「困り感に寄り添う支援」なら採用、「競争に勝つための教育サービス」ならSKIPです。
-ギフテッド支援はインクルーシブ教育の重要な一部として扱ってください。
-
-【緩和ルール】以下のトピックは広くインクルーシブ教育に関連するため、迷った場合は採用：
-・一般的な教育改革・学校運営の話題
-・デジタル教科書やICT活用（全般）
-・学習アプリ・EdTech全般
-・多様な学びを支える教育制度の話題
-
-## 記事情報
+            # キャッシュがある場合はカテゴリー判定のみ（短縮プロンプト）
+            prompt = f"""記事のカテゴリを判定。塾広告・受験競争系はSKIP。
+カテゴリ: 合理的配慮・支援 / 不登校・多様な学び / 制度・行政 / ICT・教材 / イベント・研修
 タイトル: {title}
-要約: {cached_summary}
-
-## 出力形式
-除外ルールに明確に該当する場合のみ「SKIP」。
-それ以外はカテゴリー名のみを出力（例：「不登校・多様な学び」）。"""
+→カテゴリ名のみ回答（または SKIP）"""
         else:
-            # 新規の場合は要約とカテゴリーを同時に判定
-            prompt = f"""あなたは公共性の高い教育メディア「インクルーシブ教育ナビ」の編集長です。
-提供された記事を判定し、要約とカテゴリーを返してください。
+            # 新規の場合は要約とカテゴリーを同時に判定（短縮プロンプト）
+            prompt = f"""インクルーシブ教育メディア記事判定。塾広告・受験競争系はSKIP。
+カテゴリ: 合理的配慮・支援 / 不登校・多様な学び / 制度・行政 / ICT・教材 / イベント・研修
 
-【理念】本サイトは以下のテーマを扱います：
-・特別支援教育、合理的配慮、発達障害、不登校支援
-・子どもの多様な学びを支援するICT・EdTech
-・通信制高校、オルタナティブスクール
-・ギフテッド（特異な才能）支援、2e支援
-
-【カテゴリー一覧】
-{category_list}
-
-【ギフテッド・特異な才能に関する採用基準】（重要）
-・「ギフテッド」「特異な才能」「2e（二重の特別ニーズ）」に関する記事は積極的に採用
-・不登校傾向にあるギフテッド児への支援、公教育での個別最適化、自治体の実証事業は重要トピック
-・これらは「不登校・多様な学び」または「合理的配慮・支援」カテゴリーで採用
-
-【判定ルール】
-1. 理念に合致する記事：要約とカテゴリーをJSON形式で返す
-2. 以下に該当する記事は「SKIP」のみ返す：
-   - 一般の入試倍率・出願状況のみ（不登校支援と無関係）
-   - インフルエンザ等の健康ニュース
-   - プログラミング技術解説
-   - 大学ランキング・偏差値情報
-
-【厳格な除外ルール】以下は本サイトの理念に反するため、必ず「SKIP」と判定：
-・特定の塾・予備校の開校案内、コース紹介（TOMAS、サピックス、フリーステップ、早稲田アカデミー等の宣伝）
-・受験競争での優位性を強調する「先取り学習」「最難関対策」
-・「偏差値」「合格率」「合格実績」が主役になっている記事
-・夏期講習、冬期講習、模試の申し込み案内
-・たとえ「才能」という言葉を使っていても、競争に勝つための教育サービスはSKIP
-
-【判定のコツ】
-その記事が「困り感に寄り添う支援」なら採用、「競争に勝つための教育サービス」ならSKIPです。
-ギフテッド支援はインクルーシブ教育の重要な一部として扱ってください。
-
-【緩和ルール】以下のトピックは広くインクルーシブ教育に関連するため、迷った場合は採用：
-・一般的な教育改革・学校運営の話題
-・デジタル教科書やICT活用（全般）
-・学習アプリ・EdTech全般
-・多様な学びを支える教育制度の話題
-
-## 記事情報
 タイトル: {title}
-出典: {source}
-概要: {original_summary}
+概要: {short_summary}
 
-## 出力形式
-理念に合致する場合、以下のJSON形式で出力（他の説明文は不要）：
-```json
-{{"summary": "80〜120文字の優しい要約（です・ます調）", "category": "カテゴリー名", "mainKeyword": "記事を象徴する単語1つ"}}
-```
-- mainKeyword: その記事の核心を表す単語を1つだけ抽出（例：「メタバース」「合理的配慮」「生成AI」「不登校」「フリースクール」「ICT」「発達障害」など）
-- 専門用語や固有名詞を優先し、一般的すぎる言葉（「教育」「学校」など）は避ける
-除外ルールに明確に該当する場合のみ「SKIP」。迷ったら採用側に傾ける。"""
+JSON形式で回答: {{"summary":"80字の要約","category":"カテゴリ名","mainKeyword":"キーワード1つ"}}
+または SKIP"""
 
         response = gemini_client.models.generate_content(
             model="gemini-2.5-flash",
@@ -926,8 +918,18 @@ def fetch_rss_feed(feed_info: dict) -> list:
             if not skip_core_filter and not contains_core_keyword(title, rss_summary):
                 continue
 
+            # 【省エネ】重複タイトルチェック - 既存記事と同じタイトルならスキップ
+            if is_duplicate_title(title):
+                print(f"    [SKIP] 重複: {title[:40]}...")
+                continue
+
             processed += 1
             print(f"    [{processed}] {title[:50]}...")
+
+            # 【省エネ】1回の実行で追加する記事数を制限
+            if len(articles) >= MAX_NEW_ARTICLES_PER_RUN:
+                print(f"    [省エネ] 最大追加数 {MAX_NEW_ARTICLES_PER_RUN}件に達したため終了")
+                break
 
             # 記事IDを生成
             article_id = generate_article_id(link)
@@ -936,25 +938,40 @@ def fetch_rss_feed(feed_info: dict) -> list:
             date_parsed = entry.get('published_parsed') or entry.get('updated_parsed')
             date_str = parse_date(date_parsed)
 
-            # 記事ページからOGP画像と詳細な要約を取得
-            print(f"        → ページ解析中...")
-            metadata = fetch_page_metadata(link, timeout=15)
-
-            # 【鉄壁ルール】画像URL - 取得失敗時は必ずフォールバック画像を使用
-            image_url = metadata.get('image')
-            if not image_url or not is_valid_image_url(image_url):
+            # 【省エネ】開発モードではページ解析とAPI呼び出しをスキップ
+            if IS_DEV_MODE:
                 image_url = get_fallback_image(article_id)
-                print(f"        → フォールバック画像を使用: {image_url[:50]}...")
+                original_summary = rss_summary or f"{feed_name}の記事です。"
+                # キーワードベースで簡易カテゴリ判定
+                text = f"{title} {original_summary}".lower()
+                category = "合理的配慮・支援"
+                if any(kw in text for kw in ['不登校', 'フリースクール', 'オルタナティブ', '通信制']):
+                    category = "不登校・多様な学び"
+                elif any(kw in text for kw in ['ict', 'アプリ', 'デジタル', 'ai', 'edtech']):
+                    category = "ICT・教材"
+                elif any(kw in text for kw in ['文部科学省', '文科省', '法改正', '通知']):
+                    category = "制度・行政"
+                summary = original_summary[:150]
+                main_keyword = ""
             else:
-                print(f"        → 画像URL: {image_url[:60]}...")
+                # 本番モード：ページ解析とAI判定を実行
+                print(f"        → ページ解析中...")
+                metadata = fetch_page_metadata(link, timeout=15)
 
-            # 要約（ページのdescriptionを優先、なければRSSの要約）
-            original_summary = metadata.get('description') or rss_summary
-            if not original_summary:
-                original_summary = f"{feed_name}の記事です。詳しくは元記事をご覧ください。"
+                # 【鉄壁ルール】画像URL - 取得失敗時は必ずフォールバック画像を使用
+                image_url = metadata.get('image')
+                if not image_url or not is_valid_image_url(image_url):
+                    image_url = get_fallback_image(article_id)
+                    print(f"        → フォールバック画像を使用: {image_url[:50]}...")
+                else:
+                    print(f"        → 画像URL: {image_url[:60]}...")
 
-            # 【AI要約 + カテゴリー + mainKeyword判定】
-            if gemini_client:
+                # 要約（ページのdescriptionを優先、なければRSSの要約）
+                original_summary = metadata.get('description') or rss_summary
+                if not original_summary:
+                    original_summary = f"{feed_name}の記事です。詳しくは元記事をご覧ください。"
+
+                # 【AI要約 + カテゴリー + mainKeyword判定】
                 print(f"        → AI判定（要約＆カテゴリー＆キーワード）...")
                 ai_result = generate_ai_summary_and_category(title, original_summary, feed_name, link)
 
@@ -995,10 +1012,6 @@ def fetch_rss_feed(feed_info: dict) -> list:
                 print(f"        → カテゴリー: {category}")
                 if main_keyword:
                     print(f"        → メインキーワード: {main_keyword}")
-            else:
-                summary = original_summary
-                category = "合理的配慮・支援"
-                main_keyword = ""
 
             article = {
                 "id": article_id,
@@ -1154,22 +1167,25 @@ def save_articles(data: dict) -> None:
 def main():
     """メイン処理"""
     print("=" * 60)
-    print("特別支援教育ニュース収集システム（理念フィルタ版）")
+    print("特別支援教育ニュース収集システム（省エネ版）")
     print("=" * 60)
     print(f"実行日時: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"モード: {'開発（APIスキップ）' if IS_DEV_MODE else '本番'}")
     print(f"理念キーワード: {', '.join(CORE_KEYWORDS[:10])}...")
     print()
 
     # 【キャッシュ読み込み】既存の要約を再利用
     load_summary_cache()
+
+    # 【重複チェック用】既存タイトルを読み込み
+    load_existing_titles()
     print()
 
     all_articles = []
 
     # RSSフィードから収集
     print("【1】RSSフィードを取得中...")
-    if LIGHT_MODE:
-        print(f"    ★ 軽量化モード: 各ソース最大{MAX_ARTICLES_PER_SOURCE}件")
+    print(f"    ★ 省エネモード: 各ソース最大{MAX_ARTICLES_PER_SOURCE}件、重複スキップ")
     print("-" * 40)
     for feed_info in RSS_FEEDS:
         articles = fetch_rss_feed(feed_info)

@@ -2,9 +2,8 @@ name: Auto Update News
 
 on:
   schedule:
-    # 1日2回（JST 8:00 と 20:00）
-    - cron: '0 23 * * *'  # UTC 23:00 = JST 8:00
-    - cron: '0 11 * * *'  # UTC 11:00 = JST 20:00
+    # 1日1回（JST 7:00）- API節約のため
+    - cron: '0 22 * * *'  # UTC 22:00 = JST 7:00
   workflow_dispatch:  # 手動実行も可能
 
 jobs:
