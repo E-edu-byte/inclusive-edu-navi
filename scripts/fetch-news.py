@@ -5,10 +5,10 @@
 RSSフィードから記事を取得し、理念に基づくキーワードフィルタリングを適用
 全記事にGemini AIによる優しい要約を付与
 
-【省エネモード】
-- 開発環境ではAPIを叩かずキャッシュを使用
+【徹底省エネモード】
+- 開発環境: src/data/news.jsonを読み込むだけ（API一切不使用）
+- 本番環境: 1ソース3件、重複即スキップ、短縮プロンプト
 - --force-fetch フラグで強制再取得
-- 重複記事はAI処理をスキップ
 """
 
 import feedparser
@@ -20,6 +20,7 @@ import sys
 import io
 import time
 import argparse
+import shutil
 from datetime import datetime, timedelta
 from typing import Optional, Set
 from urllib.parse import urlparse, urljoin
@@ -32,26 +33,54 @@ from dotenv import load_dotenv
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '.env.local'))
 
 # ========================================
-# 省エネモード設定
+# 徹底省エネモード設定
 # ========================================
 def parse_args():
     parser = argparse.ArgumentParser(description='ニュース収集スクリプト')
     parser.add_argument('--force-fetch', action='store_true', help='キャッシュを無視して強制的に再取得')
-    parser.add_argument('--dev', action='store_true', help='開発モード（APIを使用しない）')
+    parser.add_argument('--dev', action='store_true', help='開発モード（完全キャッシュモード）')
     return parser.parse_args()
 
 ARGS = parse_args()
 
-# 環境判定: CI/GitHub Actions = 本番、それ以外 = 開発
+# 環境判定: CI/GitHub Actions = 本番、それ以外 = 開発（完全キャッシュモード）
 IS_CI = os.getenv('CI', 'false').lower() == 'true' or os.getenv('GITHUB_ACTIONS', 'false').lower() == 'true'
 IS_DEV_MODE = ARGS.dev or (not IS_CI and not ARGS.force_fetch)
 FORCE_FETCH = ARGS.force_fetch
 
+# パス設定
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
+DEV_CACHE_FILE = os.path.join(PROJECT_ROOT, "src", "data", "news.json")
+OUTPUT_FILE = os.path.join(PROJECT_ROOT, "public", "data", "articles.json")
+STATUS_FILE = os.path.join(PROJECT_ROOT, "public", "data", "status.json")
+
 if IS_DEV_MODE:
-    print("=" * 50)
-    print("【省エネモード】開発環境 - APIを使用しません")
-    print("  強制取得: --force-fetch フラグを使用")
-    print("=" * 50)
+    print("=" * 60)
+    print("【完全キャッシュモード】開発環境")
+    print("  - 外部API: 一切使用しません")
+    print("  - データ: src/data/news.json を読み込むだけ")
+    print("  - 強制取得: --force-fetch フラグを使用")
+    print("=" * 60)
+
+    # 完全キャッシュモード: news.jsonをarticles.jsonにコピーして終了
+    if os.path.exists(DEV_CACHE_FILE):
+        with open(DEV_CACHE_FILE, 'r', encoding='utf-8') as f:
+            cache_data = json.load(f)
+        cache_data['lastUpdated'] = datetime.now().isoformat()
+        cache_data['_mode'] = 'dev_cache'
+
+        os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
+        with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
+            json.dump(cache_data, f, ensure_ascii=False, indent=2)
+
+        print(f"\n[OK] Cache data used: {len(cache_data.get('articles', []))} articles")
+        print(f"[OK] Output: {OUTPUT_FILE}")
+        print("\n[API USAGE: 0] No API calls in dev mode")
+        sys.exit(0)
+    else:
+        print(f"Warning: Cache file not found: {DEV_CACHE_FILE}")
+        print("Running in production mode...")
 
 # Gemini API初期化
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
@@ -118,12 +147,12 @@ RSS_FEEDS = [
 ]
 
 # ドメインごとの最大記事数
-MAX_ARTICLES_PER_DOMAIN = 4
+MAX_ARTICLES_PER_DOMAIN = 3
 
-# 【省エネ設定】取得件数を大幅削減
+# 【徹底省エネ設定】取得件数を最小限に
 LIGHT_MODE = True
-MAX_ARTICLES_PER_SOURCE = 4  # 各ソースから最大4件（API節約）
-MAX_NEW_ARTICLES_PER_RUN = 15  # 1回の実行で追加する最大記事数
+MAX_ARTICLES_PER_SOURCE = 3  # 各ソースから最大3件（徹底節約）
+MAX_NEW_ARTICLES_PER_RUN = 10  # 1回の実行で追加する最大記事数
 
 # 既存記事のタイトル（重複チェック用）
 EXISTING_TITLES: Set[str] = set()
@@ -249,12 +278,6 @@ CATEGORIES = {
     "ICT・教材": "支援技術、デジタル教科書、学習アプリ、タブレット活用、EdTechなど",
     "イベント・研修": "セミナー、ワークショップ、講演会、研修会、フォーラムなどの情報",
 }
-
-# 出力ファイルパス
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
-OUTPUT_FILE = os.path.join(PROJECT_ROOT, "public", "data", "articles.json")
-STATUS_FILE = os.path.join(PROJECT_ROOT, "public", "data", "status.json")
 
 # 【キャッシュ】既存のarticles.jsonから要約を再利用
 SUMMARY_CACHE = {}

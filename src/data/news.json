@@ -1,0 +1,63 @@
+{
+  "articles": [
+    {
+      "id": "fdb4ef8a2ff6",
+      "title": "令和7年度インクルーシブな学校運営モデル事業中間成果報告会を開催します",
+      "summary": "文部科学省のプレスリリースです。令和7年度インクルーシブな学校運営モデル事業中間成果報告会を開催します",
+      "category": "制度・行政",
+      "date": "2026-02-07",
+      "url": "https://www.mext.go.jp/b_menu/houdou/mext_01599.html",
+      "imageUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=300&fit=crop",
+      "source": "文部科学省",
+      "mainKeyword": "インクルーシブ教育"
+    },
+    {
+      "id": "73c1456a8a55",
+      "title": "東京大学メタバース工学部、小学生から保護者・教員まで対象別に生成AIを学べる無料講座3月開講",
+      "summary": "東京大学メタバース工学部が、小学生から保護者・教員まで幅広い対象に向けた無料オンライン講座を3月に開講します。この講座では、生成AIについてわかりやすく学べます。",
+      "category": "ICT・教材",
+      "date": "2026-02-05",
+      "url": "https://ict-enews.net/2026/02/06meta-school/",
+      "imageUrl": "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=300&fit=crop",
+      "source": "ICT教育ニュース",
+      "mainKeyword": "生成AI"
+    },
+    {
+      "id": "c1426ad9fcd3",
+      "title": "不登校オルタナティブスクール「NIJINアカデミー」、東北2校目のリアル校「福島校」4月開校",
+      "summary": "NIJINが運営する不登校オルタナティブスクール「NIJINアカデミー」は、東北地区2校目のリアル校「NIJINアカデミー福島校」を4月7日に開校します。",
+      "category": "不登校・多様な学び",
+      "date": "2026-02-05",
+      "url": "https://ict-enews.net/2026/02/06nijin-8/",
+      "imageUrl": "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=400&h=300&fit=crop",
+      "source": "ICT教育ニュース",
+      "mainKeyword": "不登校"
+    },
+    {
+      "id": "f413aacb31aa",
+      "title": "調査書不要の高校入試が広がる　不登校や病気の生徒に「チャンスを」",
+      "summary": "調査書や評定（内申点）を用いず合格者を選ぶ高校入試が増えています。背景には不登校の子の増加などがあり、多様な学びの機会を提供する動きが広がっています。",
+      "category": "不登校・多様な学び",
+      "date": "2026-01-31",
+      "url": "https://www.asahi.com/articles/ASV1X2J4XV1XUTIL00DM.html",
+      "imageUrl": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&h=300&fit=crop",
+      "source": "朝日新聞 教育",
+      "mainKeyword": "高校入試"
+    },
+    {
+      "id": "sample001",
+      "title": "発達障害のある子どもへの合理的配慮ガイドラインを改訂",
+      "summary": "文部科学省は、発達障害のある子どもへの合理的配慮に関するガイドラインを改訂しました。学校現場での具体的な支援方法が示されています。",
+      "category": "合理的配慮・支援",
+      "date": "2026-02-01",
+      "url": "https://example.com/sample001",
+      "imageUrl": "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400&h=300&fit=crop",
+      "source": "文部科学省",
+      "mainKeyword": "合理的配慮"
+    }
+  ],
+  "lastUpdated": "2026-02-07T12:00:00.000000",
+  "totalCount": 5,
+  "sources": ["文部科学省", "ICT教育ニュース", "朝日新聞 教育"],
+  "_comment": "開発環境用キャッシュデータ - 本番ではpublic/data/articles.jsonが使用されます"
+}
