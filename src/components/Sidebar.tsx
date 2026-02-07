@@ -91,7 +91,7 @@ export default function Sidebar() {
 
   return (
     <aside className="space-y-6">
-      {/* カテゴリ一覧 */}
+      {/* 1位：カテゴリ一覧 */}
       <div className="bg-white rounded-lg border border-gray-200 p-5">
         <h2 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
           <svg className="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -118,11 +118,13 @@ export default function Sidebar() {
         </ul>
       </div>
 
-      {/* 人気記事ランキング */}
-      <RankingBlock />
-
-      {/* 活動を応援する */}
+      {/* 2位：活動を応援する */}
       <SupportCard />
+
+      {/* 3位：人気記事ランキング（PC専用 - スマホはメインコンテンツ内に表示） */}
+      <div className="hidden lg:block">
+        <RankingBlock />
+      </div>
 
       {/* 注目の関連書籍（自動生成） */}
       {bookKeywords.length > 0 && (

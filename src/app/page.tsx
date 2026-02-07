@@ -275,8 +275,8 @@ export default function Home() {
           )}
         </div>
 
-        {/* サイドバー */}
-        <div className="lg:w-80 flex-shrink-0">
+        {/* サイドバー（PC専用） */}
+        <div className="hidden lg:block lg:w-80 flex-shrink-0">
           <Sidebar />
         </div>
       </div>
