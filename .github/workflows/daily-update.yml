@@ -2,9 +2,11 @@
 name: Daily Update
 
 on:
-  # 毎日午前6時（日本時間）に実行 = UTC 21:00
+  # 日本時間 7:15 と 18:00 に実行
+  # JST 7:15 = UTC 22:15 (前日), JST 18:00 = UTC 09:00
   schedule:
-    - cron: "0 21 * * *"
+    - cron: "15 22 * * *"  # JST 7:15
+    - cron: "0 9 * * *"    # JST 18:00
   # 手動実行も可能
   workflow_dispatch:
   # mainブランチへのpush時も実行（テスト用）
@@ -14,6 +16,11 @@ on:
     paths:
       - 'scripts/**'
       - '.github/workflows/daily-update.yml'
+
+# 二重起動防止（429エラー対策）
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: write
@@ -75,7 +82,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add public/data/articles.json public/data/ai-picks.json
+          git add public/data/articles.json public/data/ai-picks.json public/data/status.json
           git commit -m "chore: daily update - news & AI picks $(date +'%Y-%m-%d %H:%M' -d '+9 hours')"
           git push origin main
 

@@ -6,6 +6,11 @@ on:
     - cron: '0 22 * * *'  # UTC 22:00 = JST 7:00
   workflow_dispatch:  # 手動実行も可能
 
+# 二重起動防止（429エラー対策）
+concurrency:
+  group: news-update-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   update-news:
     runs-on: ubuntu-latest
