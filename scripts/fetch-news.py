@@ -405,6 +405,123 @@ def load_existing_titles():
     """後方互換性のためのラッパー - load_existing_articlesを呼び出す"""
     load_existing_articles()
 
+
+# ========================================
+# 不完全な要約の検出とリトライ
+# ========================================
+# 定型文パターン（これらの文言のみの要約は不完全とみなす）
+INCOMPLETE_SUMMARY_PATTERNS = [
+    "の記事です",
+    "のお知らせです",
+    "のニュースです",
+    "のプレスリリースです",
+]
+
+MAX_SUMMARY_RETRY = 5  # 1回の実行でリトライする最大件数
+
+
+def is_incomplete_summary(summary: str, source: str = "") -> bool:
+    """
+    要約が不完全かどうかを判定
+    - 40文字以下
+    - 定型文のみ（「〇〇の記事です」など）
+    """
+    if not summary:
+        return True
+
+    summary_clean = summary.strip()
+
+    # 40文字以下は不完全
+    if len(summary_clean) <= 40:
+        return True
+
+    # 定型文パターンに一致するかチェック
+    for pattern in INCOMPLETE_SUMMARY_PATTERNS:
+        if pattern in summary_clean:
+            # ソース名 + 定型文のみの場合（例：「EdTechZineの記事です」）
+            # 定型文を除いた部分がソース名だけなら不完全
+            before_pattern = summary_clean.split(pattern)[0]
+            if len(before_pattern) < 20:  # ソース名程度の短さなら定型文のみ
+                return True
+
+    return False
+
+
+def retry_incomplete_summaries():
+    """
+    既存記事の不完全な要約をリトライする
+    - 最大 MAX_SUMMARY_RETRY 件まで
+    - API制限を考慮して制限付きで実行
+    """
+    global EXISTING_ARTICLES
+
+    if IS_DEV_MODE:
+        print("  [開発モード] 要約リトライをスキップ")
+        return
+
+    if not gemini_client:
+        print("  [警告] Gemini APIが利用不可のためリトライをスキップ")
+        return
+
+    # 不完全な要約を持つ記事を検出
+    incomplete_articles = []
+    for i, article in enumerate(EXISTING_ARTICLES):
+        summary = article.get('summary', '')
+        source = article.get('source', '')
+        if is_incomplete_summary(summary, source):
+            incomplete_articles.append((i, article))
+
+    if not incomplete_articles:
+        print("  → 不完全な要約: 0件（リトライ不要）")
+        return
+
+    print(f"  → 不完全な要約: {len(incomplete_articles)}件を検出")
+
+    # 最大件数に制限
+    retry_targets = incomplete_articles[:MAX_SUMMARY_RETRY]
+    print(f"  → リトライ対象: {len(retry_targets)}件（最大{MAX_SUMMARY_RETRY}件）")
+
+    retry_success = 0
+    for idx, article in retry_targets:
+        title = article.get('title', '')
+        url = article.get('url', '')
+        source = article.get('source', '')
+        old_summary = article.get('summary', '')
+
+        print(f"    リトライ中: {title[:40]}...")
+
+        try:
+            # AI要約を再実行
+            result = generate_ai_summary_and_category(
+                title=title,
+                original_summary=old_summary,
+                source=source,
+                url=url
+            )
+
+            if result.get('skip'):
+                print(f"      → SKIP判定（そのまま維持）")
+                continue
+
+            new_summary = result.get('summary', '')
+            new_category = result.get('category', '')
+
+            # 新しい要約が有効かチェック
+            if new_summary and len(new_summary) > 40 and not is_incomplete_summary(new_summary, source):
+                EXISTING_ARTICLES[idx]['summary'] = new_summary
+                if new_category:
+                    EXISTING_ARTICLES[idx]['category'] = new_category
+                retry_success += 1
+                print(f"      → 成功: {new_summary[:30]}...")
+            else:
+                print(f"      → 改善なし（そのまま維持）")
+
+        except Exception as e:
+            print(f"      → エラー: {e}")
+
+    print(f"  → リトライ完了: {retry_success}/{len(retry_targets)}件 成功")
+
+
 # ========================================
 # フォールバック画像（Unsplash - 教育関連）
 # 【鉄壁ルール】画像が取得できない場合は必ずこれを使用
@@ -1363,6 +1480,12 @@ def main():
 
     # 【重複チェック用】既存タイトルを読み込み
     load_existing_titles()
+
+    # 【要約リトライ】不完全な要約を持つ既存記事を再処理
+    print()
+    print("【0.5】不完全な要約のリトライ...")
+    print("-" * 40)
+    retry_incomplete_summaries()
     print()
 
     all_articles = []

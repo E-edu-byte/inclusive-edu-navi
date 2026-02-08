@@ -169,7 +169,7 @@ export default function Home() {
                     date={article.date}
                     url={article.url}
                     mainKeyword={article.mainKeyword}
-                    isPickup={false}
+                    isPickup={true}
                   />
                 ))}
               </div>
