@@ -1,36 +1,6 @@
 {
   "articles": [
     {
-      "id": "cd80838cc913",
-      "title": "意識・無意識脳での神経のつながり方の可視化に成功",
-      "summary": "－睡眠中に感覚応答を知覚できない脳の謎にヒント－",
-      "category": "研究",
-      "date": "2026-02-06",
-      "url": "https://www.riken.jp/press/2026/20260207_1/index.html",
-      "imageUrl": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=300&fit=crop",
-      "source": "理化学研究所"
-    },
-    {
-      "id": "d568d5db38da",
-      "title": "遺伝子の「末尾」に最適な配列を選ぶ",
-      "summary": "－人工冬眠研究で見つかった、細胞を高精度に操る意外なヒント－",
-      "category": "研究",
-      "date": "2026-02-02",
-      "url": "https://www.riken.jp/press/2026/20260203_1/index.html",
-      "imageUrl": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=300&fit=crop",
-      "source": "理化学研究所"
-    },
-    {
-      "id": "0e35ecfe67cd",
-      "title": "感情に伴う表情と主観経験の脳内ネットワークを解明",
-      "summary": "－顔の表情が喜び、悲しみ、怒りなどの感情経験を生み出す－",
-      "category": "研究",
-      "date": "2026-01-27",
-      "url": "https://www.riken.jp/press/2026/20260128_1/index.html",
-      "imageUrl": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=300&fit=crop",
-      "source": "理化学研究所"
-    },
-    {
       "id": "d13736bef8b3",
       "title": "A hidden Aloe vera compound takes aim at Alzheimer’s",
       "summary": "Scientists have uncovered promising clues that compounds found in Aloe vera could play a role in fighting Alzheimer’s disease. Using advanced computer modeling, researchers discovered that beta-sit...",
@@ -132,6 +102,16 @@
       "imageUrl": "https://imgopt.asahi.com/ogp/AS20260207002923_comm.jpg",
       "source": "朝日新聞 教育",
       "mainKeyword": ""
+    },
+    {
+      "id": "cd80838cc913",
+      "title": "意識・無意識脳での神経のつながり方の可視化に成功",
+      "summary": "－睡眠中に感覚応答を知覚できない脳の謎にヒント－",
+      "category": "研究",
+      "date": "2026-02-06",
+      "url": "https://www.riken.jp/press/2026/20260207_1/index.html",
+      "imageUrl": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=300&fit=crop",
+      "source": "理化学研究所"
     },
     {
       "id": "8e96fde278e1",
@@ -310,6 +290,17 @@
       "source": "ICT教育ニュース"
     },
     {
+      "id": "e72f4567d201",
+      "title": "MIT's new brain tool could finally explain consciousness",
+      "summary": "Scientists still don’t know how the brain turns physical activity into thoughts, feelings, and awareness—but a powerful new tool may help crack the mystery. Researchers at MIT are exploring transcr...",
+      "category": "合理的配慮・支援",
+      "date": "2026-02-04",
+      "url": "https://www.sciencedaily.com/releases/2026/02/260203030554.htm",
+      "imageUrl": "https://www.sciencedaily.com/images/1920/consciousness-meditation.webp",
+      "source": "ScienceDaily (Mind & Brain)",
+      "mainKeyword": ""
+    },
+    {
       "id": "8b1f66e3d3bf",
       "title": "COMPASS、理科の知識で弁当箱を設計する小中学校向け探究学習プログラムを無償提供",
       "summary": "COMPASSが無償提供する、理科知識で弁当箱を設計する小中学校向け探究学習プログラム。ICTを活用した教材として、多様な学びを支援。",
@@ -376,6 +367,16 @@
       "mainKeyword": ""
     },
     {
+      "id": "d568d5db38da",
+      "title": "遺伝子の「末尾」に最適な配列を選ぶ",
+      "summary": "－人工冬眠研究で見つかった、細胞を高精度に操る意外なヒント－",
+      "category": "研究",
+      "date": "2026-02-02",
+      "url": "https://www.riken.jp/press/2026/20260203_1/index.html",
+      "imageUrl": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=300&fit=crop",
+      "source": "理化学研究所"
+    },
+    {
       "id": "f413aacb31aa",
       "title": "調査書不要の高校入試が広がる　不登校や病気の生徒に「チャンスを」",
       "summary": "不登校や病気で学校に通えなかったお子さんでも、内申点なしで高校入試を受けられる学校が増えています。これは、学力だけでなく、お子さん一人ひとりの学びや可能性を大切にする教育の多様化が進んでいる証拠です。安心して進路を考えられるよう、支援の幅が広がっています。",
@@ -384,16 +385,27 @@
       "url": "https://www.asahi.com/articles/ASV1X2J4XV1XUTIL00DM.html?ref=rss",
       "imageUrl": "https://imgopt.asahi.com/ogp/AS20260128002670_comm.jpg",
       "source": "朝日新聞 教育"
+    },
+    {
+      "id": "0e35ecfe67cd",
+      "title": "感情に伴う表情と主観経験の脳内ネットワークを解明",
+      "summary": "－顔の表情が喜び、悲しみ、怒りなどの感情経験を生み出す－",
+      "category": "研究",
+      "date": "2026-01-27",
+      "url": "https://www.riken.jp/press/2026/20260128_1/index.html",
+      "imageUrl": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=300&fit=crop",
+      "source": "理化学研究所"
     }
   ],
-  "lastUpdated": "2026-02-08T23:45:24.287424",
-  "totalCount": 34,
+  "lastUpdated": "2026-02-08T23:46:16.620238",
+  "totalCount": 38,
   "sources": [
     "ScienceDaily (Mind & Brain)",
     "ScienceDaily",
     "PRESIDENT Online",
     "文部科学省",
     "朝日新聞 教育",
+    "理化学研究所",
     "リセマム",
     "EdTechZine",
     "ICT教育ニュース"
