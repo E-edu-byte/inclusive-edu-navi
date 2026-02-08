@@ -151,6 +151,13 @@ RSS_FEEDS = [
         "is_research_institution": True,  # 厳格キーワードフィルタ
         "max_articles": 2,  # 最大2件
     },
+    {
+        "name": "東京学芸大学",
+        "url": "https://www.u-gakugei.ac.jp/news/index.xml",
+        "skip_core_filter": False,
+        "is_research_institution": True,  # 厳格キーワードフィルタ
+        "max_articles": 2,  # 最大2件
+    },
     # ※ 文部科学省・NISE・筑波大学はRSSがないため、別途スクレイピングで取得
 ]
 
@@ -754,8 +761,8 @@ JSON形式で回答: {{"summary":"80字の要約","category":"カテゴリ名","
 
         ai_response = response.text.strip()
 
-        # 【429対策】待機時間を5秒に設定（API制限回避）
-        time.sleep(5)
+        # 【429対策】待機時間を3秒に設定（API制限回避）
+        time.sleep(3)
 
         # SKIPの場合
         if ai_response.upper() == 'SKIP' or 'SKIP' in ai_response.upper()[:10]:
@@ -1444,6 +1451,21 @@ def main():
     print("-" * 40)
     mext_articles = fetch_mext_press_releases(max_articles=3)
     all_articles.extend(mext_articles)
+    print()
+
+    # 専門機関・大学（スクレイピング）
+    print("【1.6】専門機関・大学のニュースを取得中...")
+    print("-" * 40)
+
+    # 国立特別支援教育総合研究所
+    print("  ■ 国立特別支援教育総合研究所")
+    nise_articles = fetch_nise_news(max_articles=2)
+    all_articles.extend(nise_articles)
+
+    # 筑波大学 人間系
+    print("  ■ 筑波大学 人間系")
+    tsukuba_articles = fetch_tsukuba_human_news(max_articles=2)
+    all_articles.extend(tsukuba_articles)
     print()
 
     # 重複除去（URLベース）
