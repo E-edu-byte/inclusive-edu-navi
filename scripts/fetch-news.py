@@ -121,6 +121,26 @@ RSS_FEEDS = [
         "url": "https://edtechzine.jp/rss/new/20/index.xml",
         "skip_core_filter": True,
     },
+    {
+        "name": "こどもとIT",
+        "url": "https://www.watch.impress.co.jp/kodomo_it/rss/rss.xml",
+        "skip_core_filter": True,  # 教育ICT専門なのでフィルタ緩和
+    },
+    # === プレスリリース・大学ニュース ===
+    {
+        "name": "PR TIMES",
+        "url": "https://prtimes.jp/index.php?key=edutech&f=rss",
+        "skip_core_filter": False,  # 厳格フィルタ適用
+        "strict_keywords": ["インクルーシブ", "特別支援", "障害", "障がい", "発達支援"],
+        "max_articles": 2,
+    },
+    {
+        "name": "大学プレスセンター",
+        "url": "https://www.u-presscenter.jp/feed",
+        "skip_core_filter": False,  # 厳格フィルタ適用
+        "strict_keywords": ["特別支援", "障がい学生", "インクルーシブ", "合理的配慮", "発達障害"],
+        "max_articles": 2,
+    },
     # === 大手メディア教育カテゴリ ===
     {
         "name": "朝日新聞 教育",
