@@ -212,7 +212,7 @@ MAX_ARTICLES_PER_DOMAIN = 3
 LIGHT_MODE = True
 MAX_ARTICLES_PER_SOURCE = 3  # 各ソースから最大3件（徹底節約）
 MAX_NEW_ARTICLES_PER_RUN = 5  # 1回の実行で追加する最大記事数（新規）
-MAX_AI_CALLS_PER_RUN = 8  # 1回の実行でのAI呼び出し最大数（リトライ+新規合計）
+MAX_AI_CALLS_PER_RUN = 15  # 1回の実行でのAI呼び出し最大数（リトライ+新規合計）
 AI_CALL_SLEEP_SECONDS = 3  # AI呼び出し間の待機秒数
 
 # AI呼び出しカウンター（リトライ+新規の合計）
@@ -360,7 +360,7 @@ FAILED_SUMMARIES = []  # AI要約に失敗した記事をトラッキング
 # 【ステータス追跡】API使用状況
 API_CALL_COUNT = 0  # 今回の実行でのAPI呼び出し回数
 API_ERRORS = []  # エラー情報
-DAILY_API_LIMIT = 250  # 1日あたりのAPI上限（無料枠）
+DAILY_API_LIMIT = 20  # 1日あたりのAPI上限（Gemini無料枠: モデルあたり20リクエスト/日）
 
 def is_ai_generated_summary(summary: str) -> bool:
     """要約がAI生成かどうかを判定（です・ます調で終わっているか）"""
@@ -462,9 +462,11 @@ INCOMPLETE_SUMMARY_PATTERNS = [
 FORCE_RETRY_PATTERNS = [
     "EdTechZineの記事です",
     "詳しくは元記事をご覧ください",
+    "JSTのプレスリリースです",
+    "理化学研究所のプレスリリースです",
 ]
 
-MAX_SUMMARY_RETRY = 3  # 1回の実行でリトライする最大件数（AI呼び出し上限と共有）
+MAX_SUMMARY_RETRY = 10  # 1回の実行でリトライする最大件数（ユーザー要求: 10件テスト）
 
 
 def is_incomplete_summary(summary: str, source: str = "") -> bool:
@@ -484,8 +486,16 @@ def is_incomplete_summary(summary: str, source: str = "") -> bool:
     if "(内容取得失敗)" in summary_clean:
         return False
 
+    # 「要約準備中」マークは不完全（リトライ対象）
+    if "【要約準備中】" in summary_clean:
+        return True
+
     # 40文字以下は不完全
     if len(summary_clean) <= 40:
+        return True
+
+    # RIKENのサブタイトルパターン（「－」で始まり「－」で終わる）は不完全
+    if summary_clean.startswith("－") and summary_clean.endswith("－"):
         return True
 
     # 強制リトライパターン（EdTechZineなど）
@@ -898,15 +908,19 @@ def truncate_text(text: str, max_length: int = 200) -> str:
     return text[:max_length - 3] + "..."
 
 
-def generate_ai_summary_and_category(title: str, original_summary: str, source: str, url: str = "") -> dict:
+def generate_ai_summary_and_category(title: str, original_summary: str, source: str, url: str = "", retry_count: int = 0) -> dict:
     """
     【AI要約 + カテゴリー判定】Gemini APIを使用
     - 理念に合致する記事：要約とカテゴリーを返す
     - 理念に合致しない記事：{"skip": True}を返す
     【省エネモード】開発環境ではAPIを使用しない
     【軽量化】タイトル+冒頭100文字のみをAIに送信
+    【429対策】指数バックオフで最大3回リトライ
     """
     global FAILED_SUMMARIES, API_CALL_COUNT, API_ERRORS
+
+    MAX_RETRY = 3  # 最大リトライ回数
+    BASE_WAIT = 30  # 基本待機時間（秒）- Gemini APIの推奨待機時間に合わせる
 
     # 【省エネモード】開発環境ではAIを使用しない
     if IS_DEV_MODE:
@@ -966,8 +980,8 @@ JSON形式で回答: {{"summary":"80字の要約","category":"カテゴリ名","
 
         ai_response = response.text.strip()
 
-        # 【429対策】待機時間を3秒に設定（API制限回避）
-        time.sleep(3)
+        # 【429対策】待機時間を5秒に設定（API制限回避）
+        time.sleep(BASE_WAIT)
 
         # SKIPの場合
         if ai_response.upper() == 'SKIP' or 'SKIP' in ai_response.upper()[:10]:
@@ -1014,15 +1028,28 @@ JSON形式で回答: {{"summary":"80字の要約","category":"カテゴリ名","
     except json.JSONDecodeError as e:
         print(f"        [JSONパースエラー] {e}")
         FAILED_SUMMARIES.append({"title": title, "url": url, "reason": "JSONパースエラー"})
-        return {"summary": original_summary, "category": "合理的配慮・支援", "mainKeyword": "", "skip": False}
+        # JSONパースエラーはリトライしない（AIからの応答形式の問題）
+        return {"summary": "", "category": "支援・合理的配慮", "mainKeyword": "", "skip": False, "needs_retry": True}
     except Exception as e:
         error_str = str(e)
         print(f"        [AI判定エラー] {e}")
+
+        # API制限エラー（429）を検出した場合は指数バックオフでリトライ
+        if "429" in error_str or "quota" in error_str.lower() or "rate" in error_str.lower() or "resource_exhausted" in error_str.lower():
+            if retry_count < MAX_RETRY:
+                wait_time = BASE_WAIT * (2 ** retry_count)  # 指数バックオフ: 5秒, 10秒, 20秒
+                print(f"        [429対策] {wait_time}秒待機後にリトライ ({retry_count + 1}/{MAX_RETRY})")
+                time.sleep(wait_time)
+                return generate_ai_summary_and_category(title, original_summary, source, url, retry_count + 1)
+            else:
+                print(f"        [429対策] リトライ上限に達しました。後で再試行が必要です。")
+                API_ERRORS.append({"type": "quota_exceeded", "message": error_str[:100], "timestamp": datetime.now().isoformat()})
+                # リトライ上限到達時は空の要約を返し、後で再試行できるようにマーク
+                return {"summary": "", "category": "支援・合理的配慮", "mainKeyword": "", "skip": False, "needs_retry": True}
+
         FAILED_SUMMARIES.append({"title": title, "url": url, "reason": error_str[:50]})
-        # API制限エラーを検出
-        if "429" in error_str or "quota" in error_str.lower() or "rate" in error_str.lower():
-            API_ERRORS.append({"type": "quota_exceeded", "message": error_str[:100], "timestamp": datetime.now().isoformat()})
-        return {"summary": original_summary, "category": "合理的配慮・支援", "mainKeyword": "", "skip": False}
+        # その他のエラーも空の要約を返す（フォールバックなし）
+        return {"summary": "", "category": "支援・合理的配慮", "mainKeyword": "", "skip": False, "needs_retry": True}
 
 
 def contains_core_keyword(title: str, summary: str) -> bool:
@@ -1294,9 +1321,16 @@ def fetch_rss_feed(feed_info: dict) -> list:
                 if ai_result.get("skip"):
                     continue
 
-                summary = ai_result.get("summary", original_summary)
+                # 【要約取得】AIからの要約を取得（フォールバックなし）
+                summary = ai_result.get("summary", "")
                 category = ai_result.get("category", "支援・合理的配慮")
                 main_keyword = ai_result.get("mainKeyword", "")
+
+                # 【リトライ必要フラグ】要約が取得できなかった場合はスキップ（後でリトライ）
+                if ai_result.get("needs_retry") or not summary or len(summary) < 20:
+                    print(f"        → 要約取得失敗（後でリトライ）")
+                    # 要約なしでも記事は追加し、後でリトライできるようにする
+                    summary = f"【要約準備中】{title[:60]}..."
 
                 # 【キーワードベースのカテゴリ上書き】AIの判定を補完
                 text_for_category = f"{title} {summary}".lower()
