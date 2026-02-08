@@ -176,7 +176,17 @@ RSS_FEEDS = [
         "strict_keywords": ["教育", "子ども", "発達", "学校", "インクルーシブ", "特別支援", "障害", "ギフテッド", "不登校"],
         "max_articles": 2,
     },
+    # === 研究・科学メディア ===
+    {
+        "name": "ScienceDaily (Mind & Brain)",
+        "url": "https://www.sciencedaily.com/rss/mind_brain.xml",
+        "skip_core_filter": False,
+        "force_category": "研究",  # 強制的に「研究」カテゴリに振り分け
+        "strict_keywords": ["child", "education", "learning", "development", "autism", "ADHD", "dyslexia", "brain", "cognitive"],
+        "max_articles": 3,
+    },
     # ※ 文部科学省・筑波大学はRSSがないため、別途スクレイピングで取得
+    # ※ 理化学研究所・JST Science PortalはRSS提供終了
 ]
 
 # 大学・研究機関（スクレイピング対象）
