@@ -9,7 +9,6 @@
       "category": "support",
       "date": "2026-02-09",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -21,7 +20,6 @@
       "category": "support",
       "date": "2026-02-09",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -33,7 +31,6 @@
       "category": "support",
       "date": "2026-02-09",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -45,7 +42,39 @@
       "category": "support",
       "date": "2026-02-09",
       "imageUrl": "",
-      "importanceScore": 50,
+      "mainKeyword": ""
+    },
+    {
+      "id": "20d43795c904",
+      "title": "簿記学習、56.7%が「就・転職で有利な武器になった」と回答＝CPAエクセレント調べ＝",
+      "summary": "【要約準備中】簿記学習、56.7%が「就・転職で有利な武器になった」と回答＝CPAエクセレント調べ＝...",
+      "category": "支援・合理的配慮",
+      "date": "2026-02-08",
+      "url": "https://ict-enews.net/2026/02/09cpa-excellent-partners/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-cpa2-1200x630.webp",
+      "source": "ICT教育ニュース",
+      "mainKeyword": ""
+    },
+    {
+      "id": "f4110951bb73",
+      "title": "20代のAIエージェント利用は約5割、利用者の7割超が業務に「ポジティブな効果」実感=レバレジーズ調べ=",
+      "summary": "【要約準備中】20代のAIエージェント利用は約5割、利用者の7割超が業務に「ポジティブな効果」実感=レバレジーズ調べ=...",
+      "category": "支援・合理的配慮",
+      "date": "2026-02-08",
+      "url": "https://ict-enews.net/2026/02/09leverages/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-lg-1200x630.webp",
+      "source": "ICT教育ニュース",
+      "mainKeyword": ""
+    },
+    {
+      "id": "f3969572e6b3",
+      "title": "DOU、愛知大学の授業において授業内の学習データと連携した「AI講師」を試験導入",
+      "summary": "【要約準備中】DOU、愛知大学の授業において授業内の学習データと連携した「AI講師」を試験導入...",
+      "category": "支援・合理的配慮",
+      "date": "2026-02-08",
+      "url": "https://ict-enews.net/2026/02/09dou-3/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-dou-1200x630.webp",
+      "source": "ICT教育ニュース",
       "mainKeyword": ""
     },
     {
@@ -57,7 +86,6 @@
       "category": "support",
       "date": "2026-02-08",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -69,7 +97,6 @@
       "category": "diverse-learning",
       "date": "2026-02-08",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -81,7 +108,6 @@
       "category": "diverse-learning",
       "date": "2026-02-08",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -93,7 +119,6 @@
       "category": "ict",
       "date": "2026-02-08",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -105,7 +130,6 @@
       "category": "ict",
       "date": "2026-02-08",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -117,7 +141,6 @@
       "category": "support",
       "date": "2026-02-08",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -129,7 +152,6 @@
       "category": "support",
       "date": "2026-02-08",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -141,7 +163,6 @@
       "category": "support",
       "date": "2026-02-08",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -153,7 +174,6 @@
       "category": "support",
       "date": "2026-02-08",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -165,7 +185,6 @@
       "category": "support",
       "date": "2026-02-08",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -177,7 +196,6 @@
       "category": "support",
       "date": "2026-02-08",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -209,7 +227,6 @@
       "category": "support",
       "date": "2026-02-07",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -262,7 +279,6 @@
       "category": "support",
       "date": "2026-02-06",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -274,7 +290,6 @@
       "category": "support",
       "date": "2026-02-06",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -286,7 +301,6 @@
       "category": "support",
       "date": "2026-02-06",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -298,7 +312,6 @@
       "category": "support",
       "date": "2026-02-06",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -310,7 +323,6 @@
       "category": "support",
       "date": "2026-02-06",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -322,7 +334,6 @@
       "category": "support",
       "date": "2026-02-06",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -334,7 +345,6 @@
       "category": "support",
       "date": "2026-02-06",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -346,7 +356,6 @@
       "category": "support",
       "date": "2026-02-06",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -358,7 +367,6 @@
       "category": "support",
       "date": "2026-02-06",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -370,7 +378,6 @@
       "category": "support",
       "date": "2026-02-06",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -465,7 +472,6 @@
       "category": "support",
       "date": "2026-02-05",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -477,19 +483,17 @@
       "category": "support",
       "date": "2026-02-05",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
       "id": "a784676da078",
       "title": "Gakken、高等学校向け教材「大学入試面接対策映像講座」を3月31日まで予約販売、添削教材とのセット割引も",
-      "summary": "",
+      "summary": "Gakken、高等学校向け教材「大学入試面接対策映像講座」を3月31日まで予約販売、添削教材とのセット割引も... (内容取得失敗)",
       "url": "https://edtechzine.jp/article/detail/13460",
       "source": "EdTechZine",
       "category": "ict",
       "date": "2026-02-05",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -501,7 +505,6 @@
       "category": "ict",
       "date": "2026-02-05",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -513,7 +516,6 @@
       "category": "ict",
       "date": "2026-02-05",
       "imageUrl": "",
-      "importanceScore": 50,
       "mainKeyword": ""
     },
     {
@@ -567,6 +569,62 @@
       "url": "https://ict-enews.net/2026/02/06meta-school/",
       "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/162956-11-19211f3250e2f2d3690903ed3421747a-1920x1080-1-1200x630.webp",
       "source": "ICT教育ニュース"
+    },
+    {
+      "id": "8b1f66e3d3bf",
+      "title": "COMPASS、理科の知識で弁当箱を設計する小中学校向け探究学習プログラムを無償提供",
+      "summary": "【要約準備中】COMPASS、理科の知識で弁当箱を設計する小中学校向け探究学習プログラムを無償提供...",
+      "category": "支援・合理的配慮",
+      "date": "2026-02-04",
+      "url": "https://edtechzine.jp/article/detail/13459",
+      "imageUrl": "https://edtechzine.jp/static/images/article/13459/13459_og.jpg",
+      "source": "EdTechZine",
+      "mainKeyword": ""
+    },
+    {
+      "id": "c6ceae5c69da",
+      "title": "私立大学の文系学部に一般入試で入学した大学生、約8割が高3以降に志望校を決定【「武田塾」調査】",
+      "summary": "【要約準備中】私立大学の文系学部に一般入試で入学した大学生、約8割が高3以降に志望校を決定【「武田塾」調査】...",
+      "category": "支援・合理的配慮",
+      "date": "2026-02-04",
+      "url": "https://edtechzine.jp/article/detail/13456",
+      "imageUrl": "https://edtechzine.jp/static/images/article/13456/13456_og.jpg",
+      "source": "EdTechZine",
+      "mainKeyword": ""
+    },
+    {
+      "id": "877732db1f5d",
+      "title": "山形県の惺山高等学校、TERRAISEによる高校内のコンピュータのみで完結するローカルLLMを構築",
+      "summary": "【要約準備中】山形県の惺山高等学校、TERRAISEによる高校内のコンピュータのみで完結するローカルLLMを構築...",
+      "category": "支援・合理的配慮",
+      "date": "2026-02-04",
+      "url": "https://edtechzine.jp/article/detail/13457",
+      "imageUrl": "https://edtechzine.jp/static/images/article/13457/13457_og.jpg",
+      "source": "EdTechZine",
+      "mainKeyword": ""
+    },
+    {
+      "id": "f413aacb31aa",
+      "title": "調査書不要の高校入試が広がる　不登校や病気の生徒に「チャンスを」",
+      "summary": "【要約準備中】調査書不要の高校入試が広がる 不登校や病気の生徒に「チャンスを」...",
+      "category": "多様な学び",
+      "date": "2026-01-31",
+      "url": "https://www.asahi.com/articles/ASV1X2J4XV1XUTIL00DM.html?ref=rss",
+      "imageUrl": "https://imgopt.asahi.com/ogp/AS20260128002670_comm.jpg",
+      "source": "朝日新聞 教育",
+      "mainKeyword": ""
     }
+  ],
+  "lastUpdated": "2026-02-09T08:53:53.225075",
+  "totalCount": 57,
+  "sources": [
+    "NHK教育",
+    "ICT教育ニュース",
+    "朝日新聞 教育",
+    "PRESIDENT Online",
+    "文部科学省",
+    "リセマム",
+    "理化学研究所",
+    "EdTechZine"
   ]
 }
