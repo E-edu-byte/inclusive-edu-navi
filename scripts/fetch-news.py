@@ -211,9 +211,9 @@ MAX_ARTICLES_PER_DOMAIN = 3
 # 【徹底省エネ設定】取得件数を最小限に
 LIGHT_MODE = True
 MAX_ARTICLES_PER_SOURCE = 3  # 各ソースから最大3件（徹底節約）
-MAX_NEW_ARTICLES_PER_RUN = 5  # 1回の実行で追加する最大記事数（新規）
-MAX_AI_CALLS_PER_RUN = 15  # 1回の実行でのAI呼び出し最大数（リトライ+新規合計）
-AI_CALL_SLEEP_SECONDS = 3  # AI呼び出し間の待機秒数
+MAX_NEW_ARTICLES_PER_RUN = 10  # 1回の実行で追加する最大記事数（新規）
+MAX_AI_CALLS_PER_RUN = 20  # 1回の実行でのAI呼び出し最大数（リトライ+新規合計）
+AI_CALL_SLEEP_SECONDS = 1  # AI呼び出し間の待機秒数（GitHub Actions高速化）
 
 # AI呼び出しカウンター（リトライ+新規の合計）
 TOTAL_AI_CALLS_THIS_RUN = 0
@@ -920,7 +920,7 @@ def generate_ai_summary_and_category(title: str, original_summary: str, source: 
     global FAILED_SUMMARIES, API_CALL_COUNT, API_ERRORS
 
     MAX_RETRY = 3  # 最大リトライ回数
-    BASE_WAIT = 30  # 基本待機時間（秒）- Gemini APIの推奨待機時間に合わせる
+    BASE_WAIT = 1  # 基本待機時間（秒）- GitHub Actions高速化のため最短設定
 
     # 【省エネモード】開発環境ではAIを使用しない
     if IS_DEV_MODE:
@@ -1037,7 +1037,7 @@ JSON形式で回答: {{"summary":"80字の要約","category":"カテゴリ名","
         # API制限エラー（429）を検出した場合は指数バックオフでリトライ
         if "429" in error_str or "quota" in error_str.lower() or "rate" in error_str.lower() or "resource_exhausted" in error_str.lower():
             if retry_count < MAX_RETRY:
-                wait_time = BASE_WAIT * (2 ** retry_count)  # 指数バックオフ: 5秒, 10秒, 20秒
+                wait_time = BASE_WAIT * (2 ** retry_count)  # 指数バックオフ: 1秒, 2秒, 4秒
                 print(f"        [429対策] {wait_time}秒待機後にリトライ ({retry_count + 1}/{MAX_RETRY})")
                 time.sleep(wait_time)
                 return generate_ai_summary_and_category(title, original_summary, source, url, retry_count + 1)
