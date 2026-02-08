@@ -164,11 +164,6 @@ RSS_FEEDS = [
 # 大学・研究機関（スクレイピング対象）
 RESEARCH_INSTITUTIONS = [
     {
-        "name": "国立特別支援教育総合研究所",
-        "url": "https://www.nise.go.jp/nc/news",
-        "max_articles": 2,
-    },
-    {
         "name": "筑波大学 人間系",
         "url": "https://www.human.tsukuba.ac.jp/human/news/",
         "max_articles": 2,
@@ -1244,85 +1239,6 @@ def fetch_mext_press_releases(max_articles: int = 3) -> list:
     return articles
 
 
-def fetch_nise_news(max_articles: int = 2) -> list:
-    """
-    国立特別支援教育総合研究所（NISE）のニュースをスクレイピング
-    特別支援教育に特化した研究機関のため、全記事が理念に合致
-    """
-    articles = []
-    duplicate_count = 0
-    nise_url = "https://www.nise.go.jp/nc/news"
-
-    try:
-        print(f"    URL: {nise_url}")
-
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-        }
-
-        response = requests.get(nise_url, headers=headers, timeout=15)
-        response.raise_for_status()
-        response.encoding = 'utf-8'
-
-        soup = BeautifulSoup(response.text, 'html.parser')
-
-        # ニュース記事のリンクを探す（NISEのHTML構造に合わせて調整）
-        news_items = soup.find_all('a', href=True)
-        count = 0
-
-        for item in news_items:
-            if count >= max_articles:
-                break
-
-            href = item.get('href', '')
-            text = item.get_text(strip=True)
-
-            # ニュース記事のリンクパターンをチェック
-            if ('/nc/' in href or '/news/' in href) and text and len(text) > 15:
-                # 相対URLを絶対URLに変換
-                if href.startswith('/'):
-                    full_url = f"https://www.nise.go.jp{href}"
-                elif not href.startswith('http'):
-                    full_url = f"https://www.nise.go.jp/nc/{href}"
-                else:
-                    full_url = href
-
-                # 重複チェック
-                if is_duplicate_article(text, full_url):
-                    duplicate_count += 1
-                    continue
-
-                # 理念キーワードを含むかチェック（NISEは特別支援専門なので緩和）
-                if not contains_core_keyword(text, "特別支援"):
-                    continue
-
-                count += 1
-                print(f"    [{count}] {text[:50]}...")
-
-                article_id = generate_article_id(full_url)
-
-                article = {
-                    "id": article_id,
-                    "title": text,
-                    "summary": f"国立特別支援教育総合研究所のお知らせです。{text}",
-                    "category": "合理的配慮・支援",
-                    "date": datetime.now().strftime("%Y-%m-%d"),
-                    "url": full_url,
-                    "imageUrl": get_university_fallback_image(article_id),
-                    "source": "国立特別支援教育総合研究所",
-                    "mainKeyword": "特別支援教育"
-                }
-                articles.append(article)
-
-        if len(articles) > 0 or duplicate_count > 0:
-            print(f"    → 新規: {len(articles)}件 / 重複スキップ: {duplicate_count}件")
-
-    except Exception as e:
-        print(f"    エラー: NISEの取得に失敗 - {e}")
-
-    return articles
-
-
 def fetch_tsukuba_human_news(max_articles: int = 2) -> list:
     """
     筑波大学 人間系のニュースをスクレイピング
@@ -1470,11 +1386,6 @@ def main():
     # 専門機関・大学（スクレイピング）
     print("【1.6】専門機関・大学のニュースを取得中...")
     print("-" * 40)
-
-    # 国立特別支援教育総合研究所
-    print("  ■ 国立特別支援教育総合研究所")
-    nise_articles = fetch_nise_news(max_articles=2)
-    all_articles.extend(nise_articles)
 
     # 筑波大学 人間系
     print("  ■ 筑波大学 人間系")
