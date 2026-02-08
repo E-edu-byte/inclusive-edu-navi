@@ -1,50 +1,6 @@
 {
   "articles": [
     {
-      "id": "2d60680117ba",
-      "title": "国立特別支援教育総合研究所（NISE）メールマガジン第227号の刊行について",
-      "summary": "国立特別支援教育総合研究所（NISE）がメールマガジン第227号を刊行。特別支援教育に関する最新の研究成果や情報を提供し、インクルーシブ教育推進に貢献します。",
-      "category": "制度・行政",
-      "date": "2026-02-08",
-      "url": "https://www.nise.go.jp/nc/news/2026/0202",
-      "imageUrl": "https://images.unsplash.com/photo-1568792923760-d70635a89fdc?w=400&h=300&fit=crop",
-      "source": "国立特別支援教育総合研究所",
-      "mainKeyword": "特別支援教育"
-    },
-    {
-      "id": "e5ff31a68150",
-      "title": "特別支援教育リーフVol.33の刊行について",
-      "summary": "国立特別支援教育総合研究所が、特別支援教育に関する最新情報や実践例をまとめた「特別支援教育リーフVol.33」を刊行したことをお知らせ。",
-      "category": "制度・行政",
-      "date": "2026-02-08",
-      "url": "https://www.nise.go.jp/nc/news/2026/0127",
-      "imageUrl": "https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=400&h=300&fit=crop",
-      "source": "国立特別支援教育総合研究所",
-      "mainKeyword": "特別支援教育"
-    },
-    {
-      "id": "7fa995da7b99",
-      "title": "独立行政法人　国立特別支援教育総合研究所",
-      "summary": "独立行政法人国立特別支援教育総合研究所によるお知らせ。特別支援教育の総合的研究や情報発信を行う公的機関の活動に関する情報です。",
-      "category": "制度・行政",
-      "date": "2026-02-08",
-      "url": "https://www.nise.go.jp/nc/",
-      "imageUrl": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&h=300&fit=crop",
-      "source": "国立特別支援教育総合研究所",
-      "mainKeyword": "特別支援教育"
-    },
-    {
-      "id": "4f2641daef4a",
-      "title": "文部科学省著作教科書（知的障害者用）の画像ページの公開について",
-      "summary": "国立特別支援教育総合研究所が、文部科学省著作の知的障害者用教科書の画像ページ公開を発表。特別支援教育における多様な学びを支援する教材提供。",
-      "category": "ICT・教材",
-      "date": "2026-02-08",
-      "url": "https://www.nise.go.jp/nc/news/2026/0204",
-      "imageUrl": "https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop",
-      "source": "国立特別支援教育総合研究所",
-      "mainKeyword": "特別支援教育"
-    },
-    {
       "id": "fdb4ef8a2ff6",
       "title": "令和7年度インクルーシブな学校運営モデル事業中間成果報告会を開催します",
       "summary": "文部科学省が令和7年度インクルーシブな学校運営モデル事業の中間成果報告会の開催を発表。事業の進捗と成果を共有する内容。",
@@ -297,14 +253,13 @@
       "source": "朝日新聞 教育"
     }
   ],
-  "lastUpdated": "2026-02-08T18:29:25.452705",
-  "totalCount": 28,
+  "lastUpdated": "2026-02-08T18:46:05.426566",
+  "totalCount": 24,
   "sources": [
-    "国立特別支援教育総合研究所",
+    "ICT教育ニュース",
     "文部科学省",
-    "朝日新聞 教育",
-    "リセマム",
     "EdTechZine",
-    "ICT教育ニュース"
+    "リセマム",
+    "朝日新聞 教育"
   ]
 }
