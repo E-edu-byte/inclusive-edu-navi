@@ -110,8 +110,8 @@ export default function Home() {
                   インクルーシブ教育に関する最新のニュース、研究成果、実践事例を<br className="hidden sm:inline" />
                   わかりやすくお届けします。
                 </p>
-                <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
-                  <span className="font-semibold text-indigo-700">インクルーシブな社会を創る人</span>に役立つ情報を厳選してご紹介。
+                <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                  インクルーシブな社会を創る人に役立つ情報を厳選してご紹介。
                 </p>
               </div>
 

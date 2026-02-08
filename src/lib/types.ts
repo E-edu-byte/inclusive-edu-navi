@@ -55,19 +55,25 @@ export type AIPicksData = {
 // basePath設定
 export const BASE_PATH = '/inclusive-edu-navi';
 
-// カテゴリ定義（新5カテゴリー）
+// カテゴリ定義（6カテゴリー）
 export const categories: Category[] = [
   {
     id: 'support',
-    name: '合理的配慮・支援',
+    name: '支援・合理的配慮',
     description: '学校や現場での具体的な支援方法、個別の配慮事例、ギフテッド・2eへの配慮',
     color: 'bg-green-100 text-green-800',
   },
   {
     id: 'diverse-learning',
-    name: '不登校・多様な学び',
+    name: '多様な学び',
     description: '不登校支援、フリースクール、通信制高校、ギフテッド（特異な才能）支援',
     color: 'bg-purple-100 text-purple-800',
+  },
+  {
+    id: 'research',
+    name: '研究',
+    description: '脳科学、発達研究、教育心理学、学術論文、研究機関の成果発表',
+    color: 'bg-cyan-100 text-cyan-800',
   },
   {
     id: 'policy',

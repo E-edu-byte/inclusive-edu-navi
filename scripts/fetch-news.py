@@ -168,6 +168,23 @@ RSS_FEEDS = [
         "is_research_institution": True,  # 厳格キーワードフィルタ
         "max_articles": 2,  # 最大2件
     },
+    {
+        "name": "理化学研究所",
+        "url": "https://www.riken.jp/pr/news/index.xml",
+        "skip_core_filter": False,
+        "is_research_institution": True,
+        "force_category": "研究",  # 強制的に「研究」カテゴリに振り分け
+        "strict_keywords": ["脳", "発達", "認知", "学習", "教育", "子ども", "神経"],
+        "max_articles": 2,
+    },
+    # === ビジネスメディア ===
+    {
+        "name": "PRESIDENT Online",
+        "url": "https://president.jp/rss/headline",
+        "skip_core_filter": False,
+        "strict_keywords": ["教育", "子ども", "発達", "学校", "インクルーシブ", "特別支援", "障害", "ギフテッド"],
+        "max_articles": 2,
+    },
     # ※ 文部科学省・筑波大学はRSSがないため、別途スクレイピングで取得
 ]
 
@@ -318,10 +335,11 @@ PUBLIC_INSTITUTION_KEYWORDS = [
     "早稲田大学", "慶應義塾大学", "上智大学"
 ]
 
-# 【新カテゴリー定義】AI判定用（5カテゴリー）
+# 【新カテゴリー定義】AI判定用（6カテゴリー）
 CATEGORIES = {
-    "合理的配慮・支援": "学校や現場での具体的な支援方法、個別の配慮事例、発達障害・学習障害への対応、ギフテッド・2eへの合理的配慮など",
-    "不登校・多様な学び": "不登校支援、フリースクール、通信制高校、オルタナティブ教育、ギフテッド（特異な才能）支援、個別最適な学びなど",
+    "支援・合理的配慮": "学校や現場での具体的な支援方法、個別の配慮事例、発達障害・学習障害への対応、ギフテッド・2eへの合理的配慮など",
+    "多様な学び": "不登校支援、フリースクール、通信制高校、オルタナティブ教育、ギフテッド（特異な才能）支援、個別最適な学びなど",
+    "研究": "脳科学、脳機能、神経科学、認知科学、発達研究、教育心理学、学術論文、研究機関の成果発表など",
     "制度・行政": "文科省の通知、法律・法改正、自治体の施策、予算、ガイドライン、ギフテッド実証事業など",
     "ICT・教材": "支援技術、デジタル教科書、学習アプリ、タブレット活用、EdTechなど",
     "イベント・研修": "セミナー、ワークショップ、講演会、研修会、フォーラムなどの情報",
@@ -886,9 +904,11 @@ def generate_ai_summary_and_category(title: str, original_summary: str, source: 
     if IS_DEV_MODE:
         # キーワードベースで簡易カテゴリ判定
         text = f"{title} {original_summary}".lower()
-        category = "合理的配慮・支援"
-        if any(kw in text for kw in ['不登校', 'フリースクール', 'オルタナティブ', '通信制']):
-            category = "不登校・多様な学び"
+        category = "支援・合理的配慮"
+        if any(kw in text for kw in ['脳機能', '脳科学', '神経科学', '認知科学', '理化学研究所', 'riken', '研究成果', '論文']):
+            category = "研究"
+        elif any(kw in text for kw in ['不登校', 'フリースクール', 'オルタナティブ', '通信制']):
+            category = "多様な学び"
         elif any(kw in text for kw in ['ict', 'アプリ', 'デジタル', 'ai', 'edtech']):
             category = "ICT・教材"
         elif any(kw in text for kw in ['文部科学省', '文科省', '法改正', '通知']):
@@ -899,7 +919,7 @@ def generate_ai_summary_and_category(title: str, original_summary: str, source: 
     short_summary = original_summary[:100] if original_summary else ""
 
     # カテゴリー一覧を簡素化
-    category_list = "support(支援), diverse-learning(不登校), policy(行政), ict(ICT), events(イベント)"
+    category_list = "support(支援), diverse-learning(多様な学び), research(研究), policy(行政), ict(ICT), events(イベント)"
 
     # 【キャッシュチェック】既存の有効な要約があれば再利用（カテゴリーのみ再判定）
     cached_summary = None
@@ -908,19 +928,19 @@ def generate_ai_summary_and_category(title: str, original_summary: str, source: 
         print(f"        → キャッシュから要約を再利用（カテゴリーは再判定）")
 
     if not gemini_client:
-        return {"summary": original_summary, "category": "合理的配慮・支援", "mainKeyword": "", "skip": False}
+        return {"summary": original_summary, "category": "支援・合理的配慮", "mainKeyword": "", "skip": False}
 
     try:
         if cached_summary:
             # キャッシュがある場合はカテゴリー判定のみ（短縮プロンプト）
             prompt = f"""記事のカテゴリを判定。塾広告・受験競争系はSKIP。
-カテゴリ: 合理的配慮・支援 / 不登校・多様な学び / 制度・行政 / ICT・教材 / イベント・研修
+カテゴリ: 支援・合理的配慮 / 多様な学び / 研究 / 制度・行政 / ICT・教材 / イベント・研修
 タイトル: {title}
 →カテゴリ名のみ回答（または SKIP）"""
         else:
             # 新規の場合は要約とカテゴリーを同時に判定（短縮プロンプト）
             prompt = f"""インクルーシブ教育メディア記事判定。塾広告・受験競争系はSKIP。
-カテゴリ: 合理的配慮・支援 / 不登校・多様な学び / 制度・行政 / ICT・教材 / イベント・研修
+カテゴリ: 支援・合理的配慮 / 多様な学び / 研究 / 制度・行政 / ICT・教材 / イベント・研修
 
 タイトル: {title}
 概要: {short_summary}
@@ -953,7 +973,7 @@ JSON形式で回答: {{"summary":"80字の要約","category":"カテゴリ名","
             if category in CATEGORIES:
                 return {"summary": cached_summary, "category": category, "mainKeyword": "", "skip": False}
             else:
-                return {"summary": cached_summary, "category": "合理的配慮・支援", "mainKeyword": "", "skip": False}
+                return {"summary": cached_summary, "category": "支援・合理的配慮", "mainKeyword": "", "skip": False}
 
         # JSONを抽出してパース
         if "```json" in ai_response:
@@ -970,12 +990,12 @@ JSON形式で回答: {{"summary":"80字の要約","category":"カテゴリ名","
 
         result = json.loads(json_str)
         summary = result.get("summary", original_summary)
-        category = result.get("category", "合理的配慮・支援")
+        category = result.get("category", "支援・合理的配慮")
         main_keyword = result.get("mainKeyword", "")
 
         # カテゴリーが有効か確認
         if category not in CATEGORIES:
-            category = "合理的配慮・支援"
+            category = "支援・合理的配慮"
 
         if len(summary) > 10:
             return {"summary": summary, "category": category, "mainKeyword": main_keyword, "skip": False}
@@ -1228,9 +1248,11 @@ def fetch_rss_feed(feed_info: dict) -> list:
                 original_summary = rss_summary or f"{feed_name}の記事です。"
                 # キーワードベースで簡易カテゴリ判定
                 text = f"{title} {original_summary}".lower()
-                category = "合理的配慮・支援"
-                if any(kw in text for kw in ['不登校', 'フリースクール', 'オルタナティブ', '通信制']):
-                    category = "不登校・多様な学び"
+                category = "支援・合理的配慮"
+                if any(kw in text for kw in ['脳機能', '脳科学', '神経科学', '認知科学', '理化学研究所', 'riken', '研究成果', '論文']):
+                    category = "研究"
+                elif any(kw in text for kw in ['不登校', 'フリースクール', 'オルタナティブ', '通信制']):
+                    category = "多様な学び"
                 elif any(kw in text for kw in ['ict', 'アプリ', 'デジタル', 'ai', 'edtech']):
                     category = "ICT・教材"
                 elif any(kw in text for kw in ['文部科学省', '文科省', '法改正', '通知']):
@@ -1265,11 +1287,12 @@ def fetch_rss_feed(feed_info: dict) -> list:
                     continue
 
                 summary = ai_result.get("summary", original_summary)
-                category = ai_result.get("category", "合理的配慮・支援")
+                category = ai_result.get("category", "支援・合理的配慮")
                 main_keyword = ai_result.get("mainKeyword", "")
 
                 # 【キーワードベースのカテゴリ上書き】AIの判定を補完
                 text_for_category = f"{title} {summary}".lower()
+                research_keywords = ['脳機能', '脳科学', '神経科学', '認知科学', '理化学研究所', 'riken', '研究成果', '論文', '脳神経']
                 diverse_learning_keywords = [
                     '不登校', 'フリースクール', 'オルタナティブ', 'オルティナブル',
                     '通信制高校', 'ホームスクール', 'ホームエデュケーション',
@@ -1278,21 +1301,28 @@ def fetch_rss_feed(feed_info: dict) -> list:
                 ict_keywords = ['ict', 'edtech', 'タブレット', 'デジタル教科書', 'アプリ', 'ai活用', '生成ai']
                 policy_keywords = ['文部科学省', '文科省', '法改正', '通知', 'ガイドライン', '実証事業']
 
-                for kw in diverse_learning_keywords:
+                # 研究カテゴリを最優先でチェック
+                for kw in research_keywords:
                     if kw in text_for_category:
-                        category = "不登校・多様な学び"
-                        print(f"        → カテゴリ上書き: 不登校・多様な学び（キーワード: {kw}）")
+                        category = "研究"
+                        print(f"        → カテゴリ上書き: 研究（キーワード: {kw}）")
                         break
                 else:
-                    for kw in ict_keywords:
+                    for kw in diverse_learning_keywords:
                         if kw in text_for_category:
-                            category = "ICT・教材"
+                            category = "多様な学び"
+                            print(f"        → カテゴリ上書き: 多様な学び（キーワード: {kw}）")
                             break
                     else:
-                        for kw in policy_keywords:
+                        for kw in ict_keywords:
                             if kw in text_for_category:
-                                category = "制度・行政"
+                                category = "ICT・教材"
                                 break
+                        else:
+                            for kw in policy_keywords:
+                                if kw in text_for_category:
+                                    category = "制度・行政"
+                                    break
 
                 print(f"        → カテゴリー: {category}")
                 if main_keyword:
