@@ -417,6 +417,12 @@ INCOMPLETE_SUMMARY_PATTERNS = [
     "のプレスリリースです",
 ]
 
+# 強制リトライ対象のパターン（これらが含まれる場合は必ずリトライ）
+FORCE_RETRY_PATTERNS = [
+    "EdTechZineの記事です",
+    "詳しくは元記事をご覧ください",
+]
+
 MAX_SUMMARY_RETRY = 5  # 1回の実行でリトライする最大件数
 
 
@@ -425,6 +431,7 @@ def is_incomplete_summary(summary: str, source: str = "") -> bool:
     要約が不完全かどうかを判定
     - 40文字以下
     - 定型文のみ（「〇〇の記事です」など）
+    - EdTechZine定型文が含まれる場合は強制的に不完全とみなす
     """
     if not summary:
         return True
@@ -435,10 +442,15 @@ def is_incomplete_summary(summary: str, source: str = "") -> bool:
     if len(summary_clean) <= 40:
         return True
 
+    # 強制リトライパターン（EdTechZineなど）
+    for pattern in FORCE_RETRY_PATTERNS:
+        if pattern in summary_clean:
+            return True
+
     # 定型文パターンに一致するかチェック
     for pattern in INCOMPLETE_SUMMARY_PATTERNS:
         if pattern in summary_clean:
-            # ソース名 + 定型文のみの場合（例：「EdTechZineの記事です」）
+            # ソース名 + 定型文のみの場合（例：「〇〇の記事です」）
             # 定型文を除いた部分がソース名だけなら不完全
             before_pattern = summary_clean.split(pattern)[0]
             if len(before_pattern) < 20:  # ソース名程度の短さなら定型文のみ
@@ -482,11 +494,13 @@ def retry_incomplete_summaries():
     print(f"  → リトライ対象: {len(retry_targets)}件（最大{MAX_SUMMARY_RETRY}件）")
 
     retry_success = 0
+    edtech_updated = []  # EdTechZine更新記録
     for idx, article in retry_targets:
         title = article.get('title', '')
         url = article.get('url', '')
         source = article.get('source', '')
         old_summary = article.get('summary', '')
+        is_edtech = source == 'EdTechZine'
 
         print(f"    リトライ中: {title[:40]}...")
 
@@ -513,6 +527,10 @@ def retry_incomplete_summaries():
                     EXISTING_ARTICLES[idx]['category'] = new_category
                 retry_success += 1
                 print(f"      → 成功: {new_summary[:30]}...")
+
+                # EdTechZine更新の記録
+                if is_edtech:
+                    edtech_updated.append(title)
             else:
                 print(f"      → 改善なし（そのまま維持）")
 
@@ -520,6 +538,13 @@ def retry_incomplete_summaries():
             print(f"      → エラー: {e}")
 
     print(f"  → リトライ完了: {retry_success}/{len(retry_targets)}件 成功")
+
+    # EdTechZine更新の詳細ログ
+    if edtech_updated:
+        print()
+        print("  【EdTechZine要約更新】")
+        for title in edtech_updated:
+            print(f"    ✓ EdTechZineの要約を更新しました: {title[:50]}")
 
 
 # ========================================

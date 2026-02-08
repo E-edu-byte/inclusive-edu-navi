@@ -183,10 +183,10 @@ export default function BookmarksPage() {
 
       {/* 補足説明 */}
       {bookmarks.length > 0 && (
-        <div className="mt-8 p-4 bg-amber-50 border border-amber-100 rounded-lg">
-          <p className="text-sm text-amber-800">
-            <strong>ヒント:</strong> 保存した記事は、元のデータから削除されてもこのページで閲覧できます。
-            ブラウザのデータを消去すると、保存した記事も削除されます。
+        <div className="mt-8 p-4 bg-gray-50 border border-gray-200 rounded-lg flex items-start gap-3">
+          <span className="text-lg" role="img" aria-label="情報">ℹ️</span>
+          <p className="text-sm text-gray-600">
+            ブラウザのデータを消去すると、保存した記事も削除されますのでご注意ください。
           </p>
         </div>
       )}

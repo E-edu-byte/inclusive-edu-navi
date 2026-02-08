@@ -6,6 +6,7 @@ import Sidebar from '@/components/Sidebar';
 import NewsCard from '@/components/NewsCard';
 import RankingBlock from '@/components/RankingBlock';
 import { Article, ArticlesData, BASE_PATH } from '@/lib/types';
+import { useBookmarks } from '@/contexts/BookmarkContext';
 
 export default function Home() {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -13,6 +14,7 @@ export default function Home() {
   const [pickupNews, setPickupNews] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { bookmarkCount, maxBookmarks } = useBookmarks();
 
   useEffect(() => {
     async function fetchData() {
@@ -114,6 +116,32 @@ export default function Home() {
               <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-sky-200 via-indigo-200 to-purple-200 opacity-60"></div>
             </div>
           </section>
+
+          {/* スマホ用：保存した記事へのショートカット */}
+          <div className="lg:hidden mb-6">
+            <Link
+              href="/bookmarks"
+              className="flex items-center justify-between w-full px-4 py-3 bg-amber-50 hover:bg-amber-100 border border-amber-200 rounded-xl transition-colors"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
+                  <svg className="w-5 h-5 text-amber-600" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                  </svg>
+                </div>
+                <div>
+                  <span className="text-sm font-medium text-amber-800">保存した記事をみる</span>
+                  <span className="ml-2 text-xs bg-amber-200 text-amber-700 px-2 py-0.5 rounded-full">
+                    {bookmarkCount}/{maxBookmarks}
+                  </span>
+                </div>
+              </div>
+              <svg className="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
+
           {/* 最新ニュースセクション（常に5件表示） */}
           {latestNews.length > 0 && (
             <section className="mb-8">
