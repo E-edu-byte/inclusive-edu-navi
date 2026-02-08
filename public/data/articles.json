@@ -1,32 +1,23 @@
 {
   "articles": [
     {
+      "id": "d13736bef8b3",
+      "title": "A hidden Aloe vera compound takes aim at Alzheimer’s",
+      "summary": "Scientists have uncovered promising clues that compounds found in Aloe vera could play a role in fighting Alzheimer’s disease. Using advanced computer modeling, researchers discovered that beta-sit...",
+      "category": "合理的配慮・支援",
+      "date": "2026-02-08",
+      "url": "https://www.sciencedaily.com/releases/2026/02/260206012213.htm",
+      "imageUrl": "https://www.sciencedaily.com/images/1920/aloe-gel-dripping-from-fresh-cut-aloe-vera-leaf.webp",
+      "source": "ScienceDaily (Mind & Brain)",
+      "mainKeyword": ""
+    },
+    {
       "id": "a8c2af6256a4",
       "title": "New drug resets the body clock and cuts jet lag recovery nearly in half",
-      "summary": "Scientists have identified a promising new compound, Mic-628, that can reliably shift the body’s internal clock forward—something that’s notoriously hard to do. By targeting a key clock-control protein, Mic-628 jump-starts the gene that sets daily rh",
+      "summary": "Scientists have identified a promising new compound, Mic-628, that can reliably shift the body’s internal clock forward—something that’s notoriously hard to do. By targeting a key clock-control pro...",
       "category": "研究",
       "date": "2026-02-08",
       "url": "https://www.sciencedaily.com/releases/2026/02/260208011026.htm",
-      "imageUrl": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=300&fit=crop",
-      "source": "ScienceDaily"
-    },
-    {
-      "id": "67da445b5646",
-      "title": "Menopause linked to grey matter loss in key brain regions",
-      "summary": "A major study suggests menopause is linked to changes in brain structure, mental health, and sleep. Brain scans revealed grey matter loss in areas tied to memory and emotional regulation, while many women reported increased anxiety, depression, and f",
-      "category": "研究",
-      "date": "2026-02-07",
-      "url": "https://www.sciencedaily.com/releases/2026/02/260207092904.htm",
-      "imageUrl": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=300&fit=crop",
-      "source": "ScienceDaily"
-    },
-    {
-      "id": "8e96fde278e1",
-      "title": "A hidden brain effect of prenatal alcohol exposure",
-      "summary": "New research using rhesus monkeys suggests that the brain’s relationship with alcohol may begin forming long before a person ever takes a drink. Scientists found that exposure to alcohol before birth reshaped the brain’s dopamine system, a key player",
-      "category": "研究",
-      "date": "2026-02-06",
-      "url": "https://www.sciencedaily.com/releases/2026/02/260206020852.htm",
       "imageUrl": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=300&fit=crop",
       "source": "ScienceDaily"
     },
@@ -49,6 +40,27 @@
       "url": "https://www.mext.go.jp/b_menu/houdou/mext_01599.html",
       "imageUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=300&fit=crop",
       "source": "文部科学省"
+    },
+    {
+      "id": "23ee9f3d91dd",
+      "title": "That dry, bitter taste may be waking up your brain",
+      "summary": "New research suggests the astringent sensation caused by flavanols could act as a direct signal to the brain, triggering effects similar to a mild workout for the nervous system. In mouse experimen...",
+      "category": "合理的配慮・支援",
+      "date": "2026-02-07",
+      "url": "https://www.sciencedaily.com/releases/2026/02/260206012224.htm",
+      "imageUrl": "https://www.sciencedaily.com/images/1920/human-brain-neuron-activity.webp",
+      "source": "ScienceDaily (Mind & Brain)",
+      "mainKeyword": ""
+    },
+    {
+      "id": "67da445b5646",
+      "title": "Menopause linked to grey matter loss in key brain regions",
+      "summary": "A major study suggests menopause is linked to changes in brain structure, mental health, and sleep. Brain scans revealed grey matter loss in areas tied to memory and emotional regulation, while man...",
+      "category": "研究",
+      "date": "2026-02-07",
+      "url": "https://www.sciencedaily.com/releases/2026/02/260207092904.htm",
+      "imageUrl": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=300&fit=crop",
+      "source": "ScienceDaily"
     },
     {
       "id": "278e05e99ad5",
@@ -90,6 +102,16 @@
       "imageUrl": "https://imgopt.asahi.com/ogp/AS20260207002923_comm.jpg",
       "source": "朝日新聞 教育",
       "mainKeyword": ""
+    },
+    {
+      "id": "8e96fde278e1",
+      "title": "A hidden brain effect of prenatal alcohol exposure",
+      "summary": "New research using rhesus monkeys suggests that the brain’s relationship with alcohol may begin forming long before a person ever takes a drink. Scientists found that exposure to alcohol before bir...",
+      "category": "研究",
+      "date": "2026-02-06",
+      "url": "https://www.sciencedaily.com/releases/2026/02/260206020852.htm",
+      "imageUrl": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=300&fit=crop",
+      "source": "ScienceDaily"
     },
     {
       "id": "f1f28663de68",
@@ -163,6 +185,17 @@
       "url": "https://resemom.jp/article/2026/02/06/84943.html",
       "imageUrl": "https://resemom.jp/imgs/ogp_f/391371.jpg",
       "source": "リセマム"
+    },
+    {
+      "id": "962342c8378f",
+      "title": "Two-month-old babies are already making sense of the world",
+      "summary": "At just two months old, babies are already organizing the world in their minds. Brain scans revealed distinct patterns as infants looked at pictures of animals, toys, and everyday objects, showing ...",
+      "category": "ICT・教材",
+      "date": "2026-02-05",
+      "url": "https://www.sciencedaily.com/releases/2026/02/260204114144.htm",
+      "imageUrl": "https://www.sciencedaily.com/images/1920/baby-sadie-9-month-foundcog-scan.webp",
+      "source": "ScienceDaily (Mind & Brain)",
+      "mainKeyword": ""
     },
     {
       "id": "da96f16507ef",
@@ -323,9 +356,11 @@
       "source": "朝日新聞 教育"
     }
   ],
-  "lastUpdated": "2026-02-08T23:41:18.706404",
-  "totalCount": 28,
+  "lastUpdated": "2026-02-08T23:42:02.534302",
+  "totalCount": 34,
   "sources": [
+    "ScienceDaily (Mind & Brain)",
+    "ScienceDaily",
     "PRESIDENT Online",
     "文部科学省",
     "朝日新聞 教育",
