@@ -1,22 +1,32 @@
 {
   "articles": [
     {
-      "id": "278e05e99ad5",
-      "title": "母親から父親への文句が止まらない…｢学校に行きたがらない子｣の家庭に共通している\"根本的問題\"",
-      "summary": "学校に行きたがらない子どもは、どんな思いを抱えているのか。不登校・引きこもり解消支援を行う寝占理絵さんは「不登校児の親に話を聞くと…",
-      "category": "多様な学び",
-      "date": "2026-02-07",
-      "url": "https://president.jp/articles/-/108468",
-      "imageUrl": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=300&fit=crop",
-      "source": "PRESIDENT Online"
-    },
-    {
       "id": "59ba0d6f3bdc",
       "title": "｢あなたはどうしたいの？｣が口癖の人は要注意…｢子ども甘やかす親｣と｢愛情を与える親｣の決定的な違い",
       "summary": "良好な親子関係を築くためには何が必要なのか。不登校・引きこもり解消支援を行う寝占理絵さんは「甘やかしと愛情を履き違えると、子どもは…",
       "category": "多様な学び",
       "date": "2026-02-08",
       "url": "https://president.jp/articles/-/108469",
+      "imageUrl": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=300&fit=crop",
+      "source": "PRESIDENT Online"
+    },
+    {
+      "id": "fdb4ef8a2ff6",
+      "title": "令和7年度インクルーシブな学校運営モデル事業中間成果報告会を開催します",
+      "summary": "文部科学省が令和7年度インクルーシブな学校運営モデル事業の中間成果報告会の開催を発表。事業の進捗と成果を共有する内容。",
+      "category": "制度・行政",
+      "date": "2026-02-08",
+      "url": "https://www.mext.go.jp/b_menu/houdou/mext_01599.html",
+      "imageUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=300&fit=crop",
+      "source": "文部科学省"
+    },
+    {
+      "id": "278e05e99ad5",
+      "title": "母親から父親への文句が止まらない…｢学校に行きたがらない子｣の家庭に共通している\"根本的問題\"",
+      "summary": "学校に行きたがらない子どもは、どんな思いを抱えているのか。不登校・引きこもり解消支援を行う寝占理絵さんは「不登校児の親に話を聞くと…",
+      "category": "多様な学び",
+      "date": "2026-02-07",
+      "url": "https://president.jp/articles/-/108468",
       "imageUrl": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=300&fit=crop",
       "source": "PRESIDENT Online"
     },
@@ -39,16 +49,6 @@
       "url": "https://president.jp/articles/-/108313",
       "imageUrl": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=300&fit=crop",
       "source": "PRESIDENT Online"
-    },
-    {
-      "id": "fdb4ef8a2ff6",
-      "title": "令和7年度インクルーシブな学校運営モデル事業中間成果報告会を開催します",
-      "summary": "文部科学省が令和7年度インクルーシブな学校運営モデル事業の中間成果報告会の開催を発表。事業の進捗と成果を共有する内容。",
-      "category": "制度・行政",
-      "date": "2026-02-08",
-      "url": "https://www.mext.go.jp/b_menu/houdou/mext_01599.html",
-      "imageUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=300&fit=crop",
-      "source": "文部科学省"
     },
     {
       "id": "5c5ad78383ba",
@@ -293,9 +293,10 @@
       "source": "朝日新聞 教育"
     }
   ],
-  "lastUpdated": "2026-02-08T23:33:04.227679",
-  "totalCount": 24,
+  "lastUpdated": "2026-02-08T23:34:31.419424",
+  "totalCount": 28,
   "sources": [
+    "PRESIDENT Online",
     "文部科学省",
     "朝日新聞 教育",
     "リセマム",
