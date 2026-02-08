@@ -1,6 +1,28 @@
 {
   "articles": [
     {
+      "id": "7fa995da7b99",
+      "title": "独立行政法人　国立特別支援教育総合研究所",
+      "summary": "国立特別支援教育総合研究所のお知らせです。独立行政法人　国立特別支援教育総合研究所",
+      "category": "合理的配慮・支援",
+      "date": "2026-02-08",
+      "url": "https://www.nise.go.jp/nc/",
+      "imageUrl": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&h=300&fit=crop",
+      "source": "国立特別支援教育総合研究所",
+      "mainKeyword": "特別支援教育"
+    },
+    {
+      "id": "4f2641daef4a",
+      "title": "文部科学省著作教科書（知的障害者用）の画像ページの公開について",
+      "summary": "国立特別支援教育総合研究所のお知らせです。文部科学省著作教科書（知的障害者用）の画像ページの公開について",
+      "category": "合理的配慮・支援",
+      "date": "2026-02-08",
+      "url": "https://www.nise.go.jp/nc/news/2026/0204",
+      "imageUrl": "https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop",
+      "source": "国立特別支援教育総合研究所",
+      "mainKeyword": "特別支援教育"
+    },
+    {
       "id": "fdb4ef8a2ff6",
       "title": "令和7年度インクルーシブな学校運営モデル事業中間成果報告会を開催します",
       "summary": "文部科学省のプレスリリースです。令和7年度インクルーシブな学校運営モデル事業中間成果報告会を開催します",
@@ -253,9 +275,10 @@
       "source": "朝日新聞 教育"
     }
   ],
-  "lastUpdated": "2026-02-08T13:00:12.445392",
-  "totalCount": 24,
+  "lastUpdated": "2026-02-08T17:42:11.755396",
+  "totalCount": 26,
   "sources": [
+    "国立特別支援教育総合研究所",
     "文部科学省",
     "朝日新聞 教育",
     "リセマム",
