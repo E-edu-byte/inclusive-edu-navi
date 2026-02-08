@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Sidebar from '@/components/Sidebar';
 import NewsCard from '@/components/NewsCard';
 import RankingBlock from '@/components/RankingBlock';
+import SupportCard from '@/components/SupportCard';
 import { Article, ArticlesData, BASE_PATH } from '@/lib/types';
 import { useBookmarks } from '@/contexts/BookmarkContext';
 
@@ -116,16 +117,42 @@ export default function Home() {
                 {/* お気に入り追加ボタン */}
                 <button
                   onClick={() => {
+                    const title = document.title;
+                    const url = window.location.href;
+
+                    // レガシーブラウザ向け（IE/Firefox旧版）
+                    if (typeof (window as typeof window & { sidebar?: { addPanel: (title: string, url: string, empty: string) => void } }).sidebar !== 'undefined' && typeof (window as typeof window & { sidebar?: { addPanel: (title: string, url: string, empty: string) => void } }).sidebar?.addPanel === 'function') {
+                      (window as typeof window & { sidebar: { addPanel: (title: string, url: string, empty: string) => void } }).sidebar.addPanel(title, url, '');
+                      return;
+                    }
+
+                    // モバイル判定
+                    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
                     const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-                    const shortcut = isMac ? '⌘+D' : 'Ctrl+D';
-                    alert(`このサイトをブックマークに追加するには、キーボードで「${shortcut}」を押してください。`);
+
+                    if (isMobile) {
+                      alert(
+                        '【このページをお気に入りに追加する方法】\\n\\n' +
+                        '■ iPhone/iPad (Safari):\\n' +
+                        '  画面下部の「共有」ボタン → 「お気に入りに追加」\\n\\n' +
+                        '■ Android (Chrome):\\n' +
+                        '  画面右上の「︙」メニュー → 「☆」をタップ'
+                      );
+                    } else {
+                      const shortcut = isMac ? '⌘+D' : 'Ctrl+D';
+                      alert(
+                        '【このページをお気に入りに追加する方法】\\n\\n' +
+                        `キーボードで「${shortcut}」を押すか、\\n` +
+                        'ブラウザのメニューから「ブックマークに追加」を選択してください。'
+                      );
+                    }
                   }}
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-sky-700 bg-sky-100 hover:bg-sky-200 rounded-full transition-colors"
                 >
                   <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                   </svg>
-                  お気に入りに追加
+                  このページをお気に入りに追加
                 </button>
               </div>
 
@@ -183,18 +210,10 @@ export default function Home() {
                       mainKeyword={article.mainKeyword}
                       isPickup={false}
                     />
-                    {/* スマホ用：3番目の記事の下に「活動を応援する」ボタン */}
+                    {/* スマホ用：3番目の記事の下に「活動を応援する」カード */}
                     {index === 2 && (
                       <div className="lg:hidden mt-4 mb-1">
-                        <a
-                          href="https://www.buymeacoffee.com/inclusive-edu"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center justify-center gap-2 w-full py-3 bg-slate-600 hover:bg-slate-700 text-white text-sm font-medium rounded-xl transition-colors"
-                        >
-                          <span>☕️</span>
-                          活動を応援する（コーヒー1杯分から）
-                        </a>
+                        <SupportCard />
                       </div>
                     )}
                   </div>
