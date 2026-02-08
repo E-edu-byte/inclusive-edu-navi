@@ -35,8 +35,8 @@
     {
       "id": "2a2640374f6f",
       "title": "武蔵野大学、研究体験連動型学習を特徴とする「通信教育部国際データサイエンス学部」を4月に新設",
-      "summary": "EdTechZineの記事です。詳しくは元記事をご覧ください。",
-      "category": "ICT・教材",
+      "summary": "武蔵野大学が、研究体験連動型学習を特徴とする「通信教育部国際データサイエンス学部」を4月に新設。多様な学びの機会を提供します。",
+      "category": "不登校・多様な学び",
       "date": "2026-02-06",
       "url": "https://edtechzine.jp/article/detail/13462",
       "imageUrl": "https://edtechzine.jp/static/images/article/13462/13462_og.jpg",
@@ -46,7 +46,7 @@
     {
       "id": "d21b55829938",
       "title": "4月に提供予定の学校向けAI英会話サービス「スタディポケット AI英会話」、1名あたりの月額を税別150円に設定",
-      "summary": "EdTechZineの記事です。詳しくは元記事をご覧ください。",
+      "summary": "学校向けAI英会話サービス「スタディポケット AI英会話」が4月提供開始、月額150円に設定されることを伝える。教育現場におけるICT教材活用の一例。",
       "category": "ICT・教材",
       "date": "2026-02-06",
       "url": "https://edtechzine.jp/article/detail/13463",
@@ -108,8 +108,8 @@
     {
       "id": "a5b12e17f0f3",
       "title": "東京大学メタバース工学部、小・中・高校生と保護者、教員に向けた生成AIの無料オンライン講座を3月21日、29日に開講",
-      "summary": "EdTechZineの記事です。詳しくは元記事をご覧ください。",
-      "category": "ICT・教材",
+      "summary": "東京大学メタバース工学部が、小・中・高校生や保護者、教員向けに生成AIの無料オンライン講座を開講。多様な学習機会を提供する。",
+      "category": "不登校・多様な学び",
       "date": "2026-02-05",
       "url": "https://edtechzine.jp/article/detail/13461",
       "imageUrl": "https://edtechzine.jp/static/images/article/13461/13461_og.jpg",
@@ -179,7 +179,7 @@
     {
       "id": "8b1f66e3d3bf",
       "title": "COMPASS、理科の知識で弁当箱を設計する小中学校向け探究学習プログラムを無償提供",
-      "summary": "EdTechZineの記事です。詳しくは元記事をご覧ください。",
+      "summary": "COMPASSが無償提供する、理科知識で弁当箱を設計する小中学校向け探究学習プログラム。ICTを活用した教材として、多様な学びを支援。",
       "category": "ICT・教材",
       "date": "2026-02-04",
       "url": "https://edtechzine.jp/article/detail/13459",
@@ -253,13 +253,13 @@
       "source": "朝日新聞 教育"
     }
   ],
-  "lastUpdated": "2026-02-08T18:46:05.426566",
+  "lastUpdated": "2026-02-08T18:54:07.806972",
   "totalCount": 24,
   "sources": [
-    "ICT教育ニュース",
     "文部科学省",
-    "EdTechZine",
+    "朝日新聞 教育",
     "リセマム",
-    "朝日新聞 教育"
+    "EdTechZine",
+    "ICT教育ニュース"
   ]
 }
