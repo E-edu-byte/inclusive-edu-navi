@@ -166,7 +166,12 @@ MAX_ARTICLES_PER_DOMAIN = 3
 # 【徹底省エネ設定】取得件数を最小限に
 LIGHT_MODE = True
 MAX_ARTICLES_PER_SOURCE = 3  # 各ソースから最大3件（徹底節約）
-MAX_NEW_ARTICLES_PER_RUN = 10  # 1回の実行で追加する最大記事数
+MAX_NEW_ARTICLES_PER_RUN = 5  # 1回の実行で追加する最大記事数（新規）
+MAX_AI_CALLS_PER_RUN = 8  # 1回の実行でのAI呼び出し最大数（リトライ+新規合計）
+AI_CALL_SLEEP_SECONDS = 3  # AI呼び出し間の待機秒数
+
+# AI呼び出しカウンター（リトライ+新規の合計）
+TOTAL_AI_CALLS_THIS_RUN = 0
 
 # 既存記事のタイトル（重複チェック用）
 EXISTING_TITLES: Set[str] = set()
@@ -413,7 +418,7 @@ FORCE_RETRY_PATTERNS = [
     "詳しくは元記事をご覧ください",
 ]
 
-MAX_SUMMARY_RETRY = 5  # 1回の実行でリトライする最大件数
+MAX_SUMMARY_RETRY = 3  # 1回の実行でリトライする最大件数（AI呼び出し上限と共有）
 
 
 def is_incomplete_summary(summary: str, source: str = "") -> bool:
@@ -460,7 +465,7 @@ def retry_incomplete_summaries():
     - 最大 MAX_SUMMARY_RETRY 件まで
     - API制限を考慮して制限付きで実行
     """
-    global EXISTING_ARTICLES
+    global EXISTING_ARTICLES, TOTAL_AI_CALLS_THIS_RUN
 
     if IS_DEV_MODE:
         print("  [開発モード] 要約リトライをスキップ")
@@ -484,13 +489,24 @@ def retry_incomplete_summaries():
 
     print(f"  → 不完全な要約: {len(incomplete_articles)}件を検出")
 
-    # 最大件数に制限
-    retry_targets = incomplete_articles[:MAX_SUMMARY_RETRY]
-    print(f"  → リトライ対象: {len(retry_targets)}件（最大{MAX_SUMMARY_RETRY}件）")
+    # 最大件数に制限（グローバル上限も考慮）
+    available_slots = MAX_AI_CALLS_PER_RUN - TOTAL_AI_CALLS_THIS_RUN
+    retry_limit = min(MAX_SUMMARY_RETRY, available_slots)
+    retry_targets = incomplete_articles[:retry_limit]
+    print(f"  → リトライ対象: {len(retry_targets)}件（上限{retry_limit}件、残りAI枠{available_slots}件）")
+
+    if retry_limit <= 0:
+        print("  [省エネ] AI呼び出し上限に達しているためリトライをスキップ")
+        return
 
     retry_success = 0
     edtech_updated = []  # EdTechZine更新記録
     for idx, article in retry_targets:
+        # グローバルAI呼び出し上限チェック
+        if TOTAL_AI_CALLS_THIS_RUN >= MAX_AI_CALLS_PER_RUN:
+            print(f"    [省エネ] AI呼び出し上限({MAX_AI_CALLS_PER_RUN}件)に達したため終了")
+            break
+
         title = article.get('title', '')
         url = article.get('url', '')
         source = article.get('source', '')
@@ -498,6 +514,7 @@ def retry_incomplete_summaries():
         is_edtech = source == 'EdTechZine'
 
         print(f"    リトライ中: {title[:40]}...")
+        TOTAL_AI_CALLS_THIS_RUN += 1
 
         try:
             # AI要約を再実行
@@ -1172,6 +1189,12 @@ def fetch_rss_feed(feed_info: dict) -> list:
                 print(f"    [省エネ] 最大追加数 {MAX_NEW_ARTICLES_PER_RUN}件に達したため終了")
                 break
 
+            # 【省エネ】グローバルAI呼び出し上限チェック
+            global TOTAL_AI_CALLS_THIS_RUN
+            if TOTAL_AI_CALLS_THIS_RUN >= MAX_AI_CALLS_PER_RUN:
+                print(f"    [省エネ] AI呼び出し上限({MAX_AI_CALLS_PER_RUN}件)に達したため終了")
+                break
+
             # 記事IDを生成
             article_id = generate_article_id(link)
 
@@ -1214,6 +1237,7 @@ def fetch_rss_feed(feed_info: dict) -> list:
 
                 # 【AI要約 + カテゴリー + mainKeyword判定】
                 print(f"        → AI判定（要約＆カテゴリー＆キーワード）...")
+                TOTAL_AI_CALLS_THIS_RUN += 1
                 ai_result = generate_ai_summary_and_category(title, original_summary, feed_name, link)
 
                 # 【SKIP判定】AIが理念に合致しないと判断した記事は除外

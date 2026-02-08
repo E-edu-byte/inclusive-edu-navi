@@ -204,13 +204,13 @@ export default function Home() {
             </section>
           )}
 
-          {/* その他の情報をみるボタン */}
+          {/* すべてのニュースをみるボタン */}
           <div className="mt-8 text-center">
             <Link
               href="/news"
               className="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-lg transition-colors"
             >
-              その他の情報をみる
+              すべてのニュースをみる
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
