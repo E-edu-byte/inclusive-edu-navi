@@ -106,9 +106,8 @@ export default function Home() {
                 <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-3 tracking-tight">
                   すべての子どもの学びを支える
                 </h1>
-                <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                  インクルーシブ教育に関する最新のニュース、研究成果、実践事例を
-                  わかりやすくお届けします。教育現場で役立つ情報を厳選してご紹介。
+                <p className="text-slate-700 text-base sm:text-lg font-medium leading-relaxed">
+                  インクルーシブな社会をつくる人のための情報プラットフォーム
                 </p>
               </div>
 
@@ -153,19 +152,34 @@ export default function Home() {
               </h2>
 
               <div className="space-y-3">
-                {latestNews.map((article) => (
-                  <NewsCard
-                    key={article.id}
-                    title={article.title}
-                    summary={article.summary}
-                    imageUrl={article.imageUrl}
-                    category={article.category}
-                    source={article.source}
-                    date={article.date}
-                    url={article.url}
-                    mainKeyword={article.mainKeyword}
-                    isPickup={false}
-                  />
+                {latestNews.map((article, index) => (
+                  <div key={article.id}>
+                    <NewsCard
+                      title={article.title}
+                      summary={article.summary}
+                      imageUrl={article.imageUrl}
+                      category={article.category}
+                      source={article.source}
+                      date={article.date}
+                      url={article.url}
+                      mainKeyword={article.mainKeyword}
+                      isPickup={false}
+                    />
+                    {/* スマホ用：3番目の記事の下に「活動を応援する」ボタン */}
+                    {index === 2 && (
+                      <div className="lg:hidden mt-4 mb-1">
+                        <a
+                          href="#"
+                          className="flex items-center justify-center gap-2 w-full px-5 py-3.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all duration-200"
+                        >
+                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                          </svg>
+                          活動を応援する
+                        </a>
+                      </div>
+                    )}
+                  </div>
                 ))}
               </div>
             </section>

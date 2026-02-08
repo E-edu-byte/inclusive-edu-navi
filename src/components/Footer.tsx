@@ -13,10 +13,41 @@ export default function Footer() {
             <h3 className="text-lg font-bold text-gray-900 mb-4">
               インクルーシブ教育ナビ
             </h3>
-            <p className="text-sm text-gray-600 leading-relaxed">
+            <p className="text-sm text-gray-600 leading-relaxed mb-5">
               インクルーシブ教育に関する最新のニュース、研究、実践事例をお届けします。
               すべての子どもたちの学びを支えるための情報プラットフォームです。
             </p>
+            {/* 公式機関バナー（縦並び） */}
+            <div className="flex flex-col gap-3">
+              <a
+                href="https://www.mext.go.jp/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block h-12 w-44 rounded-lg overflow-hidden bg-white border border-gray-200 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+                title="文部科学省"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`${BASE_PATH}/images/banners/mext.jpg`}
+                  alt="文部科学省"
+                  className="w-full h-full object-contain"
+                />
+              </a>
+              <a
+                href="https://www.nise.go.jp/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block h-12 w-44 rounded-lg overflow-hidden bg-white border border-gray-200 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+                title="国立特別支援教育総合研究所"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`${BASE_PATH}/images/banners/nise.png`}
+                  alt="国立特別支援教育総合研究所"
+                  className="w-full h-full object-contain"
+                />
+              </a>
+            </div>
           </div>
 
           {/* カテゴリ */}
@@ -67,40 +98,6 @@ export default function Footer() {
         {/* 活動を応援する */}
         <div className="mt-8 max-w-sm mx-auto md:mx-0">
           <SupportCard />
-        </div>
-
-        {/* 公式機関バナー */}
-        <div className="mt-12 py-8 flex justify-center items-center gap-6 sm:gap-10">
-          {/* 文部科学省 */}
-          <a
-            href="https://www.mext.go.jp/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block h-14 sm:h-16 w-40 sm:w-48 rounded-lg overflow-hidden bg-white border border-gray-200 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
-            title="文部科学省"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={`${BASE_PATH}/images/banners/mext.jpg`}
-              alt="文部科学省"
-              className="w-full h-full object-contain"
-            />
-          </a>
-          {/* NISE */}
-          <a
-            href="https://www.nise.go.jp/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block h-14 sm:h-16 w-40 sm:w-48 rounded-lg overflow-hidden bg-white border border-gray-200 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
-            title="国立特別支援教育総合研究所"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={`${BASE_PATH}/images/banners/nise.png`}
-              alt="国立特別支援教育総合研究所"
-              className="w-full h-full object-contain"
-            />
-          </a>
         </div>
 
         {/* システムステータス */}
