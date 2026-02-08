@@ -117,11 +117,6 @@ RSS_FEEDS = [
         "skip_core_filter": True,
     },
     {
-        "name": "教育新聞",
-        "url": "https://www.kyobun.co.jp/feed/",
-        "skip_core_filter": True,
-    },
-    {
         "name": "EdTechZine",
         "url": "https://edtechzine.jp/rss/new/20/index.xml",
         "skip_core_filter": True,
@@ -133,8 +128,13 @@ RSS_FEEDS = [
         "skip_core_filter": False,
     },
     {
-        "name": "読売新聞 教育",
-        "url": "https://www.yomiuri.co.jp/feed/kyoiku/",
+        "name": "産経ニュース 教育",
+        "url": "https://www.sankei.com/rss/news/education.xml",
+        "skip_core_filter": False,
+    },
+    {
+        "name": "ベネッセ教育情報",
+        "url": "https://benesse.jp/news/rss.xml",
         "skip_core_filter": False,
     },
     # === 通信社・放送局 ===
@@ -943,9 +943,10 @@ def fetch_rss_feed(feed_info: dict) -> list:
     feed_name = feed_info['name']
     feed_url = feed_info['url']
     skip_core_filter = feed_info.get('skip_core_filter', False)
+    duplicate_count = 0  # 重複スキップのカウンター
 
     try:
-        print(f"  取得中: {feed_name}")
+        print(f"  ■ {feed_name}")
         print(f"    URL: {feed_url}")
 
         headers = {
@@ -1020,7 +1021,7 @@ def fetch_rss_feed(feed_info: dict) -> list:
 
             # 【API節約】重複チェック - 既存記事と同じタイトルまたはURLならAI要約前にスキップ
             if is_duplicate_article(title, link):
-                print(f"    [SKIP] 重複: {title[:40]}...")
+                duplicate_count += 1
                 continue
 
             processed += 1
@@ -1127,7 +1128,9 @@ def fetch_rss_feed(feed_info: dict) -> list:
 
             articles.append(article)
 
-        print(f"    → {len(articles)}件の理念合致記事を抽出")
+        # ソースごとのサマリー表示
+        if len(articles) > 0 or duplicate_count > 0:
+            print(f"    → 新規: {len(articles)}件 / 重複スキップ: {duplicate_count}件")
 
     except requests.exceptions.RequestException as e:
         print(f"    エラー: {feed_name}の取得に失敗 - {e}")
@@ -1170,10 +1173,11 @@ def fetch_mext_press_releases(max_articles: int = 3) -> list:
     教育関連の重要な政策発表を取得
     """
     articles = []
+    duplicate_count = 0
     mext_url = "https://www.mext.go.jp/b_menu/houdou/index.htm"
 
     try:
-        print("  取得中: 文部科学省 プレスリリース")
+        print("  ■ 文部科学省 プレスリリース")
         print(f"    URL: {mext_url}")
 
         headers = {
@@ -1209,6 +1213,11 @@ def fetch_mext_press_releases(max_articles: int = 3) -> list:
                 if not contains_core_keyword(text, ""):
                     continue
 
+                # 重複チェック
+                if is_duplicate_article(text, full_url):
+                    duplicate_count += 1
+                    continue
+
                 count += 1
                 print(f"    [{count}] {text[:50]}...")
 
@@ -1226,7 +1235,8 @@ def fetch_mext_press_releases(max_articles: int = 3) -> list:
                 }
                 articles.append(article)
 
-        print(f"    → {len(articles)}件の理念合致記事を抽出")
+        if len(articles) > 0 or duplicate_count > 0:
+            print(f"    → 新規: {len(articles)}件 / 重複スキップ: {duplicate_count}件")
 
     except Exception as e:
         print(f"    エラー: 文部科学省の取得に失敗 - {e}")
@@ -1240,10 +1250,10 @@ def fetch_nise_news(max_articles: int = 2) -> list:
     特別支援教育に特化した研究機関のため、全記事が理念に合致
     """
     articles = []
+    duplicate_count = 0
     nise_url = "https://www.nise.go.jp/nc/news"
 
     try:
-        print("  取得中: 国立特別支援教育総合研究所")
         print(f"    URL: {nise_url}")
 
         headers = {
@@ -1278,7 +1288,8 @@ def fetch_nise_news(max_articles: int = 2) -> list:
                     full_url = href
 
                 # 重複チェック
-                if is_duplicate_title(text):
+                if is_duplicate_article(text, full_url):
+                    duplicate_count += 1
                     continue
 
                 # 理念キーワードを含むかチェック（NISEは特別支援専門なので緩和）
@@ -1303,7 +1314,8 @@ def fetch_nise_news(max_articles: int = 2) -> list:
                 }
                 articles.append(article)
 
-        print(f"    → {len(articles)}件の記事を抽出")
+        if len(articles) > 0 or duplicate_count > 0:
+            print(f"    → 新規: {len(articles)}件 / 重複スキップ: {duplicate_count}件")
 
     except Exception as e:
         print(f"    エラー: NISEの取得に失敗 - {e}")
@@ -1317,10 +1329,10 @@ def fetch_tsukuba_human_news(max_articles: int = 2) -> list:
     特別支援教育・教育心理学の研究拠点
     """
     articles = []
+    duplicate_count = 0
     tsukuba_url = "https://www.human.tsukuba.ac.jp/human/news/"
 
     try:
-        print("  取得中: 筑波大学 人間系")
         print(f"    URL: {tsukuba_url}")
 
         headers = {
@@ -1355,7 +1367,8 @@ def fetch_tsukuba_human_news(max_articles: int = 2) -> list:
                     full_url = href
 
                 # 重複チェック
-                if is_duplicate_title(text):
+                if is_duplicate_article(text, full_url):
+                    duplicate_count += 1
                     continue
 
                 # 【厳格フィルタ】理念キーワードを含む記事のみ
@@ -1380,7 +1393,8 @@ def fetch_tsukuba_human_news(max_articles: int = 2) -> list:
                 }
                 articles.append(article)
 
-        print(f"    → {len(articles)}件の理念合致記事を抽出")
+        if len(articles) > 0 or duplicate_count > 0:
+            print(f"    → 新規: {len(articles)}件 / 重複スキップ: {duplicate_count}件")
 
     except Exception as e:
         print(f"    エラー: 筑波大学の取得に失敗 - {e}")
