@@ -4,12 +4,14 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { categories } from '@/lib/types';
+import { useBookmarks } from '@/contexts/BookmarkContext';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const router = useRouter();
+  const { bookmarkCount, maxBookmarks } = useBookmarks();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -135,6 +137,20 @@ export default function Header() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link
+                href="/bookmarks"
+                className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors inline-flex items-center gap-1.5"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                </svg>
+                保存した記事
+                <span className="text-xs bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full">
+                  {bookmarkCount}/{maxBookmarks}
+                </span>
+              </Link>
+            </li>
           </ul>
         </nav>
 
@@ -162,6 +178,21 @@ export default function Header() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  href="/bookmarks"
+                  className="flex items-center gap-2 px-3 py-2 text-base font-medium text-gray-700 hover:text-amber-600 hover:bg-amber-50 rounded-lg"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                  </svg>
+                  保存した記事
+                  <span className="text-sm bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">
+                    {bookmarkCount}/{maxBookmarks}
+                  </span>
+                </Link>
+              </li>
             </ul>
           </nav>
         )}

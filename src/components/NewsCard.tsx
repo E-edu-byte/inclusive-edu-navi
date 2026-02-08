@@ -1,8 +1,10 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { getCategoryByName } from '@/lib/types';
 import { generateAmazonSearchUrl, generateRakutenSearchUrl } from '@/data/articles';
+import { useBookmarks } from '@/contexts/BookmarkContext';
 
 type NewsCardProps = {
   title: string;
@@ -54,6 +56,31 @@ export default function NewsCard({
   isPickup = false,
   pickupReason,
 }: NewsCardProps) {
+  const { addBookmark, removeBookmark, isBookmarked, bookmarkCount, maxBookmarks } = useBookmarks();
+  const [showToast, setShowToast] = useState(false);
+  const bookmarked = isBookmarked(url);
+
+  const handleBookmark = () => {
+    if (bookmarked) {
+      removeBookmark(url);
+    } else {
+      const success = addBookmark({
+        id: url,
+        title,
+        summary,
+        date,
+        source: source || '',
+        url,
+        category,
+        imageUrl,
+      });
+      if (!success) {
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 3000);
+      }
+    }
+  };
+
   // カードの背景色
   const cardBgClass = isPickup
     ? 'bg-gradient-to-br from-amber-50 to-orange-50 border-amber-200'
@@ -140,8 +167,8 @@ export default function NewsCard({
             {summary}
           </p>
 
-          {/* 元記事を読むボタン + Amazon検索リンク - タップしやすい間隔 */}
-          <div className="mt-auto pt-3 flex flex-wrap items-center gap-x-5 gap-y-3">
+          {/* 元記事を読むボタン + しおり + Amazon検索リンク - タップしやすい間隔 */}
+          <div className="mt-auto pt-3 flex flex-wrap items-center gap-x-3 gap-y-3">
             <a
               href={url}
               target="_blank"
@@ -153,6 +180,29 @@ export default function NewsCard({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
             </a>
+            {/* しおりボタン */}
+            <button
+              onClick={handleBookmark}
+              className={`inline-flex items-center gap-1 px-3 py-2.5 sm:py-1.5 text-sm font-medium rounded-lg border transition-colors ${
+                bookmarked
+                  ? 'bg-amber-100 border-amber-300 text-amber-700 hover:bg-amber-200'
+                  : 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100'
+              }`}
+              title={bookmarked ? 'しおりを解除' : 'しおりに追加'}
+            >
+              <svg
+                className={`w-4 h-4 ${bookmarked ? 'fill-amber-500' : 'fill-none stroke-current'}`}
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                />
+              </svg>
+              <span className="hidden sm:inline">{bookmarked ? '保存済み' : '保存'}</span>
+            </button>
             {/* 書籍検索リンク（控えめなテキストリンク） */}
             <span className="text-xs text-gray-400 py-2 sm:py-0">
               📖 関連書籍:
@@ -177,6 +227,13 @@ export default function NewsCard({
           </div>
         </div>
       </div>
+
+      {/* トースト通知 */}
+      {showToast && (
+        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 px-4 py-3 bg-gray-800 text-white text-sm rounded-lg shadow-lg max-w-sm text-center animate-fade-in">
+          保存できるのは最大{maxBookmarks}件までです。新しい記事を保存するには、既存のしおりを解除してください。
+        </div>
+      )}
     </article>
   );
 }
