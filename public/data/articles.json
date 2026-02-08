@@ -1,6 +1,46 @@
 {
   "articles": [
     {
+      "id": "278e05e99ad5",
+      "title": "母親から父親への文句が止まらない…｢学校に行きたがらない子｣の家庭に共通している\"根本的問題\"",
+      "summary": "学校に行きたがらない子どもは、どんな思いを抱えているのか。不登校・引きこもり解消支援を行う寝占理絵さんは「不登校児の親に話を聞くと…",
+      "category": "多様な学び",
+      "date": "2026-02-07",
+      "url": "https://president.jp/articles/-/108468",
+      "imageUrl": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=300&fit=crop",
+      "source": "PRESIDENT Online"
+    },
+    {
+      "id": "59ba0d6f3bdc",
+      "title": "｢あなたはどうしたいの？｣が口癖の人は要注意…｢子ども甘やかす親｣と｢愛情を与える親｣の決定的な違い",
+      "summary": "良好な親子関係を築くためには何が必要なのか。不登校・引きこもり解消支援を行う寝占理絵さんは「甘やかしと愛情を履き違えると、子どもは…",
+      "category": "多様な学び",
+      "date": "2026-02-08",
+      "url": "https://president.jp/articles/-/108469",
+      "imageUrl": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=300&fit=crop",
+      "source": "PRESIDENT Online"
+    },
+    {
+      "id": "f1264db04561",
+      "title": "｢男性だらけの会議｣では絶対に気づかない…女性自衛官が災害現場で真っ先に提案した“2つの生活必需品”",
+      "summary": "組織の中で、自分の意見を飲み込んだ経験はないだろうか。元・陸上自衛隊幹部の有薗光代さんは「私は米陸軍工兵学校で『現場のリアルな声』…",
+      "category": "支援・合理的配慮",
+      "date": "2026-02-07",
+      "url": "https://president.jp/articles/-/108601",
+      "imageUrl": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=300&fit=crop",
+      "source": "PRESIDENT Online"
+    },
+    {
+      "id": "692cd51be13e",
+      "title": "｢男性だらけの会議｣では絶対に気づかない…女性自衛官が災害現場で真っ先に提案した“2つの生活必需品”",
+      "summary": "組織の中で、自分の意見を飲み込んだ経験はないだろうか。元・陸上自衛隊幹部の有薗光代さんは「私は米陸軍工兵学校で『現場のリアルな声』…",
+      "category": "支援・合理的配慮",
+      "date": "2026-02-07",
+      "url": "https://president.jp/articles/-/108313",
+      "imageUrl": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=300&fit=crop",
+      "source": "PRESIDENT Online"
+    },
+    {
       "id": "fdb4ef8a2ff6",
       "title": "令和7年度インクルーシブな学校運営モデル事業中間成果報告会を開催します",
       "summary": "文部科学省が令和7年度インクルーシブな学校運営モデル事業の中間成果報告会の開催を発表。事業の進捗と成果を共有する内容。",
@@ -14,7 +54,7 @@
       "id": "5c5ad78383ba",
       "title": "不登校だった人の新たな一歩へ　「もうひとつの卒業式」東京・北区で",
       "summary": "不登校などで卒業式に出られなかった人たちの新たな出発の場にしてもらおうと、東京都北区の複合施設「北とぴあ」で7日、「もうひとつの卒業式」があった。区教育委員会が初めて開き、20～30代の女性3人が「…",
-      "category": "不登校・多様な学び",
+      "category": "多様な学び",
       "date": "2026-02-07",
       "url": "https://www.asahi.com/articles/ASV272W2HV27OXIE02XM.html?ref=rss",
       "imageUrl": "https://imgopt.asahi.com/ogp/AS20260207002923_comm.jpg",
@@ -25,7 +65,7 @@
       "id": "f1f28663de68",
       "title": "【大学受験】地元進学の多い都道府県1位は愛知…旺文社",
       "summary": "旺文社は2026年1月30日、「2025年度 都道府県別 大学・短大進学状況」を公表した。地元の大学進学率は全国平均で45.4％。都道府県別では、1位が愛知県（72.5％）、2位が東京都（69.8％）であった。",
-      "category": "合理的配慮・支援",
+      "category": "支援・合理的配慮",
       "date": "2026-02-06",
       "url": "https://resemom.jp/article/2026/02/06/84959.html",
       "imageUrl": "https://resemom.jp/imgs/ogp_f/391441.jpg",
@@ -36,7 +76,7 @@
       "id": "2a2640374f6f",
       "title": "武蔵野大学、研究体験連動型学習を特徴とする「通信教育部国際データサイエンス学部」を4月に新設",
       "summary": "武蔵野大学が、研究体験連動型学習を特徴とする「通信教育部国際データサイエンス学部」を4月に新設。多様な学びの機会を提供します。",
-      "category": "不登校・多様な学び",
+      "category": "多様な学び",
       "date": "2026-02-06",
       "url": "https://edtechzine.jp/article/detail/13462",
       "imageUrl": "https://edtechzine.jp/static/images/article/13462/13462_og.jpg",
@@ -98,7 +138,7 @@
       "id": "da96f16507ef",
       "title": "メタバース教育のゲシピ、認定こども園で「eスポーツ英会話 eスピ！」レッスン提供",
       "summary": "ゲシピは4日、福岡県北九州市の認定こども園 東筑紫短期大学附属幼稚園にて、年長クラスを対象とした英語あそびの一環として「eスポーツ英会話 eスピ！」の特別レッスンを提供したことを発 […]",
-      "category": "合理的配慮・支援",
+      "category": "支援・合理的配慮",
       "date": "2026-02-05",
       "url": "https://ict-enews.net/2026/02/06gecipe-2/",
       "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/31716-117-f40103affe79c0668f7c53e770e85e90-1304x974-1-1200x630.webp",
@@ -109,7 +149,7 @@
       "id": "a5b12e17f0f3",
       "title": "東京大学メタバース工学部、小・中・高校生と保護者、教員に向けた生成AIの無料オンライン講座を3月21日、29日に開講",
       "summary": "東京大学メタバース工学部が、小・中・高校生や保護者、教員向けに生成AIの無料オンライン講座を開講。多様な学習機会を提供する。",
-      "category": "不登校・多様な学び",
+      "category": "多様な学び",
       "date": "2026-02-05",
       "url": "https://edtechzine.jp/article/detail/13461",
       "imageUrl": "https://edtechzine.jp/static/images/article/13461/13461_og.jpg",
@@ -253,7 +293,7 @@
       "source": "朝日新聞 教育"
     }
   ],
-  "lastUpdated": "2026-02-08T23:26:32.784473",
+  "lastUpdated": "2026-02-08T23:33:04.227679",
   "totalCount": 24,
   "sources": [
     "文部科学省",

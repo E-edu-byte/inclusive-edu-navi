@@ -168,21 +168,12 @@ RSS_FEEDS = [
         "is_research_institution": True,  # 厳格キーワードフィルタ
         "max_articles": 2,  # 最大2件
     },
-    {
-        "name": "理化学研究所",
-        "url": "https://www.riken.jp/pr/news/index.xml",
-        "skip_core_filter": False,
-        "is_research_institution": True,
-        "force_category": "研究",  # 強制的に「研究」カテゴリに振り分け
-        "strict_keywords": ["脳", "発達", "認知", "学習", "教育", "子ども", "神経"],
-        "max_articles": 2,
-    },
     # === ビジネスメディア ===
     {
         "name": "PRESIDENT Online",
-        "url": "https://president.jp/rss/headline",
+        "url": "https://president.jp/list/rss",
         "skip_core_filter": False,
-        "strict_keywords": ["教育", "子ども", "発達", "学校", "インクルーシブ", "特別支援", "障害", "ギフテッド"],
+        "strict_keywords": ["教育", "子ども", "発達", "学校", "インクルーシブ", "特別支援", "障害", "ギフテッド", "不登校"],
         "max_articles": 2,
     },
     # ※ 文部科学省・筑波大学はRSSがないため、別途スクレイピングで取得

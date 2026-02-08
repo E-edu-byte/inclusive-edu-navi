@@ -1,6 +1,36 @@
 {
   "articles": [
     {
+      "id": "59ba0d6f3bdc",
+      "title": "｢あなたはどうしたいの？｣が口癖の人は要注意…｢子ども甘やかす親｣と｢愛情を与える親｣の決定的な違い",
+      "summary": "良好な親子関係を築くためには何が必要なのか。不登校・引きこもり解消支援を行う寝占理絵さんは「甘やかしと愛情を履き違えると、子どもは…",
+      "category": "多様な学び",
+      "date": "2026-02-08",
+      "url": "https://president.jp/articles/-/108469",
+      "imageUrl": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=300&fit=crop",
+      "source": "PRESIDENT Online"
+    },
+    {
+      "id": "f1264db04561",
+      "title": "｢男性だらけの会議｣では絶対に気づかない…女性自衛官が災害現場で真っ先に提案した“2つの生活必需品”",
+      "summary": "組織の中で、自分の意見を飲み込んだ経験はないだろうか。元・陸上自衛隊幹部の有薗光代さんは「私は米陸軍工兵学校で『現場のリアルな声』…",
+      "category": "支援・合理的配慮",
+      "date": "2026-02-07",
+      "url": "https://president.jp/articles/-/108601",
+      "imageUrl": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=300&fit=crop",
+      "source": "PRESIDENT Online"
+    },
+    {
+      "id": "692cd51be13e",
+      "title": "｢男性だらけの会議｣では絶対に気づかない…女性自衛官が災害現場で真っ先に提案した“2つの生活必需品”",
+      "summary": "組織の中で、自分の意見を飲み込んだ経験はないだろうか。元・陸上自衛隊幹部の有薗光代さんは「私は米陸軍工兵学校で『現場のリアルな声』…",
+      "category": "支援・合理的配慮",
+      "date": "2026-02-07",
+      "url": "https://president.jp/articles/-/108313",
+      "imageUrl": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=300&fit=crop",
+      "source": "PRESIDENT Online"
+    },
+    {
       "id": "fdb4ef8a2ff6",
       "title": "令和7年度インクルーシブな学校運営モデル事業中間成果報告会を開催します",
       "summary": "文部科学省のプレスリリースです。令和7年度インクルーシブな学校運営モデル事業中間成果報告会を開催します",
@@ -26,7 +56,7 @@
       "id": "c1426ad9fcd3",
       "title": "不登校オルタナティブスクール「NIJINアカデミー」、東北2校目のリアル校「福島校」4月開校",
       "summary": "NIJINが運営する不登校オルタナティブスクール「NIJINアカデミー」は、東北地区2校目のリアル校「NIJINアカデミー福島校」を4月7日に開校します。",
-      "category": "不登校・多様な学び",
+      "category": "多様な学び",
       "date": "2026-02-05",
       "url": "https://ict-enews.net/2026/02/06nijin-8/",
       "imageUrl": "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=400&h=300&fit=crop",
@@ -37,7 +67,7 @@
       "id": "f413aacb31aa",
       "title": "調査書不要の高校入試が広がる　不登校や病気の生徒に「チャンスを」",
       "summary": "調査書や評定（内申点）を用いず合格者を選ぶ高校入試が増えています。背景には不登校の子の増加などがあり、多様な学びの機会を提供する動きが広がっています。",
-      "category": "不登校・多様な学び",
+      "category": "多様な学び",
       "date": "2026-01-31",
       "url": "https://www.asahi.com/articles/ASV1X2J4XV1XUTIL00DM.html",
       "imageUrl": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&h=300&fit=crop",
@@ -48,7 +78,7 @@
       "id": "sample001",
       "title": "発達障害のある子どもへの合理的配慮ガイドラインを改訂",
       "summary": "文部科学省は、発達障害のある子どもへの合理的配慮に関するガイドラインを改訂しました。学校現場での具体的な支援方法が示されています。",
-      "category": "合理的配慮・支援",
+      "category": "支援・合理的配慮",
       "date": "2026-02-01",
       "url": "https://example.com/sample001",
       "imageUrl": "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400&h=300&fit=crop",
@@ -58,6 +88,10 @@
   ],
   "lastUpdated": "2026-02-07T12:00:00.000000",
   "totalCount": 5,
-  "sources": ["文部科学省", "ICT教育ニュース", "朝日新聞 教育"],
+  "sources": [
+    "文部科学省",
+    "ICT教育ニュース",
+    "朝日新聞 教育"
+  ],
   "_comment": "開発環境用キャッシュデータ - 本番ではpublic/data/articles.jsonが使用されます"
 }
