@@ -103,11 +103,15 @@ export default function Home() {
 
               {/* コンテンツ */}
               <div className="relative z-10">
-                <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-3 tracking-tight">
+                <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-4 tracking-tight">
                   すべての子どもの学びを支える
                 </h1>
-                <p className="text-slate-700 text-base sm:text-lg font-medium leading-relaxed">
-                  インクルーシブな社会をつくる人のための情報プラットフォーム
+                <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-2">
+                  インクルーシブ教育に関する最新のニュース、研究成果、実践事例を<br className="hidden sm:inline" />
+                  わかりやすくお届けします。
+                </p>
+                <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+                  <span className="font-semibold text-indigo-700">インクルーシブな社会を創る人</span>に役立つ情報を厳選してご紹介。
                 </p>
               </div>
 
