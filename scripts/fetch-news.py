@@ -179,6 +179,15 @@ MAX_NEW_ARTICLES_PER_RUN = 10  # 1回の実行で追加する最大記事数
 # 既存記事のタイトル（重複チェック用）
 EXISTING_TITLES: Set[str] = set()
 
+# 既存記事のURL（重複チェック用）
+EXISTING_URLS: Set[str] = set()
+
+# 既存記事リスト（追記保存用）
+EXISTING_ARTICLES: list = []
+
+# 最大保持記事数
+MAX_ARTICLES_RETENTION = 100
+
 # ========================================
 # 理念に基づくキーワードフィルタリング
 # ========================================
@@ -348,25 +357,51 @@ def load_summary_cache():
         print(f"警告: キャッシュ読み込みエラー - {e}")
 
 
-def load_existing_titles():
-    """既存記事のタイトルを読み込み（重複チェック用）"""
-    global EXISTING_TITLES
+def load_existing_articles():
+    """
+    【追記保存の核心】既存記事を完全に読み込み
+    - タイトル・URLで重複チェック用セットを作成
+    - 既存記事リストを保持（後で新規記事と結合）
+    """
+    global EXISTING_TITLES, EXISTING_URLS, EXISTING_ARTICLES
     try:
         if os.path.exists(OUTPUT_FILE):
             with open(OUTPUT_FILE, 'r', encoding='utf-8') as f:
                 data = json.load(f)
-                for article in data.get('articles', []):
+                EXISTING_ARTICLES = data.get('articles', [])
+                for article in EXISTING_ARTICLES:
                     title = article.get('title', '').strip()
+                    url = article.get('url', '').strip()
                     if title:
                         EXISTING_TITLES.add(title)
-            print(f"✓ 重複チェック用: {len(EXISTING_TITLES)}件の既存タイトルを読み込み")
+                    if url:
+                        EXISTING_URLS.add(url)
+            print(f"✓ 既存記事読み込み: {len(EXISTING_ARTICLES)}件")
+            print(f"  - タイトル: {len(EXISTING_TITLES)}件")
+            print(f"  - URL: {len(EXISTING_URLS)}件")
     except Exception as e:
-        print(f"警告: 既存タイトル読み込みエラー - {e}")
+        print(f"警告: 既存記事読み込みエラー - {e}")
+        EXISTING_ARTICLES = []
+
+
+def is_duplicate_article(title: str, url: str) -> bool:
+    """
+    【重複チェック】タイトルまたはURLが既存記事と重複しているかチェック
+    重複している場合、AI要約を含む全処理をスキップ
+    """
+    title_clean = title.strip()
+    url_clean = url.strip()
+    return title_clean in EXISTING_TITLES or url_clean in EXISTING_URLS
 
 
 def is_duplicate_title(title: str) -> bool:
-    """タイトルが既存記事と重複しているかチェック"""
+    """タイトルが既存記事と重複しているかチェック（後方互換性のため維持）"""
     return title.strip() in EXISTING_TITLES
+
+
+def load_existing_titles():
+    """後方互換性のためのラッパー - load_existing_articlesを呼び出す"""
+    load_existing_articles()
 
 # ========================================
 # フォールバック画像（Unsplash - 教育関連）
@@ -976,8 +1011,8 @@ def fetch_rss_feed(feed_info: dict) -> list:
             if not skip_core_filter and not contains_core_keyword(title, rss_summary):
                 continue
 
-            # 【省エネ】重複タイトルチェック - 既存記事と同じタイトルならスキップ
-            if is_duplicate_title(title):
+            # 【API節約】重複チェック - 既存記事と同じタイトルまたはURLならAI要約前にスキップ
+            if is_duplicate_article(title, link):
                 print(f"    [SKIP] 重複: {title[:40]}...")
                 continue
 
@@ -1421,34 +1456,19 @@ def main():
             seen_urls.add(article['url'])
     print(f"  重複除去後: {len(unique_articles)}件")
 
-    # 【追加】1週間以上古い記事を除外
-    print()
-    print("【2.5】1週間以内の記事のみ保持...")
-    one_week_ago = (datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d")
-    fresh_articles = [a for a in unique_articles if a.get('date', '') >= one_week_ago]
-    removed_count = len(unique_articles) - len(fresh_articles)
-    print(f"  除外した古い記事: {removed_count}件")
-    print(f"  1週間以内の記事: {len(fresh_articles)}件")
-    unique_articles = fresh_articles
-
     # 日付でソート（新しい順）
     unique_articles.sort(key=lambda x: x.get('date', ''), reverse=True)
 
-    # ドメインごとの制限を適用
+    # ドメインごとの制限を適用（今回取得分のみ）
     print()
     print("【3】ドメイン制限を適用中...")
     print(f"  （各ドメイン最大{MAX_ARTICLES_PER_DOMAIN}件）")
     limited_articles = apply_domain_limit(unique_articles, MAX_ARTICLES_PER_DOMAIN)
     print(f"  制限適用後: {len(limited_articles)}件")
 
-    # 【厳格ルール】最大50件に制限
-    print()
-    print("【3.5】最大50件ルールを適用中...")
-    MAX_ARTICLES_TOTAL = 50
-    if len(limited_articles) > MAX_ARTICLES_TOTAL:
-        print(f"  {len(limited_articles)}件 → {MAX_ARTICLES_TOTAL}件に制限")
-    final_articles = limited_articles[:MAX_ARTICLES_TOTAL]
-    print(f"  最終記事数: {len(final_articles)}件")
+    # 今回取得分を最終リストに（既存記事との結合は後で行う）
+    final_articles = limited_articles
+    print(f"  今回取得: {len(final_articles)}件（既存記事との結合は後で実施）")
 
     # 【最終検証】画像URLを全チェック
     print()
@@ -1488,40 +1508,38 @@ def main():
     print(f"  フォールバック画像: {fallback_images}件")
     print(f"  水色の本アイコン: 0件（鉄壁ルール適用）")
 
-    # 【破損防止】既存記事とマージして保存
+    # ========================================
+    # 【追記保存】新規記事を先頭に追加、既存記事は維持
+    # ========================================
     print()
-    print("【7.5】既存記事とマージ中...")
+    print("【7.5】追記保存（新規を先頭に追加）...")
     print("-" * 40)
-    existing_articles = []
-    if os.path.exists(OUTPUT_FILE):
-        try:
-            with open(OUTPUT_FILE, 'r', encoding='utf-8') as f:
-                existing_data = json.load(f)
-                existing_articles = existing_data.get('articles', [])
-                print(f"  既存記事: {len(existing_articles)}件")
-        except Exception as e:
-            print(f"  警告: 既存ファイル読み込みエラー - {e}")
 
-    # URLで重複チェックしながらマージ
-    seen_urls = set(a.get('url', '') for a in final_articles)
-    merged_articles = list(final_articles)  # 新規記事を優先
-
-    for article in existing_articles:
+    # 新規記事のみを抽出（既存URLと重複しないもの）
+    truly_new_articles = []
+    for article in final_articles:
         url = article.get('url', '')
-        if url and url not in seen_urls:
-            merged_articles.append(article)
-            seen_urls.add(url)
+        title = article.get('title', '')
+        if not is_duplicate_article(title, url):
+            truly_new_articles.append(article)
+
+    print(f"  今回の取得: {len(final_articles)}件")
+    print(f"  うち新規: {len(truly_new_articles)}件")
+    print(f"  既存記事: {len(EXISTING_ARTICLES)}件")
+
+    # 新規記事を先頭に追加し、既存記事をそのまま後ろに維持
+    merged_articles = truly_new_articles + EXISTING_ARTICLES
 
     # 日付でソート（新しい順）
     merged_articles.sort(key=lambda x: x.get('date', ''), reverse=True)
 
-    # 1週間以上古い記事を除外
-    one_week_ago = (datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d")
-    merged_articles = [a for a in merged_articles if a.get('date', '') >= one_week_ago]
+    # 最大100件に制限（古い記事から削除）
+    if len(merged_articles) > MAX_ARTICLES_RETENTION:
+        removed_count = len(merged_articles) - MAX_ARTICLES_RETENTION
+        print(f"  → {removed_count}件の古い記事を削除（最大{MAX_ARTICLES_RETENTION}件維持）")
+        merged_articles = merged_articles[:MAX_ARTICLES_RETENTION]
 
-    # 最大50件に制限
-    merged_articles = merged_articles[:MAX_ARTICLES_TOTAL]
-    print(f"  マージ後: {len(merged_articles)}件")
+    print(f"  最終保存: {len(merged_articles)}件")
 
     # ソースを再集計
     sources = defaultdict(int)
