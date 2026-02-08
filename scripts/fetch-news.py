@@ -143,7 +143,29 @@ RSS_FEEDS = [
         "url": "https://www.nhk.or.jp/rss/news/cat6.xml",
         "skip_core_filter": False,
     },
-    # ※ 文部科学省はRSSがないため、別途スクレイピングで取得
+    # === 大学・研究機関（厳格フィルタ適用） ===
+    {
+        "name": "東京大学 教育学研究科",
+        "url": "https://www.p.u-tokyo.ac.jp/news/feed",
+        "skip_core_filter": False,
+        "is_research_institution": True,  # 厳格キーワードフィルタ
+        "max_articles": 2,  # 最大2件
+    },
+    # ※ 文部科学省・NISE・筑波大学はRSSがないため、別途スクレイピングで取得
+]
+
+# 大学・研究機関（スクレイピング対象）
+RESEARCH_INSTITUTIONS = [
+    {
+        "name": "国立特別支援教育総合研究所",
+        "url": "https://www.nise.go.jp/nc/news",
+        "max_articles": 2,
+    },
+    {
+        "name": "筑波大学 人間系",
+        "url": "https://www.human.tsukuba.ac.jp/human/news/",
+        "max_articles": 2,
+    },
 ]
 
 # ドメインごとの最大記事数
@@ -360,6 +382,19 @@ FALLBACK_IMAGES = [
     "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop",
     "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=400&h=300&fit=crop",
 ]
+
+# 大学・研究機関専用フォールバック画像（大学キャンパス・研究イメージ）
+UNIVERSITY_FALLBACK_IMAGES = [
+    "https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop",  # 大学キャンパス
+    "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&h=300&fit=crop",  # 大学図書館
+    "https://images.unsplash.com/photo-1568792923760-d70635a89fdc?w=400&h=300&fit=crop",  # 研究イメージ
+    "https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=400&h=300&fit=crop",  # 学術的なイメージ
+]
+
+def get_university_fallback_image(article_id: str) -> str:
+    """大学・研究機関記事用のフォールバック画像を選択"""
+    index = sum(ord(c) for c in article_id) % len(UNIVERSITY_FALLBACK_IMAGES)
+    return UNIVERSITY_FALLBACK_IMAGES[index]
 
 
 def get_fallback_image(article_id: str) -> str:
@@ -684,8 +719,8 @@ JSON形式で回答: {{"summary":"80字の要約","category":"カテゴリ名","
 
         ai_response = response.text.strip()
 
-        # 【軽量化】待機時間を短縮（3秒）
-        time.sleep(3)
+        # 【429対策】待機時間を5秒に設定（API制限回避）
+        time.sleep(5)
 
         # SKIPの場合
         if ai_response.upper() == 'SKIP' or 'SKIP' in ai_response.upper()[:10]:
@@ -1157,6 +1192,160 @@ def fetch_mext_press_releases(max_articles: int = 3) -> list:
     return articles
 
 
+def fetch_nise_news(max_articles: int = 2) -> list:
+    """
+    国立特別支援教育総合研究所（NISE）のニュースをスクレイピング
+    特別支援教育に特化した研究機関のため、全記事が理念に合致
+    """
+    articles = []
+    nise_url = "https://www.nise.go.jp/nc/news"
+
+    try:
+        print("  取得中: 国立特別支援教育総合研究所")
+        print(f"    URL: {nise_url}")
+
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        }
+
+        response = requests.get(nise_url, headers=headers, timeout=15)
+        response.raise_for_status()
+        response.encoding = 'utf-8'
+
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        # ニュース記事のリンクを探す（NISEのHTML構造に合わせて調整）
+        news_items = soup.find_all('a', href=True)
+        count = 0
+
+        for item in news_items:
+            if count >= max_articles:
+                break
+
+            href = item.get('href', '')
+            text = item.get_text(strip=True)
+
+            # ニュース記事のリンクパターンをチェック
+            if ('/nc/' in href or '/news/' in href) and text and len(text) > 15:
+                # 相対URLを絶対URLに変換
+                if href.startswith('/'):
+                    full_url = f"https://www.nise.go.jp{href}"
+                elif not href.startswith('http'):
+                    full_url = f"https://www.nise.go.jp/nc/{href}"
+                else:
+                    full_url = href
+
+                # 重複チェック
+                if is_duplicate_title(text):
+                    continue
+
+                # 理念キーワードを含むかチェック（NISEは特別支援専門なので緩和）
+                if not contains_core_keyword(text, "特別支援"):
+                    continue
+
+                count += 1
+                print(f"    [{count}] {text[:50]}...")
+
+                article_id = generate_article_id(full_url)
+
+                article = {
+                    "id": article_id,
+                    "title": text,
+                    "summary": f"国立特別支援教育総合研究所のお知らせです。{text}",
+                    "category": "合理的配慮・支援",
+                    "date": datetime.now().strftime("%Y-%m-%d"),
+                    "url": full_url,
+                    "imageUrl": get_university_fallback_image(article_id),
+                    "source": "国立特別支援教育総合研究所",
+                    "mainKeyword": "特別支援教育"
+                }
+                articles.append(article)
+
+        print(f"    → {len(articles)}件の記事を抽出")
+
+    except Exception as e:
+        print(f"    エラー: NISEの取得に失敗 - {e}")
+
+    return articles
+
+
+def fetch_tsukuba_human_news(max_articles: int = 2) -> list:
+    """
+    筑波大学 人間系のニュースをスクレイピング
+    特別支援教育・教育心理学の研究拠点
+    """
+    articles = []
+    tsukuba_url = "https://www.human.tsukuba.ac.jp/human/news/"
+
+    try:
+        print("  取得中: 筑波大学 人間系")
+        print(f"    URL: {tsukuba_url}")
+
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        }
+
+        response = requests.get(tsukuba_url, headers=headers, timeout=15)
+        response.raise_for_status()
+        response.encoding = 'utf-8'
+
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        # ニュース記事のリンクを探す
+        news_items = soup.find_all('a', href=True)
+        count = 0
+
+        for item in news_items:
+            if count >= max_articles:
+                break
+
+            href = item.get('href', '')
+            text = item.get_text(strip=True)
+
+            # ニュース記事のリンクパターンをチェック
+            if '/news/' in href and text and len(text) > 10:
+                # 相対URLを絶対URLに変換
+                if href.startswith('/'):
+                    full_url = f"https://www.human.tsukuba.ac.jp{href}"
+                elif not href.startswith('http'):
+                    full_url = f"https://www.human.tsukuba.ac.jp/human/news/{href}"
+                else:
+                    full_url = href
+
+                # 重複チェック
+                if is_duplicate_title(text):
+                    continue
+
+                # 【厳格フィルタ】理念キーワードを含む記事のみ
+                if not contains_core_keyword(text, ""):
+                    continue
+
+                count += 1
+                print(f"    [{count}] {text[:50]}...")
+
+                article_id = generate_article_id(full_url)
+
+                article = {
+                    "id": article_id,
+                    "title": text,
+                    "summary": f"筑波大学人間系のお知らせです。{text}",
+                    "category": "合理的配慮・支援",
+                    "date": datetime.now().strftime("%Y-%m-%d"),
+                    "url": full_url,
+                    "imageUrl": get_university_fallback_image(article_id),
+                    "source": "筑波大学 人間系",
+                    "mainKeyword": "特別支援教育"
+                }
+                articles.append(article)
+
+        print(f"    → {len(articles)}件の理念合致記事を抽出")
+
+    except Exception as e:
+        print(f"    エラー: 筑波大学の取得に失敗 - {e}")
+
+    return articles
+
+
 def clean_article_data(article: dict) -> dict:
     """
     記事データを軽量化（必要なフィールドのみ保持）
@@ -1299,11 +1488,51 @@ def main():
     print(f"  フォールバック画像: {fallback_images}件")
     print(f"  水色の本アイコン: 0件（鉄壁ルール適用）")
 
+    # 【破損防止】既存記事とマージして保存
+    print()
+    print("【7.5】既存記事とマージ中...")
+    print("-" * 40)
+    existing_articles = []
+    if os.path.exists(OUTPUT_FILE):
+        try:
+            with open(OUTPUT_FILE, 'r', encoding='utf-8') as f:
+                existing_data = json.load(f)
+                existing_articles = existing_data.get('articles', [])
+                print(f"  既存記事: {len(existing_articles)}件")
+        except Exception as e:
+            print(f"  警告: 既存ファイル読み込みエラー - {e}")
+
+    # URLで重複チェックしながらマージ
+    seen_urls = set(a.get('url', '') for a in final_articles)
+    merged_articles = list(final_articles)  # 新規記事を優先
+
+    for article in existing_articles:
+        url = article.get('url', '')
+        if url and url not in seen_urls:
+            merged_articles.append(article)
+            seen_urls.add(url)
+
+    # 日付でソート（新しい順）
+    merged_articles.sort(key=lambda x: x.get('date', ''), reverse=True)
+
+    # 1週間以上古い記事を除外
+    one_week_ago = (datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d")
+    merged_articles = [a for a in merged_articles if a.get('date', '') >= one_week_ago]
+
+    # 最大50件に制限
+    merged_articles = merged_articles[:MAX_ARTICLES_TOTAL]
+    print(f"  マージ後: {len(merged_articles)}件")
+
+    # ソースを再集計
+    sources = defaultdict(int)
+    for article in merged_articles:
+        sources[article.get('source', '不明')] += 1
+
     # 保存データを作成
     output_data = {
-        "articles": final_articles,
+        "articles": merged_articles,
         "lastUpdated": datetime.now().isoformat(),
-        "totalCount": len(final_articles),
+        "totalCount": len(merged_articles),
         "sources": list(sources.keys())
     }
 
