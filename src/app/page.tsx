@@ -111,49 +111,9 @@ export default function Home() {
                   インクルーシブ教育に関する最新のニュース、研究成果、実践事例を<br className="hidden sm:inline" />
                   わかりやすくお届けします。
                 </p>
-                <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-4">
+                <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
                   インクルーシブな社会を創る人に役立つ情報を厳選してご紹介。
                 </p>
-                {/* お気に入り追加ボタン */}
-                <button
-                  onClick={() => {
-                    const title = document.title;
-                    const url = window.location.href;
-
-                    // レガシーブラウザ向け（IE/Firefox旧版）
-                    if (typeof (window as typeof window & { sidebar?: { addPanel: (title: string, url: string, empty: string) => void } }).sidebar !== 'undefined' && typeof (window as typeof window & { sidebar?: { addPanel: (title: string, url: string, empty: string) => void } }).sidebar?.addPanel === 'function') {
-                      (window as typeof window & { sidebar: { addPanel: (title: string, url: string, empty: string) => void } }).sidebar.addPanel(title, url, '');
-                      return;
-                    }
-
-                    // モバイル判定
-                    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-                    const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-
-                    if (isMobile) {
-                      alert(
-                        '【このページをお気に入りに追加する方法】\\n\\n' +
-                        '■ iPhone/iPad (Safari):\\n' +
-                        '  画面下部の「共有」ボタン → 「お気に入りに追加」\\n\\n' +
-                        '■ Android (Chrome):\\n' +
-                        '  画面右上の「︙」メニュー → 「☆」をタップ'
-                      );
-                    } else {
-                      const shortcut = isMac ? '⌘+D' : 'Ctrl+D';
-                      alert(
-                        '【このページをお気に入りに追加する方法】\\n\\n' +
-                        `キーボードで「${shortcut}」を押すか、\\n` +
-                        'ブラウザのメニューから「ブックマークに追加」を選択してください。'
-                      );
-                    }
-                  }}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-sky-700 bg-sky-100 hover:bg-sky-200 rounded-full transition-colors"
-                >
-                  <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                  </svg>
-                  このページをお気に入りに追加
-                </button>
               </div>
 
               {/* アクセントライン */}

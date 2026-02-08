@@ -1,17 +1,6 @@
 {
   "articles": [
     {
-      "id": "d13736bef8b3",
-      "title": "A hidden Aloe vera compound takes aim at Alzheimer’s",
-      "summary": "Scientists have uncovered promising clues that compounds found in Aloe vera could play a role in fighting Alzheimer’s disease. Using advanced computer modeling, researchers discovered that beta-sit...",
-      "category": "合理的配慮・支援",
-      "date": "2026-02-08",
-      "url": "https://www.sciencedaily.com/releases/2026/02/260206012213.htm",
-      "imageUrl": "https://www.sciencedaily.com/images/1920/aloe-gel-dripping-from-fresh-cut-aloe-vera-leaf.webp",
-      "source": "ScienceDaily (Mind & Brain)",
-      "mainKeyword": ""
-    },
-    {
       "id": "59ba0d6f3bdc",
       "title": "｢あなたはどうしたいの？｣が口癖の人は要注意…｢子ども甘やかす親｣と｢愛情を与える親｣の決定的な違い",
       "summary": "良好な親子関係を築くためには何が必要なのか。不登校・引きこもり解消支援を行う寝占理絵さんは「甘やかしと愛情を履き違えると、子どもは…",
@@ -30,17 +19,6 @@
       "url": "https://www.mext.go.jp/b_menu/houdou/mext_01599.html",
       "imageUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=300&fit=crop",
       "source": "文部科学省"
-    },
-    {
-      "id": "23ee9f3d91dd",
-      "title": "That dry, bitter taste may be waking up your brain",
-      "summary": "New research suggests the astringent sensation caused by flavanols could act as a direct signal to the brain, triggering effects similar to a mild workout for the nervous system. In mouse experimen...",
-      "category": "合理的配慮・支援",
-      "date": "2026-02-07",
-      "url": "https://www.sciencedaily.com/releases/2026/02/260206012224.htm",
-      "imageUrl": "https://www.sciencedaily.com/images/1920/human-brain-neuron-activity.webp",
-      "source": "ScienceDaily (Mind & Brain)",
-      "mainKeyword": ""
     },
     {
       "id": "278e05e99ad5",
@@ -167,17 +145,6 @@
       "source": "リセマム"
     },
     {
-      "id": "962342c8378f",
-      "title": "Two-month-old babies are already making sense of the world",
-      "summary": "At just two months old, babies are already organizing the world in their minds. Brain scans revealed distinct patterns as infants looked at pictures of animals, toys, and everyday objects, showing ...",
-      "category": "ICT・教材",
-      "date": "2026-02-05",
-      "url": "https://www.sciencedaily.com/releases/2026/02/260204114144.htm",
-      "imageUrl": "https://www.sciencedaily.com/images/1920/baby-sadie-9-month-foundcog-scan.webp",
-      "source": "ScienceDaily (Mind & Brain)",
-      "mainKeyword": ""
-    },
-    {
       "id": "da96f16507ef",
       "title": "メタバース教育のゲシピ、認定こども園で「eスポーツ英会話 eスピ！」レッスン提供",
       "summary": "ゲシピは4日、福岡県北九州市の認定こども園 東筑紫短期大学附属幼稚園にて、年長クラスを対象とした英語あそびの一環として「eスポーツ英会話 eスピ！」の特別レッスンを提供したことを発 […]",
@@ -268,17 +235,6 @@
       "url": "https://www.jst.go.jp/pr/announce/20260204/index.html",
       "imageUrl": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=300&fit=crop",
       "source": "JST"
-    },
-    {
-      "id": "e72f4567d201",
-      "title": "MIT's new brain tool could finally explain consciousness",
-      "summary": "Scientists still don’t know how the brain turns physical activity into thoughts, feelings, and awareness—but a powerful new tool may help crack the mystery. Researchers at MIT are exploring transcr...",
-      "category": "合理的配慮・支援",
-      "date": "2026-02-04",
-      "url": "https://www.sciencedaily.com/releases/2026/02/260203030554.htm",
-      "imageUrl": "https://www.sciencedaily.com/images/1920/consciousness-meditation.webp",
-      "source": "ScienceDaily (Mind & Brain)",
-      "mainKeyword": ""
     },
     {
       "id": "8b1f66e3d3bf",
