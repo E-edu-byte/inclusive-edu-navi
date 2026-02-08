@@ -193,6 +193,14 @@ RSS_FEEDS = [
         "strict_keywords": ["脳", "感情", "遺伝子", "疾患", "心理", "神経", "認知", "発達", "学習", "記憶"],
         "max_articles": 3,
     },
+    {
+        "name": "科学技術振興機構 (JST)",
+        "url": "https://www.jst.go.jp/rss/press.xml",
+        "skip_core_filter": False,
+        "force_category": "研究",
+        "strict_keywords": ["脳", "教育", "発達", "心理", "認知", "学習", "神経", "AI", "インクルーシブ"],
+        "max_articles": 3,
+    },
     # ※ 文部科学省・筑波大学はRSSがないため、別途スクレイピングで取得
 ]
 

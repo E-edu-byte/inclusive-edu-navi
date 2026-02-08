@@ -1,6 +1,26 @@
 {
   "articles": [
     {
+      "id": "84ac6c091a0e",
+      "title": "科学論文の図表を読み解き、有効に利活用するAIワークフローDIVEを開発～水素貯蔵材料等の研究を加速～",
+      "summary": "JSTのプレスリリースです。",
+      "category": "研究",
+      "date": "2026-02-04",
+      "url": "https://www.jst.go.jp/pr/announce/20260204/index.html",
+      "imageUrl": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=300&fit=crop",
+      "source": "JST"
+    },
+    {
+      "id": "6efe2534bd27",
+      "title": "AIで「刻々と変化する風」を低コストで正確に予測～航空機や風車の設計を革新する、低コストかつ高精度な流体解析技術～",
+      "summary": "JSTのプレスリリースです。",
+      "category": "研究",
+      "date": "2026-02-03",
+      "url": "https://www.jst.go.jp/pr/announce/20260203/index.html",
+      "imageUrl": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=300&fit=crop",
+      "source": "JST"
+    },
+    {
       "id": "d13736bef8b3",
       "title": "A hidden Aloe vera compound takes aim at Alzheimer’s",
       "summary": "Scientists have uncovered promising clues that compounds found in Aloe vera could play a role in fighting Alzheimer’s disease. Using advanced computer modeling, researchers discovered that beta-sit...",
@@ -397,7 +417,7 @@
       "source": "理化学研究所"
     }
   ],
-  "lastUpdated": "2026-02-08T23:46:16.620238",
+  "lastUpdated": "2026-02-08T23:48:24.693143",
   "totalCount": 38,
   "sources": [
     "ScienceDaily (Mind & Brain)",
