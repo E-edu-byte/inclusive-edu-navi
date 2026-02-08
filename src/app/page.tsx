@@ -5,27 +5,12 @@ import Link from 'next/link';
 import Sidebar from '@/components/Sidebar';
 import NewsCard from '@/components/NewsCard';
 import RankingBlock from '@/components/RankingBlock';
-import { Article, AIPick, ArticlesData, AIPicksData, BASE_PATH } from '@/lib/types';
-
-// 編集部ピックアップ用の統一型（AI選出 or 自動選出）
-type PickItem = {
-  id: string;
-  title: string;
-  summary: string;
-  category: string;
-  date: string;
-  url: string;
-  imageUrl?: string;
-  source?: string;
-  mainKeyword?: string;
-  isAIPick: boolean;
-  pickupReason?: string;
-};
+import { Article, ArticlesData, BASE_PATH } from '@/lib/types';
 
 export default function Home() {
   const [articles, setArticles] = useState<Article[]>([]);
-  const [pickItems, setPickItems] = useState<PickItem[]>([]);
   const [latestNews, setLatestNews] = useState<Article[]>([]);
+  const [pickupNews, setPickupNews] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -44,75 +29,18 @@ export default function Home() {
           (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
         );
 
-        // 編集部ピックアップデータを取得
-        let aiPicks: AIPick[] = [];
-        try {
-          const picksRes = await fetch(`${BASE_PATH}/data/ai-picks.json`);
-          if (picksRes.ok) {
-            const picksData: AIPicksData = await picksRes.json();
-            aiPicks = picksData.picks || [];
-          }
-        } catch {
-          // ai-picks.json がない場合は空配列
-        }
+        // ========================================
+        // 【厳格なロジック】重複なしで確実に分離
+        // ========================================
 
-        // 有効なAIピックアップを抽出（sourceArticleIdが存在する記事のみ）
-        const validAIPicks = aiPicks.filter((pick) =>
-          articlesArray.some((a) => a.id === pick.sourceArticleId)
-        );
+        // 1. 最新ニュース: 先頭から5件を正確に抽出
+        const latest = sortedAll.slice(0, 5);
+        setLatestNews(latest);
 
-        // ピックアップ用の記事を準備（最大5件）
-        const picks: PickItem[] = [];
-        const usedIds = new Set<string>();
+        // 2. 編集部ピックアップ: 6件目から5件（最新ニュースの次の5件）
+        const pickup = sortedAll.slice(5, 10);
+        setPickupNews(pickup);
 
-        // 1. まずAIピックアップから追加（最大5件）
-        for (const pick of validAIPicks.slice(0, 5)) {
-          const sourceArticle = articlesArray.find((a) => a.id === pick.sourceArticleId);
-          if (sourceArticle && !usedIds.has(sourceArticle.id)) {
-            picks.push({
-              id: pick.id,
-              title: pick.title,
-              summary: pick.summary,
-              category: pick.category,
-              date: pick.originalDate,
-              url: pick.url,
-              imageUrl: sourceArticle.imageUrl,
-              source: sourceArticle.source,
-              mainKeyword: sourceArticle.mainKeyword,
-              isAIPick: true,
-              pickupReason: pick.reason,
-            });
-            usedIds.add(sourceArticle.id);
-          }
-        }
-
-        // 2. AIピックアップが5件未満の場合、最新記事から補完
-        if (picks.length < 5) {
-          for (const article of sortedAll) {
-            if (picks.length >= 5) break;
-            if (!usedIds.has(article.id)) {
-              picks.push({
-                id: `auto-${article.id}`,
-                title: article.title,
-                summary: article.summary,
-                category: article.category,
-                date: article.date,
-                url: article.url,
-                imageUrl: article.imageUrl,
-                source: article.source,
-                mainKeyword: article.mainKeyword,
-                isAIPick: false,
-              });
-              usedIds.add(article.id);
-            }
-          }
-        }
-
-        setPickItems(picks);
-
-        // 3. 最新ニュース: ピックアップに含まれない記事から5件
-        const remaining = sortedAll.filter((a) => !usedIds.has(a.id));
-        setLatestNews(remaining.slice(0, 5));
       } catch (err) {
         setError(err instanceof Error ? err.message : 'データの取得に失敗しました');
       } finally {
@@ -213,20 +141,18 @@ export default function Home() {
                 ))}
               </div>
 
-              {/* すべてのニュースを見るボタン */}
-              {articles.length > 10 && (
-                <div className="mt-6 text-center">
-                  <Link
-                    href="/news"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-lg transition-colors"
-                  >
-                    すべてのニュースを見る
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </Link>
-                </div>
-              )}
+              {/* すべてのニュースを見るボタン（常に表示） */}
+              <div className="mt-6 text-center">
+                <Link
+                  href="/news"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-lg transition-colors"
+                >
+                  すべてのニュースを見る
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </div>
             </section>
           )}
 
@@ -235,8 +161,8 @@ export default function Home() {
             <RankingBlock />
           </div>
 
-          {/* 編集部ピックアップセクション（常に5件表示） */}
-          {pickItems.length > 0 && (
+          {/* 編集部ピックアップセクション（6件目〜10件目を表示） */}
+          {pickupNews.length > 0 && (
             <section>
               <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                 <svg className="w-6 h-6 text-amber-500" fill="currentColor" viewBox="0 0 24 24">
@@ -245,19 +171,18 @@ export default function Home() {
                 編集部ピックアップ
               </h2>
               <div className="space-y-3">
-                {pickItems.map((pick) => (
+                {pickupNews.map((article) => (
                   <NewsCard
-                    key={pick.id}
-                    title={pick.title}
-                    summary={pick.summary}
-                    imageUrl={pick.imageUrl}
-                    category={pick.category}
-                    source={pick.source}
-                    date={pick.date}
-                    url={pick.url}
-                    mainKeyword={pick.mainKeyword}
-                    isPickup={pick.isAIPick}
-                    pickupReason={pick.pickupReason}
+                    key={article.id}
+                    title={article.title}
+                    summary={article.summary}
+                    imageUrl={article.imageUrl}
+                    category={article.category}
+                    source={article.source}
+                    date={article.date}
+                    url={article.url}
+                    mainKeyword={article.mainKeyword}
+                    isPickup={false}
                   />
                 ))}
               </div>
