@@ -127,16 +127,6 @@ RSS_FEEDS = [
         "url": "https://www.asahi.com/rss/asahi/edu.rdf",
         "skip_core_filter": False,
     },
-    {
-        "name": "産経ニュース 教育",
-        "url": "https://www.sankei.com/rss/news/education.xml",
-        "skip_core_filter": False,
-    },
-    {
-        "name": "ベネッセ教育情報",
-        "url": "https://benesse.jp/news/rss.xml",
-        "skip_core_filter": False,
-    },
     # === 通信社・放送局 ===
     {
         "name": "NHK NEWS WEB",
@@ -158,7 +148,7 @@ RSS_FEEDS = [
         "is_research_institution": True,  # 厳格キーワードフィルタ
         "max_articles": 2,  # 最大2件
     },
-    # ※ 文部科学省・NISE・筑波大学はRSSがないため、別途スクレイピングで取得
+    # ※ 文部科学省・筑波大学はRSSがないため、別途スクレイピングで取得
 ]
 
 # 大学・研究機関（スクレイピング対象）
@@ -432,11 +422,16 @@ def is_incomplete_summary(summary: str, source: str = "") -> bool:
     - 40文字以下
     - 定型文のみ（「〇〇の記事です」など）
     - EdTechZine定型文が含まれる場合は強制的に不完全とみなす
+    - 「内容取得失敗」マーク付きはリトライ対象外
     """
     if not summary:
         return True
 
     summary_clean = summary.strip()
+
+    # 「内容取得失敗」マーク付きはリトライ対象外（無限ループ防止）
+    if "(内容取得失敗)" in summary_clean:
+        return False
 
     # 40文字以下は不完全
     if len(summary_clean) <= 40:
@@ -532,10 +527,18 @@ def retry_incomplete_summaries():
                 if is_edtech:
                     edtech_updated.append(title)
             else:
-                print(f"      → 改善なし（そのまま維持）")
+                # リトライ失敗: 再リトライを防ぐためマークを付ける
+                if is_edtech and "(内容取得失敗)" not in old_summary:
+                    EXISTING_ARTICLES[idx]['summary'] = f"{title[:60]}... (内容取得失敗)"
+                    print(f"      → 取得失敗マークを付与")
+                else:
+                    print(f"      → 改善なし（そのまま維持）")
 
         except Exception as e:
             print(f"      → エラー: {e}")
+            # エラー時もマークを付ける
+            if is_edtech and "(内容取得失敗)" not in old_summary:
+                EXISTING_ARTICLES[idx]['summary'] = f"{title[:60]}... (内容取得失敗)"
 
     print(f"  → リトライ完了: {retry_success}/{len(retry_targets)}件 成功")
 
