@@ -1,6 +1,28 @@
 {
   "articles": [
     {
+      "id": "2d60680117ba",
+      "title": "国立特別支援教育総合研究所（NISE）メールマガジン第227号の刊行について",
+      "summary": "国立特別支援教育総合研究所のお知らせです。国立特別支援教育総合研究所（NISE）メールマガジン第227号の刊行について",
+      "category": "合理的配慮・支援",
+      "date": "2026-02-08",
+      "url": "https://www.nise.go.jp/nc/news/2026/0202",
+      "imageUrl": "https://images.unsplash.com/photo-1568792923760-d70635a89fdc?w=400&h=300&fit=crop",
+      "source": "国立特別支援教育総合研究所",
+      "mainKeyword": "特別支援教育"
+    },
+    {
+      "id": "e5ff31a68150",
+      "title": "特別支援教育リーフVol.33の刊行について",
+      "summary": "国立特別支援教育総合研究所のお知らせです。特別支援教育リーフVol.33の刊行について",
+      "category": "合理的配慮・支援",
+      "date": "2026-02-08",
+      "url": "https://www.nise.go.jp/nc/news/2026/0127",
+      "imageUrl": "https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=400&h=300&fit=crop",
+      "source": "国立特別支援教育総合研究所",
+      "mainKeyword": "特別支援教育"
+    },
+    {
       "id": "7fa995da7b99",
       "title": "独立行政法人　国立特別支援教育総合研究所",
       "summary": "国立特別支援教育総合研究所のお知らせです。独立行政法人　国立特別支援教育総合研究所",
@@ -275,8 +297,8 @@
       "source": "朝日新聞 教育"
     }
   ],
-  "lastUpdated": "2026-02-08T17:42:11.755396",
-  "totalCount": 26,
+  "lastUpdated": "2026-02-08T17:52:09.978660",
+  "totalCount": 28,
   "sources": [
     "国立特別支援教育総合研究所",
     "文部科学省",

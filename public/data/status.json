@@ -1,14 +1,14 @@
 {
-  "lastUpdated": "2026-02-08T17:42:11.756225",
+  "lastUpdated": "2026-02-08T17:52:09.979539",
   "apiUsage": {
     "used": 2,
     "limit": 250,
     "percentage": 0
   },
   "lastRun": {
-    "timestamp": "2026-02-08T17:42:11.756225",
-    "articlesProcessed": 3,
-    "articlesAdded": 3,
+    "timestamp": "2026-02-08T17:52:09.979539",
+    "articlesProcessed": 2,
+    "articlesAdded": 2,
     "apiCalls": 0,
     "success": true,
     "error": null
@@ -95,6 +95,12 @@
     {
       "timestamp": "2026-02-08T17:42:11.756225",
       "articlesProcessed": 3,
+      "apiCalls": 0,
+      "success": true
+    },
+    {
+      "timestamp": "2026-02-08T17:52:09.979539",
+      "articlesProcessed": 2,
       "apiCalls": 0,
       "success": true
     }
