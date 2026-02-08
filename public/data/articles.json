@@ -1,6 +1,36 @@
 {
   "articles": [
     {
+      "id": "cd80838cc913",
+      "title": "意識・無意識脳での神経のつながり方の可視化に成功",
+      "summary": "－睡眠中に感覚応答を知覚できない脳の謎にヒント－",
+      "category": "研究",
+      "date": "2026-02-06",
+      "url": "https://www.riken.jp/press/2026/20260207_1/index.html",
+      "imageUrl": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=300&fit=crop",
+      "source": "理化学研究所"
+    },
+    {
+      "id": "d568d5db38da",
+      "title": "遺伝子の「末尾」に最適な配列を選ぶ",
+      "summary": "－人工冬眠研究で見つかった、細胞を高精度に操る意外なヒント－",
+      "category": "研究",
+      "date": "2026-02-02",
+      "url": "https://www.riken.jp/press/2026/20260203_1/index.html",
+      "imageUrl": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=300&fit=crop",
+      "source": "理化学研究所"
+    },
+    {
+      "id": "0e35ecfe67cd",
+      "title": "感情に伴う表情と主観経験の脳内ネットワークを解明",
+      "summary": "－顔の表情が喜び、悲しみ、怒りなどの感情経験を生み出す－",
+      "category": "研究",
+      "date": "2026-01-27",
+      "url": "https://www.riken.jp/press/2026/20260128_1/index.html",
+      "imageUrl": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=300&fit=crop",
+      "source": "理化学研究所"
+    },
+    {
       "id": "d13736bef8b3",
       "title": "A hidden Aloe vera compound takes aim at Alzheimer’s",
       "summary": "Scientists have uncovered promising clues that compounds found in Aloe vera could play a role in fighting Alzheimer’s disease. Using advanced computer modeling, researchers discovered that beta-sit...",
@@ -356,7 +386,7 @@
       "source": "朝日新聞 教育"
     }
   ],
-  "lastUpdated": "2026-02-08T23:42:02.534302",
+  "lastUpdated": "2026-02-08T23:45:24.287424",
   "totalCount": 34,
   "sources": [
     "ScienceDaily (Mind & Brain)",

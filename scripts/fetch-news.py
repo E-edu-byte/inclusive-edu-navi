@@ -181,12 +181,19 @@ RSS_FEEDS = [
         "name": "ScienceDaily (Mind & Brain)",
         "url": "https://www.sciencedaily.com/rss/mind_brain.xml",
         "skip_core_filter": False,
-        "force_category": "研究",  # 強制的に「研究」カテゴリに振り分け
+        "force_category": "研究",
         "strict_keywords": ["child", "education", "learning", "development", "autism", "ADHD", "dyslexia", "brain", "cognitive"],
         "max_articles": 3,
     },
+    {
+        "name": "理化学研究所",
+        "url": "https://www.riken.jp/feed/press_feed/",
+        "skip_core_filter": False,
+        "force_category": "研究",
+        "strict_keywords": ["脳", "感情", "遺伝子", "疾患", "心理", "神経", "認知", "発達", "学習", "記憶"],
+        "max_articles": 3,
+    },
     # ※ 文部科学省・筑波大学はRSSがないため、別途スクレイピングで取得
-    # ※ 理化学研究所・JST Science PortalはRSS提供終了
 ]
 
 # 大学・研究機関（スクレイピング対象）
