@@ -110,9 +110,23 @@ export default function Home() {
                   インクルーシブ教育に関する最新のニュース、研究成果、実践事例を<br className="hidden sm:inline" />
                   わかりやすくお届けします。
                 </p>
-                <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-4">
                   インクルーシブな社会を創る人に役立つ情報を厳選してご紹介。
                 </p>
+                {/* お気に入り追加ボタン */}
+                <button
+                  onClick={() => {
+                    const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+                    const shortcut = isMac ? '⌘+D' : 'Ctrl+D';
+                    alert(`このサイトをブックマークに追加するには、キーボードで「${shortcut}」を押してください。`);
+                  }}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-sky-700 bg-sky-100 hover:bg-sky-200 rounded-full transition-colors"
+                >
+                  <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
+                  お気に入りに追加
+                </button>
               </div>
 
               {/* アクセントライン */}
@@ -173,13 +187,13 @@ export default function Home() {
                     {index === 2 && (
                       <div className="lg:hidden mt-4 mb-1">
                         <a
-                          href="#"
-                          className="flex items-center justify-center gap-2 w-full px-5 py-3.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all duration-200"
+                          href="https://www.buymeacoffee.com/inclusive-edu"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-center gap-2 w-full py-3 bg-slate-600 hover:bg-slate-700 text-white text-sm font-medium rounded-xl transition-colors"
                         >
-                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                          </svg>
-                          活動を応援する
+                          <span>☕️</span>
+                          活動を応援する（コーヒー1杯分から）
                         </a>
                       </div>
                     )}

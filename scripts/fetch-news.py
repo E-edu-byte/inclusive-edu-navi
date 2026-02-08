@@ -176,15 +176,7 @@ RSS_FEEDS = [
         "strict_keywords": ["教育", "子ども", "発達", "学校", "インクルーシブ", "特別支援", "障害", "ギフテッド", "不登校"],
         "max_articles": 2,
     },
-    # === 研究・科学メディア ===
-    {
-        "name": "ScienceDaily (Mind & Brain)",
-        "url": "https://www.sciencedaily.com/rss/mind_brain.xml",
-        "skip_core_filter": False,
-        "force_category": "研究",
-        "strict_keywords": ["child", "education", "learning", "development", "autism", "ADHD", "dyslexia", "brain", "cognitive"],
-        "max_articles": 3,
-    },
+    # === 研究・科学メディア（日本語のみ） ===
     {
         "name": "理化学研究所",
         "url": "https://www.riken.jp/feed/press_feed/",
