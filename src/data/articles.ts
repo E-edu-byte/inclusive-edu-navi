@@ -21,6 +21,9 @@ export type Article = {
 // Amazon Associate ID
 const AMAZON_ASSOCIATE_ID = 'newsnavi02a-22';
 
+// 楽天アフィリエイトID
+const RAKUTEN_AFFILIATE_ID = '50d93edb.e16bcd2b.50d93edc.c4d29473';
+
 // キーワードを抽出するヘルパー関数
 function extractKeyword(mainKeyword?: string, title?: string): string {
   if (mainKeyword && mainKeyword.trim()) {
@@ -46,15 +49,19 @@ export function generateAmazonSearchUrl(mainKeyword?: string, title?: string): s
   return `https://www.amazon.co.jp/s?k=${encodedKeywords}&i=stripbooks&tag=${AMAZON_ASSOCIATE_ID}`;
 }
 
-// 楽天ブックス検索URLを生成（準備中 - 楽天トップページへリダイレクト）
+// 楽天ブックス検索URLを生成（アフィリエイトID付き）
 export function generateRakutenSearchUrl(mainKeyword?: string, title?: string): string {
-  // 楽天アフィリエイトID取得まで暫定的にトップページへ
-  return 'https://books.rakuten.co.jp/';
+  const keyword = extractKeyword(mainKeyword, title);
+  const searchQuery = `${keyword} 教育`;
+  const encodedKeywords = encodeURIComponent(searchQuery);
+  const targetUrl = `https://books.rakuten.co.jp/search?sitem=${encodedKeywords}`;
+  const encodedTargetUrl = encodeURIComponent(targetUrl);
+  return `https://hb.afl.rakuten.co.jp/hgc/${RAKUTEN_AFFILIATE_ID}/?pc=${encodedTargetUrl}&m=${encodedTargetUrl}`;
 }
 
 // 楽天リンクが準備中かどうかを判定
 export function isRakutenPreparing(): boolean {
-  return true; // ID取得後にfalseに変更
+  return false; // 本稼働中
 }
 
 // 旧関数（後方互換性のため維持、カテゴリーIDは無視してデフォルトを返す）
