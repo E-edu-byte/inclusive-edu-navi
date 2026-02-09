@@ -170,7 +170,7 @@ RSS_FEEDS = [
     },
     {
         "name": "東京学芸大学",
-        "url": "https://www.u-gakugei.ac.jp/news/index.xml",
+        "url": "https://www.u-gakugei.ac.jp/pickup-news/atom.xml",
         "skip_core_filter": False,
         "is_research_institution": True,  # 厳格キーワードフィルタ
         "max_articles": 2,  # 最大2件
