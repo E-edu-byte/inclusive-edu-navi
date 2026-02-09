@@ -48,10 +48,18 @@ jobs:
       - name: Build
         run: npm run build
 
+      # basePath: '/inclusive' に対応するため、out/ を inclusive/ サブディレクトリに再配置
+      - name: Restructure for basePath
+        run: |
+          mkdir -p ./deploy/inclusive
+          cp -r ./out/* ./deploy/inclusive/
+          # CNAMEはルートに配置（GitHub Pages用）
+          cp ./out/CNAME ./deploy/ 2>/dev/null || true
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          path: ./deploy
 
   # デプロイジョブ
   deploy:
