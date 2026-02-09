@@ -214,8 +214,8 @@ MAX_ARTICLES_PER_DOMAIN = 3
 # 【徹底省エネ設定】取得件数を最小限に
 LIGHT_MODE = True
 MAX_ARTICLES_PER_SOURCE = 3  # 各ソースから最大3件（徹底節約）
-MAX_NEW_ARTICLES_PER_RUN = 10  # 1回の実行で追加する最大記事数（新規）
-MAX_AI_CALLS_PER_RUN = 5  # 1回の実行でのAI呼び出し最大数（1日10回×5件=50件/日）
+MAX_NEW_ARTICLES_PER_RUN = 3  # 1回の実行で追加する最大記事数（Free Tier対応）
+MAX_AI_CALLS_PER_RUN = 2  # 1回の実行でのAI呼び出し最大数（1日3回×2件=6件/日、Free Tier 20RPD対応）
 AI_CALL_SLEEP_SECONDS = 5  # AI呼び出し間の待機秒数（RPM制限15回/分を回避: 12回/分に抑制）
 
 # AI呼び出しカウンター（リトライ+新規の合計）
@@ -606,7 +606,7 @@ FORCE_RETRY_PATTERNS = [
     "理化学研究所のプレスリリースです",
 ]
 
-MAX_SUMMARY_RETRY = 5  # 1回の実行でリトライする最大件数（MAX_AI_CALLS_PER_RUNと同じ）
+MAX_SUMMARY_RETRY = 1  # 1回の実行でリトライする最大件数（Free Tier対応: 新規1件+リトライ1件=2件/実行）
 
 
 def is_incomplete_summary(summary: str, source: str = "") -> bool:
