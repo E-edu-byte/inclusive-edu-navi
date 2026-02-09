@@ -230,6 +230,9 @@ EXISTING_ARTICLES: list = []
 # 最大保持記事数
 MAX_ARTICLES_RETENTION = 100
 
+# 記事保持日数（7日経過で自動削除）
+ARTICLE_RETENTION_DAYS = 7
+
 # ========================================
 # 理念に基づくキーワードフィルタリング
 # ========================================
@@ -445,6 +448,47 @@ def is_duplicate_title(title: str) -> bool:
 def load_existing_titles():
     """後方互換性のためのラッパー - load_existing_articlesを呼び出す"""
     load_existing_articles()
+
+
+def cleanup_old_articles(articles: list) -> list:
+    """
+    7日以上前の古い記事を削除する（自動クリーンアップ）
+
+    【仕様】
+    - 公開日から ARTICLE_RETENTION_DAYS 日経過した記事を削除
+    - ブックマークはクライアント側localStorage に完全な記事データとして保存されているため、
+      サーバー側で削除されてもユーザーのブックマーク表示には影響しない
+
+    Returns:
+        保持対象の記事リスト
+    """
+    if not articles:
+        return []
+
+    cutoff_date = datetime.now() - timedelta(days=ARTICLE_RETENTION_DAYS)
+    cutoff_str = cutoff_date.strftime("%Y-%m-%d")
+
+    retained = []
+    removed_count = 0
+
+    for article in articles:
+        article_date = article.get('date', '')[:10]  # YYYY-MM-DD形式
+
+        # 日付がない場合は保持（安全策）
+        if not article_date:
+            retained.append(article)
+            continue
+
+        # 7日以内の記事は保持
+        if article_date >= cutoff_str:
+            retained.append(article)
+        else:
+            removed_count += 1
+
+    if removed_count > 0:
+        print(f"  → {removed_count}件の{ARTICLE_RETENTION_DAYS}日以上前の記事を削除")
+
+    return retained
 
 
 # ========================================
@@ -1759,6 +1803,18 @@ def main():
     print(f"  水色の本アイコン: 0件（鉄壁ルール適用）")
 
     # ========================================
+    # 【自動クリーンアップ】7日以上前の古い記事を削除
+    # ========================================
+    print()
+    print("【7.4】自動クリーンアップ...")
+    print("-" * 40)
+    print(f"  クリーンアップ前の既存記事: {len(EXISTING_ARTICLES)}件")
+
+    # 既存記事から7日以上前のものを削除
+    cleaned_existing = cleanup_old_articles(EXISTING_ARTICLES)
+    print(f"  クリーンアップ後の既存記事: {len(cleaned_existing)}件")
+
+    # ========================================
     # 【追記保存】新規記事を先頭に追加、既存記事は維持
     # ========================================
     print()
@@ -1775,10 +1831,10 @@ def main():
 
     print(f"  今回の取得: {len(final_articles)}件")
     print(f"  うち新規: {len(truly_new_articles)}件")
-    print(f"  既存記事: {len(EXISTING_ARTICLES)}件")
+    print(f"  既存記事: {len(cleaned_existing)}件")
 
-    # 新規記事を先頭に追加し、既存記事をそのまま後ろに維持
-    merged_articles = truly_new_articles + EXISTING_ARTICLES
+    # 新規記事を先頭に追加し、クリーンアップ済みの既存記事をそのまま後ろに維持
+    merged_articles = truly_new_articles + cleaned_existing
 
     # 日付でソート（新しい順）
     merged_articles.sort(key=lambda x: x.get('date', ''), reverse=True)
