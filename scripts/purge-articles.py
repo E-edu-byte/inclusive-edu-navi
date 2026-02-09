@@ -79,12 +79,27 @@ TRUSTED_EDUCATION_SOURCES = [
 
 
 def contains_strong_exclude(title: str, summary: str) -> bool:
-    """強力除外キーワードを含むかチェック"""
-    text = f"{title} {summary}".lower()
-    for keyword in STRONG_EXCLUDE_KEYWORDS:
-        if keyword.lower() in text:
-            return True
-    return False
+    """
+    強力除外キーワードを含むかチェック
+
+    【理念優先ルール】
+    除外キーワードを含んでいても、コア理念キーワードを同時に含む場合は
+    例外的にFalseを返す（採用）
+    """
+    text = f"{title} {summary}"
+
+    # 除外キーワードを含むかチェック
+    has_exclude = any(kw in text for kw in STRONG_EXCLUDE_KEYWORDS)
+    if not has_exclude:
+        return False  # 除外キーワードなし → 採用
+
+    # 除外キーワードを含むが、コア理念キーワードも含む場合は例外的に採用
+    has_core = any(kw in text for kw in CORE_KEYWORDS)
+    if has_core:
+        return False  # 理念キーワードあり → 例外採用
+
+    # 除外キーワードのみ → 除外
+    return True
 
 
 def contains_core_keyword(title: str, summary: str) -> bool:

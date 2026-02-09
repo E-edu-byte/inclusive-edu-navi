@@ -539,6 +539,7 @@ def refilter_existing_articles(articles: list) -> list:
 
     【仕様】
     - 強力除外キーワードを含む記事は削除
+    - ただし、コア理念キーワードを同時に含む場合は例外的に採用（理念優先ルール）
     - コア理念キーワードを含まない記事も削除（信頼ソース以外）
 
     Returns:
@@ -560,16 +561,20 @@ def refilter_existing_articles(articles: list) -> list:
         source = article.get('source', '')
         text = f"{title} {summary}"
 
-        # 1. 強力除外キーワードチェック
+        # コア理念キーワードを含むかチェック
+        has_core_keyword = any(kw in text for kw in CORE_KEYWORDS)
+
+        # 1. 強力除外キーワードチェック（理念優先ルール適用）
         has_strong_exclude = any(kw in text for kw in STRONG_EXCLUDE_KEYWORDS)
-        if has_strong_exclude:
+        if has_strong_exclude and not has_core_keyword:
+            # 除外キーワードあり かつ 理念キーワードなし → 除外
             removed_strong += 1
             print(f"    [再フィルタ除外] 理念外: {title[:40]}...")
             continue
+        # 除外キーワードあり かつ 理念キーワードあり → 例外採用（continueしない）
 
         # 2. コア理念キーワードチェック（信頼ソース以外）
         is_trusted = any(ts in source for ts in TRUSTED_EDUCATION_SOURCES)
-        has_core_keyword = any(kw in text for kw in CORE_KEYWORDS)
 
         if not is_trusted and not has_core_keyword:
             removed_no_core += 1
@@ -1248,9 +1253,25 @@ def contains_strong_exclude_keyword(title: str, summary: str) -> bool:
     """
     【強力除外フィルタ】サイト理念と完全に無関係な記事を即座に破棄
     政治・一般受験・一般医療・スポーツ・芸能など
+
+    【理念優先ルール】
+    除外キーワードを含んでいても、コア理念キーワード（合理的配慮、発達障害、
+    特別支援、インクルーシブなど）を同時に含む場合は例外的に採用する
     """
     text = f"{title} {summary}"
-    return any(keyword in text for keyword in STRONG_EXCLUDE_KEYWORDS)
+
+    # 除外キーワードを含むかチェック
+    has_exclude = any(keyword in text for keyword in STRONG_EXCLUDE_KEYWORDS)
+    if not has_exclude:
+        return False  # 除外キーワードなし → 採用
+
+    # 除外キーワードを含むが、コア理念キーワードも含む場合は例外的に採用
+    has_core = any(keyword in text for keyword in CORE_KEYWORDS)
+    if has_core:
+        return False  # 理念キーワードあり → 例外採用
+
+    # 除外キーワードのみ → 除外
+    return True
 
 
 def contains_practice_exclude_keyword(title: str, summary: str) -> bool:
