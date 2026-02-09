@@ -228,6 +228,9 @@ EXISTING_TITLES: Set[str] = set()
 # 既存記事のURL（重複チェック用）
 EXISTING_URLS: Set[str] = set()
 
+# 除外URL（ブラックリスト）
+EXCLUDED_URLS: Set[str] = set()
+
 # 既存記事リスト（追記保存用）
 EXISTING_ARTICLES: list = []
 
@@ -447,6 +450,25 @@ def load_summary_cache():
         print(f"警告: キャッシュ読み込みエラー - {e}")
 
 
+def load_excluded_urls():
+    """
+    【ブラックリスト読み込み】永久除外URLを読み込む
+    excluded-urls.json に登録されたURLは一切取得しない
+    """
+    global EXCLUDED_URLS
+    excluded_file = os.path.join(PROJECT_ROOT, "public", "data", "excluded-urls.json")
+    try:
+        if os.path.exists(excluded_file):
+            with open(excluded_file, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                EXCLUDED_URLS = set(data.get('excludedUrls', []))
+            if EXCLUDED_URLS:
+                print(f"✓ ブラックリスト読み込み: {len(EXCLUDED_URLS)}件")
+    except Exception as e:
+        print(f"警告: ブラックリスト読み込みエラー - {e}")
+        EXCLUDED_URLS = set()
+
+
 def load_existing_articles():
     """
     【追記保存の核心】既存記事を完全に読み込み
@@ -474,13 +496,22 @@ def load_existing_articles():
         EXISTING_ARTICLES = []
 
 
+def is_excluded_url(url: str) -> bool:
+    """URLがブラックリストに含まれているかチェック"""
+    return url.strip() in EXCLUDED_URLS
+
+
 def is_duplicate_article(title: str, url: str) -> bool:
     """
-    【重複チェック】タイトルまたはURLが既存記事と重複しているかチェック
-    重複している場合、AI要約を含む全処理をスキップ
+    【重複チェック】タイトルまたはURLが既存記事と重複しているか、
+    またはブラックリストに含まれているかチェック
+    該当する場合、AI要約を含む全処理をスキップ
     """
     title_clean = title.strip()
     url_clean = url.strip()
+    # ブラックリストチェックも追加
+    if url_clean in EXCLUDED_URLS:
+        return True
     return title_clean in EXISTING_TITLES or url_clean in EXISTING_URLS
 
 
@@ -1951,6 +1982,9 @@ def main():
 
     # 【重複チェック用】既存タイトルを読み込み
     load_existing_titles()
+
+    # 【ブラックリスト読み込み】永久除外URLを読み込み
+    load_excluded_urls()
 
     # 【既存記事の再フィルタリング】理念に合わない既存記事を削除
     print()

@@ -67,6 +67,15 @@ type ManualArticlesData = {
   lastUpdated: string | null;
 };
 
+// 全記事データ型（削除用）
+type ArticleForDeletion = {
+  title: string;
+  url: string;
+  source: string;
+  date: string;
+  isManual?: boolean;
+};
+
 // 初期トラッキングデータ
 const initialTracking: TrackingData = {
   pageViews: {},
@@ -84,6 +93,9 @@ export default function EditorDashboard() {
   const [postUrl, setPostUrl] = useState('');
   const [postError, setPostError] = useState('');
   const [existingUrls, setExistingUrls] = useState<Set<string>>(new Set());
+  const [allArticles, setAllArticles] = useState<ArticleForDeletion[]>([]);
+  const [selectedArticleUrl, setSelectedArticleUrl] = useState('');
+  const [excludedUrls, setExcludedUrls] = useState<string[]>([]);
 
   useEffect(() => {
     // ステータスデータを取得
@@ -126,17 +138,27 @@ export default function EditorDashboard() {
       }
     }
 
-    // 全記事のURLを取得（重複チェック用）
+    // 全記事のURLを取得（重複チェック用）+ 記事一覧（削除用）
     async function fetchAllUrls() {
       try {
         const urls = new Set<string>();
+        const articles: ArticleForDeletion[] = [];
 
         // articles.json
         const articlesRes = await fetch(`${BASE_PATH}/data/articles.json`);
         if (articlesRes.ok) {
           const data = await articlesRes.json();
           for (const article of data.articles || []) {
-            if (article.url) urls.add(article.url);
+            if (article.url) {
+              urls.add(article.url);
+              articles.push({
+                title: article.title,
+                url: article.url,
+                source: article.source || '',
+                date: article.date || '',
+                isManual: false,
+              });
+            }
           }
         }
 
@@ -145,13 +167,38 @@ export default function EditorDashboard() {
         if (manualRes.ok) {
           const data = await manualRes.json();
           for (const article of data.articles || []) {
-            if (article.url) urls.add(article.url);
+            if (article.url) {
+              urls.add(article.url);
+              articles.push({
+                title: article.title,
+                url: article.url,
+                source: article.source || '',
+                date: article.date || '',
+                isManual: true,
+              });
+            }
           }
         }
 
         setExistingUrls(urls);
+        // 日付の新しい順にソート
+        articles.sort((a, b) => b.date.localeCompare(a.date));
+        setAllArticles(articles);
       } catch (error) {
         console.error('URL取得エラー:', error);
+      }
+    }
+
+    // 除外URL一覧を取得
+    async function fetchExcludedUrls() {
+      try {
+        const res = await fetch(`${BASE_PATH}/data/excluded-urls.json`);
+        if (res.ok) {
+          const data = await res.json();
+          setExcludedUrls(data.excludedUrls || []);
+        }
+      } catch (error) {
+        console.error('除外URL取得エラー:', error);
       }
     }
 
@@ -159,6 +206,7 @@ export default function EditorDashboard() {
     loadTracking();
     fetchManualArticles();
     fetchAllUrls();
+    fetchExcludedUrls();
   }, []);
 
   // 日時フォーマット
@@ -434,6 +482,81 @@ export default function EditorDashboard() {
               ※ 手動記事は投稿から7日後に自動的に非表示になります
             </p>
           </div>
+        </section>
+
+        {/* 記事の永久削除 */}
+        <section className="bg-gray-800 rounded-xl p-6 mb-6">
+          <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+            <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+            記事の永久削除（ブラックリスト）
+          </h2>
+
+          <div className="bg-gray-700 rounded-lg p-4 mb-4">
+            <label className="block text-sm text-gray-300 mb-2">削除する記事を選択</label>
+            <select
+              value={selectedArticleUrl}
+              onChange={(e) => setSelectedArticleUrl(e.target.value)}
+              className="w-full px-3 py-2 bg-gray-600 border border-gray-500 rounded-lg text-white focus:outline-none focus:border-red-500"
+            >
+              <option value="">-- 記事を選択してください --</option>
+              {allArticles.map((article, index) => (
+                <option key={index} value={article.url}>
+                  {article.isManual ? '[手動] ' : ''}{article.title.substring(0, 50)}{article.title.length > 50 ? '...' : ''} ({article.date})
+                </option>
+              ))}
+            </select>
+
+            {selectedArticleUrl && (
+              <div className="mt-3 p-3 bg-gray-800 rounded-lg">
+                <p className="text-xs text-gray-400 mb-2">選択中のURL:</p>
+                <p className="text-xs text-gray-300 break-all">{selectedArticleUrl}</p>
+              </div>
+            )}
+
+            <button
+              onClick={() => {
+                if (!selectedArticleUrl) {
+                  alert('記事を選択してください');
+                  return;
+                }
+                if (confirm('この記事を永久に削除しますか？\n\nこの操作は取り消せません。削除された記事は今後一切表示されなくなります。')) {
+                  navigator.clipboard.writeText(selectedArticleUrl);
+                  alert(`URLをコピーしました。\n\nGitHub Actionsページで:\n1. Exclude Article ワークフローを選択\n2. Run workflow をクリック\n3. URLを貼り付け\n4. Run workflow を実行`);
+                  window.open('https://github.com/E-edu-byte/inclusive-edu-navi/actions/workflows/exclude-article.yml', '_blank');
+                }
+              }}
+              disabled={!selectedArticleUrl}
+              className={`mt-4 w-full px-4 py-3 font-medium rounded-lg transition-colors ${
+                selectedArticleUrl
+                  ? 'bg-red-600 hover:bg-red-700 text-white'
+                  : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+              }`}
+            >
+              この記事を削除して二度と表示しない
+            </button>
+          </div>
+
+          {/* ブラックリスト一覧 */}
+          {excludedUrls.length > 0 && (
+            <div className="mt-4">
+              <h4 className="text-sm font-medium text-gray-300 mb-2">
+                ブラックリスト（{excludedUrls.length}件）
+              </h4>
+              <div className="bg-gray-700 rounded-lg p-3 max-h-40 overflow-y-auto">
+                {excludedUrls.map((url, index) => (
+                  <div key={index} className="text-xs text-gray-400 py-1 border-b border-gray-600 last:border-0 truncate">
+                    {url}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <p className="mt-4 text-xs text-red-400">
+            ※ 削除された記事は excluded-urls.json に記録され、自動更新でも再取得されません
+          </p>
         </section>
 
         {/* 更新履歴 */}
