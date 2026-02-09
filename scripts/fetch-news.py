@@ -286,6 +286,11 @@ STRONG_EXCLUDE_KEYWORDS = [
     "ホワイトソックス", "移籍", "自主トレ", "野球", "MLB", "NPB",
     # 軍事・国際情勢
     "無人機", "輸出拠点", "ドローン攻撃", "ミサイル", "軍事",
+    # エンタメ・ゲーム・刺激重視コンテンツ（インクルーシブ教育の理念にそぐわない）
+    "Roblox", "ロブロックス", "ブレインロット", "Brain Rot", "brainrot",
+    "Fortnite", "フォートナイト", "Minecraft", "マインクラフト", "マイクラ",
+    "TikTok", "ティックトック", "YouTube", "ユーチューブ", "YouTuber",
+    "ゲーム実況", "eスポーツ", "バズる", "炎上", "インフルエンサー",
 ]
 
 # 除外キーワード（広告・PR記事をスキップ）
@@ -784,6 +789,9 @@ FALLBACK_IMAGES = [
     "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop",
     "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=400&h=300&fit=crop",
 ]
+
+# 文部科学省専用画像（公的機関のため統一画像を使用）
+MEXT_IMAGE_URL = "/inclusive/images/banners/mext.jpg"
 
 # 大学・研究機関専用フォールバック画像（大学キャンパス・研究イメージ）
 UNIVERSITY_FALLBACK_IMAGES = [
@@ -1704,7 +1712,7 @@ def fetch_mext_press_releases(max_articles: int = 3) -> list:
                     "category": "制度・行政",
                     "date": datetime.now().strftime("%Y-%m-%d"),
                     "url": full_url,
-                    "imageUrl": get_fallback_image(article_id),
+                    "imageUrl": MEXT_IMAGE_URL,  # 文部科学省専用の統一画像
                     "source": "文部科学省"
                 }
                 articles.append(article)
