@@ -1,0 +1,105 @@
+# 手動投稿ワークフロー
+# GitHubのActions画面から手動実行できます
+name: Manual Post
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: '実行するアクション'
+        required: true
+        default: 'add'
+        type: choice
+        options:
+          - add
+          - delete
+          - cleanup
+      url:
+        description: '追加する記事のURL（action=add の場合）'
+        required: false
+        type: string
+      article_id:
+        description: '削除する記事のID（action=delete の場合）'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+env:
+  GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+  TZ: Asia/Tokyo
+
+jobs:
+  manual-post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r scripts/requirements.txt
+
+      - name: Validate inputs
+        run: |
+          if [ "${{ inputs.action }}" = "add" ] && [ -z "${{ inputs.url }}" ]; then
+            echo "エラー: URLが指定されていません"
+            exit 1
+          fi
+          if [ "${{ inputs.action }}" = "delete" ] && [ -z "${{ inputs.article_id }}" ]; then
+            echo "エラー: 記事IDが指定されていません"
+            exit 1
+          fi
+
+      - name: Add article
+        if: inputs.action == 'add'
+        run: python scripts/manual-post.py --url "${{ inputs.url }}"
+
+      - name: Delete article
+        if: inputs.action == 'delete'
+        run: python scripts/manual-post.py --delete "${{ inputs.article_id }}"
+
+      - name: Cleanup expired articles
+        if: inputs.action == 'cleanup'
+        run: python scripts/manual-post.py --cleanup
+
+      - name: Check for changes
+        id: git-check
+        run: |
+          git add -A
+          if git diff --staged --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push changes
+        if: steps.git-check.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+          if [ "${{ inputs.action }}" = "add" ]; then
+            git commit -m "feat: 手動投稿 - $(date +'%Y-%m-%d %H:%M' -d '+9 hours')"
+          elif [ "${{ inputs.action }}" = "delete" ]; then
+            git commit -m "chore: 手動記事削除 - ${{ inputs.article_id }}"
+          else
+            git commit -m "chore: 期限切れ記事クリーンアップ"
+          fi
+
+          git push origin main
+
+      - name: Trigger deploy
+        if: steps.git-check.outputs.changed == 'true'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          event-type: manual-post-updated

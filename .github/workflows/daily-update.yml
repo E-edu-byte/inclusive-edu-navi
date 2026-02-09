@@ -57,6 +57,10 @@ jobs:
       - name: Fetch news articles
         run: python scripts/fetch-news.py
 
+      # 4.5. 手動記事の期限切れチェック
+      - name: Cleanup expired manual articles
+        run: python scripts/manual-post.py --cleanup
+
       # 5. AI記事生成（generate-articles.py）- 18:00 JSTのみ実行（夕刊）
       # UTC 9:00 = JST 18:00
       - name: Generate AI picks (evening edition only)

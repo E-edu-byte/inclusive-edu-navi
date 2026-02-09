@@ -48,6 +48,25 @@ type TrackingData = {
   lastReset: string;
 };
 
+// 手動記事データ型
+type ManualArticle = {
+  id: string;
+  title: string;
+  summary: string;
+  category: string;
+  date: string;
+  url: string;
+  source: string;
+  addedAt: string;
+  expiresAt: string;
+  isManual: boolean;
+};
+
+type ManualArticlesData = {
+  articles: ManualArticle[];
+  lastUpdated: string | null;
+};
+
 // 初期トラッキングデータ
 const initialTracking: TrackingData = {
   pageViews: {},
@@ -60,7 +79,11 @@ const initialTracking: TrackingData = {
 export default function EditorDashboard() {
   const [status, setStatus] = useState<StatusData | null>(null);
   const [tracking, setTracking] = useState<TrackingData>(initialTracking);
+  const [manualArticles, setManualArticles] = useState<ManualArticlesData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [postUrl, setPostUrl] = useState('');
+  const [postError, setPostError] = useState('');
+  const [existingUrls, setExistingUrls] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     // ステータスデータを取得
@@ -90,8 +113,52 @@ export default function EditorDashboard() {
       }
     }
 
+    // 手動記事データを取得
+    async function fetchManualArticles() {
+      try {
+        const res = await fetch(`${BASE_PATH}/data/manual-articles.json`);
+        if (res.ok) {
+          const data = await res.json();
+          setManualArticles(data);
+        }
+      } catch (error) {
+        console.error('手動記事取得エラー:', error);
+      }
+    }
+
+    // 全記事のURLを取得（重複チェック用）
+    async function fetchAllUrls() {
+      try {
+        const urls = new Set<string>();
+
+        // articles.json
+        const articlesRes = await fetch(`${BASE_PATH}/data/articles.json`);
+        if (articlesRes.ok) {
+          const data = await articlesRes.json();
+          for (const article of data.articles || []) {
+            if (article.url) urls.add(article.url);
+          }
+        }
+
+        // manual-articles.json
+        const manualRes = await fetch(`${BASE_PATH}/data/manual-articles.json`);
+        if (manualRes.ok) {
+          const data = await manualRes.json();
+          for (const article of data.articles || []) {
+            if (article.url) urls.add(article.url);
+          }
+        }
+
+        setExistingUrls(urls);
+      } catch (error) {
+        console.error('URL取得エラー:', error);
+      }
+    }
+
     fetchStatus();
     loadTracking();
+    fetchManualArticles();
+    fetchAllUrls();
   }, []);
 
   // 日時フォーマット
@@ -119,6 +186,52 @@ export default function EditorDashboard() {
     if (percentage >= 90) return 'bg-red-500';
     if (percentage >= 70) return 'bg-yellow-500';
     return 'bg-green-500';
+  };
+
+  // URL検証
+  const validateUrl = (url: string): string | null => {
+    if (!url.trim()) {
+      return 'URLを入力してください';
+    }
+    try {
+      const parsed = new URL(url);
+      if (!['http:', 'https:'].includes(parsed.protocol)) {
+        return '有効なURLを入力してください';
+      }
+    } catch {
+      return '有効なURLを入力してください';
+    }
+    if (existingUrls.has(url.trim())) {
+      return 'この記事は既に存在します';
+    }
+    return null;
+  };
+
+  // GitHub Actions URLを生成
+  const getGitHubActionsUrl = (action: string, params: Record<string, string> = {}) => {
+    const baseUrl = 'https://github.com/E-edu-byte/inclusive-edu-navi/actions/workflows/manual-post.yml';
+    return baseUrl;
+  };
+
+  // 投稿ボタンクリック
+  const handlePost = () => {
+    const error = validateUrl(postUrl);
+    if (error) {
+      setPostError(error);
+      return;
+    }
+    setPostError('');
+    // GitHub Actions ページを開く
+    const url = `https://github.com/E-edu-byte/inclusive-edu-navi/actions/workflows/manual-post.yml`;
+    window.open(url, '_blank');
+  };
+
+  // 期限までの日数を計算
+  const getDaysUntilExpiry = (expiresAt: string) => {
+    const now = new Date();
+    const expires = new Date(expiresAt);
+    const diff = Math.ceil((expires.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+    return diff;
   };
 
   if (loading) {
@@ -211,6 +324,116 @@ export default function EditorDashboard() {
           ) : (
             <p className="text-gray-400">ステータスデータがありません</p>
           )}
+        </section>
+
+        {/* 手動投稿 */}
+        <section className="bg-gray-800 rounded-xl p-6 mb-6">
+          <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+            <svg className="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+            </svg>
+            手動投稿
+          </h2>
+
+          {/* URL入力フォーム */}
+          <div className="bg-gray-700 rounded-lg p-4 mb-4">
+            <label className="block text-sm text-gray-300 mb-2">記事URL</label>
+            <div className="flex gap-2">
+              <input
+                type="url"
+                value={postUrl}
+                onChange={(e) => {
+                  setPostUrl(e.target.value);
+                  setPostError('');
+                }}
+                placeholder="https://example.com/article"
+                className="flex-1 px-3 py-2 bg-gray-600 border border-gray-500 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-amber-500"
+              />
+              <button
+                onClick={handlePost}
+                className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white font-medium rounded-lg transition-colors"
+              >
+                投稿
+              </button>
+            </div>
+            {postError && (
+              <p className="mt-2 text-sm text-red-400">{postError}</p>
+            )}
+            <p className="mt-3 text-xs text-gray-400">
+              投稿ボタンをクリックすると GitHub Actions ページが開きます。<br />
+              「Run workflow」→ action: add → URL入力 → 「Run workflow」で実行してください。
+            </p>
+          </div>
+
+          {/* 手動記事一覧 */}
+          <div className="mt-6">
+            <h3 className="text-sm font-medium text-gray-300 mb-3">
+              手動投稿記事一覧
+              {manualArticles?.articles && manualArticles.articles.length > 0 && (
+                <span className="ml-2 text-amber-500">({manualArticles.articles.length}件)</span>
+              )}
+            </h3>
+
+            {manualArticles?.articles && manualArticles.articles.length > 0 ? (
+              <div className="space-y-3">
+                {manualArticles.articles.map((article) => {
+                  const daysLeft = getDaysUntilExpiry(article.expiresAt);
+                  return (
+                    <div key={article.id} className="bg-gray-700 rounded-lg p-4">
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-sm font-medium text-white truncate">
+                            {article.title}
+                          </h4>
+                          <p className="text-xs text-gray-400 mt-1">
+                            {article.source} • {article.date}
+                          </p>
+                          <p className="text-xs text-gray-500 mt-1 truncate">
+                            {article.url}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <span className={`text-xs px-2 py-1 rounded ${
+                            daysLeft <= 2 ? 'bg-red-900 text-red-300' : 'bg-gray-600 text-gray-300'
+                          }`}>
+                            残り{daysLeft}日
+                          </span>
+                          <button
+                            onClick={() => {
+                              const url = `https://github.com/E-edu-byte/inclusive-edu-navi/actions/workflows/manual-post.yml`;
+                              navigator.clipboard.writeText(article.id);
+                              alert(`記事ID「${article.id}」をコピーしました。\n\nGitHub Actionsページで:\n1. Run workflow をクリック\n2. action: delete を選択\n3. article_id に貼り付け\n4. Run workflow を実行`);
+                              window.open(url, '_blank');
+                            }}
+                            className="px-3 py-1.5 text-xs bg-red-900 hover:bg-red-800 text-red-300 rounded transition-colors"
+                          >
+                            削除
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <p className="text-gray-500 text-sm">手動投稿された記事はありません</p>
+            )}
+          </div>
+
+          {/* 使い方ガイド */}
+          <div className="mt-6 p-4 bg-gray-700/50 rounded-lg border border-gray-600">
+            <h4 className="text-sm font-medium text-gray-300 mb-2">使い方</h4>
+            <ol className="text-xs text-gray-400 space-y-1 list-decimal list-inside">
+              <li>上のフォームに記事URLを入力し「投稿」をクリック</li>
+              <li>GitHub Actions ページで「Run workflow」をクリック</li>
+              <li>action: <code className="bg-gray-600 px-1 rounded">add</code> を選択、URLを入力</li>
+              <li>「Run workflow」で実行（AI要約が自動生成されます）</li>
+              <li>約2〜3分でサイトに反映されます</li>
+            </ol>
+            <p className="mt-3 text-xs text-amber-500">
+              ※ 手動記事は投稿から7日後に自動的に非表示になります
+            </p>
+          </div>
         </section>
 
         {/* 更新履歴 */}
