@@ -110,12 +110,9 @@ export default function Home() {
                 <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-4 tracking-tight">
                   すべての子どもの学びを支える
                 </h1>
-                <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-2">
+                <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
                   インクルーシブ教育に関する最新のニュース、研究成果、実践事例を<br className="hidden sm:inline" />
                   わかりやすくお届けします。
-                </p>
-                <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                  インクルーシブな社会を創る人に役立つ情報を厳選してご紹介。
                 </p>
               </div>
 
