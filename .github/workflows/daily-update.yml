@@ -69,6 +69,10 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
+      # 5.5. サイトマップ生成
+      - name: Generate sitemap
+        run: python scripts/generate-sitemap.py
+
       # 6. 変更があるかチェック
       - name: Check for changes
         id: git-check
@@ -88,7 +92,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add public/data/articles.json public/data/ai-picks.json public/data/status.json
+          git add public/data/articles.json public/data/ai-picks.json public/data/status.json public/sitemap.xml public/data/manual-articles.json
           git commit -m "chore: daily update - news & AI picks $(date +'%Y-%m-%d %H:%M' -d '+9 hours')"
           git push origin main
 

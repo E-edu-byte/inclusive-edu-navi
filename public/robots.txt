@@ -1,6 +1,11 @@
-# https://www.robotstxt.org/robotstxt.html
+# robots.txt for インクルーシブ教育ナビ
+# https://news-navi.jp/inclusive/
+
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://example.github.io/inclusive-edu-navi/sitemap.xml
+# 管理ページを除外
+Disallow: /inclusive/editor-secret-dashboard/
+
+# サイトマップの場所
+Sitemap: https://news-navi.jp/inclusive/sitemap.xml
