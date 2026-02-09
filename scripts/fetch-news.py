@@ -466,7 +466,7 @@ FORCE_RETRY_PATTERNS = [
     "理化学研究所のプレスリリースです",
 ]
 
-MAX_SUMMARY_RETRY = 10  # 1回の実行でリトライする最大件数（ユーザー要求: 10件テスト）
+MAX_SUMMARY_RETRY = 50  # 1回の実行でリトライする最大件数（MAX_AI_CALLS_PER_RUNと同じ）
 
 
 def is_incomplete_summary(summary: str, source: str = "") -> bool:
@@ -497,6 +497,12 @@ def is_incomplete_summary(summary: str, source: str = "") -> bool:
     # RIKENのサブタイトルパターン（「－」で始まり「－」で終わる）は不完全
     if summary_clean.startswith("－") and summary_clean.endswith("－"):
         return True
+
+    # 不完全な文末パターンは不完全（著作権リスク回避）
+    incomplete_endings = ['...', '・・・', '…', '──', '－－', ' [']
+    for ending in incomplete_endings:
+        if summary_clean.endswith(ending):
+            return True
 
     # 強制リトライパターン（EdTechZineなど）
     for pattern in FORCE_RETRY_PATTERNS:
@@ -600,18 +606,18 @@ def retry_incomplete_summaries():
                 if is_edtech:
                     edtech_updated.append(title)
             else:
-                # リトライ失敗: 再リトライを防ぐためマークを付ける
-                if is_edtech and "(内容取得失敗)" not in old_summary:
-                    EXISTING_ARTICLES[idx]['summary'] = f"{title[:60]}... (内容取得失敗)"
-                    print(f"      → 取得失敗マークを付与")
+                # リトライ失敗: 要約準備中のまま維持（次回リトライ対象）
+                if "【要約準備中】" not in old_summary:
+                    EXISTING_ARTICLES[idx]['summary'] = "【要約準備中】この記事の要約は現在準備中です。"
+                    print(f"      → 要約準備中マークを付与")
                 else:
                     print(f"      → 改善なし（そのまま維持）")
 
         except Exception as e:
             print(f"      → エラー: {e}")
-            # エラー時もマークを付ける
-            if is_edtech and "(内容取得失敗)" not in old_summary:
-                EXISTING_ARTICLES[idx]['summary'] = f"{title[:60]}... (内容取得失敗)"
+            # エラー時も要約準備中マークを付ける（著作権保護）
+            if "【要約準備中】" not in old_summary:
+                EXISTING_ARTICLES[idx]['summary'] = "【要約準備中】この記事の要約は現在準備中です。"
 
     print(f"  → リトライ完了: {retry_success}/{len(retry_targets)}件 成功")
 
@@ -950,7 +956,8 @@ def generate_ai_summary_and_category(title: str, original_summary: str, source: 
         print(f"        → キャッシュから要約を再利用（カテゴリーは再判定）")
 
     if not gemini_client:
-        return {"summary": original_summary, "category": "支援・合理的配慮", "mainKeyword": "", "skip": False}
+        # 【著作権保護】原文は使わない。要約準備中として後でリトライ
+        return {"summary": "", "category": "支援・合理的配慮", "mainKeyword": "", "skip": False, "needs_retry": True}
 
     try:
         if cached_summary:
@@ -967,7 +974,9 @@ def generate_ai_summary_and_category(title: str, original_summary: str, source: 
 タイトル: {title}
 概要: {short_summary}
 
-JSON形式で回答: {{"summary":"80字の要約","category":"カテゴリ名","mainKeyword":"キーワード1つ"}}
+【重要】summaryは必ず150文字以内の完結した日本語文で、文末は「。」で終わらせること。「...」や途中で切れた文は禁止。
+
+JSON形式で回答: {{"summary":"150字以内の完結した要約（文末は。）","category":"カテゴリ名","mainKeyword":"キーワード1つ"}}
 または SKIP"""
 
         response = gemini_client.models.generate_content(
@@ -980,8 +989,8 @@ JSON形式で回答: {{"summary":"80字の要約","category":"カテゴリ名","
 
         ai_response = response.text.strip()
 
-        # 【429対策】待機時間を5秒に設定（API制限回避）
-        time.sleep(BASE_WAIT)
+        # 【RPM制限回避】5秒待機で12回/分に抑制
+        time.sleep(AI_CALL_SLEEP_SECONDS)
 
         # SKIPの場合
         if ai_response.upper() == 'SKIP' or 'SKIP' in ai_response.upper()[:10]:
@@ -1011,7 +1020,7 @@ JSON形式で回答: {{"summary":"80字の要約","category":"カテゴリ名","
             json_str = ai_response
 
         result = json.loads(json_str)
-        summary = result.get("summary", original_summary)
+        summary = result.get("summary", "")
         category = result.get("category", "支援・合理的配慮")
         main_keyword = result.get("mainKeyword", "")
 
@@ -1019,11 +1028,26 @@ JSON形式で回答: {{"summary":"80字の要約","category":"カテゴリ名","
         if category not in CATEGORIES:
             category = "支援・合理的配慮"
 
-        if len(summary) > 10:
+        # 【品質チェック】不完全な要約を拒否（著作権リスク回避）
+        def is_valid_summary(s: str) -> bool:
+            if not s or len(s) < 20:
+                return False
+            # 不完全な文末パターンを拒否
+            invalid_endings = ['...', '・・・', '…', '──', '－－', '、', 'の']
+            for ending in invalid_endings:
+                if s.rstrip().endswith(ending):
+                    return False
+            # 150文字超過を拒否
+            if len(s) > 150:
+                return False
+            return True
+
+        if is_valid_summary(summary):
             return {"summary": summary, "category": category, "mainKeyword": main_keyword, "skip": False}
         else:
-            FAILED_SUMMARIES.append({"title": title, "url": url, "reason": "要約が短すぎる"})
-            return {"summary": original_summary, "category": category, "mainKeyword": main_keyword, "skip": False}
+            FAILED_SUMMARIES.append({"title": title, "url": url, "reason": "要約が不完全または長すぎる"})
+            # 【著作権保護】原文を使わず、リトライフラグを立てる
+            return {"summary": "", "category": category, "mainKeyword": main_keyword, "skip": False, "needs_retry": True}
 
     except json.JSONDecodeError as e:
         print(f"        [JSONパースエラー] {e}")
@@ -1329,8 +1353,8 @@ def fetch_rss_feed(feed_info: dict) -> list:
                 # 【リトライ必要フラグ】要約が取得できなかった場合はスキップ（後でリトライ）
                 if ai_result.get("needs_retry") or not summary or len(summary) < 20:
                     print(f"        → 要約取得失敗（後でリトライ）")
-                    # 要約なしでも記事は追加し、後でリトライできるようにする
-                    summary = f"【要約準備中】{title[:60]}..."
+                    # 【著作権保護】原文やタイトルを含めず、プレースホルダーのみ
+                    summary = "【要約準備中】この記事の要約は現在準備中です。"
 
                 # 【キーワードベースのカテゴリ上書き】AIの判定を補完
                 text_for_category = f"{title} {summary}".lower()
