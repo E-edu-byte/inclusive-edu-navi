@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Article, BASE_PATH } from '@/lib/types';
+import { Article, BASE_PATH, isPublishableSummary } from '@/lib/types';
 import { getGlobalStats } from '@/hooks/useArticleStats';
 
 type RankedArticle = {
@@ -32,7 +32,10 @@ export default function RankingBlock() {
         if (!res.ok) return;
 
         const data = await res.json();
-        const articles: Article[] = data.articles || [];
+        // 【公開フィルタ】AI要約が完了した記事のみをランキング対象にする
+        const articles: Article[] = (data.articles || []).filter(
+          (article: Article) => isPublishableSummary(article.summary)
+        );
 
         // LocalStorageから閲覧数・しおり数を取得
         const { views, bookmarks } = getGlobalStats();

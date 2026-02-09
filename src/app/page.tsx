@@ -6,7 +6,7 @@ import Sidebar from '@/components/Sidebar';
 import NewsCard from '@/components/NewsCard';
 import RankingBlock from '@/components/RankingBlock';
 import SupportCard from '@/components/SupportCard';
-import { Article, ArticlesData, BASE_PATH } from '@/lib/types';
+import { Article, ArticlesData, BASE_PATH, filterPublishableArticles } from '@/lib/types';
 import { useBookmarks } from '@/contexts/BookmarkContext';
 
 export default function Home() {
@@ -25,10 +25,13 @@ export default function Home() {
         if (!articlesRes.ok) throw new Error('記事データの取得に失敗しました');
         const articlesData: ArticlesData = await articlesRes.json();
         const articlesArray = articlesData.articles || [];
-        setArticles(articlesArray);
+
+        // 【公開フィルタ】AI要約が完了した記事のみを表示対象にする
+        const publishableArticles = filterPublishableArticles(articlesArray);
+        setArticles(publishableArticles);
 
         // 日付でソート（新しい順）
-        const sortedAll = [...articlesArray].sort(
+        const sortedAll = [...publishableArticles].sort(
           (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
         );
 

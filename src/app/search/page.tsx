@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useState } from 'react';
 import Link from 'next/link';
 import NewsCard from '@/components/NewsCard';
-import { getCategoryByName, BASE_PATH } from '@/lib/types';
+import { getCategoryByName, BASE_PATH, isPublishableSummary } from '@/lib/types';
 
 type Article = {
   id: string;
@@ -46,7 +46,11 @@ function SearchResults() {
         return res.json();
       })
       .then(data => {
-        setArticles(data.articles || []);
+        // 【公開フィルタ】AI要約が完了した記事のみを検索対象にする
+        const publishableArticles = (data.articles || []).filter(
+          (article: Article) => isPublishableSummary(article.summary)
+        );
+        setArticles(publishableArticles);
         setIsLoading(false);
       })
       .catch((err) => {

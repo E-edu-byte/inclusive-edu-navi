@@ -104,3 +104,27 @@ export function getCategoryById(categoryId: string): Category | undefined {
 export function getCategoryByName(categoryName: string): Category | undefined {
   return categories.find(category => category.name === categoryName);
 }
+
+// 要約が公開可能（AI要約完了済み）かどうかを判定
+export function isPublishableSummary(summary: string | undefined): boolean {
+  if (!summary || summary.trim().length === 0) return false;
+
+  // 準備中プレースホルダーを含む場合は非公開
+  if (summary.includes('【要約準備中】')) return false;
+
+  // 不完全な文末パターンを含む場合は非公開
+  const incompleteEndings = ['...', '・・・', '…', '[&#8230;]', ' ['];
+  for (const ending of incompleteEndings) {
+    if (summary.trim().endsWith(ending)) return false;
+  }
+
+  // 20文字未満は非公開
+  if (summary.trim().length < 20) return false;
+
+  return true;
+}
+
+// 公開可能な記事のみをフィルタリング
+export function filterPublishableArticles(articles: Article[]): Article[] {
+  return articles.filter(article => isPublishableSummary(article.summary));
+}

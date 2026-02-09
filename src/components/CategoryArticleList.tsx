@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Article, BASE_PATH, getCategoryByName, Category } from '@/lib/types';
+import { Article, BASE_PATH, getCategoryByName, Category, isPublishableSummary } from '@/lib/types';
 import NewsCard from '@/components/NewsCard';
 
 type Props = {
@@ -20,10 +20,11 @@ export default function CategoryArticleList({ category }: Props) {
         if (!res.ok) throw new Error('記事データの取得に失敗しました');
         const data = await res.json();
 
-        // カテゴリ名でフィルタリング（JSONのcategoryはカテゴリ名）
+        // カテゴリ名でフィルタリング + 公開可能な記事のみ
         const categoryArticles = (data.articles || []).filter((article: Article) => {
           const articleCategory = getCategoryByName(article.category);
-          return articleCategory?.id === category.id;
+          // カテゴリが一致 かつ AI要約が完了している記事のみ
+          return articleCategory?.id === category.id && isPublishableSummary(article.summary);
         });
 
         // 日付でソート（新しい順）

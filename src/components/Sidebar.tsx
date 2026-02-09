@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { categories, BASE_PATH, Article } from '@/lib/types';
+import { categories, BASE_PATH, Article, isPublishableSummary } from '@/lib/types';
 import { generateAmazonSearchUrl, generateRakutenSearchUrl } from '@/data/articles';
 import SupportCard from './SupportCard';
 import RankingBlock from './RankingBlock';
@@ -23,7 +23,10 @@ export default function Sidebar() {
     fetch(`${BASE_PATH}/data/articles.json`)
       .then(res => res.json())
       .then(data => {
-        const articles: Article[] = data.articles || [];
+        // 【公開フィルタ】AI要約が完了した記事のみをキーワード抽出対象にする
+        const articles: Article[] = (data.articles || []).filter(
+          (article: Article) => isPublishableSummary(article.summary)
+        );
 
         // キーワードを抽出（重複を除去）
         const keywordSet = new Set<string>();

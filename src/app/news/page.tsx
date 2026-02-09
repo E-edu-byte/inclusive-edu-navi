@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Sidebar from '@/components/Sidebar';
 import NewsCard from '@/components/NewsCard';
-import { Article, ArticlesData, BASE_PATH } from '@/lib/types';
+import { Article, ArticlesData, BASE_PATH, filterPublishableArticles } from '@/lib/types';
 
 export default function NewsPage() {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -17,7 +17,8 @@ export default function NewsPage() {
         const res = await fetch(`${BASE_PATH}/data/articles.json`);
         if (!res.ok) throw new Error('記事データの取得に失敗しました');
         const data: ArticlesData = await res.json();
-        setArticles(data.articles || []);
+        // 【公開フィルタ】AI要約が完了した記事のみを表示
+        setArticles(filterPublishableArticles(data.articles || []));
       } catch (err) {
         setError(err instanceof Error ? err.message : 'データの取得に失敗しました');
       } finally {
