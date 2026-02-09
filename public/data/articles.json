@@ -1,10 +1,43 @@
 {
   "articles": [
     {
-      "id": "c23647461d11",
-      "title": "LINEヤフーがCSR新方針を策定、若年層のデジタルリテラシー支援を重点化",
+      "id": "c9b0768a4345",
+      "title": "学校と企業の連携モデルとは、みんなのコードが無料フォーラムを3月6日に開催",
       "summary": "【要約準備中】この記事の要約は現在準備中です。",
       "category": "ICT・教材",
+      "date": "2026-02-10",
+      "url": "https://edu.watch.impress.co.jp/docs/news/event/2084413.html",
+      "imageUrl": "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400&h=300&fit=crop",
+      "source": "こどもとIT",
+      "mainKeyword": ""
+    },
+    {
+      "id": "d63288ac2ae6",
+      "title": "学習・教育関連IT本が50％OFF、Amazon「Kindle本 高価格帯タイトルセール」",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "ICT・教材",
+      "date": "2026-02-10",
+      "url": "https://edu.watch.impress.co.jp/docs/serial/amazon-sale/2084425.html",
+      "imageUrl": "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=300&fit=crop",
+      "source": "こどもとIT",
+      "mainKeyword": ""
+    },
+    {
+      "id": "9f25276b2951",
+      "title": "文部科学省、論点整理をわかりやすくまとめたビジュアル資料を公開",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "ICT・教材",
+      "date": "2026-02-10",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2082595.html",
+      "imageUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=300&fit=crop",
+      "source": "こどもとIT",
+      "mainKeyword": ""
+    },
+    {
+      "id": "c23647461d11",
+      "title": "LINEヤフーがCSR新方針を策定、若年層のデジタルリテラシー支援を重点化",
+      "summary": "LINEヤフーは、社会貢献として若い世代のインターネット利用能力を高める支援に力を入れると発表しました。これは、情報過多の現代社会で誰もが安全にデジタルツールを使いこなし、正しい情報を選べる力を育むため、非常に重要な取り組みです。",
+      "category": "支援・合理的配慮",
       "date": "2026-02-10",
       "url": "https://edu.watch.impress.co.jp/docs/news/2084631.html",
       "imageUrl": "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=400&h=300&fit=crop",
@@ -32,6 +65,17 @@
       "imageUrl": "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=400&h=300&fit=crop",
       "source": "こどもとIT",
       "mainKeyword": ""
+    },
+    {
+      "id": "2f1950223638",
+      "title": "「TDXラジオ」Teacher’s ［Shift］File.255 知多市立知多中学校 講師 林 優真 先生（前編）を公開",
+      "summary": "教育現場でICT（情報通信技術）を使った新しい学習方法や、先生たちの働き方を改善するラジオ番組が公開されました。知多中学校の先生が、ICT活用で子どもたちの学びを豊かにし、先生の負担を減らすアイデアを語っています。これは、これからの教育をより良くするために役立つ情報です。",
+      "category": "ICT・教材",
+      "date": "2026-02-09",
+      "url": "https://ict-enews.net/2026/02/09tdxradio-6/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-1tdx.jpg",
+      "source": "ICT教育ニュース",
+      "mainKeyword": "教育ICT"
     },
     {
       "id": "05b749ce85d8",
@@ -199,6 +243,17 @@
       "mainKeyword": ""
     },
     {
+      "id": "f4110951bb73",
+      "title": "20代のAIエージェント利用は約5割、利用者の7割超が業務に「ポジティブな効果」実感=レバレジーズ調べ=",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "支援・合理的配慮",
+      "date": "2026-02-08",
+      "url": "https://ict-enews.net/2026/02/09leverages/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-lg-1200x630.webp",
+      "source": "ICT教育ニュース",
+      "mainKeyword": ""
+    },
+    {
       "id": "f3969572e6b3",
       "title": "DOU、愛知大学の授業において授業内の学習データと連携した「AI講師」を試験導入",
       "summary": "愛知大学の授業で、学生の学習状況をデータで分析し、それぞれに合った指導をする「AI講師」の試験導入が始まりました。これは、AIが一人ひとりの理解度に合わせてサポートすることで、学生がより効果的に学べるように手助けする、多様な学びを支える新しい試みです。",
@@ -317,8 +372,8 @@
       "mainKeyword": ""
     }
   ],
-  "lastUpdated": "2026-02-10T00:15:41.241498",
-  "totalCount": 29,
+  "lastUpdated": "2026-02-10T00:20:07.381903",
+  "totalCount": 34,
   "sources": [
     "こどもとIT",
     "ICT教育ニュース",
