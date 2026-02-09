@@ -1,6 +1,39 @@
 {
   "articles": [
     {
+      "id": "0521d53d5c45",
+      "title": "文部科学省に聞く、教育は「生成AI」とどう向き合い、どのような未来を描くのか",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "ICT・教材",
+      "date": "2026-02-10",
+      "url": "https://edu.watch.impress.co.jp/docs/report/2075072.html",
+      "imageUrl": "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=300&fit=crop",
+      "source": "こどもとIT",
+      "mainKeyword": ""
+    },
+    {
+      "id": "d4a10bf2b31e",
+      "title": "DXハイスクールの高校生、Meta QuestとAIで地域課題解決に挑む",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "ICT・教材",
+      "date": "2026-02-10",
+      "url": "https://edu.watch.impress.co.jp/docs/report/2075364.html",
+      "imageUrl": "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=400&h=300&fit=crop",
+      "source": "こどもとIT",
+      "mainKeyword": ""
+    },
+    {
+      "id": "d9705b15906a",
+      "title": "「三鷹の魅力 はさんでどうぞ」小6と企業が開発したサンドイッチを吉祥寺マルイで発売",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "ICT・教材",
+      "date": "2026-02-10",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2081161.html",
+      "imageUrl": "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=300&fit=crop",
+      "source": "こどもとIT",
+      "mainKeyword": ""
+    },
+    {
       "id": "c9b0768a4345",
       "title": "学校と企業の連携モデルとは、みんなのコードが無料フォーラムを3月6日に開催",
       "summary": "【要約準備中】この記事の要約は現在準備中です。",
@@ -65,17 +98,6 @@
       "imageUrl": "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=400&h=300&fit=crop",
       "source": "こどもとIT",
       "mainKeyword": ""
-    },
-    {
-      "id": "2f1950223638",
-      "title": "「TDXラジオ」Teacher’s ［Shift］File.255 知多市立知多中学校 講師 林 優真 先生（前編）を公開",
-      "summary": "教育現場でICT（情報通信技術）を使った新しい学習方法や、先生たちの働き方を改善するラジオ番組が公開されました。知多中学校の先生が、ICT活用で子どもたちの学びを豊かにし、先生の負担を減らすアイデアを語っています。これは、これからの教育をより良くするために役立つ情報です。",
-      "category": "ICT・教材",
-      "date": "2026-02-09",
-      "url": "https://ict-enews.net/2026/02/09tdxradio-6/",
-      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-1tdx.jpg",
-      "source": "ICT教育ニュース",
-      "mainKeyword": "教育ICT"
     },
     {
       "id": "05b749ce85d8",
@@ -243,13 +265,35 @@
       "mainKeyword": ""
     },
     {
-      "id": "f4110951bb73",
-      "title": "20代のAIエージェント利用は約5割、利用者の7割超が業務に「ポジティブな効果」実感=レバレジーズ調べ=",
+      "id": "20d43795c904",
+      "title": "簿記学習、56.7%が「就・転職で有利な武器になった」と回答＝CPAエクセレント調べ＝",
       "summary": "【要約準備中】この記事の要約は現在準備中です。",
       "category": "支援・合理的配慮",
       "date": "2026-02-08",
-      "url": "https://ict-enews.net/2026/02/09leverages/",
-      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-lg-1200x630.webp",
+      "url": "https://ict-enews.net/2026/02/09cpa-excellent-partners/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-cpa2-1200x630.webp",
+      "source": "ICT教育ニュース",
+      "mainKeyword": ""
+    },
+    {
+      "id": "da54edb7ed5d",
+      "title": "NTT西日本・三重大学・地域創生Coデザイン研究所、包括連携協定を締結",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "支援・合理的配慮",
+      "date": "2026-02-08",
+      "url": "https://ict-enews.net/2026/02/09ntt-west/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-nttw.webp",
+      "source": "ICT教育ニュース",
+      "mainKeyword": ""
+    },
+    {
+      "id": "0cba500cee40",
+      "title": "東京工科大学、サウジアラビアの大学とMOUを締結　宇宙・AI・デジタルツイン分野の学術交流",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "支援・合理的配慮",
+      "date": "2026-02-08",
+      "url": "https://ict-enews.net/2026/02/09teu-2/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-tau-900x630.jpg",
       "source": "ICT教育ニュース",
       "mainKeyword": ""
     },
@@ -372,8 +416,8 @@
       "mainKeyword": ""
     }
   ],
-  "lastUpdated": "2026-02-10T00:20:07.381903",
-  "totalCount": 34,
+  "lastUpdated": "2026-02-10T00:37:34.445146",
+  "totalCount": 38,
   "sources": [
     "こどもとIT",
     "ICT教育ニュース",
