@@ -129,9 +129,9 @@ RSS_FEEDS = [
     # === プレスリリース・大学ニュース ===
     {
         "name": "PR TIMES",
-        "url": "https://prtimes.jp/index.php?key=edutech&f=rss",
+        "url": "https://prtimes.jp/index.rdf",
         "skip_core_filter": False,  # 厳格フィルタ適用
-        "strict_keywords": ["インクルーシブ", "特別支援", "障害", "障がい", "発達支援"],
+        "strict_keywords": ["インクルーシブ", "特別支援", "障害", "障がい", "発達支援", "発達障害", "不登校", "学習障害"],
         "max_articles": 2,
     },
     {
