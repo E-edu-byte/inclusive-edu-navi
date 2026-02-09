@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  basePath: '/inclusive-edu-navi',
-  assetPrefix: '/inclusive-edu-navi',
+  basePath: '/inclusive',
+  assetPrefix: '/inclusive',
   images: {
     unoptimized: true,
   },
