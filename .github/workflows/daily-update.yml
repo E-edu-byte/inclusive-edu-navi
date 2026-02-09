@@ -2,12 +2,11 @@
 name: Daily Update
 
 on:
-  # 【API節約】1日3回のみ実行（JST 8:00, 12:00, 18:00）
-  # Free Tier 20RPD対応: 3回×2件=6件 + AIピック1件 = 7件/日
+  # 【朝刊・夕刊スタイル】1日2回のみ実行（JST 7:00, 18:00）
+  # Free Tier 20RPD対応: 2回×5件=10件 + AIピック1件 = 11件/日（20RPD内で余裕あり）
   schedule:
-    - cron: "0 23 * * *"   # JST 8:00 (UTC 23:00)
-    - cron: "0 3 * * *"    # JST 12:00 (UTC 3:00)
-    - cron: "0 9 * * *"    # JST 18:00 (UTC 9:00)
+    - cron: "0 22 * * *"   # JST 7:00 (UTC 22:00) - 朝刊
+    - cron: "0 9 * * *"    # JST 18:00 (UTC 9:00) - 夕刊
   # 手動実行も可能
   workflow_dispatch:
   # mainブランチへのpush時も実行（テスト用）
@@ -54,13 +53,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r scripts/requirements.txt
 
-      # 4. ニュース収集（fetch-news.py）
+      # 4. ニュース収集（fetch-news.py）- 完全直列処理、15秒間隔
       - name: Fetch news articles
         run: python scripts/fetch-news.py
 
-      # 5. AI記事生成（generate-articles.py）- 18:00 JSTのみ実行
+      # 5. AI記事生成（generate-articles.py）- 18:00 JSTのみ実行（夕刊）
       # UTC 9:00 = JST 18:00
-      - name: Generate AI picks (evening only)
+      - name: Generate AI picks (evening edition only)
         if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || (github.event_name == 'schedule' && github.event.schedule == '0 9 * * *')
         run: python scripts/generate-articles.py
         env:

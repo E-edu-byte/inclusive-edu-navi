@@ -211,12 +211,13 @@ RESEARCH_INSTITUTIONS = [
 # ドメインごとの最大記事数
 MAX_ARTICLES_PER_DOMAIN = 3
 
-# 【徹底省エネ設定】取得件数を最小限に
+# 【朝刊・夕刊スタイル】1日2回実行（JST 7:00, 18:00）
 LIGHT_MODE = True
-MAX_ARTICLES_PER_SOURCE = 3  # 各ソースから最大3件（徹底節約）
-MAX_NEW_ARTICLES_PER_RUN = 3  # 1回の実行で追加する最大記事数（Free Tier対応）
-MAX_AI_CALLS_PER_RUN = 2  # 1回の実行でのAI呼び出し最大数（1日3回×2件=6件/日、Free Tier 20RPD対応）
-AI_CALL_SLEEP_SECONDS = 5  # AI呼び出し間の待機秒数（RPM制限15回/分を回避: 12回/分に抑制）
+MAX_ARTICLES_PER_SOURCE = 3  # 各ソースから最大3件
+MAX_NEW_ARTICLES_PER_RUN = 5  # 1回の実行で追加する最大記事数
+MAX_AI_CALLS_PER_RUN = 5  # 1回の実行でのAI呼び出し最大数（1日2回×5件=10件 + AIピック1件 = 11件/日）
+AI_CALL_SLEEP_SECONDS = 15  # 【RPM制限回避】15秒間隔で4回/分に抑制（15RPM制限を確実回避）
+# 【重要】完全直列処理 - 並列処理禁止、1件ずつ順番にAI要約を実行
 
 # AI呼び出しカウンター（リトライ+新規の合計）
 TOTAL_AI_CALLS_THIS_RUN = 0
@@ -606,7 +607,7 @@ FORCE_RETRY_PATTERNS = [
     "理化学研究所のプレスリリースです",
 ]
 
-MAX_SUMMARY_RETRY = 1  # 1回の実行でリトライする最大件数（Free Tier対応: 新規1件+リトライ1件=2件/実行）
+MAX_SUMMARY_RETRY = 2  # 1回の実行でリトライする最大件数（リトライ2件+新規3件=5件/実行）
 
 
 def is_incomplete_summary(summary: str, source: str = "") -> bool:
@@ -1141,7 +1142,7 @@ JSON形式で回答: {{"summary":"解説文（150字以内、文末は。）","c
 
         ai_response = response.text.strip()
 
-        # 【RPM制限回避】5秒待機で12回/分に抑制
+        # 【RPM制限回避】15秒待機で4回/分に抑制（15RPM制限を確実回避）
         time.sleep(AI_CALL_SLEEP_SECONDS)
 
         # SKIPの場合
