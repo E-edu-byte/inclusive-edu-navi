@@ -1,269 +1,6 @@
 {
   "articles": [
     {
-      "id": "fd8b36114b9c",
-      "title": "ゼレンスキー大統領 欧州10か所に無人機輸出拠点設置の考え",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "url": "https://news.web.nhk/newsweb/na/na-k10015047121000",
-      "source": "NHK教育",
-      "category": "support",
-      "date": "2026-02-09",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "1ef1fe403bf9",
-      "title": "衆議院選挙 海外の反応",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "url": "https://news.web.nhk/newsweb/na/na-k10015046981000",
-      "source": "NHK教育",
-      "category": "support",
-      "date": "2026-02-09",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "8847522f5cf5",
-      "title": "ホワイトソックス移籍の村上宗隆 アリゾナで自主トレーニング",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "url": "https://news.web.nhk/newsweb/na/na-k10015047221000",
-      "source": "NHK教育",
-      "category": "support",
-      "date": "2026-02-09",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "69d01c42db4a",
-      "title": "タイ総選挙 与党 タイ名誉党が第1党の見通し 単独過半数届かず",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "url": "https://news.web.nhk/newsweb/na/na-k10015047211000",
-      "source": "NHK教育",
-      "category": "support",
-      "date": "2026-02-09",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "7dc33fba7f69",
-      "title": "中京TV「そらメディア」、三重・津商業高校で「ドローン特別授業」を実施",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-08",
-      "url": "https://ict-enews.net/2026/02/09ctv/",
-      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-ctv-1200x630.webp",
-      "source": "ICT教育ニュース",
-      "mainKeyword": ""
-    },
-    {
-      "id": "6e5500d60c84",
-      "title": "LINEみらい財団、「GIGAワークブック活用セミナー2026」24日開催",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-08",
-      "url": "https://ict-enews.net/2026/02/09line-mirai/",
-      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/ICT-E820-3.jpg",
-      "source": "ICT教育ニュース",
-      "mainKeyword": ""
-    },
-    {
-      "id": "da54edb7ed5d",
-      "title": "NTT西日本・三重大学・地域創生Coデザイン研究所、包括連携協定を締結",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-08",
-      "url": "https://ict-enews.net/2026/02/09ntt-west/",
-      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-nttw.webp",
-      "source": "ICT教育ニュース",
-      "mainKeyword": ""
-    },
-    {
-      "id": "0cba500cee40",
-      "title": "東京工科大学、サウジアラビアの大学とMOUを締結　宇宙・AI・デジタルツイン分野の学術交流",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-08",
-      "url": "https://ict-enews.net/2026/02/09teu-2/",
-      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-tau-900x630.jpg",
-      "source": "ICT教育ニュース",
-      "mainKeyword": ""
-    },
-    {
-      "id": "25a1c1ea2bc5",
-      "title": "オープンバッジ・ネットワーク、デジタル証明書「オープンバッジ」国立大学の過半数が導入",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-08",
-      "url": "https://ict-enews.net/2026/02/09openbadge-3/",
-      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-ob-1200x448.webp",
-      "source": "ICT教育ニュース",
-      "mainKeyword": ""
-    },
-    {
-      "id": "20d43795c904",
-      "title": "簿記学習、56.7%が「就・転職で有利な武器になった」と回答＝CPAエクセレント調べ＝",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-08",
-      "url": "https://ict-enews.net/2026/02/09cpa-excellent-partners/",
-      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-cpa2-1200x630.webp",
-      "source": "ICT教育ニュース",
-      "mainKeyword": ""
-    },
-    {
-      "id": "f4110951bb73",
-      "title": "20代のAIエージェント利用は約5割、利用者の7割超が業務に「ポジティブな効果」実感=レバレジーズ調べ=",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-08",
-      "url": "https://ict-enews.net/2026/02/09leverages/",
-      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-lg-1200x630.webp",
-      "source": "ICT教育ニュース",
-      "mainKeyword": ""
-    },
-    {
-      "id": "f3969572e6b3",
-      "title": "DOU、愛知大学の授業において授業内の学習データと連携した「AI講師」を試験導入",
-      "summary": "DOUが愛知大学の授業で、学習データと連携する「AI講師」を試験導入。個別最適化された学習支援の可能性を探る。",
-      "category": "ICT・教材",
-      "date": "2026-02-08",
-      "url": "https://ict-enews.net/2026/02/09dou-3/",
-      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-dou-1200x630.webp",
-      "source": "ICT教育ニュース",
-      "mainKeyword": ""
-    },
-    {
-      "id": "4f685df80c3f",
-      "title": "10億円規模の基金を創設し「コベカツ」推進　神戸市が予算案提出へ",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "url": "https://www.asahi.com/articles/ASV272J8JV27PIHB00TM.html?ref=rss",
-      "source": "朝日新聞 教育",
-      "category": "support",
-      "date": "2026-02-08",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "afcdcaabd0ea",
-      "title": "「相談して」と言うのに頼れない大人たち　私が居場所に出会うまで",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "url": "https://www.asahi.com/articles/ASV263JDXV26UTFL00BM.html?ref=rss",
-      "source": "朝日新聞 教育",
-      "category": "diverse-learning",
-      "date": "2026-02-08",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "7ca61c1a64df",
-      "title": "キズキ、『保健室経由、かねやま本館。』著者がメッセ―ジ 期間限定無料公開",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "url": "https://ict-enews.net/2026/02/09kizuki-corp-2/",
-      "source": "ICT教育ニュース",
-      "category": "diverse-learning",
-      "date": "2026-02-08",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "01b7d0cb15f9",
-      "title": "Edv Future、中・高生の非認知能力 全国平均が一目でわかる「丸わかりブック」無料進",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "url": "https://ict-enews.net/2026/02/edv-fu09re/",
-      "source": "ICT教育ニュース",
-      "category": "ict",
-      "date": "2026-02-08",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "a68827df46f2",
-      "title": "ネイティブキャンプ、Lady GagaとBruno Marsコラボ楽曲テーマの新教材追加",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "url": "https://ict-enews.net/2026/02/09nativecamp-10/",
-      "source": "ICT教育ニュース",
-      "category": "ict",
-      "date": "2026-02-08",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "947a32604a1d",
-      "title": "イスラエル ネタニヤフ首相 米トランプ大統領と首脳会談へ",
-      "summary": "イスラエルのネタニヤフ首相が今週、アメリカを訪れ、トランプ大統領と首脳会談を行うことになり、アメリカとイランの高官協議を受けて、今後の対応を協議するものとみられます。",
-      "url": "https://news.web.nhk/newsweb/na/na-k10015046171000",
-      "source": "NHK教育",
-      "category": "support",
-      "date": "2026-02-08",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "4ea54b13cfe7",
-      "title": "北朝鮮 2月下旬に党大会開催へ 核・ミサイル開発など動向注視",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "url": "https://news.web.nhk/newsweb/na/na-k10015046201000",
-      "source": "NHK教育",
-      "category": "support",
-      "date": "2026-02-08",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "002cd57187ea",
-      "title": "イタリア 鉄道設備放火など事件相次ぐ 五輪開幕の時期狙ったか",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "url": "https://news.web.nhk/newsweb/na/na-k10015046251000",
-      "source": "NHK教育",
-      "category": "support",
-      "date": "2026-02-08",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "0838e91a3587",
-      "title": "ワシントン・ポスト紙CEOが辞任 従業員を大量解雇で社内反発か",
-      "summary": "アメリカの有力紙ワシントン・ポストで経営基盤強化のためとして従業員の3分の1が解雇されるなかCEOが辞任を表明し、アメリカメディアは解雇を巡り社内で反発が強まっていると伝えています。",
-      "url": "https://news.web.nhk/newsweb/na/na-k10015046311000",
-      "source": "NHK教育",
-      "category": "support",
-      "date": "2026-02-08",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "0c2c568af8c8",
-      "title": "【随時更新】ロシア ウクライナに軍事侵攻（2月8日の動き）",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "url": "https://news.web.nhk/newsweb/na/na-k10015021881000",
-      "source": "NHK教育",
-      "category": "support",
-      "date": "2026-02-08",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "b83373e23f0b",
-      "title": "タイ総選挙 主要政党いずれも単独過半数に届かない情勢",
-      "summary": "タイでは8日、3年ぶりに総選挙が行われました。アヌティン首相が率いる与党をはじめ、3つの主要政党を中心に争われましたが、いずれも単独過半数には届かない情勢で、選挙後の連立交渉の行方が焦点です。",
-      "url": "https://news.web.nhk/newsweb/na/na-k10015046401000",
-      "source": "NHK教育",
-      "category": "support",
-      "date": "2026-02-08",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "59ba0d6f3bdc",
-      "title": "｢あなたはどうしたいの？｣が口癖の人は要注意…｢子ども甘やかす親｣と｢愛情を与える親｣の決定的な違い",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "多様な学び",
-      "date": "2026-02-08",
-      "url": "https://president.jp/articles/-/108469",
-      "imageUrl": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=300&fit=crop",
-      "source": "PRESIDENT Online"
-    },
-    {
       "id": "fdb4ef8a2ff6",
       "title": "令和7年度インクルーシブな学校運営モデル事業中間成果報告会を開催します",
       "summary": "文部科学省が令和7年度インクルーシブな学校運営モデル事業の中間成果報告会の開催を発表。事業の進捗と成果を共有する内容。",
@@ -272,37 +9,6 @@
       "url": "https://www.mext.go.jp/b_menu/houdou/mext_01599.html",
       "imageUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=300&fit=crop",
       "source": "文部科学省"
-    },
-    {
-      "id": "b6d100f5d15c",
-      "title": "防げ研究不正　大学職員らの知識・能力認定するアドバイザー制度創設",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "url": "https://www.asahi.com/articles/ASV263JCYV26UTFL00RM.html?ref=rss",
-      "source": "朝日新聞 教育",
-      "category": "support",
-      "date": "2026-02-07",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "278e05e99ad5",
-      "title": "母親から父親への文句が止まらない…｢学校に行きたがらない子｣の家庭に共通している\"根本的問題\"",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "多様な学び",
-      "date": "2026-02-07",
-      "url": "https://president.jp/articles/-/108468",
-      "imageUrl": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=300&fit=crop",
-      "source": "PRESIDENT Online"
-    },
-    {
-      "id": "f1264db04561",
-      "title": "｢男性だらけの会議｣では絶対に気づかない…女性自衛官が災害現場で真っ先に提案した“2つの生活必需品”",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-07",
-      "url": "https://president.jp/articles/-/108601",
-      "imageUrl": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=300&fit=crop",
-      "source": "PRESIDENT Online"
     },
     {
       "id": "5c5ad78383ba",
@@ -316,116 +22,6 @@
       "mainKeyword": ""
     },
     {
-      "id": "9d137244a895",
-      "title": "「スマホに政策届ける努力を」　18歳投票から10年、望む選挙とは",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "url": "https://www.asahi.com/articles/ASV250BNLV25UTIL00WM.html?ref=rss",
-      "source": "朝日新聞 教育",
-      "category": "support",
-      "date": "2026-02-06",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "0e0b1d91f9a8",
-      "title": "【高校受験2026】大阪私立高1.5次入試、清風南海など60校",
-      "summary": "大阪私立中学校高等学校連合会は2026年2月6日、2026年度（令和8年度）私立高校の1.5次募集状況を公表した。1.5次入試は清風、明星、清風南海、桃山学院など60校が実施する。",
-      "url": "https://resemom.jp/article/2026/02/06/84953.html",
-      "source": "リセマム",
-      "category": "support",
-      "date": "2026-02-06",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "cba62014d8d9",
-      "title": "洛星ノートルダム誕生へ…ヴィアトール学園が事業譲渡契約締結",
-      "summary": "ヴィアトール学園とノートルダム女学院は2026年1月21日、事業譲渡契約書に調印した。2026年4月1日付でノートルダム学院小学校ならびにノートルダム女学院中学高等学校は、ヴィアトール学園の設置校となる。校名は「洛星ノートルダム女学院中学高等学校」に変更する。",
-      "url": "https://resemom.jp/article/2026/02/06/84954.html",
-      "source": "リセマム",
-      "category": "support",
-      "date": "2026-02-06",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "31ac6e765289",
-      "title": "【高校受験2026】福井県立高、一般選抜の出願状況（初日2/5時点）羽水（探究特進）1.58倍",
-      "summary": "福井県教育委員会は2026年2月5日、2026年度（令和8年度）福井県立高等学校一般入学者選抜について、出願1日目の出願状況を公表した。全日制の一般選抜募集人員3,316人に対し、出願初日は1,319人が出願し、倍率は0.40倍。学校・学科別では、羽水（探究特進）1.58倍がもっとも高い。出願受付は2月9日まで。",
-      "url": "https://resemom.jp/article/2026/02/06/84955.html",
-      "source": "リセマム",
-      "category": "support",
-      "date": "2026-02-06",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "a25d1f912138",
-      "title": "【中学受験】【高校受験】首都圏約200校「よみうりGENKIフェスタ」3/22",
-      "summary": "首都圏を中心とした約200の中学校・高等学校が集まる進学相談会「よみうりGENKIフェスタ2026」が2026年3月22日、東京国際フォーラムにて開催される。特別座談会やセミナー、個別相談会など。入場無料、定員は各回1,000組2,000名。入場時間指定による完全予約制、抽選。申込みは3月10日まで。",
-      "url": "https://resemom.jp/article/2026/02/06/84956.html",
-      "source": "リセマム",
-      "category": "support",
-      "date": "2026-02-06",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "a90fce4de00f",
-      "title": "【高校受験2026】京都府公立高、前期選抜の出願状況（確定）堀川（探究）1.55倍",
-      "summary": "京都府教育委員会は2026年2月6日、2026年度（令和8年度）京都府公立高等学校入学者選抜について、前期選抜の出願状況を発表した。全日制の出願倍率は1.88倍で、前年度（2025年度）より0.12ポイント減少。学校・学科別では、田辺（普通科・A方式）の5.61倍がもっとも高かった。",
-      "url": "https://resemom.jp/article/2026/02/06/84957.html",
-      "source": "リセマム",
-      "category": "support",
-      "date": "2026-02-06",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "645f34706d43",
-      "title": "【共通テスト2026】データネット「合格可能性判定基準」医学部医学科",
-      "summary": "駿台・ベネッセデータネットは2026年1月21日、2026年度（令和8年度）大学入学共通テスト（以下、共通テスト）における「合格可能性判定基準」を公開した。国公立大学、共通テスト利用私立大学の判定基準や得点率、一次通過情報などが各校の試験ごとに確認できる。",
-      "url": "https://resemom.jp/article/2026/02/06/84958.html",
-      "source": "リセマム",
-      "category": "support",
-      "date": "2026-02-06",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "c9d3b91e71dc",
-      "title": "【大学受験2026】国立2次・早慶の解答速報…河合塾が公開",
-      "summary": "河合塾は、2026年度の国立大二次試験および私立大入試の解答速報を順次Webで公開する。各大学の入試問題の徹底分析に基づき作成した「解答例」「分析コメント」と「入試問題」を速報として掲載する。",
-      "url": "https://resemom.jp/article/2026/02/06/84960.html",
-      "source": "リセマム",
-      "category": "support",
-      "date": "2026-02-06",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "a45b4512fe5f",
-      "title": "【高校受験2026】福島県公立高、前期選抜志願状況（2/6時点）福島（普通）1.10倍、白河（理数）0.58倍",
-      "summary": "福島県教育委員会は2026年2月6日、2026年度（令和8年度）県立高等学校入学者選抜前期選抜および連携型選抜の志願状況（一次）を公表した。出願先変更前の志願倍率は、福島（普通）1.10倍、安積（普通）1.08倍、白河（理数）0.58倍など。出願先変更は2月9日から13日まで受け付ける。",
-      "url": "https://resemom.jp/article/2026/02/06/84961.html",
-      "source": "リセマム",
-      "category": "support",
-      "date": "2026-02-06",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "e3397b7a0165",
-      "title": "【共通テスト2026】データネット「合格可能性判定基準」関関同立",
-      "summary": "駿台・ベネッセデータネットは2026年1月21日、2026年度（令和8年度）大学入学共通テスト（以下、共通テスト）における「合格可能性判定基準」を公開した。国公立大学、共通テスト利用私立大学の判定基準や得点率、1次通過情報などが各校の試験ごとに確認できる。",
-      "url": "https://resemom.jp/article/2026/02/06/84962.html",
-      "source": "リセマム",
-      "category": "support",
-      "date": "2026-02-06",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
       "id": "cd80838cc913",
       "title": "意識・無意識脳での神経のつながり方の可視化に成功",
       "summary": "意識・無意識下での脳神経結合の可視化に成功。睡眠中の感覚知覚メカニズム解明のヒントとなる基礎研究で、多様な脳機能を持つ人への理解や支援に貢献し得る。",
@@ -434,17 +30,6 @@
       "url": "https://www.riken.jp/press/2026/20260207_1/index.html",
       "imageUrl": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=300&fit=crop",
       "source": "理化学研究所"
-    },
-    {
-      "id": "f1f28663de68",
-      "title": "【大学受験】地元進学の多い都道府県1位は愛知…旺文社",
-      "summary": "旺文社は2026年1月30日、「2025年度 都道府県別 大学・短大進学状況」を公表した。地元の大学進学率は全国平均で45.4％。都道府県別では、1位が愛知県（72.5％）、2位が東京都（69.8％）であった。",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-06",
-      "url": "https://resemom.jp/article/2026/02/06/84959.html",
-      "imageUrl": "https://resemom.jp/imgs/ogp_f/391441.jpg",
-      "source": "リセマム",
-      "mainKeyword": ""
     },
     {
       "id": "2a2640374f6f",
@@ -469,112 +54,6 @@
       "mainKeyword": ""
     },
     {
-      "id": "3a2fe5aaaf34",
-      "title": "【高校受験2026】鳥取県立高の特色選抜…実質競争率1.00倍",
-      "summary": "鳥取県教育委員会は2026年2月3日、2026年度（令和8年度）鳥取県立高校特色入学者選抜の受検者数などを公表した。全日制の志願者数953人（県外71人）のうち、944人（県外71人）が受検。実質競争率は1.00倍で、前年度比0.19ポイント減となった。",
-      "category": "実践・事例",
-      "date": "2026-02-06",
-      "url": "https://resemom.jp/article/2026/02/06/84946.html",
-      "imageUrl": "https://resemom.jp/imgs/ogp_f/391466.jpg",
-      "source": "リセマム"
-    },
-    {
-      "id": "012d38bc04fd",
-      "title": "東京都、インフルエンザ警報を再発令…1シーズン2回は初",
-      "summary": "東京都は2026年2月5日、インフルエンザ患者数が再び警報基準を超えたと発表した。1シーズンに2度基準を上回るのは1999年の統計開始以降で初めて。現在はB型ウイルスが主流で、集団感染も急増しており、手洗いや換気など感染予防策の徹底を呼びかけている。",
-      "category": "制度・法改正",
-      "date": "2026-02-06",
-      "url": "https://resemom.jp/article/2026/02/06/84945.html",
-      "imageUrl": "https://resemom.jp/imgs/ogp_f/391461.jpg",
-      "source": "リセマム"
-    },
-    {
-      "id": "614fa84a3747",
-      "title": "【大学受験2026】京都先端科学大、今年度より共通テスト利用入試受験料を無料化",
-      "summary": "京都先端科学大学は、2026年度入試から共通テスト利用入試〈A日程～D日程〉において、入学検定料（通常1万円）を完全無料化する。",
-      "category": "研究・学術",
-      "date": "2026-02-06",
-      "url": "https://resemom.jp/article/2026/02/06/84944.html",
-      "imageUrl": "https://resemom.jp/imgs/ogp_f/385798.jpg",
-      "source": "リセマム"
-    },
-    {
-      "id": "19c6fa434e30",
-      "title": "中学生で数学1A・大学受験英文法を完成…TOMAS「最難関大学受験部Gコース」",
-      "summary": "リソー教育グループの子会社TOMASは、2026年3月より、東大・京大などの最難関国立大を志望する受験生のためのグループ授業コース「最難関大学受験部Gコース」を開講する。",
-      "category": "研究・学術",
-      "date": "2026-02-06",
-      "url": "https://resemom.jp/article/2026/02/06/84943.html",
-      "imageUrl": "https://resemom.jp/imgs/ogp_f/391371.jpg",
-      "source": "リセマム"
-    },
-    {
-      "id": "4b1cecd6d343",
-      "title": "大学入学共通テスト、平均点を発表　情報Ｉは56.59点と大幅下降",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "url": "https://www.asahi.com/articles/ASV240GY6V24UTIL02XM.html?ref=rss",
-      "source": "朝日新聞 教育",
-      "category": "support",
-      "date": "2026-02-05",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "de2749be68f3",
-      "title": "「白身のトロ」高級魚ノドグロの完全養殖に成功　近大、マグロに続け",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "url": "https://www.asahi.com/articles/ASV2524QMV25UTIL018M.html?ref=rss",
-      "source": "朝日新聞 教育",
-      "category": "support",
-      "date": "2026-02-05",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "a784676da078",
-      "title": "Gakken、高等学校向け教材「大学入試面接対策映像講座」を3月31日まで予約販売、添削教材とのセット割引も",
-      "summary": "Gakken、高等学校向け教材「大学入試面接対策映像講座」を3月31日まで予約販売、添削教材とのセット割引も... (内容取得失敗)",
-      "url": "https://edtechzine.jp/article/detail/13460",
-      "source": "EdTechZine",
-      "category": "ict",
-      "date": "2026-02-05",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "d7cd3b905466",
-      "title": "司法書士試験に合格したユーザーの勉強時間は3000時間以上が68.2%、年齢は30代以上が80.5% =アガルート調べ=",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "url": "https://ict-enews.net/2026/02/06agaroot-8/",
-      "source": "ICT教育ニュース",
-      "category": "ict",
-      "date": "2026-02-05",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "d7b4f957a897",
-      "title": "JR東日本スタートアップ、みなかみを起点に「地域まるごと学びのキャンパス」を創るリアル教室長を募集",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "url": "https://ict-enews.net/2026/02/06nijin-9/",
-      "source": "ICT教育ニュース",
-      "category": "ict",
-      "date": "2026-02-05",
-      "imageUrl": "",
-      "mainKeyword": ""
-    },
-    {
-      "id": "da96f16507ef",
-      "title": "メタバース教育のゲシピ、認定こども園で「eスポーツ英会話 eスピ！」レッスン提供",
-      "summary": "ゲシピは4日、福岡県北九州市の認定こども園 東筑紫短期大学附属幼稚園にて、年長クラスを対象とした英語あそびの一環として「eスポーツ英会話 eスピ！」の特別レッスンを提供したことを発 […]",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-05",
-      "url": "https://ict-enews.net/2026/02/06gecipe-2/",
-      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/31716-117-f40103affe79c0668f7c53e770e85e90-1304x974-1-1200x630.webp",
-      "source": "ICT教育ニュース",
-      "mainKeyword": ""
-    },
-    {
       "id": "a5b12e17f0f3",
       "title": "東京大学メタバース工学部、小・中・高校生と保護者、教員に向けた生成AIの無料オンライン講座を3月21日、29日に開講",
       "summary": "東京大学メタバース工学部が、小・中・高校生や保護者、教員向けに生成AIの無料オンライン講座を開講。多様な学習機会を提供する。",
@@ -596,26 +75,6 @@
       "source": "リセマム"
     },
     {
-      "id": "17570e530269",
-      "title": "教育サービスの利用開始は小3／中1からが最多、「もっと早く始めれば」と後悔しないコツは？ =塾探しの窓口調べ=",
-      "summary": "教育サービスの利用開始時期の調査で、小学3年生や中学1年生が最多であることが分かりました。「もっと早く始めれば」と後悔しないために、お子さん一人ひとりに合わせた学びのサポートをいつから始めるか、考えるヒントが詰まっています。最適なタイミングで個別の支援を検討するきっかけになるでしょう。",
-      "category": "研究・学術",
-      "date": "2026-02-05",
-      "url": "https://ict-enews.net/2026/02/06p-one/",
-      "imageUrl": "https://ict-enews.net/img/banner/tb2508_top_a_1.jpg",
-      "source": "ICT教育ニュース"
-    },
-    {
-      "id": "73c1456a8a55",
-      "title": "東京大学メタバース工学部、小学生から保護者・教員まで対象別に生成AIを学べる無料講座3月開講",
-      "summary": "東京大学メタバース工学部は4日、同学部が提供するジュニア講座にて、小学生、中学生、高校生、保護者、教員それぞれを対象に、生成AIについてわかりやすく学べる無料オンライン講座を3月に […]",
-      "category": "実践・事例",
-      "date": "2026-02-05",
-      "url": "https://ict-enews.net/2026/02/06meta-school/",
-      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/162956-11-19211f3250e2f2d3690903ed3421747a-1920x1080-1-1200x630.webp",
-      "source": "ICT教育ニュース"
-    },
-    {
       "id": "8b1f66e3d3bf",
       "title": "COMPASS、理科の知識で弁当箱を設計する小中学校向け探究学習プログラムを無償提供",
       "summary": "【要約準備中】この記事の要約は現在準備中です。",
@@ -623,17 +82,6 @@
       "date": "2026-02-04",
       "url": "https://edtechzine.jp/article/detail/13459",
       "imageUrl": "https://edtechzine.jp/static/images/article/13459/13459_og.jpg",
-      "source": "EdTechZine",
-      "mainKeyword": ""
-    },
-    {
-      "id": "c6ceae5c69da",
-      "title": "私立大学の文系学部に一般入試で入学した大学生、約8割が高3以降に志望校を決定【「武田塾」調査】",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-04",
-      "url": "https://edtechzine.jp/article/detail/13456",
-      "imageUrl": "https://edtechzine.jp/static/images/article/13456/13456_og.jpg",
       "source": "EdTechZine",
       "mainKeyword": ""
     },
@@ -658,40 +106,15 @@
       "imageUrl": "https://edtechzine.jp/static/images/article/13458/13458_og.jpg",
       "source": "EdTechZine",
       "mainKeyword": ""
-    },
-    {
-      "id": "cd540a2eb4c2",
-      "title": "子どもが中学受験をした保護者、受験は「子どものため」と「自分の希望・感情も混ざっていた」が同率の41.8％に【one調査】",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-03",
-      "url": "https://edtechzine.jp/article/detail/13453",
-      "imageUrl": "https://edtechzine.jp/static/images/article/13453/13453_og.jpg",
-      "source": "EdTechZine",
-      "mainKeyword": ""
-    },
-    {
-      "id": "fc685735975a",
-      "title": "大学生の子どもがいる家庭の4割が教育資金不足と回答、大学入学時の理想の教育資金貯蓄額は700万〜900万円【「塾選ジャーナル」調べ】",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-03",
-      "url": "https://edtechzine.jp/article/detail/13454",
-      "imageUrl": "https://edtechzine.jp/static/images/article/13454/13454_og.jpg",
-      "source": "EdTechZine",
-      "mainKeyword": ""
     }
   ],
-  "lastUpdated": "2026-02-09T11:26:00.349794",
-  "totalCount": 63,
+  "lastUpdated": "2026-02-09T11:33:05.740550",
+  "totalCount": 10,
   "sources": [
-    "NHK教育",
-    "ICT教育ニュース",
-    "朝日新聞 教育",
-    "PRESIDENT Online",
-    "文部科学省",
     "リセマム",
     "理化学研究所",
+    "文部科学省",
+    "朝日新聞 教育",
     "EdTechZine"
   ]
 }
