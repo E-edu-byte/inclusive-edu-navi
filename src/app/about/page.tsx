@@ -189,7 +189,7 @@ export default function AboutPage() {
 
               <div className="flex flex-col sm:flex-row gap-3 mt-4">
                 <a
-                  href="https://www.buymeacoffee.com/inclusive-edu"
+                  href="https://buymeacoffee.com/newsnavi"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 bg-slate-700 hover:bg-slate-800 text-white px-6 py-3 rounded-lg font-medium transition-colors"

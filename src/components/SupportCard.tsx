@@ -1,5 +1,5 @@
-// 寄付ページのURL（仮）- 実際のURLに置き換えてください
-const DONATION_URL = 'https://www.buymeacoffee.com/inclusive-edu';
+// 寄付ページのURL
+const DONATION_URL = 'https://buymeacoffee.com/newsnavi';
 
 export default function SupportCard() {
   return (
