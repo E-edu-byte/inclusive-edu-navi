@@ -270,11 +270,14 @@ CORE_KEYWORDS = [
 STRONG_EXCLUDE_KEYWORDS = [
     # 政治・情勢（サイト理念と無関係）
     "首相", "大統領", "会談", "総選挙", "政党", "過半数", "解雇", "辞任",
-    "国会", "与党", "野党", "閣僚", "大臣",
-    # 一般受験・倍率（競争教育）
-    "高校受験", "大学受験", "中学受験", "入試倍率", "出願状況",
+    "国会", "与党", "野党", "閣僚", "大臣", "衆議院", "参議院",
+    "ゼレンスキー", "トランプ", "バイデン", "習近平",
+    # 一般受験・倍率（競争教育）- 「入試」を単独で除外
+    "入試", "高校受験", "大学受験", "中学受験", "入試倍率", "出願状況",
     "解答速報", "合格判定", "偏差値", "共通テスト", "センター試験",
-    "志願倍率", "確定志願", "志願状況", "募集人員",
+    "志願倍率", "確定志願", "志願状況", "募集人員", "志望校",
+    # 塾・予備校（競争教育サービス）
+    "塾", "予備校", "進学塾", "学習塾",
     # 一般医療・警報（教育・発達に直接関係ないもの）
     "インフルエンザ", "警報発令", "警報再発令", "感染警報",
     "コロナ", "ワクチン", "予防接種",
@@ -283,6 +286,9 @@ STRONG_EXCLUDE_KEYWORDS = [
     # スポーツ・芸能
     "甲子園", "高校野球", "プロ野球", "サッカー", "五輪", "オリンピック",
     "芸能", "アイドル", "ドラマ", "映画", "俳優",
+    "ホワイトソックス", "移籍", "自主トレ", "野球", "MLB", "NPB",
+    # 軍事・国際情勢
+    "無人機", "輸出拠点", "ドローン攻撃", "ミサイル", "軍事",
 ]
 
 # 除外キーワード（広告・PR記事をスキップ）
@@ -523,6 +529,59 @@ def cleanup_old_articles(articles: list) -> list:
 
     if removed_count > 0:
         print(f"  → {removed_count}件の{ARTICLE_RETENTION_DAYS}日以上前の記事を削除")
+
+    return retained
+
+
+def refilter_existing_articles(articles: list) -> list:
+    """
+    既存記事に対してSTRONG_EXCLUDE_KEYWORDSとCORE_KEYWORDSで再フィルタリング
+
+    【仕様】
+    - 強力除外キーワードを含む記事は削除
+    - コア理念キーワードを含まない記事も削除（信頼ソース以外）
+
+    Returns:
+        フィルタリング後の記事リスト
+    """
+    if not articles:
+        return []
+
+    # 信頼できる教育専門ソース（これらからの記事はCORE_KEYWORDSチェックを緩和）
+    TRUSTED_EDUCATION_SOURCES = ["リセマム", "EdTechZine", "こどもとIT"]
+
+    retained = []
+    removed_strong = 0
+    removed_no_core = 0
+
+    for article in articles:
+        title = article.get('title', '')
+        summary = article.get('summary', '')
+        source = article.get('source', '')
+        text = f"{title} {summary}"
+
+        # 1. 強力除外キーワードチェック
+        has_strong_exclude = any(kw in text for kw in STRONG_EXCLUDE_KEYWORDS)
+        if has_strong_exclude:
+            removed_strong += 1
+            print(f"    [再フィルタ除外] 理念外: {title[:40]}...")
+            continue
+
+        # 2. コア理念キーワードチェック（信頼ソース以外）
+        is_trusted = any(ts in source for ts in TRUSTED_EDUCATION_SOURCES)
+        has_core_keyword = any(kw in text for kw in CORE_KEYWORDS)
+
+        if not is_trusted and not has_core_keyword:
+            removed_no_core += 1
+            print(f"    [再フィルタ除外] コア理念不足: {title[:40]}...")
+            continue
+
+        retained.append(article)
+
+    total_removed = removed_strong + removed_no_core
+    if total_removed > 0:
+        print(f"  → 既存記事から{total_removed}件を再フィルタリングで削除")
+        print(f"    （理念外: {removed_strong}件、コア理念不足: {removed_no_core}件）")
 
     return retained
 
@@ -1765,6 +1824,17 @@ def main():
 
     # 【重複チェック用】既存タイトルを読み込み
     load_existing_titles()
+
+    # 【既存記事の再フィルタリング】理念に合わない既存記事を削除
+    print()
+    print("【0.3】既存記事の再フィルタリング...")
+    print("-" * 40)
+    global EXISTING_ARTICLES
+    original_existing_count = len(EXISTING_ARTICLES)
+    EXISTING_ARTICLES = refilter_existing_articles(EXISTING_ARTICLES)
+    existing_removed = original_existing_count - len(EXISTING_ARTICLES)
+    if existing_removed > 0:
+        print(f"  既存記事: {original_existing_count}件 → {len(EXISTING_ARTICLES)}件")
 
     # 【要約リトライ】不完全な要約を持つ既存記事を再処理
     print()
