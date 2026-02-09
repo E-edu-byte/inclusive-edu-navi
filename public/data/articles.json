@@ -1,6 +1,39 @@
 {
   "articles": [
     {
+      "id": "411c99f20b0c",
+      "title": "スタディポケット AI英会話、学校向けに一人あたり月額150円（税別）で提供",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "ICT・教材",
+      "date": "2026-02-09",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2083441.html",
+      "imageUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=300&fit=crop",
+      "source": "こどもとIT",
+      "mainKeyword": ""
+    },
+    {
+      "id": "c37189c85758",
+      "title": "惺山高校、校内にローカルLLM環境を導入　生徒が「自分専用AI」づくりに挑戦",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "ICT・教材",
+      "date": "2026-02-09",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2083137.html",
+      "imageUrl": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&h=300&fit=crop",
+      "source": "こどもとIT",
+      "mainKeyword": ""
+    },
+    {
+      "id": "9cc4e46177fd",
+      "title": "生成AI利用、約8割が不安を感じつつ半数以上は規約未確認",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "ICT・教材",
+      "date": "2026-02-09",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2082574.html",
+      "imageUrl": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&h=300&fit=crop",
+      "source": "こどもとIT",
+      "mainKeyword": ""
+    },
+    {
       "id": "dd892f3bbbde",
       "title": "6割超がブラウザAI要約で検索終了、「ゼロクリック検索」の実態とは",
       "summary": "【要約準備中】この記事の要約は現在準備中です。",
@@ -34,24 +67,13 @@
       "mainKeyword": ""
     },
     {
-      "id": "f4110951bb73",
-      "title": "20代のAIエージェント利用は約5割、利用者の7割超が業務に「ポジティブな効果」実感=レバレジーズ調べ=",
+      "id": "20d43795c904",
+      "title": "簿記学習、56.7%が「就・転職で有利な武器になった」と回答＝CPAエクセレント調べ＝",
       "summary": "【要約準備中】この記事の要約は現在準備中です。",
       "category": "支援・合理的配慮",
       "date": "2026-02-08",
-      "url": "https://ict-enews.net/2026/02/09leverages/",
-      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-lg-1200x630.webp",
-      "source": "ICT教育ニュース",
-      "mainKeyword": ""
-    },
-    {
-      "id": "f3969572e6b3",
-      "title": "DOU、愛知大学の授業において授業内の学習データと連携した「AI講師」を試験導入",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-08",
-      "url": "https://ict-enews.net/2026/02/09dou-3/",
-      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-dou-1200x630.webp",
+      "url": "https://ict-enews.net/2026/02/09cpa-excellent-partners/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-cpa2-1200x630.webp",
       "source": "ICT教育ニュース",
       "mainKeyword": ""
     },
@@ -163,8 +185,8 @@
       "mainKeyword": ""
     }
   ],
-  "lastUpdated": "2026-02-09T12:16:32.676072",
-  "totalCount": 15,
+  "lastUpdated": "2026-02-09T12:34:32.032593",
+  "totalCount": 17,
   "sources": [
     "こどもとIT",
     "ICT教育ニュース",
