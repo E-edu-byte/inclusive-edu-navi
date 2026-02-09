@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { getCategoryByName } from '@/lib/types';
 import { generateAmazonSearchUrl, generateRakutenSearchUrl } from '@/data/articles';
 import { useBookmarks } from '@/contexts/BookmarkContext';
+import { trackClick } from '@/hooks/useTracking';
 
 type NewsCardProps = {
   title: string;
@@ -210,6 +211,7 @@ export default function NewsCard({
                 href={generateAmazonSearchUrl(mainKeyword, title)}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackClick('amazon')}
                 className="ml-1 text-gray-500 hover:text-gray-700 transition-colors"
               >
                 Amazon
@@ -219,6 +221,7 @@ export default function NewsCard({
                 href={generateRakutenSearchUrl(mainKeyword, title)}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackClick('rakuten')}
                 className="text-gray-500 hover:text-gray-700 transition-colors"
               >
                 楽天

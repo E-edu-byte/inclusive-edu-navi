@@ -1,6 +1,15 @@
+'use client';
+
+import { useEffect } from 'react';
 import Link from 'next/link';
+import { trackError } from '@/hooks/useTracking';
 
 export default function NotFound() {
+  useEffect(() => {
+    // 404エラーをトラッキング
+    trackError(window.location.pathname, '404');
+  }, []);
+
   return (
     <div className="container-main py-16 sm:py-24">
       <div className="max-w-xl mx-auto text-center">

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useBookmarks, BookmarkedArticle } from '@/contexts/BookmarkContext';
 import { getCategoryByName } from '@/lib/types';
 import { generateAmazonSearchUrl, generateRakutenSearchUrl } from '@/data/articles';
+import { trackClick } from '@/hooks/useTracking';
 
 // フォールバック画像
 const FALLBACK_IMAGES = [
@@ -110,6 +111,7 @@ function BookmarkCard({ article }: { article: BookmarkedArticle }) {
                 href={generateAmazonSearchUrl(undefined, article.title)}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackClick('amazon')}
                 className="ml-1 text-gray-500 hover:text-gray-700 transition-colors"
               >
                 Amazon
@@ -119,6 +121,7 @@ function BookmarkCard({ article }: { article: BookmarkedArticle }) {
                 href={generateRakutenSearchUrl(undefined, article.title)}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackClick('rakuten')}
                 className="text-gray-500 hover:text-gray-700 transition-colors"
               >
                 楽天

@@ -1,7 +1,15 @@
+'use client';
+
+import { trackClick } from '@/hooks/useTracking';
+
 // 寄付ページのURL
 const DONATION_URL = 'https://buymeacoffee.com/newsnavi';
 
 export default function SupportCard() {
+  const handleClick = () => {
+    trackClick('buymeacoffee');
+  };
+
   return (
     <div className="bg-slate-50 rounded-xl border border-dashed border-slate-200 p-5">
       {/* アイコンとタイトル */}
@@ -23,6 +31,7 @@ export default function SupportCard() {
         href={DONATION_URL}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={handleClick}
         className="flex items-center justify-center gap-2 w-full py-2 bg-slate-600 hover:bg-slate-700 text-white text-xs font-medium rounded-lg transition-colors"
       >
         <span>☕️</span>

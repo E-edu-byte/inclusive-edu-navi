@@ -6,6 +6,7 @@ import { categories, BASE_PATH, Article, isPublishableSummary } from '@/lib/type
 import { generateAmazonSearchUrl, generateRakutenSearchUrl } from '@/data/articles';
 import SupportCard from './SupportCard';
 import RankingBlock from './RankingBlock';
+import { trackClick } from '@/hooks/useTracking';
 
 // 書籍検索用のキーワード情報
 type BookKeyword = {
@@ -163,6 +164,7 @@ export default function Sidebar() {
                     href={item.amazonUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => trackClick('amazon')}
                     className="text-gray-500 hover:text-amber-700 transition-colors"
                   >
                     → Amazon
@@ -171,6 +173,7 @@ export default function Sidebar() {
                     href={item.rakutenUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => trackClick('rakuten')}
                     className="text-gray-500 hover:text-red-600 transition-colors"
                   >
                     → 楽天ブックス
@@ -187,6 +190,7 @@ export default function Sidebar() {
                 href={generateAmazonSearchUrl('インクルーシブ教育', '')}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackClick('amazon')}
                 className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-amber-600 hover:bg-amber-700 text-white text-xs font-medium rounded-lg transition-colors"
               >
                 Amazon
@@ -195,6 +199,7 @@ export default function Sidebar() {
                 href={generateRakutenSearchUrl('インクルーシブ教育', '')}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackClick('rakuten')}
                 className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-red-500 hover:bg-red-600 text-white text-xs font-medium rounded-lg transition-colors"
               >
                 楽天

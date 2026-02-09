@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { categories, BASE_PATH } from '@/lib/types';
 import SupportCard from './SupportCard';
-import SystemStatus from './SystemStatus';
 
 export default function Footer() {
   return (
@@ -99,9 +98,6 @@ export default function Footer() {
         <div className="mt-8 max-w-sm mx-auto md:mx-0">
           <SupportCard />
         </div>
-
-        {/* システムステータス */}
-        <SystemStatus />
 
         {/* コピーライト */}
         <div className="border-t border-gray-200 mt-8 pt-8 text-center">

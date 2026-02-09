@@ -4,6 +4,7 @@ import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { BookmarkProvider } from '@/contexts/BookmarkContext';
+import PageViewTracker from '@/components/PageViewTracker';
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ['latin'],
@@ -64,6 +65,7 @@ export default function RootLayout({
       </head>
       <body className={notoSansJP.className}>
         <BookmarkProvider>
+          <PageViewTracker />
           <div className="min-h-screen flex flex-col">
             <Header />
             <main className="flex-1">
