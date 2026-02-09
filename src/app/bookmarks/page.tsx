@@ -115,14 +115,9 @@ function BookmarkCard({ article }: { article: BookmarkedArticle }) {
                 Amazon
               </a>
               <span className="mx-1 text-gray-300">|</span>
-              <a
-                href={generateRakutenSearchUrl(undefined, article.title)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-500 hover:text-gray-700 transition-colors"
-              >
-                楽天
-              </a>
+              <span className="text-gray-400" title="準備中">
+                楽天（準備中）
+              </span>
             </span>
           </div>
         </div>

@@ -184,7 +184,7 @@ export default function Sidebar() {
           <div className="mt-4 pt-4 border-t border-amber-200">
             <div className="flex gap-2">
               <a
-                href="https://www.amazon.co.jp/s?k=インクルーシブ教育+本&i=stripbooks"
+                href="https://www.amazon.co.jp/s?k=インクルーシブ教育+本&i=stripbooks&tag=newsnavi02a-22"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-amber-600 hover:bg-amber-700 text-white text-xs font-medium rounded-lg transition-colors"
@@ -192,12 +192,13 @@ export default function Sidebar() {
                 Amazon
               </a>
               <a
-                href="https://books.rakuten.co.jp/search?sitem=インクルーシブ教育"
+                href="https://books.rakuten.co.jp/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-red-500 hover:bg-red-600 text-white text-xs font-medium rounded-lg transition-colors"
+                className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-gray-400 text-white text-xs font-medium rounded-lg cursor-not-allowed"
+                title="準備中"
               >
-                楽天ブックス
+                楽天（準備中）
               </a>
             </div>
             <p className="mt-2 text-xs text-amber-600 text-center">
