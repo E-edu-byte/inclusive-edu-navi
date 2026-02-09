@@ -53,7 +53,7 @@ export type AIPicksData = {
 };
 
 // basePath設定
-export const BASE_PATH = '/inclusive-edu-navi';
+export const BASE_PATH = '/inclusive';
 
 // カテゴリ定義（6カテゴリー）
 export const categories: Category[] = [

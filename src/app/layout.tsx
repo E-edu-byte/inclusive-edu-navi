@@ -12,7 +12,7 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://example.github.io/inclusive-edu-navi'),
+  metadataBase: new URL('https://news-navi.jp/inclusive'),
   title: {
     default: 'インクルーシブ教育ナビ | 特別支援教育の最新情報',
     template: '%s | インクルーシブ教育ナビ',
