@@ -212,7 +212,7 @@ MAX_ARTICLES_PER_DOMAIN = 3
 LIGHT_MODE = True
 MAX_ARTICLES_PER_SOURCE = 3  # 各ソースから最大3件（徹底節約）
 MAX_NEW_ARTICLES_PER_RUN = 10  # 1回の実行で追加する最大記事数（新規）
-MAX_AI_CALLS_PER_RUN = 50  # 1回の実行でのAI呼び出し最大数（日次枠を最大活用）
+MAX_AI_CALLS_PER_RUN = 5  # 1回の実行でのAI呼び出し最大数（動作確認用に最小限）
 AI_CALL_SLEEP_SECONDS = 5  # AI呼び出し間の待機秒数（RPM制限15回/分を回避: 12回/分に抑制）
 
 # AI呼び出しカウンター（リトライ+新規の合計）
@@ -974,9 +974,12 @@ def generate_ai_summary_and_category(title: str, original_summary: str, source: 
 タイトル: {title}
 概要: {short_summary}
 
-【重要】summaryは必ず150文字以内の完結した日本語文で、文末は「。」で終わらせること。「...」や途中で切れた文は禁止。
+【厳守事項】
+- summaryは要約本文のみ。タイトル・導入文・出典は一切含めないこと
+- 150文字以内の完結した日本語文で、文末は必ず「。」で終わらせること
+- 「...」「・・・」や途中で切れた文は禁止
 
-JSON形式で回答: {{"summary":"150字以内の完結した要約（文末は。）","category":"カテゴリ名","mainKeyword":"キーワード1つ"}}
+JSON形式で回答: {{"summary":"要約本文のみ（150字以内、文末は。）","category":"カテゴリ名","mainKeyword":"キーワード1つ"}}
 または SKIP"""
 
         response = gemini_client.models.generate_content(
