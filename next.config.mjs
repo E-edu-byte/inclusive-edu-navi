@@ -2,7 +2,7 @@
 const nextConfig = {
   output: 'export',
   basePath: '/inclusive',
-  assetPrefix: '/inclusive',
+  trailingSlash: true,
   images: {
     unoptimized: true,
   },
