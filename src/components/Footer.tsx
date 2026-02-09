@@ -80,16 +80,6 @@ export default function Footer() {
                   プライバシーポリシー
                 </Link>
               </li>
-              <li>
-                <a
-                  href={`${BASE_PATH}/feed.xml`}
-                  className="text-sm text-gray-600 hover:text-primary-600"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  RSSフィード
-                </a>
-              </li>
             </ul>
           </div>
         </div>

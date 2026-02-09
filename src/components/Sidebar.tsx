@@ -212,26 +212,6 @@ export default function Sidebar() {
         </div>
       )}
 
-      {/* お知らせ */}
-      <div className="bg-primary-50 rounded-lg border border-primary-100 p-5">
-        <h2 className="text-lg font-bold text-primary-900 mb-3">
-          お知らせ
-        </h2>
-        <p className="text-sm text-primary-800 leading-relaxed">
-          このサイトはインクルーシブ教育に関する情報を自動的に収集・整理してお届けしています。
-          最新情報はRSSフィードでも購読できます。
-        </p>
-        <a
-          href={`${BASE_PATH}/feed.xml`}
-          className="inline-flex items-center gap-2 mt-4 text-sm font-medium text-primary-700 hover:text-primary-800"
-        >
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M6.18 15.64a2.18 2.18 0 01 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 012.18-2.18M4 4.44A15.56 15.56 0 0119.56 20h-2.83A12.73 12.73 0 004 7.27V4.44m0 5.66a9.9 9.9 0 019.9 9.9h-2.83A7.07 7.07 0 004 12.93V10.1z" />
-          </svg>
-          RSSで購読する
-        </a>
-      </div>
-
       {/* サイトについて */}
       <div className="bg-white rounded-lg border border-gray-200 p-5">
         <h2 className="text-lg font-bold text-gray-900 mb-3">
