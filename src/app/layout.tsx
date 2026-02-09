@@ -21,6 +21,9 @@ export const metadata: Metadata = {
   description: 'すべての子どもの学びを支える最新情報。インクルーシブ教育に関するニュース、研究、実践事例をお届けします。',
   keywords: ['特別支援教育', 'インクルーシブ教育', '発達障害', '合理的配慮', '通級指導', '個別支援'],
   authors: [{ name: 'インクルーシブ教育ナビ編集部' }],
+  verification: {
+    google: '_0bILKnQoufY0oJ-FQRkW3KdJDtCOXls3NW5LWgjOvU',
+  },
   openGraph: {
     type: 'website',
     locale: 'ja_JP',
