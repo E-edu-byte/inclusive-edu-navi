@@ -8,6 +8,10 @@ type TrackingData = {
     rakuten: number;
     buymeacoffee: number;
   };
+  shares: {
+    x: number;
+    line: number;
+  };
   errors: Array<{
     timestamp: string;
     path: string;
@@ -22,6 +26,7 @@ const STORAGE_KEY = 'news-navi-tracking';
 const initialTracking: TrackingData = {
   pageViews: {},
   clicks: { amazon: 0, rakuten: 0, buymeacoffee: 0 },
+  shares: { x: 0, line: 0 },
   errors: [],
   lastReset: new Date().toISOString(),
 };
@@ -58,6 +63,16 @@ export function trackPageView(path: string): void {
 export function trackClick(type: 'amazon' | 'rakuten' | 'buymeacoffee'): void {
   const tracking = getTracking();
   tracking.clicks[type] = (tracking.clicks[type] || 0) + 1;
+  saveTracking(tracking);
+}
+
+// シェアを記録
+export function trackShare(type: 'x' | 'line'): void {
+  const tracking = getTracking();
+  if (!tracking.shares) {
+    tracking.shares = { x: 0, line: 0 };
+  }
+  tracking.shares[type] = (tracking.shares[type] || 0) + 1;
   saveTracking(tracking);
 }
 

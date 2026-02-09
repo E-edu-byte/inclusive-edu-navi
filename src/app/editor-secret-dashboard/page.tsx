@@ -36,6 +36,10 @@ type TrackingData = {
     rakuten: number;
     buymeacoffee: number;
   };
+  shares: {
+    x: number;
+    line: number;
+  };
   errors: Array<{
     timestamp: string;
     path: string;
@@ -48,6 +52,7 @@ type TrackingData = {
 const initialTracking: TrackingData = {
   pageViews: {},
   clicks: { amazon: 0, rakuten: 0, buymeacoffee: 0 },
+  shares: { x: 0, line: 0 },
   errors: [],
   lastReset: new Date().toISOString(),
 };
@@ -264,7 +269,7 @@ export default function EditorDashboard() {
             </button>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-4">
             {/* ページビュー合計 */}
             <div className="bg-gray-700 rounded-lg p-4">
               <span className="text-gray-400 text-xs block mb-1">総ページビュー</span>
@@ -297,6 +302,24 @@ export default function EditorDashboard() {
               <span className="text-yellow-400 font-medium text-lg">
                 {tracking.clicks.buymeacoffee}
                 <span className="text-gray-400 text-sm ml-1">clicks</span>
+              </span>
+            </div>
+
+            {/* Xシェア */}
+            <div className="bg-gray-700 rounded-lg p-4">
+              <span className="text-gray-400 text-xs block mb-1">X シェア</span>
+              <span className="text-white font-medium text-lg">
+                {tracking.shares?.x || 0}
+                <span className="text-gray-400 text-sm ml-1">shares</span>
+              </span>
+            </div>
+
+            {/* LINEシェア */}
+            <div className="bg-gray-700 rounded-lg p-4">
+              <span className="text-gray-400 text-xs block mb-1">LINE シェア</span>
+              <span className="text-[#06C755] font-medium text-lg">
+                {tracking.shares?.line || 0}
+                <span className="text-gray-400 text-sm ml-1">shares</span>
               </span>
             </div>
           </div>
