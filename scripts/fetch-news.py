@@ -121,11 +121,7 @@ RSS_FEEDS = [
         "url": "https://edtechzine.jp/rss/new/20/index.xml",
         "skip_core_filter": True,
     },
-    {
-        "name": "こどもとIT",
-        "url": "https://www.watch.impress.co.jp/kodomo_it/rss/rss.xml",
-        "skip_core_filter": True,  # 教育ICT専門なのでフィルタ緩和
-    },
+    # こどもとIT: RSSが不安定なためスクレイピングに移行（fetch_kodomo_it_news関数で取得）
     # === プレスリリース・大学ニュース ===
     {
         "name": "PR TIMES",
@@ -1800,6 +1796,107 @@ def fetch_tsukuba_human_news(max_articles: int = 2) -> list:
     return articles
 
 
+def fetch_kodomo_it_news(max_articles: int = 3) -> list:
+    """
+    こどもとIT（Impress Watch）の記事をスクレイピング
+    RSSが不安定なため、直接Webページを解析
+    教育ICT・プログラミング教育の専門メディア
+    """
+    articles = []
+    duplicate_count = 0
+    kodomo_url = "https://edu.watch.impress.co.jp/"
+
+    try:
+        print("  ■ こどもとIT")
+        print(f"    URL: {kodomo_url}")
+
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        }
+
+        response = requests.get(kodomo_url, headers=headers, timeout=15)
+        response.raise_for_status()
+        response.encoding = 'utf-8'
+
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        # 記事リンクを探す（複数のパターンに対応）
+        # パターン1: 記事一覧のリンク
+        article_links = soup.find_all('a', href=True)
+        count = 0
+        seen_urls = set()
+
+        for link in article_links:
+            if count >= max_articles:
+                break
+
+            href = link.get('href', '')
+            text = link.get_text(strip=True)
+
+            # 記事URLのパターンをチェック（/docs/ を含む記事リンク）
+            if '/docs/' in href and text and len(text) > 15:
+                # 相対URLを絶対URLに変換
+                if href.startswith('/'):
+                    full_url = f"https://edu.watch.impress.co.jp{href}"
+                elif not href.startswith('http'):
+                    full_url = f"https://edu.watch.impress.co.jp/{href}"
+                else:
+                    full_url = href
+
+                # 同じURLの重複を防ぐ
+                if full_url in seen_urls:
+                    continue
+                seen_urls.add(full_url)
+
+                # 強力除外キーワードチェック（理念優先ルール適用）
+                if contains_strong_exclude_keyword(text, ""):
+                    continue
+
+                # 重複チェック（既存記事との比較）
+                if is_duplicate_article(text, full_url):
+                    duplicate_count += 1
+                    continue
+
+                count += 1
+                print(f"    [{count}] {text[:50]}...")
+
+                article_id = generate_article_id(full_url)
+
+                # 画像URL取得を試みる
+                img_url = ""
+                img_tag = link.find('img')
+                if img_tag and img_tag.get('src'):
+                    img_src = img_tag.get('src')
+                    if img_src.startswith('http'):
+                        img_url = img_src
+                    elif img_src.startswith('/'):
+                        img_url = f"https://edu.watch.impress.co.jp{img_src}"
+
+                if not img_url:
+                    img_url = get_fallback_image(article_id)
+
+                article = {
+                    "id": article_id,
+                    "title": text,
+                    "summary": "【要約準備中】この記事の要約は現在準備中です。",
+                    "category": "ICT・教材",
+                    "date": datetime.now().strftime("%Y-%m-%d"),
+                    "url": full_url,
+                    "imageUrl": img_url,
+                    "source": "こどもとIT",
+                    "mainKeyword": ""
+                }
+                articles.append(article)
+
+        if len(articles) > 0 or duplicate_count > 0:
+            print(f"    → 新規: {len(articles)}件 / 重複スキップ: {duplicate_count}件")
+
+    except Exception as e:
+        print(f"    エラー: こどもとITの取得に失敗 - {e}")
+
+    return articles
+
+
 def clean_article_data(article: dict) -> dict:
     """
     記事データを軽量化（必要なフィールドのみ保持）
@@ -1890,6 +1987,11 @@ def main():
     print("  ■ 筑波大学 人間系")
     tsukuba_articles = fetch_tsukuba_human_news(max_articles=2)
     all_articles.extend(tsukuba_articles)
+    print()
+
+    # こどもとIT（スクレイピング）
+    kodomo_articles = fetch_kodomo_it_news(max_articles=3)
+    all_articles.extend(kodomo_articles)
     print()
 
     # 重複除去（URLベース）
