@@ -1,10 +1,54 @@
 {
   "articles": [
     {
-      "id": "4a119f0eb38f",
-      "title": "東大「メタバース工学部」が6講座を無料開講、小中高生・保護者・教員に生成AIをやさしく解説",
+      "id": "2f1950223638",
+      "title": "「TDXラジオ」Teacher’s ［Shift］File.255 知多市立知多中学校 講師 林 優真 先生（前編）を公開",
+      "summary": "教育現場でのICT活用による「新しい学び」と「先生の働き方改革」について語るラジオ番組が公開されました。ICTを効果的に使うことで、子どもたち一人ひとりに合った多様な学習方法が実現し、先生たちの業務負担も軽減されます。これは、より良い教育環境を作る上で大切なことです。",
+      "category": "ICT・教材",
+      "date": "2026-02-09",
+      "url": "https://ict-enews.net/2026/02/09tdxradio-6/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-1tdx.jpg",
+      "source": "ICT教育ニュース",
+      "mainKeyword": "教育ICT"
+    },
+    {
+      "id": "b270319bcf5e",
+      "title": "Copilotで授業計画やルーブリックを生成可能に、マイクロソフトがAIツール「Teach」を発表",
       "summary": "【要約準備中】この記事の要約は現在準備中です。",
       "category": "ICT・教材",
+      "date": "2026-02-09",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2055668.html",
+      "imageUrl": "https://images.unsplash.com/photo-1544717305-2782549b5136?w=400&h=300&fit=crop",
+      "source": "こどもとIT",
+      "mainKeyword": ""
+    },
+    {
+      "id": "715e05ff3831",
+      "title": "生成AIとディベートで鍛えるクリティカルシンキング、関西大学初等部・中等部の授業実践",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "ICT・教材",
+      "date": "2026-02-09",
+      "url": "https://edu.watch.impress.co.jp/docs/report/2042023.html",
+      "imageUrl": "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=400&h=300&fit=crop",
+      "source": "こどもとIT",
+      "mainKeyword": ""
+    },
+    {
+      "id": "c1b1a71e7e63",
+      "title": "校務用パソコンにMacを選んだ理由はこれ　導入校の先生がTooのイベントで語る",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "ICT・教材",
+      "date": "2026-02-09",
+      "url": "https://edu.watch.impress.co.jp/docs/report/2048052.html",
+      "imageUrl": "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=400&h=300&fit=crop",
+      "source": "こどもとIT",
+      "mainKeyword": ""
+    },
+    {
+      "id": "4a119f0eb38f",
+      "title": "東大「メタバース工学部」が6講座を無料開講、小中高生・保護者・教員に生成AIをやさしく解説",
+      "summary": "東京大学のメタバース工学部が、インターネット上でAIを学ぶ無料講座を開講しました。小中高生や保護者、教員が対象です。AIの基礎知識を誰でも学べる機会を提供し、情報格差を解消しながら、多様な学びを支援する大切な取り組みです。",
+      "category": "多様な学び",
       "date": "2026-02-09",
       "url": "https://edu.watch.impress.co.jp/docs/news/2082568.html",
       "imageUrl": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop",
@@ -14,8 +58,8 @@
     {
       "id": "c1a25fb00596",
       "title": "なぜ子供はRobloxに夢中なのか？イタリアンブレインロットのゲームを親子で体験して見えたこと",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "ICT・教材",
+      "summary": "この記事は、Robloxというオンラインゲームプラットフォームに子供たちが夢中になる理由を、親子でゲームを体験して探るものです。この体験を通じて、子供たちが自ら遊びや学びを創造し、交流する多様な学びの可能性や、デジタル時代における子供たちの興味や創造性を育む重要性を示しています。",
+      "category": "多様な学び",
       "date": "2026-02-09",
       "url": "https://edu.watch.impress.co.jp/docs/report/2078881.html",
       "imageUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=300&fit=crop",
@@ -97,39 +141,6 @@
       "url": "https://edu.watch.impress.co.jp/docs/knowledge/kodomoit-booklab/2083290.html",
       "imageUrl": "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=400&h=300&fit=crop",
       "source": "こどもとIT",
-      "mainKeyword": ""
-    },
-    {
-      "id": "f4110951bb73",
-      "title": "20代のAIエージェント利用は約5割、利用者の7割超が業務に「ポジティブな効果」実感=レバレジーズ調べ=",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-08",
-      "url": "https://ict-enews.net/2026/02/09leverages/",
-      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-lg-1200x630.webp",
-      "source": "ICT教育ニュース",
-      "mainKeyword": ""
-    },
-    {
-      "id": "f3969572e6b3",
-      "title": "DOU、愛知大学の授業において授業内の学習データと連携した「AI講師」を試験導入",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-08",
-      "url": "https://ict-enews.net/2026/02/09dou-3/",
-      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-dou-1200x630.webp",
-      "source": "ICT教育ニュース",
-      "mainKeyword": ""
-    },
-    {
-      "id": "da54edb7ed5d",
-      "title": "NTT西日本・三重大学・地域創生Coデザイン研究所、包括連携協定を締結",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-08",
-      "url": "https://ict-enews.net/2026/02/09ntt-west/",
-      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-nttw.webp",
-      "source": "ICT教育ニュース",
       "mainKeyword": ""
     },
     {
@@ -240,11 +251,11 @@
       "mainKeyword": ""
     }
   ],
-  "lastUpdated": "2026-02-09T13:10:36.456333",
-  "totalCount": 22,
+  "lastUpdated": "2026-02-09T20:38:07.762680",
+  "totalCount": 23,
   "sources": [
-    "こどもとIT",
     "ICT教育ニュース",
+    "こどもとIT",
     "文部科学省",
     "朝日新聞 教育",
     "理化学研究所",
