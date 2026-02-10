@@ -2248,6 +2248,20 @@ def main():
     )
 
 
+def get_quota_period_start():
+    """現在のクォータ期間の開始時刻を取得（17:00 JSTでリセット）"""
+    now = datetime.now()
+    # 今日の17:00 JST
+    today_reset = now.replace(hour=17, minute=0, second=0, microsecond=0)
+
+    if now >= today_reset:
+        # 17:00以降 → 今日の17:00が期間開始
+        return today_reset
+    else:
+        # 17:00より前 → 昨日の17:00が期間開始
+        return today_reset - timedelta(days=1)
+
+
 def save_status(articles_processed: int, articles_added: int, api_calls: int, has_error: bool, error_message: str = None):
     """システムステータスをstatus.jsonに保存"""
     try:
@@ -2257,17 +2271,20 @@ def save_status(articles_processed: int, articles_added: int, api_calls: int, ha
             with open(STATUS_FILE, 'r', encoding='utf-8') as f:
                 existing_status = json.load(f)
 
-        # 今日の日付（API制限のリセット基準）
-        # 太平洋時間0時 = 日本時間17時でリセット
+        # クォータ期間の開始時刻（17:00 JSTでリセット）
         now = datetime.now()
+        quota_period_start = get_quota_period_start()
 
-        # API使用率を計算（履歴から今日の使用量を集計）
-        today_str = now.strftime("%Y-%m-%d")
+        # API使用率を計算（クォータ期間内の使用量のみ集計）
         today_api_usage = api_calls
         for entry in existing_status.get("history", []):
-            entry_date = entry.get("timestamp", "")[:10]
-            if entry_date == today_str:
-                today_api_usage += entry.get("apiCalls", 0)
+            try:
+                entry_time = datetime.fromisoformat(entry.get("timestamp", ""))
+                # クォータ期間内のエントリのみカウント
+                if entry_time >= quota_period_start:
+                    today_api_usage += entry.get("apiCalls", 0)
+            except:
+                continue
 
         api_percentage = min(100, int((today_api_usage / DAILY_API_LIMIT) * 100))
 
