@@ -218,16 +218,28 @@ LIGHT_MODE = True
 MAX_ARTICLES_PER_SOURCE = 3  # 各ソースから最大3件
 MAX_NEW_ARTICLES_PER_RUN = 5  # 1回の実行で追加する最大記事数
 
+# ========================================
 # 【API制限設定】Free Tier: 5 RPM, 20 RPD
-# --summary-only モードでは要約生成に全枠を使用
+# ========================================
+# 1日の配分（リセット: 17:00 JST）
+#   - 朝刊 (7:00): 5件
+#   - 夕刊 (18:00): 6件（5件 + AIピック1件）
+#   - ルーティン合計: 11件
+#   - 構築/要約補完用: 9件（20 - 11）
+# ========================================
+DAILY_API_LIMIT = 20
+ROUTINE_RESERVED = 11  # 朝刊5 + 夕刊6
+CONSTRUCTION_AVAILABLE = DAILY_API_LIMIT - ROUTINE_RESERVED  # 9件
+
 if SUMMARY_ONLY:
-    MAX_AI_CALLS_PER_RUN = 18  # 要約専用モード: 1日の枠をほぼ使い切る（20-2=18、余裕を持たせる）
+    MAX_AI_CALLS_PER_RUN = CONSTRUCTION_AVAILABLE  # 要約専用モード: 構築用枠のみ使用（9件）
     print("=" * 60)
     print("【要約専用モード】新規収集をスキップ、要約生成に集中")
     print(f"  - 最大AI呼び出し: {MAX_AI_CALLS_PER_RUN}件")
+    print(f"  - ルーティン予約枠: {ROUTINE_RESERVED}件（朝刊5+夕刊6）")
     print("=" * 60)
 else:
-    MAX_AI_CALLS_PER_RUN = 5  # 通常モード: 1回5件（1日2回×5件=10件 + AIピック1件 = 11件/日）
+    MAX_AI_CALLS_PER_RUN = 5  # 通常モード: 1回5件
 
 AI_CALL_SLEEP_SECONDS = 15  # 【RPM制限回避】15秒間隔で4回/分に抑制（5RPM制限を確実回避）
 # 【重要】完全直列処理 - 並列処理禁止、1件ずつ順番にAI要約を実行
@@ -671,7 +683,7 @@ FORCE_RETRY_PATTERNS = [
 
 # 要約リトライ最大件数
 if SUMMARY_ONLY:
-    MAX_SUMMARY_RETRY = 18  # 要約専用モード: 全枠をリトライに使用
+    MAX_SUMMARY_RETRY = CONSTRUCTION_AVAILABLE  # 要約専用モード: 構築用枠のみ使用（9件）
 else:
     MAX_SUMMARY_RETRY = 2  # 通常モード: リトライ2件+新規3件=5件/実行
 
