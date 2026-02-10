@@ -3,7 +3,7 @@
 import { trackClick } from '@/hooks/useTracking';
 
 // 寄付ページのURL
-const DONATION_URL = 'https://buymeacoffee.com/newsnavi';
+const DONATION_URL = 'https://ofuse.me/newsnavi';
 
 export default function SupportCard() {
   const handleClick = () => {
