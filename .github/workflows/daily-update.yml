@@ -2,13 +2,21 @@
 name: Daily Update
 
 on:
-  # 【朝刊・夕刊スタイル】1日2回のみ実行（JST 7:00, 18:00）
-  # Free Tier 20RPD対応: 2回×5件=10件 + AIピック1件 = 11件/日（20RPD内で余裕あり）
+  # 【朝刊・夕刊スタイル】1日2回 + 要約補完1回
+  # Free Tier 20RPD対応: 通常2回×5件=10件 + AIピック1件 = 11件/日
+  # 要約補完: クォータリセット後（17:10 JST）に未完了の要約を処理
   schedule:
     - cron: "0 22 * * *"   # JST 7:00 (UTC 22:00) - 朝刊
     - cron: "0 9 * * *"    # JST 18:00 (UTC 9:00) - 夕刊
+    - cron: "10 8 * * *"   # JST 17:10 (UTC 8:10) - 要約補完（クォータリセット後）
   # 手動実行も可能
   workflow_dispatch:
+    inputs:
+      summary_only:
+        description: '要約専用モード（新規収集をスキップ）'
+        required: false
+        default: 'false'
+        type: boolean
   # mainブランチへのpush時も実行（テスト用）
   push:
     branches:
@@ -54,8 +62,16 @@ jobs:
           pip install -r scripts/requirements.txt
 
       # 4. ニュース収集（fetch-news.py）- 完全直列処理、15秒間隔
+      # 17:10 JST（UTC 8:10）またはsummary_only=trueの場合は要約専用モード
       - name: Fetch news articles
-        run: python scripts/fetch-news.py
+        run: |
+          if [[ "${{ github.event.schedule }}" == "10 8 * * *" ]] || [[ "${{ github.event.inputs.summary_only }}" == "true" ]]; then
+            echo "=== 要約専用モード ==="
+            python scripts/fetch-news.py --summary-only
+          else
+            echo "=== 通常モード ==="
+            python scripts/fetch-news.py
+          fi
 
       # 4.5. 手動記事の期限切れチェック
       - name: Cleanup expired manual articles
@@ -63,8 +79,12 @@ jobs:
 
       # 5. AI記事生成（generate-articles.py）- 18:00 JSTのみ実行（夕刊）
       # UTC 9:00 = JST 18:00
+      # 要約専用モード（17:10 JST）ではスキップ
       - name: Generate AI picks (evening edition only)
-        if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || (github.event_name == 'schedule' && github.event.schedule == '0 9 * * *')
+        if: |
+          (github.event_name == 'workflow_dispatch' && github.event.inputs.summary_only != 'true') ||
+          github.event_name == 'push' ||
+          (github.event_name == 'schedule' && github.event.schedule == '0 9 * * *')
         run: python scripts/generate-articles.py
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
