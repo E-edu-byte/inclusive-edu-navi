@@ -1955,8 +1955,10 @@ def fetch_kodomo_it_news(max_articles: int = 3) -> list:
 
                 article_id = generate_article_id(full_url)
 
-                # 画像URL取得を試みる
+                # 画像URL取得を試みる（記事ページのOGP画像を優先）
                 img_url = ""
+
+                # まずリンク内の画像を試す
                 img_tag = link.find('img')
                 if img_tag and img_tag.get('src'):
                     img_src = img_tag.get('src')
@@ -1965,7 +1967,23 @@ def fetch_kodomo_it_news(max_articles: int = 3) -> list:
                     elif img_src.startswith('/'):
                         img_url = f"https://edu.watch.impress.co.jp{img_src}"
 
-                if not img_url:
+                # リンク内に画像がない場合、記事ページからOGP画像を取得
+                if not img_url or 'unsplash.com' in img_url:
+                    try:
+                        article_resp = requests.get(full_url, headers=headers, timeout=10)
+                        if article_resp.status_code == 200:
+                            article_soup = BeautifulSoup(article_resp.text, 'html.parser')
+                            # OGP画像を探す
+                            og_image = article_soup.find('meta', property='og:image')
+                            if og_image and og_image.get('content'):
+                                og_img_url = og_image['content']
+                                if og_img_url.startswith('http') and is_valid_image_url(og_img_url):
+                                    img_url = og_img_url
+                                    print(f"        → OGP画像取得成功")
+                    except Exception as img_err:
+                        print(f"        → OGP画像取得失敗: {img_err}")
+
+                if not img_url or not is_valid_image_url(img_url):
                     img_url = get_fallback_image(article_id)
 
                 article = {
