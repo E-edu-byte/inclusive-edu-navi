@@ -302,6 +302,89 @@ CORE_KEYWORDS = [
     "障害児", "障がい児", "障害のある子", "障がいのある子",
 ]
 
+# ========================================
+# 【理念スコアリング】記事の優先順位付け
+# ========================================
+
+# 高優先度キーワード（+20点）：サイトの核心テーマ
+HIGH_PRIORITY_KEYWORDS = [
+    "インクルーシブ", "インクルーシブ教育",
+    "特別支援", "特別支援教育",
+    "発達障害", "神経多様性", "ニューロダイバーシティ",
+    "ギフテッド", "2e", "特異な才能",
+    "不登校", "合理的配慮",
+]
+
+# 中優先度キーワード（+10点）：関連テーマ
+MEDIUM_PRIORITY_KEYWORDS = [
+    "支援学級", "支援学校", "通級",
+    "学習障害", "LD", "ディスレクシア",
+    "ADHD", "自閉症", "ASD",
+    "個別支援", "IEP", "療育",
+    "フリースクール", "多様な学び",
+]
+
+
+def calculate_relevance_score(title: str, summary: str) -> int:
+    """
+    記事の理念適合スコアを計算
+    - 高優先度キーワード: +20点
+    - 中優先度キーワード: +10点
+    - その他のCORE_KEYWORDS: +5点
+    """
+    text = f"{title} {summary}".lower()
+    score = 0
+
+    # 高優先度キーワード
+    for kw in HIGH_PRIORITY_KEYWORDS:
+        if kw.lower() in text:
+            score += 20
+
+    # 中優先度キーワード（高優先度と重複しないもののみ）
+    for kw in MEDIUM_PRIORITY_KEYWORDS:
+        if kw.lower() in text and kw not in HIGH_PRIORITY_KEYWORDS:
+            score += 10
+
+    # その他のCORE_KEYWORDS
+    for kw in CORE_KEYWORDS:
+        if kw.lower() in text and kw not in HIGH_PRIORITY_KEYWORDS and kw not in MEDIUM_PRIORITY_KEYWORDS:
+            score += 5
+
+    return score
+
+
+def apply_category_diversity(articles: list, max_category_ratio: float = 0.5) -> list:
+    """
+    カテゴリの多様性を確保（1つのカテゴリが全体の50%を超えないようにする）
+    スコア順にソートされた記事リストを受け取り、多様性を確保しつつ再構成
+    """
+    if not articles:
+        return articles
+
+    total_target = len(articles)
+    max_per_category = max(1, int(total_target * max_category_ratio))
+
+    # カテゴリごとにカウント
+    category_counts = defaultdict(int)
+    result = []
+    deferred = []  # 上限に達したカテゴリの記事
+
+    for article in articles:
+        category = article.get('category', '不明')
+        if category_counts[category] < max_per_category:
+            result.append(article)
+            category_counts[category] += 1
+        else:
+            deferred.append(article)
+
+    # 枠が余っていれば、延期された記事を追加
+    remaining_slots = total_target - len(result)
+    if remaining_slots > 0 and deferred:
+        result.extend(deferred[:remaining_slots])
+
+    return result
+
+
 # 【強力な除外キーワード】これらを含む記事は即座に破棄（理念と無関係）
 STRONG_EXCLUDE_KEYWORDS = [
     # 政治・情勢（サイト理念と無関係）
@@ -2131,8 +2214,22 @@ def main():
                 seen_urls.add(article['url'])
         print(f"  重複除去後: {len(unique_articles)}件")
 
-        # 日付でソート（新しい順）
-        unique_articles.sort(key=lambda x: x.get('date', ''), reverse=True)
+        # 【理念スコアリング】各記事にスコアを付与
+        print()
+        print("【2.5】理念スコアリング...")
+        print("-" * 40)
+        for article in unique_articles:
+            score = calculate_relevance_score(article.get('title', ''), article.get('summary', ''))
+            article['relevance_score'] = score
+
+        # スコア順（降順）→ 日付順（降順）でソート
+        unique_articles.sort(key=lambda x: (-x.get('relevance_score', 0), x.get('date', '')), reverse=False)
+        unique_articles.sort(key=lambda x: x.get('relevance_score', 0), reverse=True)
+
+        # 上位5件のスコアを表示
+        print("  上位スコア:")
+        for i, article in enumerate(unique_articles[:5]):
+            print(f"    {i+1}. [{article.get('relevance_score', 0)}点] {article.get('title', '')[:40]}...")
 
         # ドメインごとの制限を適用（今回取得分のみ）
         print()
@@ -2141,8 +2238,23 @@ def main():
         limited_articles = apply_domain_limit(unique_articles, MAX_ARTICLES_PER_DOMAIN)
         print(f"  制限適用後: {len(limited_articles)}件")
 
+        # 【カテゴリ多様性】1つのカテゴリが50%を超えないようにする
+        print()
+        print("【3.5】カテゴリ多様性を確保...")
+        print("-" * 40)
+        diverse_articles = apply_category_diversity(limited_articles, max_category_ratio=0.5)
+
+        # カテゴリ比率を表示
+        category_counts = defaultdict(int)
+        for article in diverse_articles:
+            category_counts[article.get('category', '不明')] += 1
+        total = len(diverse_articles) if diverse_articles else 1
+        for cat, count in sorted(category_counts.items(), key=lambda x: -x[1]):
+            ratio = count / total * 100
+            print(f"  {cat}: {count}件 ({ratio:.0f}%)")
+
         # 今回取得分を最終リストに（既存記事との結合は後で行う）
-        final_articles = limited_articles
+        final_articles = diverse_articles
         print(f"  今回取得: {len(final_articles)}件（既存記事との結合は後で実施）")
 
     # 【最終検証】画像URLを全チェック
