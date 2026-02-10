@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     description: 'すべての子どもの学びを支える最新情報',
     images: [
       {
-        url: 'https://news-navi.jp/inclusive/ogp-image.png',
+        url: 'https://news-navi.jp/inclusive/ogp-image.jpg',
         width: 1200,
         height: 630,
         alt: 'NewsNavi - インクルーシブ教育ナビ',
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'NewsNavi - インクルーシブ教育ナビ',
     description: 'すべての子どもの学びを支える最新情報',
-    images: ['https://news-navi.jp/inclusive/ogp-image.png'],
+    images: ['https://news-navi.jp/inclusive/ogp-image.jpg'],
   },
   alternates: {
     types: {

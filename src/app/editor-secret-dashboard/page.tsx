@@ -46,6 +46,22 @@ type TrackingData = {
     type: string;
   }>;
   lastReset: string;
+  // 累計アクセス数（リセットしても保持）
+  totalPageViews?: number;
+  // 日別アクセス記録
+  dailyPageViews?: { [date: string]: number };
+};
+
+// ゴミ箱記事データ型
+type TrashedArticle = {
+  id: string;
+  title: string;
+  url: string;
+  source: string;
+  date: string;
+  trashedAt: string;  // ゴミ箱に入れた日時
+  expiresAt: string;  // 完全削除される日時（24時間後）
+  isManual: boolean;
 };
 
 // 手動記事データ型
@@ -83,7 +99,12 @@ const initialTracking: TrackingData = {
   shares: { x: 0, line: 0 },
   errors: [],
   lastReset: new Date().toISOString(),
+  totalPageViews: 0,
+  dailyPageViews: {},
 };
+
+// ゴミ箱のローカルストレージキー
+const TRASH_STORAGE_KEY = 'news-navi-trash';
 
 export default function EditorDashboard() {
   const [status, setStatus] = useState<StatusData | null>(null);
@@ -96,6 +117,8 @@ export default function EditorDashboard() {
   const [allArticles, setAllArticles] = useState<ArticleForDeletion[]>([]);
   const [selectedArticleUrl, setSelectedArticleUrl] = useState('');
   const [excludedUrls, setExcludedUrls] = useState<string[]>([]);
+  const [trashedArticles, setTrashedArticles] = useState<TrashedArticle[]>([]);
+  const [showAllBlacklist, setShowAllBlacklist] = useState(false);
 
   useEffect(() => {
     // ステータスデータを取得
@@ -118,10 +141,42 @@ export default function EditorDashboard() {
       try {
         const saved = localStorage.getItem('news-navi-tracking');
         if (saved) {
-          setTracking(JSON.parse(saved));
+          const data = JSON.parse(saved);
+          // 累計アクセス数がない場合は現在のページビュー合計を設定
+          if (!data.totalPageViews) {
+            data.totalPageViews = Object.values(data.pageViews as Record<string, number>).reduce((a: number, b: number) => a + b, 0);
+          }
+          // 日別アクセス記録がない場合は初期化
+          if (!data.dailyPageViews) {
+            data.dailyPageViews = {};
+          }
+          setTracking(data);
         }
       } catch (error) {
         console.error('トラッキング取得エラー:', error);
+      }
+    }
+
+    // ゴミ箱データをlocalStorageから取得
+    function loadTrash() {
+      try {
+        const saved = localStorage.getItem(TRASH_STORAGE_KEY);
+        if (saved) {
+          const data: TrashedArticle[] = JSON.parse(saved);
+          const now = new Date();
+          // 24時間以上経過したものを除外
+          const validTrash = data.filter(item => {
+            const expiresAt = new Date(item.expiresAt);
+            return now < expiresAt;
+          });
+          // 期限切れを削除した場合は保存
+          if (validTrash.length !== data.length) {
+            localStorage.setItem(TRASH_STORAGE_KEY, JSON.stringify(validTrash));
+          }
+          setTrashedArticles(validTrash);
+        }
+      } catch (error) {
+        console.error('ゴミ箱取得エラー:', error);
       }
     }
 
@@ -204,6 +259,7 @@ export default function EditorDashboard() {
 
     fetchStatus();
     loadTracking();
+    loadTrash();
     fetchManualArticles();
     fetchAllUrls();
     fetchExcludedUrls();
@@ -222,11 +278,77 @@ export default function EditorDashboard() {
     });
   };
 
-  // トラッキングデータをリセット
+  // トラッキングデータをリセット（累計は保持）
   const resetTracking = () => {
-    const newTracking = { ...initialTracking, lastReset: new Date().toISOString() };
+    const newTracking = {
+      ...initialTracking,
+      lastReset: new Date().toISOString(),
+      totalPageViews: tracking.totalPageViews || 0,  // 累計は保持
+      dailyPageViews: tracking.dailyPageViews || {},  // 日別記録も保持
+    };
     localStorage.setItem('news-navi-tracking', JSON.stringify(newTracking));
     setTracking(newTracking);
+  };
+
+  // 記事をゴミ箱に移動
+  const moveToTrash = (article: ArticleForDeletion) => {
+    const now = new Date();
+    const trashedItem: TrashedArticle = {
+      id: article.url, // URLをIDとして使用
+      title: article.title,
+      url: article.url,
+      source: article.source,
+      date: article.date,
+      trashedAt: now.toISOString(),
+      expiresAt: new Date(now.getTime() + 24 * 60 * 60 * 1000).toISOString(), // 24時間後
+      isManual: article.isManual || false,
+    };
+    const newTrash = [trashedItem, ...trashedArticles];
+    localStorage.setItem(TRASH_STORAGE_KEY, JSON.stringify(newTrash));
+    setTrashedArticles(newTrash);
+  };
+
+  // ゴミ箱から復元
+  const restoreFromTrash = (url: string) => {
+    const newTrash = trashedArticles.filter(item => item.url !== url);
+    localStorage.setItem(TRASH_STORAGE_KEY, JSON.stringify(newTrash));
+    setTrashedArticles(newTrash);
+    alert('記事をゴミ箱から復元しました。\n\n復元した記事はサイトに表示されます。\n（ブラックリストへの追加はキャンセルされました）');
+  };
+
+  // ゴミ箱から完全削除
+  const permanentlyDelete = (url: string) => {
+    if (!confirm('この記事を完全に削除しますか？\n\nこの操作は取り消せません。')) {
+      return;
+    }
+    const newTrash = trashedArticles.filter(item => item.url !== url);
+    localStorage.setItem(TRASH_STORAGE_KEY, JSON.stringify(newTrash));
+    setTrashedArticles(newTrash);
+    // ブラックリストに追加するためGitHub Actionsページを開く
+    navigator.clipboard.writeText(url);
+    window.open('https://github.com/E-edu-byte/inclusive-edu-navi/actions/workflows/exclude-article.yml', '_blank');
+  };
+
+  // ゴミ箱内の残り時間を計算
+  const getTrashTimeRemaining = (expiresAt: string) => {
+    const now = new Date();
+    const expires = new Date(expiresAt);
+    const diff = expires.getTime() - now.getTime();
+    if (diff <= 0) return '期限切れ';
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    return `残り${hours}時間${minutes}分`;
+  };
+
+  // 今日の日付を取得（YYYY-MM-DD形式）
+  const getTodayDate = () => {
+    return new Date().toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' }).replace(/\//g, '-');
+  };
+
+  // 今日のアクセス数を取得
+  const getTodayPageViews = () => {
+    const today = getTodayDate();
+    return tracking.dailyPageViews?.[today] || 0;
   };
 
   // API残量のカラー判定
@@ -479,7 +601,7 @@ export default function EditorDashboard() {
               <li>約2〜3分でサイトに反映されます</li>
             </ol>
             <p className="mt-3 text-xs text-amber-500">
-              ※ 手動記事は投稿から7日後に自動的に非表示になります
+              ※ 手動記事は投稿から7日後に自動的に非表示になります（毎日7:00/17:10/18:00 JSTに自動クリーンアップ）
             </p>
           </div>
         </section>
@@ -521,36 +643,91 @@ export default function EditorDashboard() {
                   alert('記事を選択してください');
                   return;
                 }
-                if (confirm('この記事を永久に削除しますか？\n\nこの操作は取り消せません。削除された記事は今後一切表示されなくなります。')) {
-                  navigator.clipboard.writeText(selectedArticleUrl);
-                  alert(`URLをコピーしました。\n\nGitHub Actionsページで:\n1. Exclude Article ワークフローを選択\n2. Run workflow をクリック\n3. URLを貼り付け\n4. Run workflow を実行`);
-                  window.open('https://github.com/E-edu-byte/inclusive-edu-navi/actions/workflows/exclude-article.yml', '_blank');
+                const article = allArticles.find(a => a.url === selectedArticleUrl);
+                if (article) {
+                  moveToTrash(article);
+                  setSelectedArticleUrl('');
+                  alert('記事をゴミ箱に移動しました。\n\n24時間以内であれば復元できます。\n24時間後に自動的に完全削除されます。');
                 }
               }}
               disabled={!selectedArticleUrl}
               className={`mt-4 w-full px-4 py-3 font-medium rounded-lg transition-colors ${
                 selectedArticleUrl
-                  ? 'bg-red-600 hover:bg-red-700 text-white'
+                  ? 'bg-amber-600 hover:bg-amber-700 text-white'
                   : 'bg-gray-600 text-gray-400 cursor-not-allowed'
               }`}
             >
-              この記事を削除して二度と表示しない
+              この記事をゴミ箱に移動（24時間以内は復元可能）
             </button>
           </div>
 
-          {/* ブラックリスト一覧 */}
+          {/* ゴミ箱一覧（24時間以内は復元可能） */}
+          {trashedArticles.length > 0 && (
+            <div className="mt-6 p-4 bg-amber-900/30 rounded-lg border border-amber-700/50">
+              <h4 className="text-sm font-medium text-amber-300 mb-3 flex items-center gap-2">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+                ゴミ箱（{trashedArticles.length}件）- 24時間以内は復元可能
+              </h4>
+              <div className="space-y-2">
+                {trashedArticles.map((article) => (
+                  <div key={article.url} className="bg-gray-800 rounded-lg p-3">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex-1 min-w-0">
+                        <h5 className="text-sm text-gray-300 truncate">{article.title}</h5>
+                        <p className="text-xs text-gray-500 mt-1">
+                          {article.source} • {article.date}
+                        </p>
+                        <p className="text-xs text-amber-400 mt-1">
+                          {getTrashTimeRemaining(article.expiresAt)}で自動削除
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => restoreFromTrash(article.url)}
+                          className="px-3 py-1.5 text-xs bg-green-700 hover:bg-green-600 text-white rounded transition-colors"
+                        >
+                          復元
+                        </button>
+                        <button
+                          onClick={() => permanentlyDelete(article.url)}
+                          className="px-3 py-1.5 text-xs bg-red-700 hover:bg-red-600 text-white rounded transition-colors"
+                        >
+                          完全削除
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* ブラックリスト一覧（最大20件表示） */}
           {excludedUrls.length > 0 && (
             <div className="mt-4">
               <h4 className="text-sm font-medium text-gray-300 mb-2">
                 ブラックリスト（{excludedUrls.length}件）
+                {excludedUrls.length > 20 && !showAllBlacklist && (
+                  <span className="text-gray-500 text-xs ml-2">最新20件を表示中</span>
+                )}
               </h4>
               <div className="bg-gray-700 rounded-lg p-3 max-h-40 overflow-y-auto">
-                {excludedUrls.map((url, index) => (
+                {(showAllBlacklist ? excludedUrls : excludedUrls.slice(0, 20)).map((url, index) => (
                   <div key={index} className="text-xs text-gray-400 py-1 border-b border-gray-600 last:border-0 truncate">
                     {url}
                   </div>
                 ))}
               </div>
+              {excludedUrls.length > 20 && (
+                <button
+                  onClick={() => setShowAllBlacklist(!showAllBlacklist)}
+                  className="mt-2 text-xs text-gray-400 hover:text-white transition-colors"
+                >
+                  {showAllBlacklist ? '20件のみ表示' : `すべて表示（${excludedUrls.length}件）`}
+                </button>
+              )}
             </div>
           )}
 
@@ -615,12 +792,20 @@ export default function EditorDashboard() {
             </button>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-4">
-            {/* ページビュー合計 */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-4">
+            {/* 累計ページビュー */}
             <div className="bg-gray-700 rounded-lg p-4">
-              <span className="text-gray-400 text-xs block mb-1">総ページビュー</span>
+              <span className="text-gray-400 text-xs block mb-1">累計アクセス</span>
               <span className="text-white font-medium text-lg">
-                {Object.values(tracking.pageViews).reduce((a, b) => a + b, 0)}
+                {(tracking.totalPageViews || 0) + Object.values(tracking.pageViews).reduce((a, b) => a + b, 0)}
+              </span>
+            </div>
+
+            {/* 今日のアクセス */}
+            <div className="bg-gray-700 rounded-lg p-4">
+              <span className="text-gray-400 text-xs block mb-1">今日のアクセス</span>
+              <span className="text-blue-400 font-medium text-lg">
+                {getTodayPageViews() || Object.values(tracking.pageViews).reduce((a, b) => a + b, 0)}
               </span>
             </div>
 

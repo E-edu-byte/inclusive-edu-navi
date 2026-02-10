@@ -18,6 +18,10 @@ type TrackingData = {
     type: string;
   }>;
   lastReset: string;
+  // 累計アクセス数（リセットしても保持）
+  totalPageViews?: number;
+  // 日別アクセス記録
+  dailyPageViews?: { [date: string]: number };
 };
 
 const STORAGE_KEY = 'news-navi-tracking';
@@ -29,6 +33,8 @@ const initialTracking: TrackingData = {
   shares: { x: 0, line: 0 },
   errors: [],
   lastReset: new Date().toISOString(),
+  totalPageViews: 0,
+  dailyPageViews: {},
 };
 
 // トラッキングデータを取得
@@ -52,10 +58,39 @@ function saveTracking(data: TrackingData): void {
   }
 }
 
+// 今日の日付を取得（YYYY-MM-DD形式）
+function getTodayDate(): string {
+  return new Date().toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' }).replace(/\//g, '-');
+}
+
 // ページビューを記録
 export function trackPageView(path: string): void {
   const tracking = getTracking();
   tracking.pageViews[path] = (tracking.pageViews[path] || 0) + 1;
+
+  // 日別アクセス記録を更新
+  const today = getTodayDate();
+  if (!tracking.dailyPageViews) {
+    tracking.dailyPageViews = {};
+  }
+  tracking.dailyPageViews[today] = (tracking.dailyPageViews[today] || 0) + 1;
+
+  // 累計アクセス数を更新
+  if (!tracking.totalPageViews) {
+    tracking.totalPageViews = 0;
+  }
+  tracking.totalPageViews += 1;
+
+  // 古い日別記録を削除（7日以上前）
+  const sevenDaysAgo = new Date();
+  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+  const cutoffDate = sevenDaysAgo.toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' }).replace(/\//g, '-');
+  for (const date of Object.keys(tracking.dailyPageViews)) {
+    if (date < cutoffDate) {
+      delete tracking.dailyPageViews[date];
+    }
+  }
+
   saveTracking(tracking);
 }
 
