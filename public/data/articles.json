@@ -1,41 +1,6 @@
 {
   "articles": [
     {
-      "id": "6f61fda2b518",
-      "title": "「内申点が取れない…」発達障害の子が公立中で"詰む"残酷な理由。75％の親が「あえて中学受験」を考える切実な事情（with online） - Yahoo!ニュース",
-      "summary": "発達障害のあるお子さんの75%の保護者が中学受験を検討しています。公立中学では、内申点が特性によって取りにくい上、多忙な学校生活も負担になりがちです。子どもの特性に合った環境を求め、高校受験の負担を避けるため、中学受験が注目される選択肢となっています。",
-      "category": "不登校・多様な学び",
-      "date": "2026-02-10",
-      "url": "https://news.yahoo.co.jp/articles/06fbb2f28388840edbcfd85f5c0cf5e7fa1c1dc5",
-      "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260210-00000002-withonline-000-1-view.jpg?exp=10800",
-      "source": "Yahoo!ニュース",
-      "mainKeyword": "中学受験",
-      "isManual": true
-    },
-    {
-      "id": "b049f3fc812e",
-      "title": "となりの発達障害：「合理的配慮」はなぜ誤解されるのか　訳語の歴史をたどってみると | 毎日新聞",
-      "summary": "「合理的配慮」という言葉は、障害のある方が社会生活の障壁を乗り越え、誰もが平等な機会を得られるようにするための対応です。法律で義務化されていますが、なぜ「配慮」が義務なのか疑問に感じる方もいるでしょう。この記事では、この訳語がどのように生まれたのか、その歴史をたどって解説しています。",
-      "category": "合理的配慮・支援",
-      "date": "2026-02-10",
-      "url": "https://mainichi.jp/articles/20260209/k00/00m/040/199000c",
-      "imageUrl": "https://cdn.mainichi.jp/vol1/2026/02/09/20260209k0000m040202000p/0c10.jpg?1",
-      "source": "毎日新聞",
-      "mainKeyword": "合理的配慮",
-      "isManual": true
-    },
-    {
-      "id": "cd80838cc913",
-      "title": "意識・無意識脳での神経のつながり方の可視化に成功",
-      "summary": "理化学研究所が、意識・無意識下の脳神経結合の可視化に成功しました。この基礎研究は、発達障害など多様な脳機能を持つ人々の特性への理解を深め、より適切な教育的支援や合理的配慮のあり方を考える上で重要な一歩となる可能性があります。",
-      "category": "研究",
-      "date": "2026-02-06",
-      "url": "https://www.riken.jp/press/2026/20260207_1/index.html",
-      "imageUrl": "https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop",
-      "source": "理化学研究所",
-      "mainKeyword": "脳機能"
-    },
-    {
       "id": "fdb4ef8a2ff6",
       "title": "令和7年度インクルーシブな学校運営モデル事業中間成果報告会を開催します",
       "summary": "文部科学省のプレスリリースです。令和7年度インクルーシブな学校運営モデル事業中間成果報告会を開催します",
@@ -79,72 +44,6 @@
       "mainKeyword": ""
     },
     {
-      "id": "0521d53d5c45",
-      "title": "文部科学省に聞く、教育は「生成AI」とどう向き合い、どのような未来を描くのか",
-      "summary": "文部科学省が教育分野における生成AIの活用方針や将来像について見解を示しました。生成AIは、一人ひとりに合った学びを提供したり、先生の業務負担を減らしたりする可能性があり、教育の未来を大きく変える重要な技術となるためです。",
-      "category": "制度・行政",
-      "date": "2026-02-10",
-      "url": "https://edu.watch.impress.co.jp/docs/report/2075072.html",
-      "imageUrl": "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=300&fit=crop",
-      "source": "こどもとIT",
-      "mainKeyword": ""
-    },
-    {
-      "id": "d4a10bf2b31e",
-      "title": "DXハイスクールの高校生、Meta QuestとAIで地域課題解決に挑む",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "ICT・教材",
-      "date": "2026-02-10",
-      "url": "https://edu.watch.impress.co.jp/docs/report/2075364.html",
-      "imageUrl": "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=400&h=300&fit=crop",
-      "source": "こどもとIT",
-      "mainKeyword": ""
-    },
-    {
-      "id": "c9b0768a4345",
-      "title": "学校と企業の連携モデルとは、みんなのコードが無料フォーラムを3月6日に開催",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "ICT・教材",
-      "date": "2026-02-10",
-      "url": "https://edu.watch.impress.co.jp/docs/news/event/2084413.html",
-      "imageUrl": "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400&h=300&fit=crop",
-      "source": "こどもとIT",
-      "mainKeyword": ""
-    },
-    {
-      "id": "9f25276b2951",
-      "title": "文部科学省、論点整理をわかりやすくまとめたビジュアル資料を公開",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "ICT・教材",
-      "date": "2026-02-10",
-      "url": "https://edu.watch.impress.co.jp/docs/news/2082595.html",
-      "imageUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=300&fit=crop",
-      "source": "こどもとIT",
-      "mainKeyword": ""
-    },
-    {
-      "id": "c23647461d11",
-      "title": "LINEヤフーがCSR新方針を策定、若年層のデジタルリテラシー支援を重点化",
-      "summary": "LINEヤフーは、社会貢献として若い世代のインターネット利用能力を高める支援に力を入れると発表しました。これは、情報過多の現代社会で誰もが安全にデジタルツールを使いこなし、正しい情報を選べる力を育むため、非常に重要な取り組みです。",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-10",
-      "url": "https://edu.watch.impress.co.jp/docs/news/2084631.html",
-      "imageUrl": "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=400&h=300&fit=crop",
-      "source": "こどもとIT",
-      "mainKeyword": ""
-    },
-    {
-      "id": "6536e2e8cae3",
-      "title": "若手教員向けフリーマガジン『ホピロクvol.2』を正進社が発刊",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "ICT・教材",
-      "date": "2026-02-10",
-      "url": "https://edu.watch.impress.co.jp/docs/news/2084471.html",
-      "imageUrl": "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400&h=300&fit=crop",
-      "source": "こどもとIT",
-      "mainKeyword": ""
-    },
-    {
       "id": "fd8b198f76a7",
       "title": "「総合的な探究の時間」の指導、高校教員の7割以上が「他の業務に比べ負担が大きい」と回答＝新興出版社啓林館調べ＝",
       "summary": "【要約準備中】この記事の要約は現在準備中です。",
@@ -167,72 +66,6 @@
       "mainKeyword": ""
     },
     {
-      "id": "05b749ce85d8",
-      "title": "九州初！福岡教育大学附属3校に「フューチャークラスルーム」導入　教育研究と実践の拠点に",
-      "summary": "「フューチャークラスルーム」という、未来型の新しい教室が九州で初めて福岡教育大学の附属３校に導入されました。この教室は、最先端の技術を使って、子どもたちが協力し合ったり、それぞれのペースで学んだりできる場です。ここでは、新しい教え方を研究し、他の学校にも良い教育を広めるための大切な拠点になります。",
-      "category": "多様な学び",
-      "date": "2026-02-09",
-      "url": "https://edu.watch.impress.co.jp/docs/report/2048903.html",
-      "imageUrl": "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400&h=300&fit=crop",
-      "source": "こどもとIT",
-      "mainKeyword": ""
-    },
-    {
-      "id": "f99e8ebee211",
-      "title": "東日本大震災から15年、震災を経験した子供の「忘れられない一言」を公開",
-      "summary": "東日本大震災から15年を経て、被災した子どもたちの心に残る言葉が公開されます。これは、震災が子どもたちに与えた心の傷や成長を理解し、未来に向けた災害支援や教育のあり方を考える上でとても重要です。",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-09",
-      "url": "https://edu.watch.impress.co.jp/docs/news/2083545.html",
-      "imageUrl": "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=400&h=300&fit=crop",
-      "source": "こどもとIT",
-      "mainKeyword": ""
-    },
-    {
-      "id": "b270319bcf5e",
-      "title": "Copilotで授業計画やルーブリックを生成可能に、マイクロソフトがAIツール「Teach」を発表",
-      "summary": "マイクロソフトが、授業計画や評価基準をAIが作る新ツール「Teach」を発表しました。これは先生がAIを使って、個々の生徒に合わせた授業や評価を効率的に準備できるシステムです。先生の負担を減らし、生徒一人ひとりにきめ細かい指導ができるようになり、多様な学びの実現に貢献すると期待されます。",
-      "category": "ICT・教材",
-      "date": "2026-02-09",
-      "url": "https://edu.watch.impress.co.jp/docs/news/2055668.html",
-      "imageUrl": "https://images.unsplash.com/photo-1544717305-2782549b5136?w=400&h=300&fit=crop",
-      "source": "こどもとIT",
-      "mainKeyword": ""
-    },
-    {
-      "id": "715e05ff3831",
-      "title": "生成AIとディベートで鍛えるクリティカルシンキング、関西大学初等部・中等部の授業実践",
-      "summary": "関西大学の小中学校で、生成AIを使ったディベート授業が行われました。生徒たちはAIの力を借りて、物事を批判的に考える力、つまりクリティカルシンキングを鍛えることができます。多様な情報が飛び交う現代社会で、論理的に判断する力を育む新しい学び方として注目されています。",
-      "category": "多様な学び",
-      "date": "2026-02-09",
-      "url": "https://edu.watch.impress.co.jp/docs/report/2042023.html",
-      "imageUrl": "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=400&h=300&fit=crop",
-      "source": "こどもとIT",
-      "mainKeyword": ""
-    },
-    {
-      "id": "c1b1a71e7e63",
-      "title": "校務用パソコンにMacを選んだ理由はこれ　導入校の先生がTooのイベントで語る",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "ICT・教材",
-      "date": "2026-02-09",
-      "url": "https://edu.watch.impress.co.jp/docs/report/2048052.html",
-      "imageUrl": "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=400&h=300&fit=crop",
-      "source": "こどもとIT",
-      "mainKeyword": ""
-    },
-    {
-      "id": "4a119f0eb38f",
-      "title": "東大「メタバース工学部」が6講座を無料開講、小中高生・保護者・教員に生成AIをやさしく解説",
-      "summary": "東京大学のメタバース工学部が、インターネット上でAIを学ぶ無料講座を開講しました。小中高生や保護者、教員が対象です。AIの基礎知識を誰でも学べる機会を提供し、情報格差を解消しながら、多様な学びを支援する大切な取り組みです。",
-      "category": "多様な学び",
-      "date": "2026-02-09",
-      "url": "https://edu.watch.impress.co.jp/docs/news/2082568.html",
-      "imageUrl": "https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop",
-      "source": "こどもとIT",
-      "mainKeyword": ""
-    },
-    {
       "id": "2a2640374f6f",
       "title": "武蔵野大学、研究体験連動型学習を特徴とする「通信教育部国際データサイエンス学部」を4月に新設",
       "summary": "【要約準備中】この記事の要約は現在準備中です。",
@@ -242,10 +75,32 @@
       "imageUrl": "https://edtechzine.jp/static/images/article/13462/13462_og.jpg",
       "source": "EdTechZine",
       "mainKeyword": ""
+    },
+    {
+      "id": "d21b55829938",
+      "title": "4月に提供予定の学校向けAI英会話サービス「スタディポケット AI英会話」、1名あたりの月額を税別150円に設定",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "支援・合理的配慮",
+      "date": "2026-02-06",
+      "url": "https://edtechzine.jp/article/detail/13463",
+      "imageUrl": "https://edtechzine.jp/static/images/article/13463/13463_og.jpg",
+      "source": "EdTechZine",
+      "mainKeyword": ""
+    },
+    {
+      "id": "a5b12e17f0f3",
+      "title": "東京大学メタバース工学部、小・中・高校生と保護者、教員に向けた生成AIの無料オンライン講座を3月21日、29日に開講",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "ICT・教材",
+      "date": "2026-02-05",
+      "url": "https://edtechzine.jp/article/detail/13461",
+      "imageUrl": "https://edtechzine.jp/static/images/article/13461/13461_og.jpg",
+      "source": "EdTechZine",
+      "mainKeyword": ""
     }
   ],
-  "lastUpdated": "2026-02-10T13:15:53.778007",
-  "totalCount": 19,
+  "lastUpdated": "2026-02-10T13:48:40.464948",
+  "totalCount": 9,
   "sources": [
     "文部科学省",
     "こどもとIT",
