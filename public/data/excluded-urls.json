@@ -1,5 +1,26 @@
 {
-  "excludedUrls": [],
-  "lastUpdated": null,
+  "excludedUrls": [
+    "https://news.web.nhk/newsweb/na/na-k10015048051000",
+    "https://resemom.jp/article/2026/02/09/84978.html",
+    "https://resemom.jp/article/2026/02/09/84979.html",
+    "https://resemom.jp/article/2026/02/09/84980.html",
+    "https://resemom.jp/article/2026/02/09/84981.html",
+    "https://resemom.jp/article/2026/02/09/84982.html",
+    "https://resemom.jp/article/2026/02/09/84983.html",
+    "https://resemom.jp/article/2026/02/09/84984.html",
+    "https://resemom.jp/article/2026/02/09/84985.html",
+    "https://resemom.jp/article/2026/02/09/84986.html",
+    "https://resemom.jp/article/2026/02/09/84987.html",
+    "https://news.web.nhk/newsweb/na/na-k10015047991000",
+    "https://news.web.nhk/newsweb/na/na-k10015047881000",
+    "https://news.web.nhk/newsweb/na/na-k10015047891000",
+    "https://news.web.nhk/newsweb/na/na-k10015047541000",
+    "https://news.web.nhk/newsweb/na/na-k10015028111000",
+    "https://news.web.nhk/newsweb/na/na-k10015047761000",
+    "https://news.web.nhk/newsweb/na/na-k10015047751000",
+    "https://news.web.nhk/newsweb/na/na-k10015046981000",
+    "https://news.web.nhk/newsweb/na/na-k10015047391000"
+  ],
+  "lastUpdated": "2026-02-10T20:00:00.000000",
   "note": "削除された記事のURL。自動更新でも再取得されない。"
 }
