@@ -278,12 +278,35 @@ def add_manual_article(url):
     if save_json(MANUAL_FILE, manual_data):
         print(f"\n✓ 手動記事を追加しました: {article_id}")
 
+        # articles.json にも追加（メイン記事一覧に表示するため）
+        add_to_main_articles(new_article)
+
         # ai-picks.json も更新（手動記事を先頭に追加）
         update_ai_picks_with_manual(new_article)
 
         return True
 
     return False
+
+
+def add_to_main_articles(manual_article):
+    """手動記事をarticles.jsonの先頭に追加（メイン記事一覧に表示）"""
+    articles_data = load_json(ARTICLES_FILE)
+    if not articles_data:
+        articles_data = {"articles": [], "lastUpdated": None}
+
+    # 重複チェック（既に存在する場合はスキップ）
+    existing_urls = {a.get('url', '') for a in articles_data.get('articles', [])}
+    if manual_article['url'] in existing_urls:
+        print("  → articles.json に既に存在するためスキップ")
+        return
+
+    # 先頭に追加
+    articles_data['articles'].insert(0, manual_article)
+    articles_data['lastUpdated'] = datetime.now().isoformat()
+
+    if save_json(ARTICLES_FILE, articles_data):
+        print(f"✓ articles.json に追加しました（メイン一覧に表示されます）")
 
 
 def update_ai_picks_with_manual(manual_article):
