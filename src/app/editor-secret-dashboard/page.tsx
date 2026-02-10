@@ -793,20 +793,22 @@ export default function EditorDashboard() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-4">
-            {/* 累計ページビュー */}
+            {/* 累計ページビュー（リセットしても消えない） */}
             <div className="bg-gray-700 rounded-lg p-4">
               <span className="text-gray-400 text-xs block mb-1">累計アクセス</span>
               <span className="text-white font-medium text-lg">
-                {(tracking.totalPageViews || 0) + Object.values(tracking.pageViews).reduce((a, b) => a + b, 0)}
+                {tracking.totalPageViews || 0}
               </span>
+              <span className="text-gray-500 text-xs block mt-1">サイト開設以来</span>
             </div>
 
             {/* 今日のアクセス */}
             <div className="bg-gray-700 rounded-lg p-4">
               <span className="text-gray-400 text-xs block mb-1">今日のアクセス</span>
               <span className="text-blue-400 font-medium text-lg">
-                {getTodayPageViews() || Object.values(tracking.pageViews).reduce((a, b) => a + b, 0)}
+                {getTodayPageViews()}
               </span>
+              <span className="text-gray-500 text-xs block mt-1">{getTodayDate()}</span>
             </div>
 
             {/* Amazonクリック */}
