@@ -117,8 +117,7 @@ export default function Home() {
                   すべての子どもの学びを支える
                 </h1>
                 <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                  インクルーシブ教育に関する最新のニュース、研究成果、実践事例を<br className="hidden sm:inline" />
-                  わかりやすくお届けします。
+                  インクルーシブ教育に関する最新のニュース、研究成果、実践事例をわかりやすくお届けします。
                 </p>
               </div>
 
