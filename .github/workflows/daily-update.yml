@@ -78,6 +78,66 @@ jobs:
       - name: Cleanup expired manual articles
         run: python scripts/manual-post.py --cleanup
 
+      # 4.6. ゴミ箱の24時間経過記事を永久削除
+      - name: Cleanup expired trash
+        run: |
+          python << 'EOF'
+          import json
+          import os
+          from datetime import datetime, timedelta
+
+          TRASHED_FILE = "public/data/trashed-articles.json"
+          EXCLUDED_FILE = "public/data/excluded-urls.json"
+
+          # ゴミ箱ファイル読み込み
+          if not os.path.exists(TRASHED_FILE):
+              print("ゴミ箱ファイルが存在しません")
+              exit(0)
+
+          with open(TRASHED_FILE, 'r', encoding='utf-8') as f:
+              trash_data = json.load(f)
+
+          # 除外URLファイル読み込み
+          if os.path.exists(EXCLUDED_FILE):
+              with open(EXCLUDED_FILE, 'r', encoding='utf-8') as f:
+                  excluded_data = json.load(f)
+          else:
+              excluded_data = {"excludedUrls": []}
+
+          now = datetime.now()
+          expired_urls = []
+          remaining_articles = []
+
+          for article in trash_data.get('articles', []):
+              trashed_at = datetime.fromisoformat(article['trashedAt'].replace('Z', ''))
+              if now - trashed_at > timedelta(hours=24):
+                  # 24時間経過 → 永久削除へ
+                  expired_urls.append(article['url'])
+                  print(f"永久削除: {article['url']}")
+              else:
+                  remaining_articles.append(article)
+
+          if expired_urls:
+              # 除外URLに追加
+              for url in expired_urls:
+                  if url not in excluded_data['excludedUrls']:
+                      excluded_data['excludedUrls'].append(url)
+
+              # ファイル更新
+              trash_data['articles'] = remaining_articles
+              trash_data['lastUpdated'] = now.isoformat()
+
+              with open(TRASHED_FILE, 'w', encoding='utf-8') as f:
+                  json.dump(trash_data, f, ensure_ascii=False, indent=2)
+
+              with open(EXCLUDED_FILE, 'w', encoding='utf-8') as f:
+                  json.dump(excluded_data, f, ensure_ascii=False, indent=2)
+
+              print(f"✓ {len(expired_urls)}件を永久削除しました")
+          else:
+              print("期限切れの記事はありません")
+          EOF
+
       # 5. AI記事生成（generate-articles.py）- 18:00 JSTのみ実行（夕刊）
       # UTC 9:00 = JST 18:00
       # 要約専用モード（17:10 JST）ではスキップ

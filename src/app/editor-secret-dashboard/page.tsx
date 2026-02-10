@@ -103,9 +103,6 @@ const initialTracking: TrackingData = {
   dailyPageViews: {},
 };
 
-// ゴミ箱のローカルストレージキー
-const TRASH_STORAGE_KEY = 'news-navi-trash';
-
 export default function EditorDashboard() {
   const [status, setStatus] = useState<StatusData | null>(null);
   const [tracking, setTracking] = useState<TrackingData>(initialTracking);
@@ -157,22 +154,35 @@ export default function EditorDashboard() {
       }
     }
 
-    // ゴミ箱データをlocalStorageから取得
-    function loadTrash() {
+    // ゴミ箱データをサーバーから取得
+    async function loadTrash() {
       try {
-        const saved = localStorage.getItem(TRASH_STORAGE_KEY);
-        if (saved) {
-          const data: TrashedArticle[] = JSON.parse(saved);
+        const res = await fetch(`${BASE_PATH}/data/trashed-articles.json`);
+        if (res.ok) {
+          const data = await res.json();
           const now = new Date();
-          // 24時間以上経過したものを除外
-          const validTrash = data.filter(item => {
-            const expiresAt = new Date(item.expiresAt);
-            return now < expiresAt;
-          });
-          // 期限切れを削除した場合は保存
-          if (validTrash.length !== data.length) {
-            localStorage.setItem(TRASH_STORAGE_KEY, JSON.stringify(validTrash));
-          }
+          // サーバーデータをTrashedArticle形式に変換（24時間以内のもののみ）
+          const validTrash: TrashedArticle[] = (data.articles || [])
+            .filter((item: { url: string; trashedAt: string }) => {
+              const trashedAt = new Date(item.trashedAt);
+              const hoursSinceTrashed = (now.getTime() - trashedAt.getTime()) / (1000 * 60 * 60);
+              return hoursSinceTrashed < 24;
+            })
+            .map((item: { url: string; trashedAt: string }) => {
+              const trashedAt = new Date(item.trashedAt);
+              const expiresAt = new Date(trashedAt.getTime() + 24 * 60 * 60 * 1000);
+              // allArticlesから記事情報を取得（後で設定される）
+              return {
+                id: item.url,
+                title: '',  // 後で記事データから補完
+                url: item.url,
+                source: '',
+                date: '',
+                trashedAt: item.trashedAt,
+                expiresAt: expiresAt.toISOString(),
+                isManual: false,
+              };
+            });
           setTrashedArticles(validTrash);
         }
       } catch (error) {
@@ -290,42 +300,27 @@ export default function EditorDashboard() {
     setTracking(newTracking);
   };
 
-  // 記事をゴミ箱に移動
+  // 記事をゴミ箱に移動（GitHub Actions経由）
   const moveToTrash = (article: ArticleForDeletion) => {
-    const now = new Date();
-    const trashedItem: TrashedArticle = {
-      id: article.url, // URLをIDとして使用
-      title: article.title,
-      url: article.url,
-      source: article.source,
-      date: article.date,
-      trashedAt: now.toISOString(),
-      expiresAt: new Date(now.getTime() + 24 * 60 * 60 * 1000).toISOString(), // 24時間後
-      isManual: article.isManual || false,
-    };
-    const newTrash = [trashedItem, ...trashedArticles];
-    localStorage.setItem(TRASH_STORAGE_KEY, JSON.stringify(newTrash));
-    setTrashedArticles(newTrash);
+    navigator.clipboard.writeText(article.url);
+    alert(`URLをコピーしました。\n\nGitHub Actionsページで:\n1. Run workflow をクリック\n2. action: trash を選択\n3. URLを貼り付け\n4. Run workflow を実行\n\n約1〜2分でサイトから非表示になります。\n24時間以内であれば復元できます。`);
+    window.open('https://github.com/E-edu-byte/inclusive-edu-navi/actions/workflows/trash-article.yml', '_blank');
   };
 
-  // ゴミ箱から復元
+  // ゴミ箱から復元（GitHub Actions経由）
   const restoreFromTrash = (url: string) => {
-    const newTrash = trashedArticles.filter(item => item.url !== url);
-    localStorage.setItem(TRASH_STORAGE_KEY, JSON.stringify(newTrash));
-    setTrashedArticles(newTrash);
-    alert('記事をゴミ箱から復元しました。\n\n復元した記事はサイトに表示されます。\n（ブラックリストへの追加はキャンセルされました）');
+    navigator.clipboard.writeText(url);
+    alert(`URLをコピーしました。\n\nGitHub Actionsページで:\n1. Run workflow をクリック\n2. action: restore を選択\n3. URLを貼り付け\n4. Run workflow を実行\n\n約1〜2分でサイトに再表示されます。`);
+    window.open('https://github.com/E-edu-byte/inclusive-edu-navi/actions/workflows/trash-article.yml', '_blank');
   };
 
-  // ゴミ箱から完全削除
+  // ゴミ箱から完全削除（永久削除 = ブラックリスト追加）
   const permanentlyDelete = (url: string) => {
-    if (!confirm('この記事を完全に削除しますか？\n\nこの操作は取り消せません。')) {
+    if (!confirm('この記事を完全に削除しますか？\n\nこの操作は取り消せません。記事はブラックリストに追加され、二度と表示されなくなります。')) {
       return;
     }
-    const newTrash = trashedArticles.filter(item => item.url !== url);
-    localStorage.setItem(TRASH_STORAGE_KEY, JSON.stringify(newTrash));
-    setTrashedArticles(newTrash);
-    // ブラックリストに追加するためGitHub Actionsページを開く
     navigator.clipboard.writeText(url);
+    alert(`URLをコピーしました。\n\nGitHub Actionsページで:\n1. Exclude Article ワークフローを選択\n2. Run workflow をクリック\n3. URLを貼り付け\n4. Run workflow を実行`);
     window.open('https://github.com/E-edu-byte/inclusive-edu-navi/actions/workflows/exclude-article.yml', '_blank');
   };
 
@@ -647,7 +642,6 @@ export default function EditorDashboard() {
                 if (article) {
                   moveToTrash(article);
                   setSelectedArticleUrl('');
-                  alert('記事をゴミ箱に移動しました。\n\n24時間以内であれば復元できます。\n24時間後に自動的に完全削除されます。');
                 }
               }}
               disabled={!selectedArticleUrl}
@@ -671,35 +665,44 @@ export default function EditorDashboard() {
                 ゴミ箱（{trashedArticles.length}件）- 24時間以内は復元可能
               </h4>
               <div className="space-y-2">
-                {trashedArticles.map((article) => (
-                  <div key={article.url} className="bg-gray-800 rounded-lg p-3">
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="flex-1 min-w-0">
-                        <h5 className="text-sm text-gray-300 truncate">{article.title}</h5>
-                        <p className="text-xs text-gray-500 mt-1">
-                          {article.source} • {article.date}
-                        </p>
-                        <p className="text-xs text-amber-400 mt-1">
-                          {getTrashTimeRemaining(article.expiresAt)}で自動削除
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <button
-                          onClick={() => restoreFromTrash(article.url)}
-                          className="px-3 py-1.5 text-xs bg-green-700 hover:bg-green-600 text-white rounded transition-colors"
-                        >
-                          復元
-                        </button>
-                        <button
-                          onClick={() => permanentlyDelete(article.url)}
-                          className="px-3 py-1.5 text-xs bg-red-700 hover:bg-red-600 text-white rounded transition-colors"
-                        >
-                          完全削除
-                        </button>
+                {trashedArticles.map((trashedItem) => {
+                  // allArticlesから記事情報を取得
+                  const articleInfo = allArticles.find(a => a.url === trashedItem.url);
+                  const title = articleInfo?.title || trashedItem.url;
+                  const source = articleInfo?.source || '';
+                  const date = articleInfo?.date || '';
+                  return (
+                    <div key={trashedItem.url} className="bg-gray-800 rounded-lg p-3">
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="flex-1 min-w-0">
+                          <h5 className="text-sm text-gray-300 truncate">{title}</h5>
+                          {(source || date) && (
+                            <p className="text-xs text-gray-500 mt-1">
+                              {source}{source && date && ' • '}{date}
+                            </p>
+                          )}
+                          <p className="text-xs text-amber-400 mt-1">
+                            {getTrashTimeRemaining(trashedItem.expiresAt)}で自動削除
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => restoreFromTrash(trashedItem.url)}
+                            className="px-3 py-1.5 text-xs bg-green-700 hover:bg-green-600 text-white rounded transition-colors"
+                          >
+                            復元
+                          </button>
+                          <button
+                            onClick={() => permanentlyDelete(trashedItem.url)}
+                            className="px-3 py-1.5 text-xs bg-red-700 hover:bg-red-600 text-white rounded transition-colors"
+                          >
+                            完全削除
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           )}

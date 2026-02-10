@@ -1,0 +1,116 @@
+# 記事のゴミ箱管理ワークフロー
+# 記事をゴミ箱に移動、または復元する
+name: Trash Article
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: '実行するアクション'
+        required: true
+        default: 'trash'
+        type: choice
+        options:
+          - trash
+          - restore
+      url:
+        description: '対象記事のURL'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+env:
+  TZ: Asia/Tokyo
+
+jobs:
+  trash-article:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Trash or restore article
+        run: |
+          python << 'EOF'
+          import json
+          import os
+          from datetime import datetime
+
+          TRASHED_FILE = "public/data/trashed-articles.json"
+          action = "${{ inputs.action }}"
+          url = "${{ inputs.url }}"
+
+          # ファイル読み込み
+          if os.path.exists(TRASHED_FILE):
+              with open(TRASHED_FILE, 'r', encoding='utf-8') as f:
+                  data = json.load(f)
+          else:
+              data = {"articles": [], "lastUpdated": None}
+
+          if action == "trash":
+              # 既に存在するかチェック
+              existing_urls = [a.get('url') for a in data['articles']]
+              if url in existing_urls:
+                  print(f"既にゴミ箱に存在します: {url}")
+              else:
+                  # ゴミ箱に追加
+                  data['articles'].append({
+                      "url": url,
+                      "trashedAt": datetime.now().isoformat()
+                  })
+                  print(f"ゴミ箱に追加しました: {url}")
+
+          elif action == "restore":
+              # ゴミ箱から削除
+              original_count = len(data['articles'])
+              data['articles'] = [a for a in data['articles'] if a.get('url') != url]
+              if len(data['articles']) < original_count:
+                  print(f"復元しました: {url}")
+              else:
+                  print(f"ゴミ箱に見つかりませんでした: {url}")
+
+          data['lastUpdated'] = datetime.now().isoformat()
+
+          # 保存
+          with open(TRASHED_FILE, 'w', encoding='utf-8') as f:
+              json.dump(data, f, ensure_ascii=False, indent=2)
+
+          print(f"現在のゴミ箱: {len(data['articles'])}件")
+          EOF
+
+      - name: Check for changes
+        id: git-check
+        run: |
+          git add -A
+          if git diff --staged --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push changes
+        if: steps.git-check.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+          if [ "${{ inputs.action }}" = "trash" ]; then
+            git commit -m "chore: 記事をゴミ箱に移動"
+          else
+            git commit -m "chore: 記事をゴミ箱から復元"
+          fi
+
+          git push origin main
+
+      - name: Trigger deploy
+        if: steps.git-check.outputs.changed == 'true'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          event-type: trash-updated

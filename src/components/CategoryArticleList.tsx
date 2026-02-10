@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Article, BASE_PATH, getCategoryByName, Category, isPublishableSummary } from '@/lib/types';
+import { Article, BASE_PATH, getCategoryByName, Category, isPublishableSummary, fetchTrashedUrls } from '@/lib/types';
 import NewsCard from '@/components/NewsCard';
 
 type Props = {
@@ -16,15 +16,21 @@ export default function CategoryArticleList({ category }: Props) {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch(`${BASE_PATH}/data/articles.json`);
+        // 記事データとゴミ箱データを並列取得
+        const [res, trashedUrls] = await Promise.all([
+          fetch(`${BASE_PATH}/data/articles.json`),
+          fetchTrashedUrls()
+        ]);
         if (!res.ok) throw new Error('記事データの取得に失敗しました');
         const data = await res.json();
 
-        // カテゴリ名でフィルタリング + 公開可能な記事のみ
+        // カテゴリ名でフィルタリング + 公開可能な記事のみ + ゴミ箱除外
         const categoryArticles = (data.articles || []).filter((article: Article) => {
           const articleCategory = getCategoryByName(article.category);
-          // カテゴリが一致 かつ AI要約が完了している記事のみ
-          return articleCategory?.id === category.id && isPublishableSummary(article.summary);
+          // カテゴリが一致 かつ AI要約が完了 かつ ゴミ箱に入っていない
+          return articleCategory?.id === category.id &&
+                 isPublishableSummary(article.summary) &&
+                 !trashedUrls.has(article.url);
         });
 
         // 日付でソート（新しい順）

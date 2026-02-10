@@ -52,6 +52,34 @@ export type AIPicksData = {
   totalCount: number;
 };
 
+// ゴミ箱記事の型
+export type TrashedArticleData = {
+  url: string;
+  trashedAt: string;
+};
+
+export type TrashedArticlesData = {
+  articles: TrashedArticleData[];
+  lastUpdated: string | null;
+};
+
+// ゴミ箱のURLリストを取得
+export async function fetchTrashedUrls(): Promise<Set<string>> {
+  try {
+    const res = await fetch(`${BASE_PATH}/data/trashed-articles.json`);
+    if (!res.ok) return new Set();
+    const data: TrashedArticlesData = await res.json();
+    return new Set(data.articles.map(a => a.url));
+  } catch {
+    return new Set();
+  }
+}
+
+// ゴミ箱に入っている記事を除外
+export function filterOutTrashedArticles(articles: Article[], trashedUrls: Set<string>): Article[] {
+  return articles.filter(article => !trashedUrls.has(article.url));
+}
+
 // basePath設定
 export const BASE_PATH = '/inclusive';
 

@@ -6,7 +6,7 @@ import Sidebar from '@/components/Sidebar';
 import NewsCard from '@/components/NewsCard';
 import RankingBlock from '@/components/RankingBlock';
 import SupportCard from '@/components/SupportCard';
-import { Article, ArticlesData, BASE_PATH, filterPublishableArticles } from '@/lib/types';
+import { Article, ArticlesData, BASE_PATH, filterPublishableArticles, fetchTrashedUrls, filterOutTrashedArticles } from '@/lib/types';
 import { useBookmarks } from '@/contexts/BookmarkContext';
 
 export default function Home() {
@@ -20,18 +20,24 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       try {
-        // 記事データを取得
-        const articlesRes = await fetch(`${BASE_PATH}/data/articles.json`);
+        // 記事データとゴミ箱データを並列取得
+        const [articlesRes, trashedUrls] = await Promise.all([
+          fetch(`${BASE_PATH}/data/articles.json`),
+          fetchTrashedUrls()
+        ]);
         if (!articlesRes.ok) throw new Error('記事データの取得に失敗しました');
         const articlesData: ArticlesData = await articlesRes.json();
         const articlesArray = articlesData.articles || [];
 
         // 【公開フィルタ】AI要約が完了した記事のみを表示対象にする
         const publishableArticles = filterPublishableArticles(articlesArray);
-        setArticles(publishableArticles);
+
+        // 【ゴミ箱フィルタ】ゴミ箱に入っている記事を除外
+        const visibleArticles = filterOutTrashedArticles(publishableArticles, trashedUrls);
+        setArticles(visibleArticles);
 
         // 日付でソート（新しい順）
-        const sortedAll = [...publishableArticles].sort(
+        const sortedAll = [...visibleArticles].sort(
           (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
         );
 
