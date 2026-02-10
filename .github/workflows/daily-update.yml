@@ -62,9 +62,68 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r scripts/requirements.txt
 
+      # 3.5. クォータチェック（API枠がなければ早期終了）
+      - name: Check API quota
+        id: quota-check
+        run: |
+          python << 'EOF'
+          import json
+          import os
+          import sys
+          from datetime import datetime, timedelta
+
+          STATUS_FILE = "public/data/status.json"
+          DAILY_LIMIT = 20
+
+          def get_quota_period_start():
+              """17:00 JSTでリセット"""
+              now = datetime.now()
+              today_reset = now.replace(hour=17, minute=0, second=0, microsecond=0)
+              if now >= today_reset:
+                  return today_reset
+              else:
+                  return today_reset - timedelta(days=1)
+
+          # status.json読み込み
+          if not os.path.exists(STATUS_FILE):
+              print("status.json not found, assuming 0 usage")
+              print("quota_ok=true")
+              sys.exit(0)
+
+          with open(STATUS_FILE, 'r', encoding='utf-8') as f:
+              status = json.load(f)
+
+          # クォータ期間内の使用量を計算
+          period_start = get_quota_period_start()
+          used_in_period = 0
+
+          for entry in status.get("history", []):
+              try:
+                  entry_time = datetime.fromisoformat(entry.get("timestamp", ""))
+                  if entry_time >= period_start:
+                      used_in_period += entry.get("apiCalls", 0)
+              except:
+                  continue
+
+          remaining = DAILY_LIMIT - used_in_period
+          print(f"クォータ期間開始: {period_start}")
+          print(f"使用済み: {used_in_period}/{DAILY_LIMIT}")
+          print(f"残り: {remaining}")
+
+          if remaining <= 0:
+              print("::error::API枠がありません。17:00 JSTのリセットを待ってください。")
+              with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+                  f.write("quota_ok=false\n")
+              sys.exit(0)
+          else:
+              with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+                  f.write("quota_ok=true\n")
+          EOF
+
       # 4. ニュース収集（fetch-news.py）- 完全直列処理、15秒間隔
       # 17:10 JST（UTC 8:10）またはsummary_only=trueの場合は要約専用モード
       - name: Fetch news articles
+        if: steps.quota-check.outputs.quota_ok == 'true'
         run: |
           if [[ "${{ github.event.schedule }}" == "10 8 * * *" ]] || [[ "${{ github.event.inputs.summary_only }}" == "true" ]]; then
             echo "=== 要約専用モード ==="
@@ -141,11 +200,13 @@ jobs:
       # 5. AI記事生成（generate-articles.py）- 18:00 JSTのみ実行（夕刊）
       # UTC 9:00 = JST 18:00
       # 要約専用モード（17:10 JST）ではスキップ
+      # クォータがない場合もスキップ
       - name: Generate AI picks (evening edition only)
         if: |
-          (github.event_name == 'workflow_dispatch' && github.event.inputs.summary_only != 'true') ||
+          steps.quota-check.outputs.quota_ok == 'true' &&
+          ((github.event_name == 'workflow_dispatch' && github.event.inputs.summary_only != 'true') ||
           github.event_name == 'push' ||
-          (github.event_name == 'schedule' && github.event.schedule == '0 9 * * *')
+          (github.event_name == 'schedule' && github.event.schedule == '0 9 * * *'))
         run: python scripts/generate-articles.py
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
