@@ -120,6 +120,18 @@ export default function Sidebar() {
             </li>
           ))}
         </ul>
+        {/* すべてのニュースをみる */}
+        <div className="mt-4 pt-4 border-t border-gray-100">
+          <Link
+            href="/news"
+            className="flex items-center justify-center gap-2 w-full py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-lg transition-colors text-sm"
+          >
+            すべてのニュースをみる
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
       </div>
 
       {/* 2位：活動を応援する */}

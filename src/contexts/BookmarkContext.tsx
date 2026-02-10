@@ -27,7 +27,7 @@ type BookmarkContextType = {
 const BookmarkContext = createContext<BookmarkContextType | undefined>(undefined);
 
 const STORAGE_KEY = 'inclusive-edu-navi-bookmarks';
-const MAX_BOOKMARKS = 5;
+const MAX_BOOKMARKS = 10;
 
 export function BookmarkProvider({ children }: { children: ReactNode }) {
   const [bookmarks, setBookmarks] = useState<BookmarkedArticle[]>([]);
