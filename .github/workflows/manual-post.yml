@@ -96,6 +96,8 @@ jobs:
             git commit -m "chore: 期限切れ記事クリーンアップ"
           fi
 
+          # リモートに新しいコミットがある場合はrebaseしてからプッシュ
+          git pull --rebase origin main || true
           git push origin main
 
       - name: Trigger deploy

@@ -107,6 +107,8 @@ jobs:
             git commit -m "chore: 記事をゴミ箱から復元"
           fi
 
+          # リモートに新しいコミットがある場合はrebaseしてからプッシュ
+          git pull --rebase origin main || true
           git push origin main
 
       - name: Trigger deploy
