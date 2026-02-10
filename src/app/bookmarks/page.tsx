@@ -15,6 +15,9 @@ const FALLBACK_IMAGES = [
   'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400&h=300&fit=crop',
 ];
 
+// 最終フォールバック: ローカルSVGプレースホルダー（絶対に失敗しない）
+const PLACEHOLDER_SVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect fill='%23e2e8f0' width='400' height='300'/%3E%3Cg fill='%2394a3b8'%3E%3Cpath d='M200 100c-22 0-40 18-40 40s18 40 40 40 40-18 40-40-18-40-40-40zm0 65c-13.8 0-25-11.2-25-25s11.2-25 25-25 25 11.2 25 25-11.2 25-25 25z'/%3E%3Cpath d='M280 210H120c-5.5 0-10-4.5-10-10v-20c0-27.6 22.4-50 50-50h80c27.6 0 50 22.4 50 50v20c0 5.5-4.5 10-10 10z'/%3E%3C/g%3E%3C/svg%3E";
+
 function getFallbackImage(title: string): string {
   const hash = title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
   return FALLBACK_IMAGES[hash % FALLBACK_IMAGES.length];
@@ -46,7 +49,13 @@ function BookmarkCard({ article }: { article: BookmarkedArticle }) {
               className="w-full h-full object-cover"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
-                if (!target.src.includes('unsplash.com')) {
+                // 既にプレースホルダーなら何もしない
+                if (target.src.startsWith('data:')) return;
+                // Unsplashフォールバックも失敗したら最終プレースホルダーへ
+                if (target.src.includes('unsplash.com')) {
+                  target.src = PLACEHOLDER_SVG;
+                } else {
+                  // 元画像が失敗 → Unsplashフォールバックを試す
                   target.src = fallbackImage;
                 }
               }}
