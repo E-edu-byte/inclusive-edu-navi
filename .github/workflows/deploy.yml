@@ -5,9 +5,9 @@ on:
   # mainブランチへのプッシュ時に実行
   push:
     branches: [main]
-  # ニュース更新時に実行
+  # ニュース更新時・手動投稿時に実行
   repository_dispatch:
-    types: [news-updated]
+    types: [news-updated, manual-post-updated, article-excluded]
   # 手動実行も可能
   workflow_dispatch:
 
