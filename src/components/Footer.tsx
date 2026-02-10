@@ -16,13 +16,13 @@ export default function Footer() {
               インクルーシブ教育に関する最新のニュース、研究、実践事例をお届けします。
               すべての子どもたちの学びを支えるための情報プラットフォームです。
             </p>
-            {/* 公式機関バナー（縦並び） */}
-            <div className="flex flex-col gap-3">
+            {/* 公式機関バナー（横並び） */}
+            <div className="flex flex-row flex-wrap gap-3">
               <a
                 href="https://www.mext.go.jp/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block h-12 w-44 rounded-lg overflow-hidden bg-white border border-gray-200 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+                className="block h-12 w-36 sm:w-44 rounded-lg overflow-hidden bg-white border border-gray-200 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
                 title="文部科学省"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -36,7 +36,7 @@ export default function Footer() {
                 href="https://www.nise.go.jp/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block h-12 w-44 rounded-lg overflow-hidden bg-white border border-gray-200 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+                className="block h-12 w-36 sm:w-44 rounded-lg overflow-hidden bg-white border border-gray-200 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
                 title="国立特別支援教育総合研究所"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}

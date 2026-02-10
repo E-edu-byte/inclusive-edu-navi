@@ -40,6 +40,14 @@
   .category-badge {
     @apply inline-block px-3 py-1 text-sm font-medium rounded-full;
   }
+
+  /* ボタン内のリンクは訪問済みでも白文字を維持 */
+  a.bg-primary-600,
+  a.bg-primary-600:visited,
+  a.bg-amber-600,
+  a.bg-amber-600:visited {
+    @apply text-white;
+  }
 }
 
 @layer utilities {
