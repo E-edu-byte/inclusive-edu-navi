@@ -600,19 +600,23 @@ def refilter_existing_articles(articles: list) -> list:
         title = article.get('title', '')
         summary = article.get('summary', '')
         source = article.get('source', '')
+        is_manual = article.get('isManual', False)
         text = f"{title} {summary}"
+
+        # 手動投稿記事は常に保持（削除しない）
+        if is_manual:
+            retained.append(article)
+            continue
 
         # コア理念キーワードを含むかチェック
         has_core_keyword = any(kw in text for kw in CORE_KEYWORDS)
 
-        # 1. 強力除外キーワードチェック（信頼ソースでも厳格に適用）
-        # 受験倍率・株価・国際情勢などはインクルーシブ教育と無関係
+        # 1. 強力除外キーワードチェック（理念優先ルール適用）
         has_strong_exclude = any(kw in text for kw in STRONG_EXCLUDE_KEYWORDS)
-        if has_strong_exclude:
-            # コア理念キーワードがあっても、強力除外キーワードがあれば除外
-            # （例：「不登校」を含んでも「高校受験」の倍率記事は除外）
+        if has_strong_exclude and not has_core_keyword:
+            # 除外キーワードあり かつ 理念キーワードなし → 除外
             removed_strong += 1
-            print(f"    [再フィルタ除外] 強力除外: {title[:40]}...")
+            print(f"    [再フィルタ除外] 理念外: {title[:40]}...")
             continue
 
         # 2. コア理念キーワードチェック（信頼ソース以外）
@@ -1299,16 +1303,24 @@ def contains_strong_exclude_keyword(title: str, summary: str) -> bool:
     【強力除外フィルタ】サイト理念と完全に無関係な記事を即座に破棄
     政治・一般受験・資格試験・経済ニュース・国際情勢・スポーツ・芸能など
 
-    【厳格ルール】
-    STRONG_EXCLUDE_KEYWORDSを含む記事は無条件で除外する。
-    たとえコア理念キーワードを含んでいても、受験倍率・株価ニュース等は
-    インクルーシブ教育の理念にそぐわないため除外する。
+    【理念優先ルール】
+    除外キーワードを含んでいても、コア理念キーワード（合理的配慮、発達障害、
+    特別支援、インクルーシブなど）を同時に含む場合は例外的に採用する
     """
     text = f"{title} {summary}"
 
-    # 除外キーワードを含むかチェック（含む場合は無条件で除外）
+    # 除外キーワードを含むかチェック
     has_exclude = any(keyword in text for keyword in STRONG_EXCLUDE_KEYWORDS)
-    return has_exclude
+    if not has_exclude:
+        return False  # 除外キーワードなし → 採用
+
+    # 除外キーワードを含むが、コア理念キーワードも含む場合は例外的に採用
+    has_core = any(keyword in text for keyword in CORE_KEYWORDS)
+    if has_core:
+        return False  # 理念キーワードあり → 例外採用
+
+    # 除外キーワードのみ → 除外
+    return True
 
 
 def contains_practice_exclude_keyword(title: str, summary: str) -> bool:
