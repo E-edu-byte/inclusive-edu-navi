@@ -39,6 +39,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='ニュース収集スクリプト')
     parser.add_argument('--force-fetch', action='store_true', help='キャッシュを無視して強制的に再取得')
     parser.add_argument('--dev', action='store_true', help='開発モード（完全キャッシュモード）')
+    parser.add_argument('--summary-only', action='store_true', help='要約生成のみ実行（新規記事収集をスキップ）')
     return parser.parse_args()
 
 ARGS = parse_args()
@@ -47,6 +48,7 @@ ARGS = parse_args()
 IS_CI = os.getenv('CI', 'false').lower() == 'true' or os.getenv('GITHUB_ACTIONS', 'false').lower() == 'true'
 IS_DEV_MODE = ARGS.dev or (not IS_CI and not ARGS.force_fetch)
 FORCE_FETCH = ARGS.force_fetch
+SUMMARY_ONLY = ARGS.summary_only  # 要約生成のみモード（新規収集スキップ）
 
 # パス設定
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -215,8 +217,19 @@ MAX_ARTICLES_PER_DOMAIN = 3
 LIGHT_MODE = True
 MAX_ARTICLES_PER_SOURCE = 3  # 各ソースから最大3件
 MAX_NEW_ARTICLES_PER_RUN = 5  # 1回の実行で追加する最大記事数
-MAX_AI_CALLS_PER_RUN = 5  # 1回の実行でのAI呼び出し最大数（1日2回×5件=10件 + AIピック1件 = 11件/日）
-AI_CALL_SLEEP_SECONDS = 15  # 【RPM制限回避】15秒間隔で4回/分に抑制（15RPM制限を確実回避）
+
+# 【API制限設定】Free Tier: 5 RPM, 20 RPD
+# --summary-only モードでは要約生成に全枠を使用
+if SUMMARY_ONLY:
+    MAX_AI_CALLS_PER_RUN = 18  # 要約専用モード: 1日の枠をほぼ使い切る（20-2=18、余裕を持たせる）
+    print("=" * 60)
+    print("【要約専用モード】新規収集をスキップ、要約生成に集中")
+    print(f"  - 最大AI呼び出し: {MAX_AI_CALLS_PER_RUN}件")
+    print("=" * 60)
+else:
+    MAX_AI_CALLS_PER_RUN = 5  # 通常モード: 1回5件（1日2回×5件=10件 + AIピック1件 = 11件/日）
+
+AI_CALL_SLEEP_SECONDS = 15  # 【RPM制限回避】15秒間隔で4回/分に抑制（5RPM制限を確実回避）
 # 【重要】完全直列処理 - 並列処理禁止、1件ずつ順番にAI要約を実行
 
 # AI呼び出しカウンター（リトライ+新規の合計）
@@ -656,7 +669,11 @@ FORCE_RETRY_PATTERNS = [
     "理化学研究所のプレスリリースです",
 ]
 
-MAX_SUMMARY_RETRY = 2  # 1回の実行でリトライする最大件数（リトライ2件+新規3件=5件/実行）
+# 要約リトライ最大件数
+if SUMMARY_ONLY:
+    MAX_SUMMARY_RETRY = 18  # 要約専用モード: 全枠をリトライに使用
+else:
+    MAX_SUMMARY_RETRY = 2  # 通常モード: リトライ2件+新規3件=5件/実行
 
 
 def is_incomplete_summary(summary: str, source: str = "") -> bool:
@@ -2019,60 +2036,73 @@ def main():
 
     all_articles = []
 
-    # RSSフィードから収集
-    print("【1】RSSフィードを取得中...")
-    print(f"    ★ 省エネモード: 各ソース最大{MAX_ARTICLES_PER_SOURCE}件、重複スキップ")
-    print("-" * 40)
-    for feed_info in RSS_FEEDS:
-        articles = fetch_rss_feed(feed_info)
-        all_articles.extend(articles)
+    # 【要約専用モード】新規収集をスキップ
+    if SUMMARY_ONLY:
+        print("【1】新規記事収集をスキップ（--summary-only モード）")
+        print("-" * 40)
+        print("  → 既存記事の要約生成に集中します")
+        print()
+    else:
+        # RSSフィードから収集
+        print("【1】RSSフィードを取得中...")
+        print(f"    ★ 省エネモード: 各ソース最大{MAX_ARTICLES_PER_SOURCE}件、重複スキップ")
+        print("-" * 40)
+        for feed_info in RSS_FEEDS:
+            articles = fetch_rss_feed(feed_info)
+            all_articles.extend(articles)
+            print()
+
+        # 文部科学省プレスリリース（RSSなし、スクレイピング）
+        print("【1.5】文部科学省プレスリリースを取得中...")
+        print("-" * 40)
+        mext_articles = fetch_mext_press_releases(max_articles=3)
+        all_articles.extend(mext_articles)
         print()
 
-    # 文部科学省プレスリリース（RSSなし、スクレイピング）
-    print("【1.5】文部科学省プレスリリースを取得中...")
-    print("-" * 40)
-    mext_articles = fetch_mext_press_releases(max_articles=3)
-    all_articles.extend(mext_articles)
-    print()
+        # 専門機関・大学（スクレイピング）
+        print("【1.6】専門機関・大学のニュースを取得中...")
+        print("-" * 40)
 
-    # 専門機関・大学（スクレイピング）
-    print("【1.6】専門機関・大学のニュースを取得中...")
-    print("-" * 40)
+        # 筑波大学 人間系
+        print("  ■ 筑波大学 人間系")
+        tsukuba_articles = fetch_tsukuba_human_news(max_articles=2)
+        all_articles.extend(tsukuba_articles)
+        print()
 
-    # 筑波大学 人間系
-    print("  ■ 筑波大学 人間系")
-    tsukuba_articles = fetch_tsukuba_human_news(max_articles=2)
-    all_articles.extend(tsukuba_articles)
-    print()
+        # こどもとIT（スクレイピング）
+        kodomo_articles = fetch_kodomo_it_news(max_articles=3)
+        all_articles.extend(kodomo_articles)
+        print()
 
-    # こどもとIT（スクレイピング）
-    kodomo_articles = fetch_kodomo_it_news(max_articles=3)
-    all_articles.extend(kodomo_articles)
-    print()
+    # 【要約専用モード】新規記事がないため処理をスキップ
+    if SUMMARY_ONLY:
+        print("【2】重複除去をスキップ（新規記事なし）")
+        print("【3】ドメイン制限をスキップ（新規記事なし）")
+        final_articles = []
+    else:
+        # 重複除去（URLベース）
+        print("【2】重複を除去中...")
+        seen_urls = set()
+        unique_articles = []
+        for article in all_articles:
+            if article['url'] not in seen_urls:
+                unique_articles.append(article)
+                seen_urls.add(article['url'])
+        print(f"  重複除去後: {len(unique_articles)}件")
 
-    # 重複除去（URLベース）
-    print("【2】重複を除去中...")
-    seen_urls = set()
-    unique_articles = []
-    for article in all_articles:
-        if article['url'] not in seen_urls:
-            unique_articles.append(article)
-            seen_urls.add(article['url'])
-    print(f"  重複除去後: {len(unique_articles)}件")
+        # 日付でソート（新しい順）
+        unique_articles.sort(key=lambda x: x.get('date', ''), reverse=True)
 
-    # 日付でソート（新しい順）
-    unique_articles.sort(key=lambda x: x.get('date', ''), reverse=True)
+        # ドメインごとの制限を適用（今回取得分のみ）
+        print()
+        print("【3】ドメイン制限を適用中...")
+        print(f"  （各ドメイン最大{MAX_ARTICLES_PER_DOMAIN}件）")
+        limited_articles = apply_domain_limit(unique_articles, MAX_ARTICLES_PER_DOMAIN)
+        print(f"  制限適用後: {len(limited_articles)}件")
 
-    # ドメインごとの制限を適用（今回取得分のみ）
-    print()
-    print("【3】ドメイン制限を適用中...")
-    print(f"  （各ドメイン最大{MAX_ARTICLES_PER_DOMAIN}件）")
-    limited_articles = apply_domain_limit(unique_articles, MAX_ARTICLES_PER_DOMAIN)
-    print(f"  制限適用後: {len(limited_articles)}件")
-
-    # 今回取得分を最終リストに（既存記事との結合は後で行う）
-    final_articles = limited_articles
-    print(f"  今回取得: {len(final_articles)}件（既存記事との結合は後で実施）")
+        # 今回取得分を最終リストに（既存記事との結合は後で行う）
+        final_articles = limited_articles
+        print(f"  今回取得: {len(final_articles)}件（既存記事との結合は後で実施）")
 
     # 【最終検証】画像URLを全チェック
     print()
