@@ -16,7 +16,7 @@ export default function SupportCard() {
       <div className="flex items-center gap-2 mb-3">
         <span className="text-xl" role="img" aria-label="コーヒー">☕️</span>
         <h3 className="text-sm font-bold text-slate-700">
-          活動を応援する
+          サイト継続のために応援する
         </h3>
       </div>
 
