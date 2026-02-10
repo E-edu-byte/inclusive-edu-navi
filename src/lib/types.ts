@@ -107,21 +107,25 @@ export function getCategoryByName(categoryName: string): Category | undefined {
 
 // 要約が公開可能（AI要約完了済み）かどうかを判定
 export function isPublishableSummary(summary: string | undefined): boolean {
+  // 【一時的に全記事表示】API制限のため、要約未完了の記事も表示する
+  // TODO: AI要約完了後にフィルタを復活させる
   if (!summary || summary.trim().length === 0) return false;
+  return true;
 
+  // --- 以下は一時的に無効化 ---
   // 準備中プレースホルダーを含む場合は非公開
-  if (summary.includes('【要約準備中】')) return false;
+  // if (summary.includes('【要約準備中】')) return false;
 
   // 不完全な文末パターンを含む場合は非公開
-  const incompleteEndings = ['...', '・・・', '…', '[&#8230;]', ' ['];
-  for (const ending of incompleteEndings) {
-    if (summary.trim().endsWith(ending)) return false;
-  }
+  // const incompleteEndings = ['...', '・・・', '…', '[&#8230;]', ' ['];
+  // for (const ending of incompleteEndings) {
+  //   if (summary.trim().endsWith(ending)) return false;
+  // }
 
   // 20文字未満は非公開
-  if (summary.trim().length < 20) return false;
+  // if (summary.trim().length < 20) return false;
 
-  return true;
+  // return true;
 }
 
 // 公開可能な記事のみをフィルタリング
