@@ -1,5 +1,10 @@
 {
-  "articles": [],
-  "lastUpdated": null,
+  "articles": [
+    {
+      "url": "https://edu.watch.impress.co.jp/docs/news/2081161.html",
+      "trashedAt": "2026-02-10T21:23:35.923212"
+    }
+  ],
+  "lastUpdated": "2026-02-10T21:23:35.923225",
   "note": "ゴミ箱に入れた記事。24時間後に自動で永久削除される。"
 }
