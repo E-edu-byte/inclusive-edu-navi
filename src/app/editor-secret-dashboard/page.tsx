@@ -50,6 +50,21 @@ type TrackingData = {
   totalPageViews?: number;
   // 日別アクセス記録
   dailyPageViews?: { [date: string]: number };
+  // 累計クリック数
+  totalClicks?: {
+    amazon: number;
+    rakuten: number;
+    buymeacoffee: number;
+  };
+  // 日別クリック記録
+  dailyClicks?: { [date: string]: { amazon: number; rakuten: number; buymeacoffee: number } };
+  // 累計シェア数
+  totalShares?: {
+    x: number;
+    line: number;
+  };
+  // 日別シェア記録
+  dailyShares?: { [date: string]: { x: number; line: number } };
 };
 
 // ゴミ箱記事データ型
@@ -101,6 +116,10 @@ const initialTracking: TrackingData = {
   lastReset: new Date().toISOString(),
   totalPageViews: 0,
   dailyPageViews: {},
+  totalClicks: { amazon: 0, rakuten: 0, buymeacoffee: 0 },
+  dailyClicks: {},
+  totalShares: { x: 0, line: 0 },
+  dailyShares: {},
 };
 
 export default function EditorDashboard() {
@@ -293,8 +312,13 @@ export default function EditorDashboard() {
     const newTracking = {
       ...initialTracking,
       lastReset: new Date().toISOString(),
-      totalPageViews: tracking.totalPageViews || 0,  // 累計は保持
-      dailyPageViews: tracking.dailyPageViews || {},  // 日別記録も保持
+      // 累計は全て保持
+      totalPageViews: tracking.totalPageViews || 0,
+      dailyPageViews: tracking.dailyPageViews || {},
+      totalClicks: tracking.totalClicks || { amazon: 0, rakuten: 0, buymeacoffee: 0 },
+      dailyClicks: tracking.dailyClicks || {},
+      totalShares: tracking.totalShares || { x: 0, line: 0 },
+      dailyShares: tracking.dailyShares || {},
     };
     localStorage.setItem('news-navi-tracking', JSON.stringify(newTracking));
     setTracking(newTracking);
@@ -344,6 +368,18 @@ export default function EditorDashboard() {
   const getTodayPageViews = () => {
     const today = getTodayDate();
     return tracking.dailyPageViews?.[today] || 0;
+  };
+
+  // 今日のクリック数を取得
+  const getTodayClicks = (type: 'amazon' | 'rakuten' | 'buymeacoffee') => {
+    const today = getTodayDate();
+    return tracking.dailyClicks?.[today]?.[type] || 0;
+  };
+
+  // 今日のシェア数を取得
+  const getTodayShares = (type: 'x' | 'line') => {
+    const today = getTodayDate();
+    return tracking.dailyShares?.[today]?.[type] || 0;
   };
 
   // API残量のカラー判定
@@ -841,68 +877,109 @@ export default function EditorDashboard() {
             </button>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-4">
-            {/* 累計ページビュー（リセットしても消えない） */}
-            <div className="bg-gray-700 rounded-lg p-4">
-              <span className="text-gray-400 text-xs block mb-1">累計アクセス</span>
-              <span className="text-white font-medium text-lg">
-                {tracking.totalPageViews || 0}
-              </span>
-              <span className="text-gray-500 text-xs block mt-1">サイト開設以来</span>
+          {/* アクセス数 */}
+          <div className="mb-4">
+            <h3 className="text-sm font-medium text-gray-300 mb-2">アクセス数</h3>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-gray-700 rounded-lg p-4">
+                <span className="text-gray-400 text-xs block mb-1">累計</span>
+                <span className="text-white font-medium text-lg">
+                  {tracking.totalPageViews || 0}
+                </span>
+              </div>
+              <div className="bg-gray-700 rounded-lg p-4">
+                <span className="text-gray-400 text-xs block mb-1">今日</span>
+                <span className="text-blue-400 font-medium text-lg">
+                  {getTodayPageViews()}
+                </span>
+              </div>
             </div>
+          </div>
 
-            {/* 今日のアクセス */}
-            <div className="bg-gray-700 rounded-lg p-4">
-              <span className="text-gray-400 text-xs block mb-1">今日のアクセス</span>
-              <span className="text-blue-400 font-medium text-lg">
-                {getTodayPageViews()}
-              </span>
-              <span className="text-gray-500 text-xs block mt-1">{getTodayDate()}</span>
+          {/* クリック数 */}
+          <div className="mb-4">
+            <h3 className="text-sm font-medium text-gray-300 mb-2">クリック数</h3>
+            <div className="grid grid-cols-3 gap-4">
+              {/* Amazon */}
+              <div className="bg-gray-700 rounded-lg p-4">
+                <span className="text-amber-400 text-xs block mb-2">Amazon</span>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <span className="text-gray-500 text-xs">累計</span>
+                    <span className="text-white font-medium text-sm ml-1">{tracking.totalClicks?.amazon || 0}</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-500 text-xs">今日</span>
+                    <span className="text-amber-400 font-medium text-sm ml-1">{getTodayClicks('amazon')}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* 楽天 */}
+              <div className="bg-gray-700 rounded-lg p-4">
+                <span className="text-red-400 text-xs block mb-2">楽天</span>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <span className="text-gray-500 text-xs">累計</span>
+                    <span className="text-white font-medium text-sm ml-1">{tracking.totalClicks?.rakuten || 0}</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-500 text-xs">今日</span>
+                    <span className="text-red-400 font-medium text-sm ml-1">{getTodayClicks('rakuten')}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Buy Me a Coffee */}
+              <div className="bg-gray-700 rounded-lg p-4">
+                <span className="text-yellow-400 text-xs block mb-2">Coffee</span>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <span className="text-gray-500 text-xs">累計</span>
+                    <span className="text-white font-medium text-sm ml-1">{tracking.totalClicks?.buymeacoffee || 0}</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-500 text-xs">今日</span>
+                    <span className="text-yellow-400 font-medium text-sm ml-1">{getTodayClicks('buymeacoffee')}</span>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
 
-            {/* Amazonクリック */}
-            <div className="bg-gray-700 rounded-lg p-4">
-              <span className="text-gray-400 text-xs block mb-1">Amazon</span>
-              <span className="text-amber-400 font-medium text-lg">
-                {tracking.clicks.amazon}
-                <span className="text-gray-400 text-sm ml-1">clicks</span>
-              </span>
-            </div>
+          {/* シェア数 */}
+          <div className="mb-4">
+            <h3 className="text-sm font-medium text-gray-300 mb-2">シェア数</h3>
+            <div className="grid grid-cols-2 gap-4">
+              {/* X */}
+              <div className="bg-gray-700 rounded-lg p-4">
+                <span className="text-white text-xs block mb-2">X（Twitter）</span>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <span className="text-gray-500 text-xs">累計</span>
+                    <span className="text-white font-medium text-sm ml-1">{tracking.totalShares?.x || 0}</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-500 text-xs">今日</span>
+                    <span className="text-blue-400 font-medium text-sm ml-1">{getTodayShares('x')}</span>
+                  </div>
+                </div>
+              </div>
 
-            {/* 楽天クリック */}
-            <div className="bg-gray-700 rounded-lg p-4">
-              <span className="text-gray-400 text-xs block mb-1">楽天</span>
-              <span className="text-red-400 font-medium text-lg">
-                {tracking.clicks.rakuten}
-                <span className="text-gray-400 text-sm ml-1">clicks</span>
-              </span>
-            </div>
-
-            {/* Buy Me a Coffee */}
-            <div className="bg-gray-700 rounded-lg p-4">
-              <span className="text-gray-400 text-xs block mb-1">Buy Me a Coffee</span>
-              <span className="text-yellow-400 font-medium text-lg">
-                {tracking.clicks.buymeacoffee}
-                <span className="text-gray-400 text-sm ml-1">clicks</span>
-              </span>
-            </div>
-
-            {/* Xシェア */}
-            <div className="bg-gray-700 rounded-lg p-4">
-              <span className="text-gray-400 text-xs block mb-1">X シェア</span>
-              <span className="text-white font-medium text-lg">
-                {tracking.shares?.x || 0}
-                <span className="text-gray-400 text-sm ml-1">shares</span>
-              </span>
-            </div>
-
-            {/* LINEシェア */}
-            <div className="bg-gray-700 rounded-lg p-4">
-              <span className="text-gray-400 text-xs block mb-1">LINE シェア</span>
-              <span className="text-[#06C755] font-medium text-lg">
-                {tracking.shares?.line || 0}
-                <span className="text-gray-400 text-sm ml-1">shares</span>
-              </span>
+              {/* LINE */}
+              <div className="bg-gray-700 rounded-lg p-4">
+                <span className="text-[#06C755] text-xs block mb-2">LINE</span>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <span className="text-gray-500 text-xs">累計</span>
+                    <span className="text-white font-medium text-sm ml-1">{tracking.totalShares?.line || 0}</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-500 text-xs">今日</span>
+                    <span className="text-[#06C755] font-medium text-sm ml-1">{getTodayShares('line')}</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 

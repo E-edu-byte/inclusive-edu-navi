@@ -1,5 +1,9 @@
 'use client';
 
+// クリック/シェアの詳細型
+type ClickType = 'amazon' | 'rakuten' | 'buymeacoffee';
+type ShareType = 'x' | 'line';
+
 // トラッキングデータ型
 type TrackingData = {
   pageViews: { [page: string]: number };
@@ -22,6 +26,21 @@ type TrackingData = {
   totalPageViews?: number;
   // 日別アクセス記録
   dailyPageViews?: { [date: string]: number };
+  // 累計クリック数（リセットしても保持）
+  totalClicks?: {
+    amazon: number;
+    rakuten: number;
+    buymeacoffee: number;
+  };
+  // 日別クリック記録
+  dailyClicks?: { [date: string]: { amazon: number; rakuten: number; buymeacoffee: number } };
+  // 累計シェア数（リセットしても保持）
+  totalShares?: {
+    x: number;
+    line: number;
+  };
+  // 日別シェア記録
+  dailyShares?: { [date: string]: { x: number; line: number } };
 };
 
 const STORAGE_KEY = 'news-navi-tracking';
@@ -35,6 +54,10 @@ const initialTracking: TrackingData = {
   lastReset: new Date().toISOString(),
   totalPageViews: 0,
   dailyPageViews: {},
+  totalClicks: { amazon: 0, rakuten: 0, buymeacoffee: 0 },
+  dailyClicks: {},
+  totalShares: { x: 0, line: 0 },
+  dailyShares: {},
 };
 
 // トラッキングデータを取得
@@ -95,19 +118,77 @@ export function trackPageView(path: string): void {
 }
 
 // クリックを記録
-export function trackClick(type: 'amazon' | 'rakuten' | 'buymeacoffee'): void {
+export function trackClick(type: ClickType): void {
   const tracking = getTracking();
+  const today = getTodayDate();
+
+  // 通常のクリック数を更新
   tracking.clicks[type] = (tracking.clicks[type] || 0) + 1;
+
+  // 累計クリック数を更新
+  if (!tracking.totalClicks) {
+    tracking.totalClicks = { amazon: 0, rakuten: 0, buymeacoffee: 0 };
+  }
+  tracking.totalClicks[type] = (tracking.totalClicks[type] || 0) + 1;
+
+  // 日別クリック記録を更新
+  if (!tracking.dailyClicks) {
+    tracking.dailyClicks = {};
+  }
+  if (!tracking.dailyClicks[today]) {
+    tracking.dailyClicks[today] = { amazon: 0, rakuten: 0, buymeacoffee: 0 };
+  }
+  tracking.dailyClicks[today][type] = (tracking.dailyClicks[today][type] || 0) + 1;
+
+  // 古い日別記録を削除（7日以上前）
+  const sevenDaysAgo = new Date();
+  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+  const cutoffDate = sevenDaysAgo.toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' }).replace(/\//g, '-');
+  for (const date of Object.keys(tracking.dailyClicks)) {
+    if (date < cutoffDate) {
+      delete tracking.dailyClicks[date];
+    }
+  }
+
   saveTracking(tracking);
 }
 
 // シェアを記録
-export function trackShare(type: 'x' | 'line'): void {
+export function trackShare(type: ShareType): void {
   const tracking = getTracking();
+  const today = getTodayDate();
+
+  // 通常のシェア数を更新
   if (!tracking.shares) {
     tracking.shares = { x: 0, line: 0 };
   }
   tracking.shares[type] = (tracking.shares[type] || 0) + 1;
+
+  // 累計シェア数を更新
+  if (!tracking.totalShares) {
+    tracking.totalShares = { x: 0, line: 0 };
+  }
+  tracking.totalShares[type] = (tracking.totalShares[type] || 0) + 1;
+
+  // 日別シェア記録を更新
+  if (!tracking.dailyShares) {
+    tracking.dailyShares = {};
+  }
+  if (!tracking.dailyShares[today]) {
+    tracking.dailyShares[today] = { x: 0, line: 0 };
+  }
+  tracking.dailyShares[today][type] = (tracking.dailyShares[today][type] || 0) + 1;
+
+  // 古い日別記録を削除（7日以上前）
+  const sevenDaysAgo = new Date();
+  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+  const cutoffDate = sevenDaysAgo.toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' }).replace(/\//g, '-');
+  for (const date of Object.keys(tracking.dailyShares)) {
+    if (date < cutoffDate) {
+      delete tracking.dailyShares[date];
+    }
+  }
+
   saveTracking(tracking);
 }
 
