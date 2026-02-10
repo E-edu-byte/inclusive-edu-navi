@@ -62,8 +62,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r scripts/requirements.txt
 
-      # 3.5. クォータチェック（API枠がなければ早期終了）
-      - name: Check API quota
+      # 3.5. クォータチェック（予約制：ルーティン枠を確保）
+      - name: Check API quota with reservation
         id: quota-check
         run: |
           python << 'EOF'
@@ -75,6 +75,26 @@ jobs:
           STATUS_FILE = "public/data/status.json"
           DAILY_LIMIT = 20
 
+          # ルーティン枠の定義
+          MORNING_QUOTA = 5   # 朝刊（7:00 JST）
+          EVENING_QUOTA = 6   # 夕刊（18:00 JST）+ AIピック
+
+          # 実行タイプを判定
+          schedule = os.environ.get('SCHEDULE', '')
+          is_manual = os.environ.get('IS_MANUAL', 'false') == 'true'
+          summary_only = os.environ.get('SUMMARY_ONLY', 'false') == 'true'
+
+          if schedule == '0 22 * * *':  # UTC 22:00 = JST 7:00
+              run_type = 'morning'
+          elif schedule == '0 9 * * *':  # UTC 9:00 = JST 18:00
+              run_type = 'evening'
+          elif schedule == '10 8 * * *':  # UTC 8:10 = JST 17:10
+              run_type = 'summary'
+          else:
+              run_type = 'manual'
+
+          print(f"実行タイプ: {run_type}")
+
           def get_quota_period_start():
               """17:00 JSTでリセット"""
               now = datetime.now()
@@ -84,53 +104,90 @@ jobs:
               else:
                   return today_reset - timedelta(days=1)
 
+          def get_pending_routine_reserve(run_type):
+              """今後のルーティン実行のために予約すべき枠を計算"""
+              if run_type == 'morning':
+                  # 朝刊実行時：この期間のルーティンは終了
+                  return 0
+              elif run_type == 'evening':
+                  # 夕刊実行時：朝刊分を予約
+                  return MORNING_QUOTA
+              elif run_type == 'summary':
+                  # 要約補完実行時：夕刊+朝刊分を予約
+                  return EVENING_QUOTA + MORNING_QUOTA
+              else:  # manual
+                  # 手動実行：全ルーティン分を予約
+                  return EVENING_QUOTA + MORNING_QUOTA
+
           # status.json読み込み
-          if not os.path.exists(STATUS_FILE):
-              print("status.json not found, assuming 0 usage")
-              print("quota_ok=true")
-              sys.exit(0)
-
-          with open(STATUS_FILE, 'r', encoding='utf-8') as f:
-              status = json.load(f)
-
-          # クォータ期間内の使用量を計算
-          period_start = get_quota_period_start()
           used_in_period = 0
-
-          for entry in status.get("history", []):
-              try:
-                  entry_time = datetime.fromisoformat(entry.get("timestamp", ""))
-                  if entry_time >= period_start:
-                      used_in_period += entry.get("apiCalls", 0)
-              except:
-                  continue
+          if os.path.exists(STATUS_FILE):
+              with open(STATUS_FILE, 'r', encoding='utf-8') as f:
+                  status = json.load(f)
+              period_start = get_quota_period_start()
+              for entry in status.get("history", []):
+                  try:
+                      entry_time = datetime.fromisoformat(entry.get("timestamp", ""))
+                      if entry_time >= period_start:
+                          used_in_period += entry.get("apiCalls", 0)
+                  except:
+                      continue
 
           remaining = DAILY_LIMIT - used_in_period
-          print(f"クォータ期間開始: {period_start}")
+          reserve = get_pending_routine_reserve(run_type)
+          available = remaining - reserve
+
+          print(f"=" * 50)
           print(f"使用済み: {used_in_period}/{DAILY_LIMIT}")
           print(f"残り: {remaining}")
+          print(f"ルーティン予約: {reserve}")
+          print(f"利用可能: {available}")
+          print(f"=" * 50)
 
-          if remaining <= 0:
-              print("::error::API枠がありません。17:00 JSTのリセットを待ってください。")
-              with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
-                  f.write("quota_ok=false\n")
-              sys.exit(0)
-          else:
-              with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
-                  f.write("quota_ok=true\n")
+          # 出力変数を設定
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              if run_type in ['morning', 'evening']:
+                  # ルーティン実行：必要枠があるかチェック
+                  needed = MORNING_QUOTA if run_type == 'morning' else EVENING_QUOTA
+                  if remaining >= needed:
+                      f.write("quota_ok=true\n")
+                      f.write(f"available={needed}\n")
+                      print(f"[OK] ルーティン実行: {needed}件分の枠あり")
+                  else:
+                      f.write("quota_ok=false\n")
+                      f.write("available=0\n")
+                      print(f"::error::[NG] ルーティン枠不足: 残り{remaining} < 必要{needed}")
+              else:
+                  # 非ルーティン実行：予約枠を除いた分のみ利用可能
+                  if available > 0:
+                      f.write("quota_ok=true\n")
+                      f.write(f"available={available}\n")
+                      print(f"[OK] 非ルーティン実行: {available}件まで利用可能")
+                  else:
+                      f.write("quota_ok=false\n")
+                      f.write("available=0\n")
+                      print(f"::warning::[スキップ] ルーティン予約のため利用可能枠なし")
           EOF
+        env:
+          SCHEDULE: ${{ github.event.schedule }}
+          IS_MANUAL: ${{ github.event_name == 'workflow_dispatch' }}
+          SUMMARY_ONLY: ${{ github.event.inputs.summary_only }}
 
       # 4. ニュース収集（fetch-news.py）- 完全直列処理、15秒間隔
       # 17:10 JST（UTC 8:10）またはsummary_only=trueの場合は要約専用モード
+      # --max-calls で利用可能枠を制限
       - name: Fetch news articles
         if: steps.quota-check.outputs.quota_ok == 'true'
         run: |
+          AVAILABLE="${{ steps.quota-check.outputs.available }}"
+          echo "利用可能API枠: ${AVAILABLE}件"
+
           if [[ "${{ github.event.schedule }}" == "10 8 * * *" ]] || [[ "${{ github.event.inputs.summary_only }}" == "true" ]]; then
             echo "=== 要約専用モード ==="
-            python scripts/fetch-news.py --summary-only
+            python scripts/fetch-news.py --summary-only --max-calls "${AVAILABLE}"
           else
             echo "=== 通常モード ==="
-            python scripts/fetch-news.py
+            python scripts/fetch-news.py --max-calls "${AVAILABLE}"
           fi
 
       # 4.5. 手動記事の期限切れチェック

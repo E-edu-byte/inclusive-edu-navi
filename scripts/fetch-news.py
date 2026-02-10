@@ -40,6 +40,7 @@ def parse_args():
     parser.add_argument('--force-fetch', action='store_true', help='キャッシュを無視して強制的に再取得')
     parser.add_argument('--dev', action='store_true', help='開発モード（完全キャッシュモード）')
     parser.add_argument('--summary-only', action='store_true', help='要約生成のみ実行（新規記事収集をスキップ）')
+    parser.add_argument('--max-calls', type=int, default=None, help='API呼び出し上限（ワークフローから渡される）')
     return parser.parse_args()
 
 ARGS = parse_args()
@@ -231,7 +232,17 @@ DAILY_API_LIMIT = 20
 ROUTINE_RESERVED = 11  # 朝刊5 + 夕刊6
 CONSTRUCTION_AVAILABLE = DAILY_API_LIMIT - ROUTINE_RESERVED  # 9件
 
-if SUMMARY_ONLY:
+# --max-calls 引数が指定されていればそれを使用（ワークフローからの予約制限）
+if ARGS.max_calls is not None:
+    MAX_AI_CALLS_PER_RUN = ARGS.max_calls
+    print("=" * 60)
+    print(f"【予約制API管理】ワークフローから上限指定: {MAX_AI_CALLS_PER_RUN}件")
+    if SUMMARY_ONLY:
+        print("  - モード: 要約専用（新規収集スキップ）")
+    else:
+        print("  - モード: 通常（新規収集+要約）")
+    print("=" * 60)
+elif SUMMARY_ONLY:
     MAX_AI_CALLS_PER_RUN = CONSTRUCTION_AVAILABLE  # 要約専用モード: 構築用枠のみ使用（9件）
     print("=" * 60)
     print("【要約専用モード】新規収集をスキップ、要約生成に集中")

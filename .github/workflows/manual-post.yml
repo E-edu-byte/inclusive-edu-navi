@@ -60,9 +60,67 @@ jobs:
             exit 1
           fi
 
-      - name: Add article
+      # クォータチェック（add時のみ - API使用するため）
+      - name: Check API quota for manual add
         if: inputs.action == 'add'
+        id: quota-check
+        run: |
+          python << 'EOF'
+          import json
+          import os
+          from datetime import datetime, timedelta
+
+          STATUS_FILE = "public/data/status.json"
+          DAILY_LIMIT = 20
+          ROUTINE_RESERVED = 11  # 朝刊5 + 夕刊6
+
+          def get_quota_period_start():
+              now = datetime.now()
+              today_reset = now.replace(hour=17, minute=0, second=0, microsecond=0)
+              if now >= today_reset:
+                  return today_reset
+              else:
+                  return today_reset - timedelta(days=1)
+
+          used_in_period = 0
+          if os.path.exists(STATUS_FILE):
+              with open(STATUS_FILE, 'r', encoding='utf-8') as f:
+                  status = json.load(f)
+              period_start = get_quota_period_start()
+              for entry in status.get("history", []):
+                  try:
+                      entry_time = datetime.fromisoformat(entry.get("timestamp", ""))
+                      if entry_time >= period_start:
+                          used_in_period += entry.get("apiCalls", 0)
+                  except:
+                      continue
+
+          remaining = DAILY_LIMIT - used_in_period
+          available = remaining - ROUTINE_RESERVED
+
+          print(f"使用済み: {used_in_period}/{DAILY_LIMIT}")
+          print(f"残り: {remaining}")
+          print(f"ルーティン予約: {ROUTINE_RESERVED}")
+          print(f"手動投稿利用可能: {available}")
+
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              if available >= 1:
+                  f.write("quota_ok=true\n")
+                  print("[OK] 手動投稿可能")
+              else:
+                  f.write("quota_ok=false\n")
+                  print("::error::[NG] ルーティン予約のため手動投稿不可。17:00 JSTリセット後にお試しください。")
+          EOF
+
+      - name: Add article
+        if: inputs.action == 'add' && steps.quota-check.outputs.quota_ok == 'true'
         run: python scripts/manual-post.py --url "${{ inputs.url }}"
+
+      - name: Quota exceeded notice
+        if: inputs.action == 'add' && steps.quota-check.outputs.quota_ok != 'true'
+        run: |
+          echo "::error::API枠がルーティン予約で埋まっています。17:00 JST以降にお試しください。"
+          exit 1
 
       - name: Delete article
         if: inputs.action == 'delete'
