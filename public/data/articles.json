@@ -9,8 +9,7 @@
       "url": "https://news.yahoo.co.jp/articles/06fbb2f28388840edbcfd85f5c0cf5e7fa1c1dc5",
       "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260210-00000002-withonline-000-1-view.jpg?exp=10800",
       "source": "Yahoo!ニュース",
-      "mainKeyword": "中学受験",
-      "isManual": true
+      "mainKeyword": "中学受験"
     },
     {
       "id": "b049f3fc812e",
@@ -21,8 +20,7 @@
       "url": "https://mainichi.jp/articles/20260209/k00/00m/040/199000c",
       "imageUrl": "https://cdn.mainichi.jp/vol1/2026/02/09/20260209k0000m040202000p/0c10.jpg?1",
       "source": "毎日新聞",
-      "mainKeyword": "合理的配慮",
-      "isManual": true
+      "mainKeyword": "合理的配慮"
     },
     {
       "id": "0521d53d5c45",
@@ -60,8 +58,8 @@
     {
       "id": "c9b0768a4345",
       "title": "学校と企業の連携モデルとは、みんなのコードが無料フォーラムを3月6日に開催",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "ICT・教材",
+      "summary": "教育団体「みんなのコード」は、学校と企業が連携する新しい教育の形を学ぶ無料フォーラムを3月6日に開催します。この連携により、子どもたちが社会で役立つ実践的な力を多様な方法で身につけられるよう、協力体制を考える重要な機会となります。",
+      "category": "イベント・研修",
       "date": "2026-02-10",
       "url": "https://edu.watch.impress.co.jp/docs/news/event/2084413.html",
       "imageUrl": "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400&h=300&fit=crop",
@@ -82,8 +80,8 @@
     {
       "id": "9f25276b2951",
       "title": "文部科学省、論点整理をわかりやすくまとめたビジュアル資料を公開",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "ICT・教材",
+      "summary": "文部科学省が、教育に関する大切な考え方や課題をまとめた資料を、絵や図を多く使って分かりやすく公開しました。これは、難しい教育の議論を多くの人が理解し、今後の日本の教育がどうあるべきかを一緒に考えるために重要です。",
+      "category": "制度・行政",
       "date": "2026-02-10",
       "url": "https://edu.watch.impress.co.jp/docs/news/2082595.html",
       "imageUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=300&fit=crop",
@@ -289,39 +287,6 @@
       "mainKeyword": ""
     },
     {
-      "id": "20d43795c904",
-      "title": "簿記学習、56.7%が「就・転職で有利な武器になった」と回答＝CPAエクセレント調べ＝",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-08",
-      "url": "https://ict-enews.net/2026/02/09cpa-excellent-partners/",
-      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-cpa2-1200x630.webp",
-      "source": "ICT教育ニュース",
-      "mainKeyword": ""
-    },
-    {
-      "id": "da54edb7ed5d",
-      "title": "NTT西日本・三重大学・地域創生Coデザイン研究所、包括連携協定を締結",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-08",
-      "url": "https://ict-enews.net/2026/02/09ntt-west/",
-      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-nttw.webp",
-      "source": "ICT教育ニュース",
-      "mainKeyword": ""
-    },
-    {
-      "id": "0cba500cee40",
-      "title": "東京工科大学、サウジアラビアの大学とMOUを締結　宇宙・AI・デジタルツイン分野の学術交流",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-08",
-      "url": "https://ict-enews.net/2026/02/09teu-2/",
-      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0209-tau-900x630.jpg",
-      "source": "ICT教育ニュース",
-      "mainKeyword": ""
-    },
-    {
       "id": "f3969572e6b3",
       "title": "DOU、愛知大学の授業において授業内の学習データと連携した「AI講師」を試験導入",
       "summary": "愛知大学の授業で、学生の学習状況をデータで分析し、それぞれに合った指導をする「AI講師」の試験導入が始まりました。これは、AIが一人ひとりの理解度に合わせてサポートすることで、学生がより効果的に学べるように手助けする、多様な学びを支える新しい試みです。",
@@ -440,9 +405,11 @@
       "mainKeyword": ""
     }
   ],
-  "lastUpdated": "2026-02-10T15:20:01.511123",
-  "totalCount": 38,
+  "lastUpdated": "2026-02-10T20:19:03.875680",
+  "totalCount": 37,
   "sources": [
+    "Yahoo!ニュース",
+    "毎日新聞",
     "こどもとIT",
     "ICT教育ニュース",
     "文部科学省",
