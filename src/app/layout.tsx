@@ -27,14 +27,24 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'ja_JP',
+    url: 'https://news-navi.jp/inclusive/',
     siteName: 'インクルーシブ教育ナビ',
-    title: 'インクルーシブ教育ナビ | 特別支援教育の最新情報',
-    description: 'すべての子どもの学びを支える最新情報。インクルーシブ教育に関するニュース、研究、実践事例をお届けします。',
+    title: 'NewsNavi - インクルーシブ教育ナビ',
+    description: 'すべての子どもの学びを支える最新情報',
+    images: [
+      {
+        url: 'https://news-navi.jp/inclusive/ogp-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'NewsNavi - インクルーシブ教育ナビ',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'インクルーシブ教育ナビ | 特別支援教育の最新情報',
+    title: 'NewsNavi - インクルーシブ教育ナビ',
     description: 'すべての子どもの学びを支える最新情報',
+    images: ['https://news-navi.jp/inclusive/ogp-image.png'],
   },
   alternates: {
     types: {
