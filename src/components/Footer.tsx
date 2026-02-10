@@ -63,6 +63,14 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  href="/news"
+                  className="text-sm text-gray-600 hover:text-primary-600"
+                >
+                  すべてのニュース
+                </Link>
+              </li>
             </ul>
           </div>
 

@@ -139,6 +139,14 @@ export default function Header() {
             ))}
             <li>
               <Link
+                href="/news"
+                className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
+              >
+                すべてのニュース
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/bookmarks"
                 className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors inline-flex items-center gap-1.5"
               >
@@ -178,6 +186,15 @@ export default function Header() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  href="/news"
+                  className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-lg"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  すべてのニュース
+                </Link>
+              </li>
               <li>
                 <Link
                   href="/bookmarks"
