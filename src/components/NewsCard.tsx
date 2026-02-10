@@ -45,17 +45,19 @@ function isValidImageUrl(url?: string): boolean {
   return false;
 }
 
+// サイトトップページURL（シェア用）
+const SITE_URL = 'https://news-navi.jp/inclusive/';
+
 // X（Twitter）シェアURL生成
-function generateXShareUrl(title: string, summary: string, url: string): string {
-  const truncatedSummary = summary.length > 100 ? summary.substring(0, 100) + '...' : summary;
-  const shareText = `${title} - NewsNavi AI要約\n${truncatedSummary}\n#インクルーシブ教育 #福祉 #NewsNavi\nURL: ${url}`;
-  return `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
+function generateXShareUrl(title: string): string {
+  const shareText = `${title}\n#インクルーシブ教育 #福祉 #NewsNavi`;
+  return `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(SITE_URL)}`;
 }
 
 // LINEシェアURL生成
-function generateLineShareUrl(title: string, url: string): string {
-  const shareText = `${title}\n${url}`;
-  return `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`;
+function generateLineShareUrl(title: string): string {
+  const shareText = `${title}\n${SITE_URL}`;
+  return `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(SITE_URL)}&text=${encodeURIComponent(shareText)}`;
 }
 
 export default function NewsCard({
@@ -197,7 +199,7 @@ export default function NewsCard({
             <span className="text-xs text-gray-400 hidden sm:inline">シェア:</span>
             {/* Xシェアボタン */}
             <a
-              href={generateXShareUrl(title, summary, url)}
+              href={generateXShareUrl(title)}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackShare('x')}
@@ -211,7 +213,7 @@ export default function NewsCard({
             </a>
             {/* LINEシェアボタン */}
             <a
-              href={generateLineShareUrl(title, url)}
+              href={generateLineShareUrl(title)}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackShare('line')}
