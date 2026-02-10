@@ -409,7 +409,53 @@ export default function EditorDashboard() {
     );
   }
 
-  const remainingPercentage = status ? 100 - status.apiUsage.percentage : 0;
+  // 17:00 JSTでリセットするクォータ期間の開始時刻を計算
+  const getQuotaPeriodStart = (): Date => {
+    const now = new Date();
+    // JSTに変換（UTC+9）
+    const jstNow = new Date(now.getTime() + 9 * 60 * 60 * 1000);
+    const todayReset = new Date(jstNow);
+    todayReset.setHours(17, 0, 0, 0);
+
+    if (jstNow >= todayReset) {
+      // 今日の17:00以降 → 今日の17:00が期間開始
+      return new Date(todayReset.getTime() - 9 * 60 * 60 * 1000); // UTCに戻す
+    } else {
+      // 今日の17:00より前 → 昨日の17:00が期間開始
+      return new Date(todayReset.getTime() - 9 * 60 * 60 * 1000 - 24 * 60 * 60 * 1000);
+    }
+  };
+
+  // クォータ期間内の使用量を計算
+  const getQuotaUsage = (): { used: number; limit: number; remaining: number } => {
+    const DAILY_LIMIT = 20;
+    if (!status?.history) {
+      return { used: 0, limit: DAILY_LIMIT, remaining: DAILY_LIMIT };
+    }
+
+    const periodStart = getQuotaPeriodStart();
+    let usedInPeriod = 0;
+
+    for (const entry of status.history) {
+      try {
+        const entryTime = new Date(entry.timestamp);
+        if (entryTime >= periodStart) {
+          usedInPeriod += entry.apiCalls || 0;
+        }
+      } catch {
+        continue;
+      }
+    }
+
+    return {
+      used: usedInPeriod,
+      limit: DAILY_LIMIT,
+      remaining: Math.max(0, DAILY_LIMIT - usedInPeriod),
+    };
+  };
+
+  const quotaUsage = getQuotaUsage();
+  const remainingPercentage = Math.round((quotaUsage.remaining / quotaUsage.limit) * 100);
   const recentHistory = status?.history?.slice(-10).reverse() || [];
 
   return (
@@ -446,20 +492,20 @@ export default function EditorDashboard() {
                 </span>
               </div>
 
-              {/* API残量 */}
+              {/* API残量（17:00 JSTリセット対応） */}
               <div className="bg-gray-700 rounded-lg p-4">
-                <span className="text-gray-400 text-xs block mb-1">API残量</span>
+                <span className="text-gray-400 text-xs block mb-1">API残量（17:00リセット）</span>
                 <div className="flex items-center gap-2">
                   <div className="flex-1 h-2 bg-gray-600 rounded-full overflow-hidden">
                     <div
-                      className={`h-full ${getApiBarColor(status.apiUsage.percentage)} transition-all`}
+                      className={`h-full ${getApiBarColor(100 - remainingPercentage)} transition-all`}
                       style={{ width: `${remainingPercentage}%` }}
                     />
                   </div>
-                  <span className="text-white font-medium text-sm">{remainingPercentage}%</span>
+                  <span className="text-white font-medium text-sm">{quotaUsage.remaining}/{quotaUsage.limit}</span>
                 </div>
                 <span className="text-gray-500 text-xs mt-1 block">
-                  {status.apiUsage.used}/{status.apiUsage.limit} 使用済み
+                  今期間: {quotaUsage.used}回使用済み
                 </span>
               </div>
 
