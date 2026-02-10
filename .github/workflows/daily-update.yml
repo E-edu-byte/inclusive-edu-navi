@@ -17,13 +17,14 @@ on:
         required: false
         default: 'false'
         type: boolean
-  # mainブランチへのpush時も実行（テスト用）
-  push:
-    branches:
-      - main
-    paths:
-      - 'scripts/**'
-      - '.github/workflows/daily-update.yml'
+  # mainブランチへのpush時は実行しない（スケジュールと手動のみ）
+  # 以前: pushでも実行していたが、記事データが上書きされる問題があったため無効化
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - 'scripts/**'
+  #     - '.github/workflows/daily-update.yml'
 
 # 二重起動防止（429エラー対策）
 concurrency:
