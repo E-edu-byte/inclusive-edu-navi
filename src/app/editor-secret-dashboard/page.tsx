@@ -234,12 +234,26 @@ export default function EditorDashboard() {
         const urls = new Set<string>();
         const articles: ArticleForDeletion[] = [];
 
+        // 除外URL一覧を取得
+        const excludedUrls = new Set<string>();
+        try {
+          const excludedRes = await fetch(`${BASE_PATH}/data/excluded-urls.json`);
+          if (excludedRes.ok) {
+            const excludedData = await excludedRes.json();
+            for (const url of excludedData.excludedUrls || []) {
+              excludedUrls.add(url);
+            }
+          }
+        } catch {
+          // 除外URLの取得に失敗しても続行
+        }
+
         // articles.json
         const articlesRes = await fetch(`${BASE_PATH}/data/articles.json`);
         if (articlesRes.ok) {
           const data = await articlesRes.json();
           for (const article of data.articles || []) {
-            if (article.url) {
+            if (article.url && !excludedUrls.has(article.url)) {
               urls.add(article.url);
               articles.push({
                 title: article.title,
@@ -257,7 +271,7 @@ export default function EditorDashboard() {
         if (manualRes.ok) {
           const data = await manualRes.json();
           for (const article of data.articles || []) {
-            if (article.url) {
+            if (article.url && !excludedUrls.has(article.url)) {
               urls.add(article.url);
               articles.push({
                 title: article.title,
