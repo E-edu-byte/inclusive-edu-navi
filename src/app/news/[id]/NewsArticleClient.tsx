@@ -6,6 +6,7 @@ import { getCategoryByName } from '@/lib/types';
 import { generateAmazonSearchUrl, generateRakutenSearchUrl } from '@/data/articles';
 import { useBookmarks } from '@/contexts/BookmarkContext';
 import { trackClick, trackShare } from '@/hooks/useTracking';
+import BookmarkShortcut from '@/components/BookmarkShortcut';
 
 type Article = {
   id: string;
@@ -75,6 +76,7 @@ export default function NewsArticleClient({ article }: { article: Article }) {
         url: article.url,
         category: article.category,
         imageUrl: article.imageUrl,
+        articleId: article.id, // シェアURL用の記事ID
       });
       if (!success) {
         setShowToast(true);
@@ -89,6 +91,9 @@ export default function NewsArticleClient({ article }: { article: Article }) {
 
   return (
     <div className="container-main py-8">
+      {/* スマホ用：保存した記事へのショートカット */}
+      <BookmarkShortcut />
+
       <div className="max-w-2xl mx-auto">
         {/* 記事カード */}
         <article className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
@@ -139,54 +144,50 @@ export default function NewsArticleClient({ article }: { article: Article }) {
             </p>
 
             {/* アクションボタン */}
-            <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-gray-100">
+            <div className="flex items-center gap-2 pt-4 border-t border-gray-100">
               {/* 元記事を読む */}
               <a
                 href={article.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-5 py-3 text-white text-sm font-medium rounded-lg bg-primary-600 hover:bg-primary-700 transition-colors"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 sm:px-3 sm:py-1.5 text-white text-sm font-medium rounded-lg bg-primary-600 hover:bg-primary-700 transition-colors"
               >
                 元記事を読む
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
               </a>
-
-              <span className="text-xs text-gray-400">シェア:</span>
-
+              <span className="text-xs text-gray-400 hidden sm:inline">シェア:</span>
               {/* Xシェアボタン */}
               <a
                 href={generateXShareUrl(article.title, article.id)}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackShare('x')}
-                className="inline-flex items-center justify-center w-11 h-11 rounded-lg bg-black hover:bg-gray-800 text-white transition-colors"
+                className="inline-flex items-center justify-center w-11 h-11 sm:w-8 sm:h-8 rounded-lg bg-black hover:bg-gray-800 text-white transition-colors"
                 title="Xでシェア"
               >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
               </a>
-
               {/* LINEシェアボタン */}
               <a
                 href={generateLineShareUrl(article.title, article.id)}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackShare('line')}
-                className="inline-flex items-center justify-center w-11 h-11 rounded-lg bg-[#06C755] hover:bg-[#05b34c] text-white transition-colors"
+                className="inline-flex items-center justify-center w-11 h-11 sm:w-8 sm:h-8 rounded-lg bg-[#06C755] hover:bg-[#05b34c] text-white transition-colors"
                 title="LINEでシェア"
               >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314" />
                 </svg>
               </a>
-
               {/* しおりボタン */}
               <button
                 onClick={handleBookmark}
-                className={`inline-flex items-center justify-center w-11 h-11 rounded-lg border transition-colors ${
+                className={`inline-flex items-center justify-center w-11 h-11 sm:w-8 sm:h-8 rounded-lg border transition-colors ${
                   bookmarked
                     ? 'bg-amber-100 border-amber-300 text-amber-700 hover:bg-amber-200'
                     : 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100'
@@ -194,7 +195,7 @@ export default function NewsArticleClient({ article }: { article: Article }) {
                 title={bookmarked ? 'しおりを解除' : 'しおりに追加'}
               >
                 <svg
-                  className={`w-5 h-5 ${bookmarked ? 'fill-amber-500' : 'fill-none stroke-current'}`}
+                  className={`w-5 h-5 sm:w-4 sm:h-4 ${bookmarked ? 'fill-amber-500' : 'fill-none stroke-current'}`}
                   viewBox="0 0 24 24"
                   strokeWidth={2}
                 >
