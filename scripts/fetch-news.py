@@ -243,10 +243,10 @@ if ARGS.max_calls is not None:
         print("  - モード: 通常（新規収集+要約）")
     print("=" * 60)
 elif SUMMARY_ONLY:
-    MAX_AI_CALLS_PER_RUN = CONSTRUCTION_AVAILABLE  # 要約専用モード: 構築用枠のみ使用（9件）
+    MAX_AI_CALLS_PER_RUN = 3  # 要約専用モード: 控えめに3件まで（ルーティン枠を圧迫しない）
     print("=" * 60)
     print("【要約専用モード】新規収集をスキップ、要約生成に集中")
-    print(f"  - 最大AI呼び出し: {MAX_AI_CALLS_PER_RUN}件")
+    print(f"  - 最大AI呼び出し: {MAX_AI_CALLS_PER_RUN}件（控えめ設定）")
     print(f"  - ルーティン予約枠: {ROUTINE_RESERVED}件（朝刊5+夕刊6）")
     print("=" * 60)
 else:
@@ -777,7 +777,7 @@ FORCE_RETRY_PATTERNS = [
 
 # 要約リトライ最大件数
 if SUMMARY_ONLY:
-    MAX_SUMMARY_RETRY = CONSTRUCTION_AVAILABLE  # 要約専用モード: 構築用枠のみ使用（9件）
+    MAX_SUMMARY_RETRY = 3  # 要約専用モード: 控えめに3件まで（ルーティン枠を圧迫しない）
 else:
     MAX_SUMMARY_RETRY = 2  # 通常モード: リトライ2件+新規3件=5件/実行
 
