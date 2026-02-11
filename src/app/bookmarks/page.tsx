@@ -162,27 +162,28 @@ function BookmarkCard({ article }: { article: BookmarkedArticle }) {
             </button>
           </div>
           {/* 書籍検索リンク */}
-          <div className="mt-2 text-xs text-gray-400">
-            関連書籍:
-              <a
-                href={generateAmazonSearchUrl(undefined, article.title)}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackClick('amazon')}
-                className="ml-1 text-gray-500 hover:text-gray-700 transition-colors"
-              >
-                Amazon
-              </a>
-              <span className="mx-1 text-gray-300">|</span>
-              <a
-                href={generateRakutenSearchUrl(undefined, article.title)}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackClick('rakuten')}
-                className="text-gray-500 hover:text-gray-700 transition-colors"
-              >
-                楽天
-              </a>
+          <div className="mt-2 text-sm text-gray-500">
+            <span className="text-gray-400">📖 この記事の関連書籍</span>
+            <span className="mx-1.5 text-gray-400">⇒</span>
+            <a
+              href={generateAmazonSearchUrl(undefined, article.title)}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackClick('amazon')}
+              className="font-medium text-gray-600 hover:text-primary-600 transition-colors"
+            >
+              Amazon
+            </a>
+            <span className="mx-1.5 text-gray-300">/</span>
+            <a
+              href={generateRakutenSearchUrl(undefined, article.title)}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackClick('rakuten')}
+              className="font-medium text-gray-600 hover:text-primary-600 transition-colors"
+            >
+              楽天
+            </a>
           </div>
         </div>
       </div>

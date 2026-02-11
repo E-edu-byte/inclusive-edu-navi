@@ -208,24 +208,25 @@ export default function NewsArticleClient({ article }: { article: Article }) {
             </div>
 
             {/* 関連書籍リンク */}
-            <div className="mt-4 pt-4 border-t border-gray-100 text-xs text-gray-400">
-              <span className="mr-1">📖</span> 関連書籍:
+            <div className="mt-4 pt-4 border-t border-gray-100 text-sm text-gray-500">
+              <span className="text-gray-400">📖 この記事の関連書籍</span>
+              <span className="mx-1.5 text-gray-400">⇒</span>
               <a
                 href={generateAmazonSearchUrl(article.mainKeyword, article.title)}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackClick('amazon')}
-                className="ml-1 text-gray-500 hover:text-gray-700 transition-colors"
+                className="font-medium text-gray-600 hover:text-primary-600 transition-colors"
               >
                 Amazon
               </a>
-              <span className="mx-1 text-gray-300">|</span>
+              <span className="mx-1.5 text-gray-300">/</span>
               <a
                 href={generateRakutenSearchUrl(article.mainKeyword, article.title)}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackClick('rakuten')}
-                className="text-gray-500 hover:text-gray-700 transition-colors"
+                className="font-medium text-gray-600 hover:text-primary-600 transition-colors"
               >
                 楽天
               </a>
