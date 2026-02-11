@@ -103,7 +103,7 @@ export default function FeaturedBooksBlock() {
         注目の関連書籍
       </h2>
       <p className="text-xs text-amber-700 mb-4 leading-relaxed">
-        最新ニュースに関連する書籍をAmazonで探せます
+        最新ニュースに関連する書籍をAmazon・楽天で探せます。サイト運営支援にもなります。
       </p>
 
       <div className="space-y-3">
