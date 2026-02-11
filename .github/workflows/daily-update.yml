@@ -272,6 +272,21 @@ jobs:
       - name: Generate sitemap
         run: python scripts/generate-sitemap.py
 
+      # 5.6. Node.js環境のセットアップ（RSS生成用）
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # 5.7. npm依存関係のインストール
+      - name: Install npm dependencies
+        run: npm ci
+
+      # 5.8. RSSフィード生成
+      - name: Generate RSS feed
+        run: npm run generate-rss
+
       # 6. 変更があるかチェック
       - name: Check for changes
         id: git-check
@@ -291,7 +306,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add public/data/articles.json public/data/ai-picks.json public/data/status.json public/sitemap.xml public/data/manual-articles.json public/data/trashed-articles.json public/data/excluded-urls.json
+          git add public/data/articles.json public/data/ai-picks.json public/data/status.json public/sitemap.xml public/feed.xml public/data/manual-articles.json public/data/trashed-articles.json public/data/excluded-urls.json
           git commit -m "chore: daily update - news & AI picks $(date +'%Y-%m-%d %H:%M' -d '+9 hours')"
           # リモートに新しいコミットがある場合はrebaseしてからプッシュ
           git pull --rebase origin main || true

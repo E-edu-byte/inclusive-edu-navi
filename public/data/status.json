@@ -1,162 +1,17 @@
 {
-  "lastUpdated": "2026-02-10T20:50:11.471652",
+  "lastUpdated": "2026-02-11T17:00:00.000000",
   "apiUsage": {
-    "used": 27,
+    "used": 0,
     "limit": 20,
-    "percentage": 100
+    "percentage": 0
   },
   "lastRun": {
-    "timestamp": "2026-02-10T20:50:11.471652",
+    "timestamp": "2026-02-11T17:00:00.000000",
     "articlesProcessed": 0,
     "articlesAdded": 0,
-    "apiCalls": 4,
-    "success": false,
-    "error": "429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please "
+    "apiCalls": 0,
+    "success": true,
+    "error": null
   },
-  "history": [
-    {
-      "timestamp": "2026-02-09T09:25:47.439489",
-      "articlesProcessed": 6,
-      "apiCalls": 1,
-      "success": false
-    },
-    {
-      "timestamp": "2026-02-09T09:41:35.449322",
-      "articlesProcessed": 2,
-      "apiCalls": 0,
-      "success": false
-    },
-    {
-      "timestamp": "2026-02-09T10:03:08.719165",
-      "articlesProcessed": 0,
-      "apiCalls": 0,
-      "success": false
-    },
-    {
-      "timestamp": "2026-02-09T10:18:58.177198",
-      "articlesProcessed": 0,
-      "apiCalls": 0,
-      "success": false
-    },
-    {
-      "timestamp": "2026-02-09T10:26:10.734071",
-      "articlesProcessed": 0,
-      "apiCalls": 4,
-      "success": false
-    },
-    {
-      "timestamp": "2026-02-09T10:52:58.547096",
-      "articlesProcessed": 0,
-      "apiCalls": 0,
-      "success": false
-    },
-    {
-      "timestamp": "2026-02-09T11:17:15.763126",
-      "articlesProcessed": 0,
-      "apiCalls": 0,
-      "success": false
-    },
-    {
-      "timestamp": "2026-02-09T11:26:00.350844",
-      "articlesProcessed": 0,
-      "apiCalls": 0,
-      "success": false
-    },
-    {
-      "timestamp": "2026-02-09T11:44:04.108287",
-      "articlesProcessed": 1,
-      "apiCalls": 1,
-      "success": false
-    },
-    {
-      "timestamp": "2026-02-09T11:51:20.768378",
-      "articlesProcessed": 2,
-      "apiCalls": 0,
-      "success": false
-    },
-    {
-      "timestamp": "2026-02-09T12:06:32.675485",
-      "articlesProcessed": 2,
-      "apiCalls": 0,
-      "success": false
-    },
-    {
-      "timestamp": "2026-02-09T12:16:32.676673",
-      "articlesProcessed": 5,
-      "apiCalls": 0,
-      "success": false
-    },
-    {
-      "timestamp": "2026-02-09T12:34:32.033163",
-      "articlesProcessed": 4,
-      "apiCalls": 0,
-      "success": false
-    },
-    {
-      "timestamp": "2026-02-09T13:10:36.457066",
-      "articlesProcessed": 6,
-      "apiCalls": 0,
-      "success": false
-    },
-    {
-      "timestamp": "2026-02-09T20:38:07.763321",
-      "articlesProcessed": 4,
-      "apiCalls": 5,
-      "success": true
-    },
-    {
-      "timestamp": "2026-02-09T22:09:27.218334",
-      "articlesProcessed": 5,
-      "apiCalls": 5,
-      "success": true
-    },
-    {
-      "timestamp": "2026-02-10T00:15:41.242222",
-      "articlesProcessed": 3,
-      "apiCalls": 5,
-      "success": true
-    },
-    {
-      "timestamp": "2026-02-10T00:20:07.382689",
-      "articlesProcessed": 5,
-      "apiCalls": 4,
-      "success": false
-    },
-    {
-      "timestamp": "2026-02-10T00:37:34.445951",
-      "articlesProcessed": 6,
-      "apiCalls": 0,
-      "success": false
-    },
-    {
-      "timestamp": "2026-02-10T13:15:53.778550",
-      "articlesProcessed": 7,
-      "apiCalls": 1,
-      "success": false
-    },
-    {
-      "timestamp": "2026-02-10T13:48:40.465434",
-      "articlesProcessed": 9,
-      "apiCalls": 0,
-      "success": false
-    },
-    {
-      "timestamp": "2026-02-10T14:01:38.920245",
-      "articlesProcessed": 8,
-      "apiCalls": 4,
-      "success": false
-    },
-    {
-      "timestamp": "2026-02-10T20:19:03.876743",
-      "articlesProcessed": 0,
-      "apiCalls": 9,
-      "success": true
-    },
-    {
-      "timestamp": "2026-02-10T20:50:11.471652",
-      "articlesProcessed": 0,
-      "apiCalls": 4,
-      "success": false
-    }
-  ]
+  "history": []
 }
