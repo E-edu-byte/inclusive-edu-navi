@@ -1,6 +1,19 @@
 {
   "picks": [
     {
+      "id": "e43d4a9dc695",
+      "sourceArticleId": "a69c04284f3d",
+      "title": "AIの使用OKなクラスとNGなクラスで学習成果、比べてみた。意外な結果に",
+      "url": "https://www.gizmodo.jp/2026/02/this-professor-let-half-his-class-use-ai-heres-what-happened-2i7.html",
+      "category": "研究",
+      "originalDate": "2026-02-11",
+      "reason": "編集部ピックアップ",
+      "summary": "授業でのAI（ChatGPTなど）利用に関する研究で、AIを使った学生は学習意欲や自信が高まり、授業参加も積極的になりました。一方、試験の点数には差がなかったそうです。AIが学び方や学びへの姿勢に良い影響を与える可能性が示されました。",
+      "generatedAt": "2026-02-11T17:27:52.424730",
+      "model": "manual",
+      "isManual": true
+    },
+    {
       "id": "b13a4594764d",
       "sourceArticleId": "6f61fda2b518",
       "title": "「内申点が取れない…」発達障害の子が公立中で“詰む”残酷な理由。75％の親が「あえて中学受験」を考える切実な事情（with online） - Yahoo!ニュース",
@@ -49,20 +62,8 @@
       "summary": "不登校を経験した子どもたちの新たな門出を祝う「もうひとつの卒業式」が東京・北区で開催されました。この取り組みは、学校以外の場での学びや成長を認め、自己肯定感を育む重要な支援の形として、不登校に悩む保護者や教員に希望を与えます。",
       "generatedAt": "2026-02-10T00:16:03.987883",
       "model": "gemini-2.5-flash"
-    },
-    {
-      "id": "98ecbd3a33bc",
-      "sourceArticleId": "870a39f00ebd",
-      "title": "全国開催「まるごと通信制フェスタ2026」2/14-3/1",
-      "url": "https://resemom.jp/article/2026/02/05/84934.html",
-      "category": "実践・事例",
-      "originalDate": "2026-02-05",
-      "reason": "通信制高校の選択肢を拡充",
-      "summary": "全国の通信制高校やサポート校が集まる合同説明会「まるごと通信制フェスタ」が開催されます。不登校の子どもを持つ保護者や、多様な学びを求める生徒にとって、最適な進路選択を見つける貴重な機会となるでしょう。",
-      "generatedAt": "2026-02-10T00:16:03.987890",
-      "model": "gemini-2.5-flash"
     }
   ],
-  "lastUpdated": "2026-02-10T12:58:41.243648",
+  "lastUpdated": "2026-02-11T17:27:52.424742",
   "totalCount": 5
 }

@@ -1,6 +1,20 @@
 {
   "articles": [
     {
+      "id": "a69c04284f3d",
+      "title": "AIの使用OKなクラスとNGなクラスで学習成果、比べてみた。意外な結果に",
+      "summary": "授業でのAI（ChatGPTなど）利用に関する研究で、AIを使った学生は学習意欲や自信が高まり、授業参加も積極的になりました。一方、試験の点数には差がなかったそうです。AIが学び方や学びへの姿勢に良い影響を与える可能性が示されました。",
+      "category": "研究",
+      "date": "2026-02-11",
+      "url": "https://www.gizmodo.jp/2026/02/this-professor-let-half-his-class-use-ai-heres-what-happened-2i7.html",
+      "imageUrl": "https://media.loom-app.com/gizmodo/dist/images/2025/10/31/shutterstock_2591156483.jpg?w=1280&h=630&f=jpg",
+      "source": "gizmodo.jp",
+      "mainKeyword": "AI教育",
+      "isManual": true,
+      "addedAt": "2026-02-11T17:27:52.423617",
+      "expiresAt": "2026-02-18T17:27:52.423619"
+    },
+    {
       "id": "6f61fda2b518",
       "title": "「内申点が取れない…」発達障害の子が公立中で“詰む”残酷な理由。75％の親が「あえて中学受験」を考える切実な事情（with online） - Yahoo!ニュース",
       "summary": "発達障害のあるお子さんの75%の保護者が中学受験を検討しています。公立中学では、内申点が特性によって取りにくい上、多忙な学校生活も負担になりがちです。子どもの特性に合った環境を求め、高校受験の負担を避けるため、中学受験が注目される選択肢となっています。",
@@ -405,7 +419,7 @@
       "mainKeyword": ""
     }
   ],
-  "lastUpdated": "2026-02-10T20:50:11.470780",
+  "lastUpdated": "2026-02-11T17:27:52.424145",
   "totalCount": 37,
   "sources": [
     "Yahoo!ニュース",
