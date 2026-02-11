@@ -15,6 +15,8 @@ type NewsCardProps = {
   source?: string;
   date: string;
   url: string;
+  // 記事ID（シェアURL用）
+  id?: string;
   // Amazon検索用キーワード（AI抽出）
   mainKeyword?: string;
   // 編集部ピックアップ用
@@ -48,19 +50,21 @@ function isValidImageUrl(url?: string): boolean {
   return false;
 }
 
-// サイトトップページURL（シェア用）
-const SITE_URL = 'https://news-navi.jp/inclusive/';
+// サイトURL（シェア用）
+const SITE_URL = 'https://news-navi.jp/inclusive';
 
-// X（Twitter）シェアURL生成
-function generateXShareUrl(title: string): string {
+// X（Twitter）シェアURL生成（記事IDがあれば個別記事ページ、なければトップページ）
+function generateXShareUrl(title: string, articleId?: string): string {
+  const shareUrl = articleId ? `${SITE_URL}/news/${articleId}/` : `${SITE_URL}/`;
   const shareText = `${title}\n#インクルーシブ教育 #福祉 #NewsNavi`;
-  return `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(SITE_URL)}`;
+  return `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
 }
 
-// LINEシェアURL生成
-function generateLineShareUrl(title: string): string {
-  const shareText = `${title}\n${SITE_URL}`;
-  return `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(SITE_URL)}&text=${encodeURIComponent(shareText)}`;
+// LINEシェアURL生成（記事IDがあれば個別記事ページ、なければトップページ）
+function generateLineShareUrl(title: string, articleId?: string): string {
+  const shareUrl = articleId ? `${SITE_URL}/news/${articleId}/` : `${SITE_URL}/`;
+  const shareText = `${title}\n${shareUrl}`;
+  return `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
 }
 
 export default function NewsCard({
@@ -71,6 +75,7 @@ export default function NewsCard({
   source,
   date,
   url,
+  id,
   mainKeyword,
   isPickup = false,
   pickupReason,
@@ -208,7 +213,7 @@ export default function NewsCard({
             <span className="text-xs text-gray-400 hidden sm:inline">シェア:</span>
             {/* Xシェアボタン */}
             <a
-              href={generateXShareUrl(title)}
+              href={generateXShareUrl(title, id)}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackShare('x')}
@@ -222,7 +227,7 @@ export default function NewsCard({
             </a>
             {/* LINEシェアボタン */}
             <a
-              href={generateLineShareUrl(title)}
+              href={generateLineShareUrl(title, id)}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackShare('line')}

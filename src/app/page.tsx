@@ -172,6 +172,7 @@ export default function Home() {
                       source={article.source}
                       date={article.date}
                       url={article.url}
+                      id={article.id}
                       mainKeyword={article.mainKeyword}
                       isPickup={false}
                     />
@@ -212,6 +213,7 @@ export default function Home() {
                     source={article.source}
                     date={article.date}
                     url={article.url}
+                    id={article.id}
                     mainKeyword={article.mainKeyword}
                     isPickup={true}
                   />

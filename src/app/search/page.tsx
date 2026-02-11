@@ -177,6 +177,7 @@ function SearchResults() {
                 source={article.source}
                 date={article.date}
                 url={article.url}
+                id={article.id}
                 mainKeyword={article.mainKeyword}
               />
             );
