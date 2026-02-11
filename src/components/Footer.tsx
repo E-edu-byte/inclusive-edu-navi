@@ -103,7 +103,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} インクルーシブ教育ナビ All rights reserved.
           </p>
           <p className="text-xs text-gray-400 mt-2">
-            Amazonのアソシエイトとして、当メディアは適格販売により収入を得ています。
+            Amazon、楽天のアソシエイトとして、当メディアは適格販売により収入を得ています。
           </p>
         </div>
       </div>

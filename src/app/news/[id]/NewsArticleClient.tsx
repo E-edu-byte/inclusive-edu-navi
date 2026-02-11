@@ -150,10 +150,10 @@ export default function NewsArticleClient({ article }: { article: Article }) {
                 href={article.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 sm:px-3 sm:py-1.5 text-white text-sm font-medium rounded-lg bg-primary-600 hover:bg-primary-700 transition-colors"
+                className="inline-flex items-center gap-1 px-3 py-2 text-white text-sm font-medium rounded-lg bg-primary-600 hover:bg-primary-700 transition-colors whitespace-nowrap"
               >
                 元記事を読む
-                <svg className="w-4 h-4 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
               </a>
@@ -209,9 +209,9 @@ export default function NewsArticleClient({ article }: { article: Article }) {
             </div>
 
             {/* 関連書籍リンク */}
-            <div className="mt-4 pt-4 border-t border-gray-100 text-sm text-gray-500">
-              <span className="text-gray-400">📖 この記事の関連書籍</span>
-              <span className="mx-1.5 text-gray-400">⇒</span>
+            <div className="mt-4 pt-4 border-t border-gray-100 text-sm text-gray-600">
+              <span>📖 この記事の関連書籍</span>
+              <span className="mx-1.5">⇒</span>
               <a
                 href={generateAmazonSearchUrl(article.mainKeyword, article.title)}
                 target="_blank"

@@ -162,9 +162,9 @@ function BookmarkCard({ article }: { article: BookmarkedArticle }) {
             </button>
           </div>
           {/* 書籍検索リンク */}
-          <div className="mt-2 text-sm text-gray-500">
-            <span className="text-gray-400">📖 この記事の関連書籍</span>
-            <span className="mx-1.5 text-gray-400">⇒</span>
+          <div className="mt-2 text-sm text-gray-600">
+            <span>📖 この記事の関連書籍</span>
+            <span className="mx-1.5">⇒</span>
             <a
               href={generateAmazonSearchUrl(undefined, article.title)}
               target="_blank"
