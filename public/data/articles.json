@@ -9,10 +9,7 @@
       "url": "https://www.gizmodo.jp/2026/02/this-professor-let-half-his-class-use-ai-heres-what-happened-2i7.html",
       "imageUrl": "https://media.loom-app.com/gizmodo/dist/images/2025/10/31/shutterstock_2591156483.jpg?w=1280&h=630&f=jpg",
       "source": "gizmodo.jp",
-      "mainKeyword": "AI教育",
-      "isManual": true,
-      "addedAt": "2026-02-11T17:27:52.423617",
-      "expiresAt": "2026-02-18T17:27:52.423619"
+      "mainKeyword": "AI教育"
     },
     {
       "id": "6f61fda2b518",
@@ -50,8 +47,8 @@
     {
       "id": "d4a10bf2b31e",
       "title": "DXハイスクールの高校生、Meta QuestとAIで地域課題解決に挑む",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "ICT・教材",
+      "summary": "DXハイスクールの高校生たちが、VRゴーグルやAIといった最新技術を使って、自分たちの地域の課題解決に挑戦しました。この取り組みは、子どもたちが未来に役立つデジタル技術と、自分で考えて問題を解決する力を実践的に学ぶ、多様な教育方法の一つとして注目されています。",
+      "category": "多様な学び",
       "date": "2026-02-10",
       "url": "https://edu.watch.impress.co.jp/docs/report/2075364.html",
       "imageUrl": "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=400&h=300&fit=crop",
@@ -226,8 +223,8 @@
     {
       "id": "ffc671a5ad8f",
       "title": "次期学習指導要領の「論点整理」をNotebookLMで読み解く",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "ICT・教材",
+      "summary": "新しい学習指導要領をどう作るか、その議論の元となる資料がまとめられました。この記事は、AIツールを使ってその内容を分かりやすく分析しています。これにより、将来の教育の方向性がどのように変わっていくかを理解する手助けとなります。",
+      "category": "制度・行政",
       "date": "2026-02-09",
       "url": "https://edu.watch.impress.co.jp/docs/serial/educaition-times/2056497.html",
       "imageUrl": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=300&fit=crop",
@@ -406,22 +403,12 @@
       "imageUrl": "https://edtechzine.jp/static/images/article/13457/13457_og.jpg",
       "source": "EdTechZine",
       "mainKeyword": ""
-    },
-    {
-      "id": "4732997d57ec",
-      "title": "プラス、スマートスクール利用校を対象とした保護者向けECサイト「TsunaBi」を開始",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-03",
-      "url": "https://edtechzine.jp/article/detail/13458",
-      "imageUrl": "https://edtechzine.jp/static/images/article/13458/13458_og.jpg",
-      "source": "EdTechZine",
-      "mainKeyword": ""
     }
   ],
-  "lastUpdated": "2026-02-11T17:27:52.424145",
+  "lastUpdated": "2026-02-11T19:39:07.643408",
   "totalCount": 37,
   "sources": [
+    "gizmodo.jp",
     "Yahoo!ニュース",
     "毎日新聞",
     "こどもとIT",
