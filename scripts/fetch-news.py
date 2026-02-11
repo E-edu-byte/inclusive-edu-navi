@@ -423,11 +423,14 @@ STRONG_EXCLUDE_KEYWORDS = [
     "ゲーム実況", "eスポーツ", "バズる", "炎上", "インフルエンサー",
 ]
 
-# 除外キーワード（広告・PR記事をスキップ）
+# 除外キーワード（広告・PR記事・商業記事をスキップ）
 EXCLUDE_KEYWORDS = [
     "PR", "広告", "プレゼント", "キャンペーン", "セミナー申込",
     "応募締切", "抽選で", "モニター募集", "スポンサー",
-    "[PR]", "【PR】", "【広告】", "[AD]"
+    "[PR]", "【PR】", "【広告】", "[AD]",
+    # 商業・セール記事（教育と無関係）
+    "セール", "割引", "OFF", "％OFF", "%OFF", "クーポン", "お買い得",
+    "Kindle本", "タイトルセール", "ポイント還元"
 ]
 
 # 有料記事URLパターン（AI判定前に弾く）
@@ -736,6 +739,14 @@ def refilter_existing_articles(articles: list) -> list:
             # 除外キーワードあり かつ 理念キーワードなし → 除外
             removed_strong += 1
             print(f"    [再フィルタ除外] 理念外: {title[:40]}...")
+            continue
+
+        # 1.5. 探究学習フィルタ（支援キーワードなしの場合のみ除外）
+        # 「探究学習」単独の記事はインクルーシブ教育と無関係なことが多い
+        has_tankyu = "探究学習" in text or "探究型学習" in text or "探究活動" in text
+        if has_tankyu and not has_core_keyword:
+            removed_strong += 1
+            print(f"    [再フィルタ除外] 探究学習（理念なし）: {title[:40]}...")
             continue
 
         # 2. コア理念キーワードチェック（信頼ソース以外）
@@ -1446,6 +1457,30 @@ def contains_strong_exclude_keyword(title: str, summary: str) -> bool:
     return True
 
 
+def is_tankyu_without_support(title: str, summary: str) -> bool:
+    """
+    【探究学習フィルタ】探究学習記事で支援キーワードがない場合に除外
+
+    「探究学習」単独の記事はインクルーシブ教育と無関係なことが多い
+    ただし、コア理念キーワード（特別支援、発達障害、合理的配慮等）を
+    含む場合は例外的に採用する
+    """
+    text = f"{title} {summary}"
+
+    # 探究学習キーワードを含むかチェック
+    has_tankyu = "探究学習" in text or "探究型学習" in text or "探究活動" in text
+    if not has_tankyu:
+        return False  # 探究学習記事ではない → 採用
+
+    # 探究学習記事だが、コア理念キーワードも含む場合は例外的に採用
+    has_core = any(keyword in text for keyword in CORE_KEYWORDS)
+    if has_core:
+        return False  # 理念キーワードあり → 例外採用
+
+    # 探究学習のみ（支援なし） → 除外
+    return True
+
+
 def contains_practice_exclude_keyword(title: str, summary: str) -> bool:
     """
     【除外フィルタ】細かすぎる実践情報をスキップ
@@ -1607,6 +1642,11 @@ def fetch_rss_feed(feed_info: dict) -> list:
             # 政治・一般受験・一般医療・スポーツ・芸能など
             if contains_strong_exclude_keyword(title, rss_summary):
                 print(f"    [除外] 理念外: {title[:40]}...")
+                continue
+
+            # 【探究学習フィルタ】支援キーワードなしの探究学習記事を除外
+            if is_tankyu_without_support(title, rss_summary):
+                print(f"    [除外] 探究学習（理念なし）: {title[:40]}...")
                 continue
 
             # 【除外フィルタ】塾・予備校広告をスキップ（AI判定前に弾く）
@@ -2026,6 +2066,10 @@ def fetch_kodomo_it_news(max_articles: int = 3) -> list:
 
                 # 強力除外キーワードチェック（理念優先ルール適用）
                 if contains_strong_exclude_keyword(text, ""):
+                    continue
+
+                # 探究学習フィルタ（支援キーワードなしの場合は除外）
+                if is_tankyu_without_support(text, ""):
                     continue
 
                 # 重複チェック（既存記事との比較）
