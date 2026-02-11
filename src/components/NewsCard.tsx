@@ -97,6 +97,7 @@ export default function NewsCard({
         url,
         category,
         imageUrl,
+        articleId: id, // シェアURL用の記事ID
       });
       if (!success) {
         setShowToast(true);

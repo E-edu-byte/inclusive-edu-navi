@@ -13,6 +13,7 @@ export type BookmarkedArticle = {
   category?: string;
   imageUrl?: string;
   savedAt: string; // 保存日時
+  articleId?: string; // 記事ID（シェアURL用）
 };
 
 type BookmarkContextType = {
