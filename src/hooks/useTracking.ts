@@ -81,9 +81,17 @@ function saveTracking(data: TrackingData): void {
   }
 }
 
-// 今日の日付を取得（YYYY-MM-DD形式）
+// 今日の日付を取得（YYYY-MM-DD形式、ゼロパディング付き）
 function getTodayDate(): string {
-  return new Date().toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' }).replace(/\//g, '-');
+  const now = new Date();
+  // JSTに変換
+  const jstOffset = 9 * 60; // 9時間（分）
+  const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+  const jst = new Date(utc + (jstOffset * 60000));
+  const year = jst.getFullYear();
+  const month = String(jst.getMonth() + 1).padStart(2, '0');
+  const day = String(jst.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
 }
 
 // ページビューを記録
@@ -107,7 +115,10 @@ export function trackPageView(path: string): void {
   // 古い日別記録を削除（7日以上前）
   const sevenDaysAgo = new Date();
   sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-  const cutoffDate = sevenDaysAgo.toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' }).replace(/\//g, '-');
+  const jstOffset = 9 * 60;
+  const utc = sevenDaysAgo.getTime() + (sevenDaysAgo.getTimezoneOffset() * 60000);
+  const jst = new Date(utc + (jstOffset * 60000));
+  const cutoffDate = `${jst.getFullYear()}-${String(jst.getMonth() + 1).padStart(2, '0')}-${String(jst.getDate()).padStart(2, '0')}`;
   for (const date of Object.keys(tracking.dailyPageViews)) {
     if (date < cutoffDate) {
       delete tracking.dailyPageViews[date];
@@ -143,7 +154,10 @@ export function trackClick(type: ClickType): void {
   // 古い日別記録を削除（7日以上前）
   const sevenDaysAgo = new Date();
   sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-  const cutoffDate = sevenDaysAgo.toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' }).replace(/\//g, '-');
+  const jstOffset = 9 * 60;
+  const utc = sevenDaysAgo.getTime() + (sevenDaysAgo.getTimezoneOffset() * 60000);
+  const jst = new Date(utc + (jstOffset * 60000));
+  const cutoffDate = `${jst.getFullYear()}-${String(jst.getMonth() + 1).padStart(2, '0')}-${String(jst.getDate()).padStart(2, '0')}`;
   for (const date of Object.keys(tracking.dailyClicks)) {
     if (date < cutoffDate) {
       delete tracking.dailyClicks[date];
@@ -182,7 +196,10 @@ export function trackShare(type: ShareType): void {
   // 古い日別記録を削除（7日以上前）
   const sevenDaysAgo = new Date();
   sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-  const cutoffDate = sevenDaysAgo.toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' }).replace(/\//g, '-');
+  const jstOffset = 9 * 60;
+  const utc = sevenDaysAgo.getTime() + (sevenDaysAgo.getTimezoneOffset() * 60000);
+  const jst = new Date(utc + (jstOffset * 60000));
+  const cutoffDate = `${jst.getFullYear()}-${String(jst.getMonth() + 1).padStart(2, '0')}-${String(jst.getDate()).padStart(2, '0')}`;
   for (const date of Object.keys(tracking.dailyShares)) {
     if (date < cutoffDate) {
       delete tracking.dailyShares[date];

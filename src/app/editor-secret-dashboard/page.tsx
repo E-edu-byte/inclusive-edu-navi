@@ -78,17 +78,6 @@ type TrackingData = {
   dailyShares?: { [date: string]: { x: number; line: number } };
 };
 
-// ゴミ箱記事データ型
-type TrashedArticle = {
-  id: string;
-  title: string;
-  url: string;
-  source: string;
-  date: string;
-  trashedAt: string;  // ゴミ箱に入れた日時
-  expiresAt: string;  // 完全削除される日時（24時間後）
-  isManual: boolean;
-};
 
 // 手動記事データ型
 type ManualArticle = {
@@ -149,9 +138,6 @@ export default function EditorDashboard() {
   const [existingUrls, setExistingUrls] = useState<Set<string>>(new Set());
   const [allArticles, setAllArticles] = useState<ArticleForDeletion[]>([]);
   const [selectedArticleUrl, setSelectedArticleUrl] = useState('');
-  const [excludedUrls, setExcludedUrls] = useState<string[]>([]);
-  const [trashedArticles, setTrashedArticles] = useState<TrashedArticle[]>([]);
-  const [showAllBlacklist, setShowAllBlacklist] = useState(false);
 
   // 認証チェック（localStorage）
   useEffect(() => {
@@ -229,42 +215,6 @@ export default function EditorDashboard() {
       }
     }
 
-    // ゴミ箱データをサーバーから取得
-    async function loadTrash() {
-      try {
-        const res = await fetch(`${BASE_PATH}/data/trashed-articles.json`);
-        if (res.ok) {
-          const data = await res.json();
-          const now = new Date();
-          // サーバーデータをTrashedArticle形式に変換（24時間以内のもののみ）
-          const validTrash: TrashedArticle[] = (data.articles || [])
-            .filter((item: { url: string; trashedAt: string }) => {
-              const trashedAt = new Date(item.trashedAt);
-              const hoursSinceTrashed = (now.getTime() - trashedAt.getTime()) / (1000 * 60 * 60);
-              return hoursSinceTrashed < 24;
-            })
-            .map((item: { url: string; trashedAt: string }) => {
-              const trashedAt = new Date(item.trashedAt);
-              const expiresAt = new Date(trashedAt.getTime() + 24 * 60 * 60 * 1000);
-              // allArticlesから記事情報を取得（後で設定される）
-              return {
-                id: item.url,
-                title: '',  // 後で記事データから補完
-                url: item.url,
-                source: '',
-                date: '',
-                trashedAt: item.trashedAt,
-                expiresAt: expiresAt.toISOString(),
-                isManual: false,
-              };
-            });
-          setTrashedArticles(validTrash);
-        }
-      } catch (error) {
-        console.error('ゴミ箱取得エラー:', error);
-      }
-    }
-
     // 手動記事データを取得
     async function fetchManualArticles() {
       try {
@@ -329,25 +279,10 @@ export default function EditorDashboard() {
       }
     }
 
-    // 除外URL一覧を取得
-    async function fetchExcludedUrls() {
-      try {
-        const res = await fetch(`${BASE_PATH}/data/excluded-urls.json`);
-        if (res.ok) {
-          const data = await res.json();
-          setExcludedUrls(data.excludedUrls || []);
-        }
-      } catch (error) {
-        console.error('除外URL取得エラー:', error);
-      }
-    }
-
     fetchStatus();
     loadTracking();
-    loadTrash();
     fetchManualArticles();
     fetchAllUrls();
-    fetchExcludedUrls();
   }, []);
 
   // 日時フォーマット
@@ -380,44 +315,27 @@ export default function EditorDashboard() {
     setTracking(newTracking);
   };
 
-  // 記事をゴミ箱に移動（GitHub Actions経由）
-  const moveToTrash = (article: ArticleForDeletion) => {
-    navigator.clipboard.writeText(article.url);
-    alert(`URLをコピーしました。\n\nGitHub Actionsページで:\n1. Run workflow をクリック\n2. action: trash を選択\n3. URLを貼り付け\n4. Run workflow を実行\n\n約1〜2分でサイトから非表示になります。\n24時間以内であれば復元できます。`);
-    window.open('https://github.com/E-edu-byte/inclusive-edu-navi/actions/workflows/trash-article.yml', '_blank');
-  };
-
-  // ゴミ箱から復元（GitHub Actions経由）
-  const restoreFromTrash = (url: string) => {
-    navigator.clipboard.writeText(url);
-    alert(`URLをコピーしました。\n\nGitHub Actionsページで:\n1. Run workflow をクリック\n2. action: restore を選択\n3. URLを貼り付け\n4. Run workflow を実行\n\n約1〜2分でサイトに再表示されます。`);
-    window.open('https://github.com/E-edu-byte/inclusive-edu-navi/actions/workflows/trash-article.yml', '_blank');
-  };
-
-  // ゴミ箱から完全削除（永久削除 = ブラックリスト追加）
-  const permanentlyDelete = (url: string) => {
-    if (!confirm('この記事を完全に削除しますか？\n\nこの操作は取り消せません。記事はブラックリストに追加され、二度と表示されなくなります。')) {
+  // 記事を削除（ブラックリストに追加）
+  const deleteArticle = (url: string) => {
+    if (!confirm('この記事を削除しますか？\n\nブラックリストに追加され、自動更新でも再取得されなくなります。')) {
       return;
     }
     navigator.clipboard.writeText(url);
-    alert(`URLをコピーしました。\n\nGitHub Actionsページで:\n1. Exclude Article ワークフローを選択\n2. Run workflow をクリック\n3. URLを貼り付け\n4. Run workflow を実行`);
+    alert(`URLをコピーしました。\n\nGitHub Actionsページで:\n1. Run workflow をクリック\n2. URLを貼り付け\n3. Run workflow を実行`);
     window.open('https://github.com/E-edu-byte/inclusive-edu-navi/actions/workflows/exclude-article.yml', '_blank');
   };
 
-  // ゴミ箱内の残り時間を計算
-  const getTrashTimeRemaining = (expiresAt: string) => {
-    const now = new Date();
-    const expires = new Date(expiresAt);
-    const diff = expires.getTime() - now.getTime();
-    if (diff <= 0) return '期限切れ';
-    const hours = Math.floor(diff / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    return `残り${hours}時間${minutes}分`;
-  };
-
-  // 今日の日付を取得（YYYY-MM-DD形式）
+  // 今日の日付を取得（YYYY-MM-DD形式、ゼロパディング付き）
   const getTodayDate = () => {
-    return new Date().toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' }).replace(/\//g, '-');
+    const now = new Date();
+    // JSTに変換
+    const jstOffset = 9 * 60; // 9時間（分）
+    const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+    const jst = new Date(utc + (jstOffset * 60000));
+    const year = jst.getFullYear();
+    const month = String(jst.getMonth() + 1).padStart(2, '0');
+    const day = String(jst.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   };
 
   // 今日のアクセス数を取得
@@ -807,13 +725,13 @@ export default function EditorDashboard() {
           </div>
         </section>
 
-        {/* 記事の永久削除 */}
+        {/* 記事の削除 */}
         <section className="bg-gray-800 rounded-xl p-6 mb-6">
           <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
             <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
             </svg>
-            記事の永久削除（ブラックリスト）
+            記事の削除
           </h2>
 
           <div className="bg-gray-700 rounded-lg p-4 mb-4">
@@ -844,103 +762,22 @@ export default function EditorDashboard() {
                   alert('記事を選択してください');
                   return;
                 }
-                const article = allArticles.find(a => a.url === selectedArticleUrl);
-                if (article) {
-                  moveToTrash(article);
-                  setSelectedArticleUrl('');
-                }
+                deleteArticle(selectedArticleUrl);
+                setSelectedArticleUrl('');
               }}
               disabled={!selectedArticleUrl}
               className={`mt-4 w-full px-4 py-3 font-medium rounded-lg transition-colors ${
                 selectedArticleUrl
-                  ? 'bg-amber-600 hover:bg-amber-700 text-white'
+                  ? 'bg-red-600 hover:bg-red-700 text-white'
                   : 'bg-gray-600 text-gray-400 cursor-not-allowed'
               }`}
             >
-              この記事をゴミ箱に移動（24時間以内は復元可能）
+              この記事を削除
             </button>
           </div>
 
           {/* ゴミ箱一覧（24時間以内は復元可能） */}
-          {trashedArticles.length > 0 && (
-            <div className="mt-6 p-4 bg-amber-900/30 rounded-lg border border-amber-700/50">
-              <h4 className="text-sm font-medium text-amber-300 mb-3 flex items-center gap-2">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
-                ゴミ箱（{trashedArticles.length}件）- 24時間以内は復元可能
-              </h4>
-              <div className="space-y-2">
-                {trashedArticles.map((trashedItem) => {
-                  // allArticlesから記事情報を取得
-                  const articleInfo = allArticles.find(a => a.url === trashedItem.url);
-                  const title = articleInfo?.title || trashedItem.url;
-                  const source = articleInfo?.source || '';
-                  const date = articleInfo?.date || '';
-                  return (
-                    <div key={trashedItem.url} className="bg-gray-800 rounded-lg p-3">
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="flex-1 min-w-0">
-                          <h5 className="text-sm text-gray-300 truncate">{title}</h5>
-                          {(source || date) && (
-                            <p className="text-xs text-gray-500 mt-1">
-                              {source}{source && date && ' • '}{date}
-                            </p>
-                          )}
-                          <p className="text-xs text-amber-400 mt-1">
-                            {getTrashTimeRemaining(trashedItem.expiresAt)}で自動削除
-                          </p>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <button
-                            onClick={() => restoreFromTrash(trashedItem.url)}
-                            className="px-3 py-1.5 text-xs bg-green-700 hover:bg-green-600 text-white rounded transition-colors"
-                          >
-                            復元
-                          </button>
-                          <button
-                            onClick={() => permanentlyDelete(trashedItem.url)}
-                            className="px-3 py-1.5 text-xs bg-red-700 hover:bg-red-600 text-white rounded transition-colors"
-                          >
-                            完全削除
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* ブラックリスト一覧（最大20件表示） */}
-          {excludedUrls.length > 0 && (
-            <div className="mt-4">
-              <h4 className="text-sm font-medium text-gray-300 mb-2">
-                ブラックリスト（{excludedUrls.length}件）
-                {excludedUrls.length > 20 && !showAllBlacklist && (
-                  <span className="text-gray-500 text-xs ml-2">最新20件を表示中</span>
-                )}
-              </h4>
-              <div className="bg-gray-700 rounded-lg p-3 max-h-40 overflow-y-auto">
-                {(showAllBlacklist ? excludedUrls : excludedUrls.slice(0, 20)).map((url, index) => (
-                  <div key={index} className="text-xs text-gray-400 py-1 border-b border-gray-600 last:border-0 truncate">
-                    {url}
-                  </div>
-                ))}
-              </div>
-              {excludedUrls.length > 20 && (
-                <button
-                  onClick={() => setShowAllBlacklist(!showAllBlacklist)}
-                  className="mt-2 text-xs text-gray-400 hover:text-white transition-colors"
-                >
-                  {showAllBlacklist ? '20件のみ表示' : `すべて表示（${excludedUrls.length}件）`}
-                </button>
-              )}
-            </div>
-          )}
-
-          <p className="mt-4 text-xs text-red-400">
+          <p className="mt-4 text-xs text-gray-500">
             ※ 削除された記事は excluded-urls.json に記録され、自動更新でも再取得されません
           </p>
         </section>
