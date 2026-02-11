@@ -4,6 +4,17 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { BASE_PATH } from '@/lib/types';
 
+// パスワードハッシュ（ビルド時に環境変数から設定）
+const PASSWORD_HASH = process.env.NEXT_PUBLIC_EDITOR_PASSWORD_HASH || '';
+
+// SHA-256ハッシュ関数（Web Crypto API使用）
+async function sha256(message: string): Promise<string> {
+  const msgBuffer = new TextEncoder().encode(message);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
 // ステータスデータ型
 type StatusData = {
   lastUpdated: string | null;
@@ -123,6 +134,12 @@ const initialTracking: TrackingData = {
 };
 
 export default function EditorDashboard() {
+  // 認証状態
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authChecking, setAuthChecking] = useState(true);
+  const [password, setPassword] = useState('');
+  const [authError, setAuthError] = useState('');
+
   const [status, setStatus] = useState<StatusData | null>(null);
   const [tracking, setTracking] = useState<TrackingData>(initialTracking);
   const [manualArticles, setManualArticles] = useState<ManualArticlesData | null>(null);
@@ -135,6 +152,45 @@ export default function EditorDashboard() {
   const [excludedUrls, setExcludedUrls] = useState<string[]>([]);
   const [trashedArticles, setTrashedArticles] = useState<TrashedArticle[]>([]);
   const [showAllBlacklist, setShowAllBlacklist] = useState(false);
+
+  // 認証チェック（localStorage）
+  useEffect(() => {
+    const checkAuth = async () => {
+      const savedHash = localStorage.getItem('editor-auth-hash');
+      if (savedHash && savedHash === PASSWORD_HASH) {
+        setIsAuthenticated(true);
+      }
+      setAuthChecking(false);
+    };
+    checkAuth();
+  }, []);
+
+  // パスワード認証
+  const handleAuth = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setAuthError('');
+
+    if (!password) {
+      setAuthError('パスワードを入力してください');
+      return;
+    }
+
+    const inputHash = await sha256(password);
+    if (inputHash === PASSWORD_HASH) {
+      localStorage.setItem('editor-auth-hash', inputHash);
+      setIsAuthenticated(true);
+    } else {
+      setAuthError('パスワードが正しくありません');
+      setPassword('');
+    }
+  };
+
+  // ログアウト
+  const handleLogout = () => {
+    localStorage.removeItem('editor-auth-hash');
+    setIsAuthenticated(false);
+    setPassword('');
+  };
 
   useEffect(() => {
     // ステータスデータを取得
@@ -435,6 +491,66 @@ export default function EditorDashboard() {
     return diff;
   };
 
+  // 認証チェック中
+  if (authChecking) {
+    return (
+      <div className="min-h-screen bg-gray-900 text-gray-100 flex items-center justify-center">
+        <div className="animate-pulse">認証確認中...</div>
+      </div>
+    );
+  }
+
+  // 未認証の場合はログイン画面
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gray-900 text-gray-100 flex items-center justify-center p-4">
+        <div className="w-full max-w-sm">
+          <div className="bg-gray-800 rounded-xl p-8 shadow-2xl">
+            <div className="text-center mb-8">
+              <h1 className="text-2xl font-bold text-white mb-2">管理者ログイン</h1>
+              <p className="text-gray-400 text-sm">パスワードを入力してください</p>
+            </div>
+
+            <form onSubmit={handleAuth}>
+              <div className="mb-6">
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setAuthError('');
+                  }}
+                  placeholder="パスワード"
+                  autoComplete="current-password"
+                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
+                />
+                {authError && (
+                  <p className="mt-2 text-sm text-red-400">{authError}</p>
+                )}
+              </div>
+
+              <button
+                type="submit"
+                className="w-full px-4 py-3 bg-amber-600 hover:bg-amber-700 text-white font-medium rounded-lg transition-colors"
+              >
+                ログイン
+              </button>
+            </form>
+
+            <div className="mt-6 text-center">
+              <Link
+                href="/"
+                className="text-sm text-gray-400 hover:text-white transition-colors"
+              >
+                ← サイトに戻る
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-900 text-gray-100 p-8">
@@ -503,12 +619,20 @@ export default function EditorDashboard() {
             <h1 className="text-2xl font-bold text-white">管理ダッシュボード</h1>
             <p className="text-gray-400 text-sm mt-1">Editor Secret Dashboard</p>
           </div>
-          <Link
-            href="/"
-            className="text-sm text-gray-400 hover:text-white transition-colors"
-          >
-            ← サイトに戻る
-          </Link>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={handleLogout}
+              className="text-sm text-gray-400 hover:text-red-400 transition-colors"
+            >
+              ログアウト
+            </button>
+            <Link
+              href="/"
+              className="text-sm text-gray-400 hover:text-white transition-colors"
+            >
+              ← サイトに戻る
+            </Link>
+          </div>
         </div>
 
         {/* システムステータス */}

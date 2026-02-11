@@ -45,8 +45,21 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Generate password hash
+        id: hash
+        run: |
+          if [ -n "${{ secrets.EDITOR_PASSWORD }}" ]; then
+            HASH=$(echo -n "${{ secrets.EDITOR_PASSWORD }}" | sha256sum | cut -d' ' -f1)
+            echo "NEXT_PUBLIC_EDITOR_PASSWORD_HASH=${HASH}" >> $GITHUB_ENV
+            echo "Password hash generated"
+          else
+            echo "Warning: EDITOR_PASSWORD not set"
+          fi
+
       - name: Build
         run: npm run build
+        env:
+          NEXT_PUBLIC_EDITOR_PASSWORD_HASH: ${{ env.NEXT_PUBLIC_EDITOR_PASSWORD_HASH }}
 
       # basePath: '/inclusive' に対応するため、out/ を inclusive/ サブディレクトリに再配置
       - name: Restructure for basePath
