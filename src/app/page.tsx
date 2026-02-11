@@ -235,6 +235,11 @@ export default function Home() {
             </Link>
           </div>
 
+          {/* スマホ用：サイト応援カード */}
+          <div className="lg:hidden mt-8">
+            <SupportCard />
+          </div>
+
           {/* 記事がない場合 */}
           {articles.length === 0 && (
             <div className="text-center py-8 bg-gray-50 rounded-xl">
