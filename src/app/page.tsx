@@ -6,6 +6,7 @@ import Sidebar from '@/components/Sidebar';
 import NewsCard from '@/components/NewsCard';
 import RankingBlock from '@/components/RankingBlock';
 import SupportCard from '@/components/SupportCard';
+import FeaturedBooksBlock from '@/components/FeaturedBooksBlock';
 import { Article, ArticlesData, BASE_PATH, filterPublishableArticles, fetchTrashedUrls, filterOutTrashedArticles } from '@/lib/types';
 import { useBookmarks } from '@/contexts/BookmarkContext';
 
@@ -238,6 +239,11 @@ export default function Home() {
           {/* スマホ用：サイト応援カード */}
           <div className="lg:hidden mt-8">
             <SupportCard />
+          </div>
+
+          {/* スマホ用：注目の関連書籍 */}
+          <div className="lg:hidden mt-6">
+            <FeaturedBooksBlock />
           </div>
 
           {/* 記事がない場合 */}
