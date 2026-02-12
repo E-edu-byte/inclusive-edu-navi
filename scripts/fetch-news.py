@@ -108,21 +108,27 @@ if sys.platform == 'win32':
 # 収集対象のRSSフィード（拡張版）
 # ========================================
 RSS_FEEDS = [
-    # === 教育専門メディア ===
+    # === 教育専門メディア（厳格フィルタ適用） ===
     {
         "name": "リセマム",
         "url": "https://resemom.jp/rss20/index.rdf",
-        "skip_core_filter": True,
+        "skip_core_filter": False,  # 厳格フィルタ適用
+        "strict_keywords": ["インクルーシブ", "特別支援", "発達障害", "学習障害", "LD", "ADHD", "自閉症", "ASD", "ギフテッド", "不登校", "合理的配慮", "療育", "支援学級", "支援学校", "通級", "個別支援"],
+        "max_articles": 3,
     },
     {
         "name": "ICT教育ニュース",
         "url": "https://ict-enews.net/feed/",
-        "skip_core_filter": True,
+        "skip_core_filter": False,  # 厳格フィルタ適用
+        "strict_keywords": ["インクルーシブ", "特別支援", "発達障害", "学習障害", "ADHD", "自閉症", "ギフテッド", "不登校", "合理的配慮", "療育", "支援学級", "支援学校", "通級", "個別支援", "読み書き困難", "ディスレクシア"],
+        "max_articles": 3,
     },
     {
         "name": "EdTechZine",
         "url": "https://edtechzine.jp/rss/new/20/index.xml",
-        "skip_core_filter": True,
+        "skip_core_filter": False,  # 厳格フィルタ適用
+        "strict_keywords": ["インクルーシブ", "特別支援", "発達障害", "学習障害", "ADHD", "自閉症", "ギフテッド", "不登校", "合理的配慮", "療育", "支援学級", "支援学校", "通級", "個別支援", "多様な学び"],
+        "max_articles": 3,
     },
     # こどもとIT: RSSが不安定なためスクレイピングに移行（fetch_kodomo_it_news関数で取得）
     # === プレスリリース・大学ニュース ===
@@ -151,7 +157,9 @@ RSS_FEEDS = [
     {
         "name": "朝日新聞 教育",
         "url": "https://www.asahi.com/rss/asahi/edu.rdf",
-        "skip_core_filter": False,
+        "skip_core_filter": False,  # 厳格フィルタ適用
+        "strict_keywords": ["インクルーシブ", "特別支援", "発達障害", "学習障害", "ADHD", "自閉症", "ギフテッド", "不登校", "合理的配慮", "療育", "支援学級", "支援学校", "通級", "障害児", "障がい"],
+        "max_articles": 2,
     },
     # === 通信社・放送局 ===
     {
@@ -170,16 +178,16 @@ RSS_FEEDS = [
     {
         "name": "東京大学 教育学研究科",
         "url": "https://www.p.u-tokyo.ac.jp/news/feed",
-        "skip_core_filter": False,
-        "is_research_institution": True,  # 厳格キーワードフィルタ
-        "max_articles": 2,  # 最大2件
+        "skip_core_filter": False,  # 厳格フィルタ適用
+        "strict_keywords": ["インクルーシブ", "特別支援", "発達障害", "学習障害", "ADHD", "自閉症", "ギフテッド", "不登校", "合理的配慮", "療育", "障害児", "障がい", "神経多様性"],
+        "max_articles": 2,
     },
     {
         "name": "東京学芸大学",
         "url": "https://www.u-gakugei.ac.jp/pickup-news/atom.xml",
-        "skip_core_filter": False,
-        "is_research_institution": True,  # 厳格キーワードフィルタ
-        "max_articles": 2,  # 最大2件
+        "skip_core_filter": False,  # 厳格フィルタ適用
+        "strict_keywords": ["インクルーシブ", "特別支援", "発達障害", "学習障害", "ADHD", "自閉症", "ギフテッド", "不登校", "合理的配慮", "療育", "障害児", "障がい", "神経多様性"],
+        "max_articles": 2,
     },
     # === ビジネスメディア ===
     {
@@ -214,6 +222,7 @@ RESEARCH_INSTITUTIONS = [
     {
         "name": "筑波大学 人間系",
         "url": "https://www.human.tsukuba.ac.jp/human/news/",
+        "strict_keywords": ["インクルーシブ", "特別支援", "発達障害", "学習障害", "ADHD", "自閉症", "ギフテッド", "不登校", "合理的配慮", "療育", "障害児", "障がい", "神経多様性"],
         "max_articles": 2,
     },
 ]
