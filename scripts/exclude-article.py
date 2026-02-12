@@ -6,6 +6,8 @@
 
 使用方法:
   python scripts/exclude-article.py --url "https://example.com/article"
+  python scripts/exclude-article.py --urls "url1" "url2" "url3"
+  echo "url1\nurl2" | python scripts/exclude-article.py --stdin
   python scripts/exclude-article.py --list
 """
 
@@ -243,13 +245,57 @@ def list_excluded():
 
 def main():
     parser = argparse.ArgumentParser(description='記事除外スクリプト')
-    parser.add_argument('--url', type=str, help='除外する記事のURL')
+    parser.add_argument('--url', type=str, help='除外する記事のURL（単一）')
+    parser.add_argument('--urls', type=str, nargs='+', help='除外する記事のURL（複数）')
+    parser.add_argument('--stdin', action='store_true', help='標準入力からURLを読み込む（改行区切り）')
     parser.add_argument('--list', action='store_true', help='ブラックリスト一覧を表示')
 
     args = parser.parse_args()
 
     if args.list:
         list_excluded()
+    elif args.stdin:
+        # 標準入力から複数URLを読み込み
+        urls = []
+        for line in sys.stdin:
+            url = line.strip()
+            if url and url.startswith('http'):
+                urls.append(url)
+
+        if not urls:
+            print("エラー: 有効なURLが入力されていません")
+            sys.exit(1)
+
+        print(f"\n{'='*50}")
+        print(f"一括除外処理: {len(urls)}件のURL")
+        print(f"{'='*50}")
+
+        success_count = 0
+        for i, url in enumerate(urls, 1):
+            print(f"\n[{i}/{len(urls)}] 処理中...")
+            if exclude_article(url):
+                success_count += 1
+
+        print(f"\n{'='*50}")
+        print(f"一括除外完了: {success_count}/{len(urls)}件 成功")
+        print(f"{'='*50}")
+        sys.exit(0 if success_count == len(urls) else 1)
+    elif args.urls:
+        # 複数URLを引数で指定
+        print(f"\n{'='*50}")
+        print(f"一括除外処理: {len(args.urls)}件のURL")
+        print(f"{'='*50}")
+
+        success_count = 0
+        for i, url in enumerate(args.urls, 1):
+            print(f"\n[{i}/{len(args.urls)}] 処理中...")
+            if exclude_article(url):
+                success_count += 1
+
+        print(f"\n{'='*50}")
+        print(f"一括除外完了: {success_count}/{len(args.urls)}件 成功")
+        print(f"{'='*50}")
+        sys.exit(0 if success_count == len(args.urls) else 1)
     elif args.url:
         success = exclude_article(args.url)
         sys.exit(0 if success else 1)

@@ -137,7 +137,7 @@ export default function EditorDashboard() {
   const [postError, setPostError] = useState('');
   const [existingUrls, setExistingUrls] = useState<Set<string>>(new Set());
   const [allArticles, setAllArticles] = useState<ArticleForDeletion[]>([]);
-  const [selectedArticleUrl, setSelectedArticleUrl] = useState('');
+  const [selectedArticleUrls, setSelectedArticleUrls] = useState<Set<string>>(new Set());
 
   // 認証チェック（localStorage）
   useEffect(() => {
@@ -329,14 +329,56 @@ export default function EditorDashboard() {
     setTracking(newTracking);
   };
 
-  // 記事を削除（ブラックリストに追加）
-  const deleteArticle = (url: string) => {
-    if (!confirm('この記事を削除しますか？\n\nブラックリストに追加され、自動更新でも再取得されなくなります。')) {
+  // 記事を削除（ブラックリストに追加）- 複数URL対応
+  const deleteArticles = (urls: string[]) => {
+    if (urls.length === 0) {
+      alert('削除する記事を選択してください');
       return;
     }
-    navigator.clipboard.writeText(url);
-    alert(`URLをコピーしました。\n\nGitHub Actionsページで:\n1. Run workflow をクリック\n2. URLを貼り付け\n3. Run workflow を実行`);
+
+    const message = urls.length === 1
+      ? 'この記事を削除しますか？'
+      : `${urls.length}件の記事を削除しますか？`;
+
+    if (!confirm(`${message}\n\nブラックリストに追加され、自動更新でも再取得されなくなります。`)) {
+      return;
+    }
+
+    // 複数URLを改行区切りでコピー
+    const urlText = urls.join('\n');
+    navigator.clipboard.writeText(urlText);
+
+    const instruction = urls.length === 1
+      ? `URLをコピーしました。\n\nGitHub Actionsページで:\n1. Run workflow をクリック\n2. URLを貼り付け\n3. Run workflow を実行`
+      : `${urls.length}件のURLをコピーしました。\n\nGitHub Actionsページで:\n1. Run workflow をクリック\n2. urls欄にURLを貼り付け（改行区切り）\n3. Run workflow を実行`;
+
+    alert(instruction);
     window.open('https://github.com/E-edu-byte/inclusive-edu-navi/actions/workflows/exclude-article.yml', '_blank');
+
+    // 選択をクリア
+    setSelectedArticleUrls(new Set());
+  };
+
+  // チェックボックスの切り替え
+  const toggleArticleSelection = (url: string) => {
+    setSelectedArticleUrls(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(url)) {
+        newSet.delete(url);
+      } else {
+        newSet.add(url);
+      }
+      return newSet;
+    });
+  };
+
+  // 全選択/全解除
+  const toggleSelectAll = () => {
+    if (selectedArticleUrls.size === allArticles.length) {
+      setSelectedArticleUrls(new Set());
+    } else {
+      setSelectedArticleUrls(new Set(allArticles.map(a => a.url)));
+    }
   };
 
   // 今日の日付を取得（YYYY-MM-DD形式、ゼロパディング付き）
@@ -493,48 +535,20 @@ export default function EditorDashboard() {
     );
   }
 
-  // 17:00 JSTでリセットするクォータ期間の開始時刻を計算
-  const getQuotaPeriodStart = (): Date => {
-    const now = new Date();
-    // JSTに変換（UTC+9）
-    const jstNow = new Date(now.getTime() + 9 * 60 * 60 * 1000);
-    const todayReset = new Date(jstNow);
-    todayReset.setHours(17, 0, 0, 0);
-
-    if (jstNow >= todayReset) {
-      // 今日の17:00以降 → 今日の17:00が期間開始
-      return new Date(todayReset.getTime() - 9 * 60 * 60 * 1000); // UTCに戻す
-    } else {
-      // 今日の17:00より前 → 昨日の17:00が期間開始
-      return new Date(todayReset.getTime() - 9 * 60 * 60 * 1000 - 24 * 60 * 60 * 1000);
-    }
-  };
-
-  // クォータ期間内の使用量を計算
+  // クォータ期間内の使用量を取得（サーバー側で計算済みの値を使用）
   const getQuotaUsage = (): { used: number; limit: number; remaining: number } => {
     const DAILY_LIMIT = 20;
-    if (!status?.history) {
+    // status.apiUsage はサーバー側（fetch-news.py）で正しく計算されている
+    // タイムゾーンの不整合を避けるため、この値を直接使用する
+    if (!status?.apiUsage) {
       return { used: 0, limit: DAILY_LIMIT, remaining: DAILY_LIMIT };
     }
 
-    const periodStart = getQuotaPeriodStart();
-    let usedInPeriod = 0;
-
-    for (const entry of status.history) {
-      try {
-        const entryTime = new Date(entry.timestamp);
-        if (entryTime >= periodStart) {
-          usedInPeriod += entry.apiCalls || 0;
-        }
-      } catch {
-        continue;
-      }
-    }
-
+    const used = status.apiUsage.used || 0;
     return {
-      used: usedInPeriod,
+      used,
       limit: DAILY_LIMIT,
-      remaining: Math.max(0, DAILY_LIMIT - usedInPeriod),
+      remaining: Math.max(0, DAILY_LIMIT - used),
     };
   };
 
@@ -746,52 +760,92 @@ export default function EditorDashboard() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
             </svg>
             記事の削除
+            {selectedArticleUrls.size > 0 && (
+              <span className="ml-2 px-2 py-0.5 text-xs bg-red-600 text-white rounded-full">
+                {selectedArticleUrls.size}件選択中
+              </span>
+            )}
           </h2>
 
           <div className="bg-gray-700 rounded-lg p-4 mb-4">
-            <label className="block text-sm text-gray-300 mb-2">削除する記事を選択</label>
-            <select
-              value={selectedArticleUrl}
-              onChange={(e) => setSelectedArticleUrl(e.target.value)}
-              className="w-full px-3 py-2 bg-gray-600 border border-gray-500 rounded-lg text-white focus:outline-none focus:border-red-500"
-            >
-              <option value="">-- 記事を選択してください --</option>
-              {allArticles.map((article, index) => (
-                <option key={index} value={article.url}>
-                  {article.isManual ? '[手動] ' : ''}{article.title.substring(0, 50)}{article.title.length > 50 ? '...' : ''} ({article.date})
-                </option>
-              ))}
-            </select>
+            {/* 全選択/全解除 & 削除ボタン */}
+            <div className="flex items-center justify-between mb-3">
+              <button
+                onClick={toggleSelectAll}
+                className="text-xs text-gray-400 hover:text-white transition-colors"
+              >
+                {selectedArticleUrls.size === allArticles.length ? '全解除' : '全選択'}
+              </button>
+              <span className="text-xs text-gray-500">
+                {allArticles.length}件の記事
+              </span>
+            </div>
 
-            {selectedArticleUrl && (
-              <div className="mt-3 p-3 bg-gray-800 rounded-lg">
-                <p className="text-xs text-gray-400 mb-2">選択中のURL:</p>
-                <p className="text-xs text-gray-300 break-all">{selectedArticleUrl}</p>
-              </div>
+            {/* 記事リスト（チェックボックス付き） */}
+            <div className="max-h-80 overflow-y-auto space-y-2">
+              {allArticles.map((article, index) => (
+                <label
+                  key={index}
+                  className={`flex items-start gap-3 p-3 rounded-lg cursor-pointer transition-colors ${
+                    selectedArticleUrls.has(article.url)
+                      ? 'bg-red-900/30 border border-red-700'
+                      : 'bg-gray-800 hover:bg-gray-750 border border-transparent'
+                  }`}
+                >
+                  <input
+                    type="checkbox"
+                    checked={selectedArticleUrls.has(article.url)}
+                    onChange={() => toggleArticleSelection(article.url)}
+                    className="mt-1 w-4 h-4 rounded border-gray-500 text-red-600 focus:ring-red-500 bg-gray-600"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      {article.isManual && (
+                        <span className="px-1.5 py-0.5 text-[10px] bg-amber-600 text-white rounded">手動</span>
+                      )}
+                      <span className="text-xs text-gray-500">{article.date}</span>
+                      <span className="text-xs text-gray-600">•</span>
+                      <span className="text-xs text-gray-500 truncate">{article.source}</span>
+                    </div>
+                    <p className="text-sm text-gray-200 mt-1 line-clamp-2">
+                      {article.title}
+                    </p>
+                  </div>
+                </label>
+              ))}
+            </div>
+
+            {/* 選択中のURL一覧（折りたたみ可能） */}
+            {selectedArticleUrls.size > 0 && (
+              <details className="mt-3">
+                <summary className="text-xs text-gray-400 cursor-pointer hover:text-white">
+                  選択中のURL一覧を表示
+                </summary>
+                <div className="mt-2 p-3 bg-gray-800 rounded-lg max-h-32 overflow-y-auto">
+                  {Array.from(selectedArticleUrls).map((url, i) => (
+                    <p key={i} className="text-xs text-gray-400 break-all mb-1">{url}</p>
+                  ))}
+                </div>
+              </details>
             )}
 
+            {/* 削除ボタン */}
             <button
-              onClick={() => {
-                if (!selectedArticleUrl) {
-                  alert('記事を選択してください');
-                  return;
-                }
-                deleteArticle(selectedArticleUrl);
-                setSelectedArticleUrl('');
-              }}
-              disabled={!selectedArticleUrl}
+              onClick={() => deleteArticles(Array.from(selectedArticleUrls))}
+              disabled={selectedArticleUrls.size === 0}
               className={`mt-4 w-full px-4 py-3 font-medium rounded-lg transition-colors ${
-                selectedArticleUrl
+                selectedArticleUrls.size > 0
                   ? 'bg-red-600 hover:bg-red-700 text-white'
                   : 'bg-gray-600 text-gray-400 cursor-not-allowed'
               }`}
             >
-              この記事を削除
+              {selectedArticleUrls.size > 0
+                ? `${selectedArticleUrls.size}件の記事を削除`
+                : '記事を選択してください'}
             </button>
           </div>
 
-          {/* ゴミ箱一覧（24時間以内は復元可能） */}
-          <p className="mt-4 text-xs text-gray-500">
+          <p className="text-xs text-gray-500">
             ※ 削除された記事は excluded-urls.json に記録され、自動更新でも再取得されません
           </p>
         </section>

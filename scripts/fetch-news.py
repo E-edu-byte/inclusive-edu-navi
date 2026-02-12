@@ -711,8 +711,9 @@ def refilter_existing_articles(articles: list) -> list:
     if not articles:
         return []
 
-    # 信頼できる教育専門ソース（これらからの記事はCORE_KEYWORDSチェックを緩和）
-    TRUSTED_EDUCATION_SOURCES = ["リセマム", "EdTechZine", "こどもとIT"]
+    # 【廃止】信頼ソースの緩和ルールは廃止（2026-02-12）
+    # 全ソースにCORE_KEYWORDSチェックを適用する厳格化を実施
+    # TRUSTED_EDUCATION_SOURCES = ["リセマム", "EdTechZine", "こどもとIT"]
 
     retained = []
     removed_strong = 0
@@ -749,10 +750,9 @@ def refilter_existing_articles(articles: list) -> list:
             print(f"    [再フィルタ除外] 探究学習（理念なし）: {title[:40]}...")
             continue
 
-        # 2. コア理念キーワードチェック（信頼ソース以外）
-        is_trusted = any(ts in source for ts in TRUSTED_EDUCATION_SOURCES)
-
-        if not is_trusted and not has_core_keyword:
+        # 2. コア理念キーワードチェック（全ソース共通）
+        # 【厳格化】信頼ソースも理念キーワードを必須とする
+        if not has_core_keyword:
             removed_no_core += 1
             print(f"    [再フィルタ除外] コア理念不足: {title[:40]}...")
             continue
@@ -2072,6 +2072,10 @@ def fetch_kodomo_it_news(max_articles: int = 3) -> list:
                 if is_tankyu_without_support(text, ""):
                     continue
 
+                # 【理念フィルタ】コア理念キーワードチェック（こどもとITも例外なし）
+                if not contains_core_keyword(text, ""):
+                    continue  # 理念キーワードなし → 除外
+
                 # 重複チェック（既存記事との比較）
                 if is_duplicate_article(text, full_url):
                     duplicate_count += 1
@@ -2113,16 +2117,46 @@ def fetch_kodomo_it_news(max_articles: int = 3) -> list:
                 if not img_url or not is_valid_image_url(img_url):
                     img_url = get_fallback_image(article_id)
 
+                # 【AI要約】グローバルAPI上限チェック
+                global TOTAL_AI_CALLS_THIS_RUN
+                if TOTAL_AI_CALLS_THIS_RUN >= MAX_AI_CALLS_PER_RUN:
+                    print(f"    [省エネ] AI呼び出し上限({MAX_AI_CALLS_PER_RUN}件)に達したため終了")
+                    break
+
+                # 【AI要約 + カテゴリー + mainKeyword判定】
+                summary = "【要約準備中】この記事の要約は現在準備中です。"
+                category = "ICT・教材"
+                main_keyword = ""
+
+                if gemini_client:
+                    print(f"        → AI判定（要約＆カテゴリー＆キーワード）...")
+                    TOTAL_AI_CALLS_THIS_RUN += 1
+                    ai_result = generate_ai_summary_and_category(text, "", "こどもとIT", full_url)
+
+                    # 【SKIP判定】AIが理念に合致しないと判断した記事は除外
+                    if ai_result.get("skip"):
+                        print(f"        → SKIP（理念に合致しない）")
+                        continue
+
+                    # AI結果を取得
+                    if ai_result.get("summary") and len(ai_result.get("summary", "")) > 20:
+                        summary = ai_result.get("summary")
+                        print(f"        → 要約生成成功")
+                    if ai_result.get("category"):
+                        category = ai_result.get("category")
+                    if ai_result.get("mainKeyword"):
+                        main_keyword = ai_result.get("mainKeyword")
+
                 article = {
                     "id": article_id,
                     "title": text,
-                    "summary": "【要約準備中】この記事の要約は現在準備中です。",
-                    "category": "ICT・教材",
+                    "summary": summary,
+                    "category": category,
                     "date": datetime.now().strftime("%Y-%m-%d"),
                     "url": full_url,
                     "imageUrl": img_url,
                     "source": "こどもとIT",
-                    "mainKeyword": ""
+                    "mainKeyword": main_keyword
                 }
                 articles.append(article)
 
@@ -2196,11 +2230,13 @@ def main():
         print(f"  既存記事: {original_existing_count}件 → {len(EXISTING_ARTICLES)}件")
 
     # 【要約リトライ】不完全な要約を持つ既存記事を再処理
-    print()
-    print("【0.5】不完全な要約のリトライ...")
-    print("-" * 40)
-    retry_incomplete_summaries()
-    print()
+    # 【廃止】リトライ機能は廃止（2026-02-12）
+    # 全記事に取得時にAI要約を適用する方式に変更
+    # print()
+    # print("【0.5】不完全な要約のリトライ...")
+    # print("-" * 40)
+    # retry_incomplete_summaries()
+    # print()
 
     all_articles = []
 

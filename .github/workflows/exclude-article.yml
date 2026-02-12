@@ -1,12 +1,13 @@
 # 記事除外（ブラックリスト）ワークフロー
 # GitHubのActions画面から手動実行できます
+# 複数URLを改行区切りで入力可能
 name: Exclude Article
 
 on:
   workflow_dispatch:
     inputs:
-      url:
-        description: '除外する記事のURL'
+      urls:
+        description: '除外する記事のURL（複数の場合は改行区切り）'
         required: true
         type: string
 
@@ -32,8 +33,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
 
-      - name: Exclude article
-        run: python scripts/exclude-article.py --url "${{ inputs.url }}"
+      - name: Exclude articles
+        run: |
+          echo "${{ inputs.urls }}" | python scripts/exclude-article.py --stdin
 
       - name: Check for changes
         id: git-check
