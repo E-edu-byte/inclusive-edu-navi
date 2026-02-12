@@ -1,10 +1,6 @@
 {
   "articles": [
     {
-      "url": "https://edu.watch.impress.co.jp/docs/news/2084654.html",
-      "trashedAt": "2026-02-11T18:47:43.623721"
-    },
-    {
       "url": "https://edu.watch.impress.co.jp/docs/report/2073602.html",
       "trashedAt": "2026-02-11T23:40:31.789757"
     },
@@ -13,6 +9,6 @@
       "trashedAt": "2026-02-11T23:41:03.489299"
     }
   ],
-  "lastUpdated": "2026-02-12T08:05:59.432355",
+  "lastUpdated": "2026-02-12T19:31:00.025059",
   "note": "ゴミ箱に入れた記事。24時間後に自動で永久削除される。"
 }
