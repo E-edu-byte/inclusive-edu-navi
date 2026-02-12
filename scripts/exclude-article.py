@@ -256,11 +256,15 @@ def main():
         list_excluded()
     elif args.stdin:
         # 標準入力から複数URLを読み込み
+        # 改行区切り、スペース区切りの両方に対応
         urls = []
         for line in sys.stdin:
-            url = line.strip()
-            if url and url.startswith('http'):
-                urls.append(url)
+            # 各行をスペースでも分割（GitHub Actionsで改行がスペースに変換される対策）
+            parts = line.strip().split()
+            for part in parts:
+                part = part.strip()
+                if part and part.startswith('http'):
+                    urls.append(part)
 
         if not urls:
             print("エラー: 有効なURLが入力されていません")
