@@ -1,0 +1,48 @@
+# API残量リセット（17:00 JST）
+# 毎日17:00 JSTにAPI使用量表示をリセット
+name: Reset API Quota Display
+
+on:
+  schedule:
+    - cron: "0 8 * * *"   # JST 17:00 (UTC 8:00)
+  workflow_dispatch:      # 手動実行も可能
+
+permissions:
+  contents: write
+
+env:
+  TZ: Asia/Tokyo
+
+jobs:
+  reset-quota:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Update status (recalculate API usage)
+        run: python scripts/update-status.py
+
+      - name: Check for changes
+        id: git-check
+        run: |
+          git add -A
+          if git diff --staged --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push changes
+        if: steps.git-check.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "chore: API残量リセット - $(date +'%Y-%m-%d %H:%M' -d '+9 hours')"
+          git pull --rebase origin main || true
+          git push origin main

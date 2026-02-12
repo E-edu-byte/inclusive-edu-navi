@@ -130,6 +130,17 @@ jobs:
         if: inputs.action == 'cleanup'
         run: python scripts/manual-post.py --cleanup
 
+      # ステータス更新（API使用量を再計算）
+      - name: Update status
+        run: |
+          if [ "${{ inputs.action }}" = "add" ]; then
+            # add時はAPI1回使用、記事1件処理として記録
+            python scripts/update-status.py --api-calls 1 --articles 1 --add-history
+          else
+            # delete/cleanup時はAPI使用なし、ステータスのみ更新
+            python scripts/update-status.py
+          fi
+
       - name: Check for changes
         id: git-check
         run: |
