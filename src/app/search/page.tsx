@@ -62,22 +62,17 @@ function SearchResults() {
   }, []);
 
   // 検索クエリで記事をフィルタリング（あいまい検索対応）
+  // タイトルと要約（記事内容）のみで検索、タグ（カテゴリ・ソース・キーワード）では検索しない
   const searchResults = query
     ? articles.filter((article) => {
         const normalizedQuery = normalizeText(query);
         const normalizedTitle = normalizeText(article.title);
         const normalizedSummary = normalizeText(article.summary);
-        const normalizedCategory = normalizeText(article.category);
-        const normalizedSource = normalizeText(article.source || '');
-        const normalizedKeyword = normalizeText(article.mainKeyword || '');
 
-        // 部分一致検索（タイトル、要約、カテゴリ、ソース、キーワード）
+        // 部分一致検索（タイトルと要約のみ）
         return (
           normalizedTitle.includes(normalizedQuery) ||
-          normalizedSummary.includes(normalizedQuery) ||
-          normalizedCategory.includes(normalizedQuery) ||
-          normalizedSource.includes(normalizedQuery) ||
-          normalizedKeyword.includes(normalizedQuery)
+          normalizedSummary.includes(normalizedQuery)
         );
       })
     : [];
