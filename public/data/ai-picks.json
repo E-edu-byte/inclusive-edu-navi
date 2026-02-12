@@ -1,6 +1,19 @@
 {
   "picks": [
     {
+      "id": "8aaf50213f0d",
+      "sourceArticleId": "0f6a2b445f34",
+      "title": "日本人小児におけるADHDサブタイプと肥満との関係｜CareNet.com",
+      "url": "https://www.carenet.com/news/general/carenet/61892",
+      "category": "研究",
+      "originalDate": "2026-02-12",
+      "reason": "編集部ピックアップ",
+      "summary": "日本のADHDのお子さんを対象に、そのタイプ（サブタイプ）と肥満との関連について研究が行われました。ADHDにはいくつかのタイプがあり、それぞれの特徴と肥満との関係が明らかになることが期待されます。お子さんの健康や発達に関心のある保護者や先生方にとって役立つ情報となるでしょう。",
+      "generatedAt": "2026-02-12T20:38:40.379915",
+      "model": "manual",
+      "isManual": true
+    },
+    {
       "id": "44acaef156aa",
       "sourceArticleId": "0a6756e34151",
       "title": "ダボス会議が示した3つの教訓：レジリエンス、AI、そしてインクルーシブ成長の必然性 | Forbes JAPAN 公式サイト（フォーブス ジャパン）",
@@ -48,20 +61,8 @@
       "summary": "発達障害のある子どもが公立中学で直面する内申点の問題と、その結果として中学受験を検討する家庭が多い実態を深く掘り下げています。保護者や教員が子どもの進路を考える上で、重要な示唆を与えます。",
       "generatedAt": "2026-02-12T20:30:40.863126",
       "model": "gemini-2.5-flash"
-    },
-    {
-      "id": "63bf2f4b4d1d",
-      "sourceArticleId": "eb12499dfa8f",
-      "title": "極端な気温で不登校増加…RIETIが有意な関連示唆",
-      "url": "https://resemom.jp/article/2026/02/12/85020.html",
-      "category": "多様な学び",
-      "originalDate": "2026-02-12",
-      "reason": "不登校問題の新たな要因",
-      "summary": "極端な気温と不登校の関連性を示唆する研究結果は、気候変動が進む現代において、子どもの心身の健康と教育環境を考える上で新たな視点を提供します。学校や家庭での環境整備を考えるきっかけとなるでしょう。",
-      "generatedAt": "2026-02-12T20:30:40.863131",
-      "model": "gemini-2.5-flash"
     }
   ],
-  "lastUpdated": "2026-02-12T20:32:01.633861",
+  "lastUpdated": "2026-02-12T20:38:40.379926",
   "totalCount": 5
 }
