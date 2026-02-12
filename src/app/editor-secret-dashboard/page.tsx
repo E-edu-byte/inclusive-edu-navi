@@ -329,6 +329,10 @@ export default function EditorDashboard() {
     setTracking(newTracking);
   };
 
+  // 削除確認モーダルの状態
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteUrlText, setDeleteUrlText] = useState('');
+
   // 記事を削除（ブラックリストに追加）- 複数URL対応
   const deleteArticles = (urls: string[]) => {
     if (urls.length === 0) {
@@ -336,26 +340,17 @@ export default function EditorDashboard() {
       return;
     }
 
-    const message = urls.length === 1
-      ? 'この記事を削除しますか？'
-      : `${urls.length}件の記事を削除しますか？`;
+    // スペース区切りでURLを結合（GitHub Actionsの単一行入力に対応）
+    const urlText = urls.join(' ');
+    setDeleteUrlText(urlText);
+    setShowDeleteModal(true);
+  };
 
-    if (!confirm(`${message}\n\nブラックリストに追加され、自動更新でも再取得されなくなります。`)) {
-      return;
-    }
-
-    // 複数URLを改行区切りでコピー
-    const urlText = urls.join('\n');
-    navigator.clipboard.writeText(urlText);
-
-    const instruction = urls.length === 1
-      ? `URLをコピーしました。\n\nGitHub Actionsページで:\n1. Run workflow をクリック\n2. URLを貼り付け\n3. Run workflow を実行`
-      : `${urls.length}件のURLをコピーしました。\n\nGitHub Actionsページで:\n1. Run workflow をクリック\n2. urls欄にURLを貼り付け（改行区切り）\n3. Run workflow を実行`;
-
-    alert(instruction);
+  // 削除実行
+  const executeDelete = () => {
+    navigator.clipboard.writeText(deleteUrlText);
     window.open('https://github.com/E-edu-byte/inclusive-edu-navi/actions/workflows/exclude-article.yml', '_blank');
-
-    // 選択をクリア
+    setShowDeleteModal(false);
     setSelectedArticleUrls(new Set());
   };
 
@@ -1062,6 +1057,66 @@ export default function EditorDashboard() {
           <p className="mt-1">データはlocalStorageに保存されています</p>
         </div>
       </div>
+
+      {/* 削除確認モーダル */}
+      {showDeleteModal && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center p-4 z-50">
+          <div className="bg-gray-800 rounded-xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+            <h3 className="text-lg font-bold text-white mb-4">
+              {selectedArticleUrls.size}件の記事を削除
+            </h3>
+
+            <p className="text-gray-300 text-sm mb-4">
+              以下のURLをコピーして、GitHub Actionsの入力欄に貼り付けてください。
+            </p>
+
+            {/* コピー用テキストエリア */}
+            <div className="relative mb-4">
+              <textarea
+                readOnly
+                value={deleteUrlText}
+                className="w-full h-32 px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white text-xs font-mono resize-none focus:outline-none focus:border-amber-500"
+                onClick={(e) => (e.target as HTMLTextAreaElement).select()}
+              />
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText(deleteUrlText);
+                  alert('URLをコピーしました');
+                }}
+                className="absolute top-2 right-2 px-3 py-1 text-xs bg-gray-600 hover:bg-gray-500 text-white rounded transition-colors"
+              >
+                コピー
+              </button>
+            </div>
+
+            <div className="bg-gray-700/50 rounded-lg p-4 mb-4">
+              <h4 className="text-sm font-medium text-gray-300 mb-2">手順</h4>
+              <ol className="text-xs text-gray-400 space-y-1 list-decimal list-inside">
+                <li>上のテキストをコピー（クリックで全選択、またはコピーボタン）</li>
+                <li>「GitHub Actionsを開く」をクリック</li>
+                <li>「Run workflow」をクリック</li>
+                <li>urls欄にペースト</li>
+                <li>緑の「Run workflow」ボタンで実行</li>
+              </ol>
+            </div>
+
+            <div className="flex gap-3">
+              <button
+                onClick={executeDelete}
+                className="flex-1 px-4 py-3 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition-colors"
+              >
+                コピーしてGitHub Actionsを開く
+              </button>
+              <button
+                onClick={() => setShowDeleteModal(false)}
+                className="px-4 py-3 bg-gray-600 hover:bg-gray-500 text-white font-medium rounded-lg transition-colors"
+              >
+                キャンセル
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
