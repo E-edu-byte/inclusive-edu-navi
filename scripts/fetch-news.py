@@ -130,14 +130,21 @@ RSS_FEEDS = [
         "name": "PR TIMES",
         "url": "https://prtimes.jp/index.rdf",
         "skip_core_filter": False,  # 厳格フィルタ適用
-        "strict_keywords": ["インクルーシブ", "特別支援", "障害", "障がい", "発達支援", "発達障害", "不登校", "学習障害"],
+        "strict_keywords": ["インクルーシブ", "特別支援", "障害", "障がい", "発達支援", "発達障害", "不登校", "学習障害", "自閉症", "自閉", "ASD", "療育"],
         "max_articles": 2,
     },
     {
         "name": "大学プレスセンター",
         "url": "https://www.u-presscenter.jp/feed",
         "skip_core_filter": False,  # 厳格フィルタ適用
-        "strict_keywords": ["特別支援", "障がい学生", "インクルーシブ", "合理的配慮", "発達障害"],
+        "strict_keywords": ["特別支援", "障がい学生", "インクルーシブ", "合理的配慮", "発達障害", "自閉症", "療育"],
+        "max_articles": 2,
+    },
+    {
+        "name": "近大PICKS",
+        "url": "https://kindaipicks.com/rss",
+        "skip_core_filter": False,  # 厳格フィルタ適用
+        "strict_keywords": ["発達障害", "学習障害", "LD", "ディスレクシア", "ADHD", "自閉症", "ASD", "ギフテッド", "不登校", "インクルーシブ", "特別支援", "合理的配慮", "療育"],
         "max_articles": 2,
     },
     # === 大手メディア教育カテゴリ ===
