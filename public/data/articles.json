@@ -9,10 +9,7 @@
       "url": "https://manasapo-kyokyo.com/event/post_5825/",
       "imageUrl": "https://manasapo-kyokyo.com/cms_e3XSzMxu/wp-content/uploads/2024/10/ogp-1200x630.png",
       "source": "京都教育大学 学びサポート室",
-      "mainKeyword": "フロリアン",
-      "isManual": true,
-      "addedAt": "2026-02-12T22:01:57.743995",
-      "expiresAt": "2026-02-19T22:01:57.743998"
+      "mainKeyword": "フロリアン"
     },
     {
       "id": "0f6a2b445f34",
@@ -23,10 +20,7 @@
       "url": "https://www.carenet.com/news/general/carenet/61892",
       "imageUrl": "https://www.carenet.com/files/news/20251202102552-1.jpg",
       "source": "CareNet.com",
-      "mainKeyword": "ADHD",
-      "isManual": true,
-      "addedAt": "2026-02-12T20:38:40.378905",
-      "expiresAt": "2026-02-19T20:38:40.378907"
+      "mainKeyword": "ADHD"
     },
     {
       "id": "0a6756e34151",
@@ -37,10 +31,7 @@
       "url": "https://forbesjapan.com/articles/detail/91567?read_more=1",
       "imageUrl": "https://images.forbesjapan.com/media/article/91567/images/main_image_4e9db1ac75920260cde1dc49ae723647f4e69044.jpg",
       "source": "forbesjapan.com",
-      "mainKeyword": "インクルーシブ",
-      "isManual": true,
-      "addedAt": "2026-02-12T20:32:01.632889",
-      "expiresAt": "2026-02-19T20:32:01.632891"
+      "mainKeyword": "インクルーシブ"
     },
     {
       "id": "0ab575f6cb63",
@@ -204,21 +195,14 @@
       "imageUrl": "https://edtechzine.jp/static/images/article/13462/13462_og.jpg",
       "source": "EdTechZine",
       "mainKeyword": ""
-    },
-    {
-      "id": "870a39f00ebd",
-      "title": "全国開催「まるごと通信制フェスタ2026」2/14-3/1",
-      "summary": "全国の通信制高校やサポート校が集まる合同説明会「まるごと通信制フェスタ2026」が開催されます。多様な学びの選択肢を知る良い機会となり、不登校のお子さんや、それぞれに合った学びを求める生徒さんの進路を考える上で、保護者や先生方にとって大変役立つでしょう。参加は無料です。",
-      "category": "実践・事例",
-      "date": "2026-02-05",
-      "url": "https://resemom.jp/article/2026/02/05/84934.html",
-      "imageUrl": "https://resemom.jp/imgs/ogp_f/391355.jpg",
-      "source": "リセマム"
     }
   ],
-  "lastUpdated": "2026-02-12T22:01:57.744575",
-  "totalCount": 16,
+  "lastUpdated": "2026-02-13T08:01:34.223649",
+  "totalCount": 18,
   "sources": [
+    "京都教育大学 学びサポート室",
+    "CareNet.com",
+    "forbesjapan.com",
     "こどもとIT",
     "リセマム",
     "Kindai Picks",
