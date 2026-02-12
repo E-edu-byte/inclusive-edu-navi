@@ -1,6 +1,20 @@
 {
   "articles": [
     {
+      "id": "f362324e9908",
+      "title": "学びサポート室特別国際シンポジウムを開催します。　　　　　　　　Special International Symposium will be held.｜研修・イベント｜京都教育大学 学びサポート室",
+      "summary": "京都教育大学がインクルーシブ教育の国際シンポジウムを開催します。世界的権威のフロリアン先生が来日し、国として成果を上げているスコットランドの事例をもとに、日本の学校で多様性を包摂する学びをどう実現するか議論します。保護者や教員が実践のヒントを得る貴重な機会です。",
+      "category": "イベント・研修",
+      "date": "2026-02-12",
+      "url": "https://manasapo-kyokyo.com/event/post_5825/",
+      "imageUrl": "https://manasapo-kyokyo.com/cms_e3XSzMxu/wp-content/uploads/2024/10/ogp-1200x630.png",
+      "source": "京都教育大学 学びサポート室",
+      "mainKeyword": "フロリアン",
+      "isManual": true,
+      "addedAt": "2026-02-12T22:01:57.743995",
+      "expiresAt": "2026-02-19T22:01:57.743998"
+    },
+    {
       "id": "0f6a2b445f34",
       "title": "日本人小児におけるADHDサブタイプと肥満との関係｜CareNet.com",
       "summary": "日本のADHDのお子さんを対象に、そのタイプ（サブタイプ）と肥満との関連について研究が行われました。ADHDにはいくつかのタイプがあり、それぞれの特徴と肥満との関係が明らかになることが期待されます。お子さんの健康や発達に関心のある保護者や先生方にとって役立つ情報となるでしょう。",
@@ -202,7 +216,7 @@
       "source": "リセマム"
     }
   ],
-  "lastUpdated": "2026-02-12T20:38:40.379499",
+  "lastUpdated": "2026-02-12T22:01:57.744575",
   "totalCount": 16,
   "sources": [
     "こどもとIT",

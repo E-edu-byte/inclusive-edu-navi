@@ -1,6 +1,19 @@
 {
   "picks": [
     {
+      "id": "449f4587e179",
+      "sourceArticleId": "f362324e9908",
+      "title": "学びサポート室特別国際シンポジウムを開催します。　　　　　　　　Special International Symposium will be held.｜研修・イベント｜京都教育大学 学びサポート室",
+      "url": "https://manasapo-kyokyo.com/event/post_5825/",
+      "category": "イベント・研修",
+      "originalDate": "2026-02-12",
+      "reason": "編集部ピックアップ",
+      "summary": "京都教育大学がインクルーシブ教育の国際シンポジウムを開催します。世界的権威のフロリアン先生が来日し、国として成果を上げているスコットランドの事例をもとに、日本の学校で多様性を包摂する学びをどう実現するか議論します。保護者や教員が実践のヒントを得る貴重な機会です。",
+      "generatedAt": "2026-02-12T22:01:57.745046",
+      "model": "manual",
+      "isManual": true
+    },
+    {
       "id": "8aaf50213f0d",
       "sourceArticleId": "0f6a2b445f34",
       "title": "日本人小児におけるADHDサブタイプと肥満との関係｜CareNet.com",
@@ -49,20 +62,8 @@
       "summary": "「合理的配慮」という言葉の誤解を解き、その本質を歴史的背景から解説する記事です。インクルーシブ教育の根幹である合理的配慮への理解を深め、実践に活かすための必読情報となります。",
       "generatedAt": "2026-02-12T20:30:40.863119",
       "model": "gemini-2.5-flash"
-    },
-    {
-      "id": "5556936ef9d0",
-      "sourceArticleId": "6f61fda2b518",
-      "title": "「内申点が取れない…」発達障害の子が公立中で“詰む”残酷な理由。75％の親が「あえて中学受験」を考える切実な事情（with online） - Yahoo!ニュース",
-      "url": "https://news.yahoo.co.jp/articles/06fbb2f28388840edbcfd85f5c0cf5e7fa1c1dc5",
-      "category": "不登校・多様な学び",
-      "originalDate": "2026-02-10",
-      "reason": "発達障害児の進路の課題",
-      "summary": "発達障害のある子どもが公立中学で直面する内申点の問題と、その結果として中学受験を検討する家庭が多い実態を深く掘り下げています。保護者や教員が子どもの進路を考える上で、重要な示唆を与えます。",
-      "generatedAt": "2026-02-12T20:30:40.863126",
-      "model": "gemini-2.5-flash"
     }
   ],
-  "lastUpdated": "2026-02-12T20:38:40.379926",
+  "lastUpdated": "2026-02-12T22:01:57.745058",
   "totalCount": 5
 }
