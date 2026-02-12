@@ -1,6 +1,19 @@
 {
   "picks": [
     {
+      "id": "a13ab4293d4b",
+      "sourceArticleId": "eb041a37d5ad",
+      "title": "愛知県公立高等学校入学者選抜 学力検査問題で使用されるフォントの正体を探ってみた話",
+      "url": "https://www.oyama-design.jp/aichihighschooltest-udfont/",
+      "category": "ICT・教材",
+      "originalDate": "2026-02-13",
+      "reason": "編集部ピックアップ",
+      "summary": "愛知県の公立高校入試では、2026年から学力検査問題のフォントがUDフォントに変わります。UDフォントは、文字がより見やすいように工夫されたユニバーサルデザインの書体です。文字の輪を広げたり、濁点を離したりすることで、視力に不安がある方を含め、多くの受験生が読みやすい問題になります。",
+      "generatedAt": "2026-02-13T08:42:43.969342",
+      "model": "manual",
+      "isManual": true
+    },
+    {
       "id": "449f4587e179",
       "sourceArticleId": "f362324e9908",
       "title": "学びサポート室特別国際シンポジウムを開催します。　　　　　　　　Special International Symposium will be held.｜研修・イベント｜京都教育大学 学びサポート室",
@@ -50,20 +63,8 @@
       "summary": "文部科学省がインクルーシブな学校運営モデル事業の中間成果報告会を開催。国の施策の進捗を知ることで、今後のインクルーシブ教育の方向性や現場での具体的な取り組みのヒントを得られる重要な情報です。",
       "generatedAt": "2026-02-12T20:30:40.863110",
       "model": "gemini-2.5-flash"
-    },
-    {
-      "id": "ca643af0ace3",
-      "sourceArticleId": "b049f3fc812e",
-      "title": "となりの発達障害：「合理的配慮」はなぜ誤解されるのか　訳語の歴史をたどってみると",
-      "url": "https://mainichi.jp/articles/20260209/k00/00m/040/199000c",
-      "category": "合理的配慮・支援",
-      "originalDate": "2026-02-10",
-      "reason": "合理的配慮の本質を解説",
-      "summary": "「合理的配慮」という言葉の誤解を解き、その本質を歴史的背景から解説する記事です。インクルーシブ教育の根幹である合理的配慮への理解を深め、実践に活かすための必読情報となります。",
-      "generatedAt": "2026-02-12T20:30:40.863119",
-      "model": "gemini-2.5-flash"
     }
   ],
-  "lastUpdated": "2026-02-12T22:01:57.745058",
+  "lastUpdated": "2026-02-13T08:42:43.969353",
   "totalCount": 5
 }
