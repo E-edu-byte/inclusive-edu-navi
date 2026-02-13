@@ -1,70 +1,66 @@
 {
   "picks": [
     {
-      "id": "a13ab4293d4b",
-      "sourceArticleId": "eb041a37d5ad",
-      "title": "愛知県公立高等学校入学者選抜 学力検査問題で使用されるフォントの正体を探ってみた話",
-      "url": "https://www.oyama-design.jp/aichihighschooltest-udfont/",
-      "category": "ICT・教材",
-      "originalDate": "2026-02-13",
-      "reason": "編集部ピックアップ",
-      "summary": "愛知県の公立高校入試では、2026年から学力検査問題のフォントがUDフォントに変わります。UDフォントは、文字がより見やすいように工夫されたユニバーサルデザインの書体です。文字の輪を広げたり、濁点を離したりすることで、視力に不安がある方を含め、多くの受験生が読みやすい問題になります。",
-      "generatedAt": "2026-02-13T08:42:43.969342",
-      "model": "manual",
-      "isManual": true
-    },
-    {
-      "id": "449f4587e179",
-      "sourceArticleId": "f362324e9908",
-      "title": "学びサポート室特別国際シンポジウムを開催します。　　　　　　　　Special International Symposium will be held.｜研修・イベント｜京都教育大学 学びサポート室",
-      "url": "https://manasapo-kyokyo.com/event/post_5825/",
-      "category": "イベント・研修",
-      "originalDate": "2026-02-12",
-      "reason": "編集部ピックアップ",
-      "summary": "京都教育大学がインクルーシブ教育の国際シンポジウムを開催します。世界的権威のフロリアン先生が来日し、国として成果を上げているスコットランドの事例をもとに、日本の学校で多様性を包摂する学びをどう実現するか議論します。保護者や教員が実践のヒントを得る貴重な機会です。",
-      "generatedAt": "2026-02-12T22:01:57.745046",
-      "model": "manual",
-      "isManual": true
-    },
-    {
-      "id": "8aaf50213f0d",
-      "sourceArticleId": "0f6a2b445f34",
-      "title": "日本人小児におけるADHDサブタイプと肥満との関係｜CareNet.com",
-      "url": "https://www.carenet.com/news/general/carenet/61892",
-      "category": "研究",
-      "originalDate": "2026-02-12",
-      "reason": "編集部ピックアップ",
-      "summary": "日本のADHDのお子さんを対象に、そのタイプ（サブタイプ）と肥満との関連について研究が行われました。ADHDにはいくつかのタイプがあり、それぞれの特徴と肥満との関係が明らかになることが期待されます。お子さんの健康や発達に関心のある保護者や先生方にとって役立つ情報となるでしょう。",
-      "generatedAt": "2026-02-12T20:38:40.379915",
-      "model": "manual",
-      "isManual": true
-    },
-    {
-      "id": "44acaef156aa",
-      "sourceArticleId": "0a6756e34151",
-      "title": "ダボス会議が示した3つの教訓：レジリエンス、AI、そしてインクルーシブ成長の必然性 | Forbes JAPAN 公式サイト（フォーブス ジャパン）",
-      "url": "https://forbesjapan.com/articles/detail/91567?read_more=1",
-      "category": "制度・行政",
-      "originalDate": "2026-02-12",
-      "reason": "編集部ピックアップ",
-      "summary": "ダボス会議で、誰もが恩恵を受けられる「インクルーシブ成長」の重要性が示されました。これは、世界的な視点から、教育の現場で「誰一人取り残さない」というインクルーシブ教育の理念が不可欠であることを示唆しています。未来に向けて、多様な子どもたちが自分らしく学び、社会で活躍するための環境づくりが求められています。",
-      "generatedAt": "2026-02-12T20:32:01.633845",
-      "model": "manual",
-      "isManual": true
-    },
-    {
-      "id": "0763857fed4b",
+      "id": "d3810b225669",
       "sourceArticleId": "fdb4ef8a2ff6",
       "title": "令和7年度インクルーシブな学校運営モデル事業中間成果報告会を開催します",
       "url": "https://www.mext.go.jp/b_menu/houdou/mext_01599.html",
       "category": "制度・行政",
       "originalDate": "2026-02-08",
-      "reason": "文科省の重要政策発表",
-      "summary": "文部科学省がインクルーシブな学校運営モデル事業の中間成果報告会を開催。国の施策の進捗を知ることで、今後のインクルーシブ教育の方向性や現場での具体的な取り組みのヒントを得られる重要な情報です。",
-      "generatedAt": "2026-02-12T20:30:40.863110",
+      "reason": "文科省の公式発表",
+      "summary": "文部科学省がインクルーシブな学校運営モデル事業の中間成果報告会開催を発表。国のインクルーシブ教育推進の具体的な取り組みと進捗がわかる重要な発表です。保護者や教員は、今後の教育の方向性を把握できます。",
+      "generatedAt": "2026-02-13T20:10:34.433280",
+      "model": "gemini-2.5-flash"
+    },
+    {
+      "id": "2b2b35b96db6",
+      "sourceArticleId": "6f61fda2b518",
+      "title": "「内申点が取れない…」発達障害の子が公立中で“詰む”残酷な理由。75％の親が「あえて中学受験」を考える切実な事情（with online） - Yahoo!ニュース",
+      "url": "https://news.yahoo.co.jp/articles/06fbb2f28388840edbcfd85f5c0cf5e7fa1c1dc5",
+      "category": "不登校・多様な学び",
+      "originalDate": "2026-02-10",
+      "reason": "発達障害児の進路課題",
+      "summary": "発達障害のあるお子さんの75%の保護者が中学受験を検討している実態を大手メディアが報じています。公立中学の内申点制度や学校生活が負担となる課題が浮き彫りになり、保護者が直面する切実な悩みに光を当てています。",
+      "generatedAt": "2026-02-13T20:10:34.433290",
+      "model": "gemini-2.5-flash"
+    },
+    {
+      "id": "495998cd4d31",
+      "sourceArticleId": "b049f3fc812e",
+      "title": "となりの発達障害：「合理的配慮」はなぜ誤解されるのか　訳語の歴史をたどってみると",
+      "url": "https://mainichi.jp/articles/20260209/k00/00m/040/199000c",
+      "category": "合理的配慮・支援",
+      "originalDate": "2026-02-10",
+      "reason": "合理的配慮の理解促進",
+      "summary": "「合理的配慮」の言葉がなぜ誤解されるのか、その歴史を大手メディアが深掘りしています。法定義務化されたこの重要な概念について、保護者や教員が正しく理解し、学校現場での実践に繋げるための視点を提供します。",
+      "generatedAt": "2026-02-13T20:10:34.433296",
+      "model": "gemini-2.5-flash"
+    },
+    {
+      "id": "7fe7e8ec28d3",
+      "sourceArticleId": "eb12499dfa8f",
+      "title": "極端な気温で不登校増加…RIETIが有意な関連示唆",
+      "url": "https://resemom.jp/article/2026/02/12/85020.html",
+      "category": "多様な学び",
+      "originalDate": "2026-02-12",
+      "reason": "不登校原因の調査結果",
+      "summary": "極端な暑さや寒さが子どもたちの不登校増加に関連する可能性を示唆する分析結果を大手メディアが報じています。気候変動が不登校に与える影響という新たな視点は、不登校支援策を考える上で重要な情報となります。",
+      "generatedAt": "2026-02-13T20:10:34.433306",
+      "model": "gemini-2.5-flash"
+    },
+    {
+      "id": "d63013a03efb",
+      "sourceArticleId": "5c5ad78383ba",
+      "title": "不登校だった人の新たな一歩へ　「もうひとつの卒業式」東京・北区で",
+      "url": "https://www.asahi.com/articles/ASV272W2HV27OXIE02XM.html?ref=rss",
+      "category": "多様な学び",
+      "originalDate": "2026-02-07",
+      "reason": "不登校支援の温かい事例",
+      "summary": "不登校を経験した子どもたちのための「もうひとつの卒業式」が東京・北区で開催されたことを大手メディアが紹介しています。学校に行けなかった子どもたちが自身の努力を認められ、自信を持って次の一歩を踏み出す希望を与える温かい事例です。",
+      "generatedAt": "2026-02-13T20:10:34.433311",
       "model": "gemini-2.5-flash"
     }
   ],
-  "lastUpdated": "2026-02-13T08:42:43.969353",
+  "lastUpdated": "2026-02-13T20:10:34.433315",
   "totalCount": 5
 }
