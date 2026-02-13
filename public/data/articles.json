@@ -9,10 +9,7 @@
       "url": "https://www.oyama-design.jp/aichihighschooltest-udfont/",
       "imageUrl": "https://www.oyama-design.jp/wp-content/uploads/2025/10/251028-AichiHighSchoolTest-UDFont.png",
       "source": "お山デザイン",
-      "mainKeyword": "UDフォント",
-      "isManual": true,
-      "addedAt": "2026-02-13T08:42:43.968279",
-      "expiresAt": "2026-02-20T08:42:43.968280"
+      "mainKeyword": "UDフォント"
     },
     {
       "id": "f362324e9908",
@@ -211,9 +208,10 @@
       "mainKeyword": ""
     }
   ],
-  "lastUpdated": "2026-02-13T08:42:43.968860",
-  "totalCount": 18,
+  "lastUpdated": "2026-02-13T19:10:38.062590",
+  "totalCount": 19,
   "sources": [
+    "お山デザイン",
     "京都教育大学 学びサポート室",
     "CareNet.com",
     "forbesjapan.com",
