@@ -9,10 +9,7 @@
       "url": "https://wired.jp/article/early-specialization-myth-debunked-by-talent-research/",
       "imageUrl": "https://media.wired.jp/photos/695ca7a72aa77009ba539b56/16:9/w_1280,c_limit/2217409632",
       "source": "WIRED.jp",
-      "mainKeyword": "才能",
-      "isManual": true,
-      "addedAt": "2026-02-14T07:56:57.725003",
-      "expiresAt": "2026-02-21T07:56:57.725005"
+      "mainKeyword": "才能"
     },
     {
       "id": "2462ba8fb728",
@@ -23,10 +20,7 @@
       "url": "https://news.yahoo.co.jp/articles/3d6674037637a7c4ae2ca96c135a5a1f9c26de68?page=1",
       "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260208-01092621-fnnprimev-000-1-view.jpg?exp=10800",
       "source": "Yahoo!ニュース",
-      "mainKeyword": "不登校",
-      "isManual": true,
-      "addedAt": "2026-02-13T23:12:56.689173",
-      "expiresAt": "2026-02-20T23:12:56.689175"
+      "mainKeyword": "不登校"
     },
     {
       "id": "02cdb2524684",
@@ -37,10 +31,7 @@
       "url": "https://news.yahoo.co.jp/articles/c14540b3f3a7fc6d117eb0329b8bd0329fee88bf?page=1",
       "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260213-00933532-toyoedu-000-1-view.jpg?exp=10800",
       "source": "Yahoo!ニュース",
-      "mainKeyword": "合理的配慮",
-      "isManual": true,
-      "addedAt": "2026-02-13T21:48:47.055763",
-      "expiresAt": "2026-02-20T21:48:47.055765"
+      "mainKeyword": "合理的配慮"
     },
     {
       "id": "eb041a37d5ad",
@@ -227,32 +218,13 @@
       "imageUrl": "https://imgopt.asahi.com/ogp/AS20260207002923_comm.jpg",
       "source": "朝日新聞 教育",
       "mainKeyword": ""
-    },
-    {
-      "id": "cd80838cc913",
-      "title": "意識・無意識脳での神経のつながり方の可視化に成功",
-      "summary": "意識・無意識下での脳神経結合の可視化に成功。睡眠中の感覚知覚メカニズム解明のヒントとなる基礎研究で、多様な脳機能を持つ人への理解や支援に貢献し得る。",
-      "category": "研究",
-      "date": "2026-02-06",
-      "url": "https://www.riken.jp/press/2026/20260207_1/index.html",
-      "imageUrl": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=300&fit=crop",
-      "source": "理化学研究所"
-    },
-    {
-      "id": "2a2640374f6f",
-      "title": "武蔵野大学、研究体験連動型学習を特徴とする「通信教育部国際データサイエンス学部」を4月に新設",
-      "summary": "武蔵野大学が、研究体験連動型学習を特徴とする「通信教育部国際データサイエンス学部」を4月に新設。多様な学びの機会を提供します。",
-      "category": "多様な学び",
-      "date": "2026-02-06",
-      "url": "https://edtechzine.jp/article/detail/13462",
-      "imageUrl": "https://edtechzine.jp/static/images/article/13462/13462_og.jpg",
-      "source": "EdTechZine",
-      "mainKeyword": ""
     }
   ],
-  "lastUpdated": "2026-02-14T07:56:57.725742",
-  "totalCount": 19,
+  "lastUpdated": "2026-02-14T08:05:18.913655",
+  "totalCount": 20,
   "sources": [
+    "WIRED.jp",
+    "Yahoo!ニュース",
     "お山デザイン",
     "京都教育大学 学びサポート室",
     "CareNet.com",
@@ -262,11 +234,8 @@
     "Kindai Picks",
     "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
     "ICT教育ニュース",
-    "Yahoo!ニュース",
     "毎日新聞",
     "文部科学省",
-    "朝日新聞 教育",
-    "理化学研究所",
-    "EdTechZine"
+    "朝日新聞 教育"
   ]
 }
