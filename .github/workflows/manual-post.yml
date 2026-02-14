@@ -61,6 +61,7 @@ jobs:
           fi
 
       # クォータチェック（add時のみ - API使用するため）
+      # 動的予約: ルーティンの実際の使用量に基づいて予約枠を計算
       - name: Check API quota for manual add
         if: inputs.action == 'add'
         id: quota-check
@@ -72,9 +73,11 @@ jobs:
 
           STATUS_FILE = "public/data/status.json"
           DAILY_LIMIT = 20
-          ROUTINE_RESERVED = 11  # 朝刊5 + 夕刊6
+          MORNING_MAX = 5   # 朝刊の最大使用枠
+          EVENING_MAX = 6   # 夕刊の最大使用枠（AIピック含む）
 
           def get_quota_period_start():
+              """17:00 JSTでリセット"""
               now = datetime.now()
               today_reset = now.replace(hour=17, minute=0, second=0, microsecond=0)
               if now >= today_reset:
@@ -82,12 +85,51 @@ jobs:
               else:
                   return today_reset - timedelta(days=1)
 
+          def identify_routine_runs(history, period_start):
+              """
+              ルーティン実行を時間帯で識別
+              - 夕刊: 17:00-23:59 (期間開始日)
+              - 朝刊: 00:00-16:59 (期間開始日の翌日)
+              """
+              evening_run = None
+              morning_run = None
+
+              for entry in history:
+                  try:
+                      ts = datetime.fromisoformat(entry.get("timestamp", ""))
+                      if ts < period_start:
+                          continue
+
+                      api_calls = entry.get("apiCalls", 0)
+                      articles = entry.get("articlesProcessed", 0)
+
+                      # 夕刊: 期間開始日の17:00-23:59、かつAPI使用あり
+                      if ts.date() == period_start.date() and ts.hour >= 17 and api_calls >= 1:
+                          if evening_run is None or api_calls > evening_run["apiCalls"]:
+                              evening_run = {"timestamp": ts, "apiCalls": api_calls, "articles": articles}
+
+                      # 朝刊: 期間開始日の翌日の00:00-16:59、かつAPI使用あり
+                      next_day = period_start.date() + timedelta(days=1)
+                      if ts.date() == next_day and ts.hour < 17 and api_calls >= 1:
+                          if morning_run is None or api_calls > morning_run["apiCalls"]:
+                              morning_run = {"timestamp": ts, "apiCalls": api_calls, "articles": articles}
+                  except:
+                      continue
+
+              return evening_run, morning_run
+
+          # 現在時刻とクォータ期間
+          now = datetime.now()
+          period_start = get_quota_period_start()
+
+          # status.json読み込み
           used_in_period = 0
+          history = []
           if os.path.exists(STATUS_FILE):
               with open(STATUS_FILE, 'r', encoding='utf-8') as f:
                   status = json.load(f)
-              period_start = get_quota_period_start()
-              for entry in status.get("history", []):
+              history = status.get("history", [])
+              for entry in history:
                   try:
                       entry_time = datetime.fromisoformat(entry.get("timestamp", ""))
                       if entry_time >= period_start:
@@ -95,13 +137,44 @@ jobs:
                   except:
                       continue
 
-          remaining = DAILY_LIMIT - used_in_period
-          available = remaining - ROUTINE_RESERVED
+          # ルーティン実行を識別
+          evening_run, morning_run = identify_routine_runs(history, period_start)
 
+          # 予約枠を計算
+          evening_reserve = 0
+          morning_reserve = 0
+
+          # 夕刊の予約
+          if evening_run:
+              # 夕刊実行済み: 使用分は使用済みにカウント、余剰分は解放
+              evening_actual = evening_run["apiCalls"]
+              print(f"夕刊: 実行済み（{evening_actual}件使用）")
+          else:
+              # 夕刊未実行: 最大枠を予約
+              evening_reserve = EVENING_MAX
+              print(f"夕刊: 未実行（{EVENING_MAX}件予約）")
+
+          # 朝刊の予約
+          if morning_run:
+              # 朝刊実行済み: 使用分は使用済みにカウント、余剰分は解放
+              morning_actual = morning_run["apiCalls"]
+              print(f"朝刊: 実行済み（{morning_actual}件使用）")
+          else:
+              # 朝刊未実行: 最大枠を予約
+              morning_reserve = MORNING_MAX
+              print(f"朝刊: 未実行（{MORNING_MAX}件予約）")
+
+          total_reserve = evening_reserve + morning_reserve
+          remaining = DAILY_LIMIT - used_in_period
+          available = remaining - total_reserve
+
+          print(f"=" * 40)
+          print(f"クォータ期間: {period_start.strftime('%m/%d %H:%M')} 〜")
           print(f"使用済み: {used_in_period}/{DAILY_LIMIT}")
           print(f"残り: {remaining}")
-          print(f"ルーティン予約: {ROUTINE_RESERVED}")
+          print(f"予約枠: {total_reserve}（夕刊{evening_reserve} + 朝刊{morning_reserve}）")
           print(f"手動投稿利用可能: {available}")
+          print(f"=" * 40)
 
           with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
               if available >= 1:
@@ -109,7 +182,7 @@ jobs:
                   print("[OK] 手動投稿可能")
               else:
                   f.write("quota_ok=false\n")
-                  print("::error::[NG] ルーティン予約のため手動投稿不可。17:00 JSTリセット後にお試しください。")
+                  print("::warning::[NG] 利用可能枠なし")
           EOF
 
       - name: Add article

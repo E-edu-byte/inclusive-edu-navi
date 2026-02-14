@@ -2,13 +2,12 @@
 name: Daily Update
 
 on:
-  # 【朝刊・夕刊スタイル】1日2回 + 要約補完1回
-  # Free Tier 20RPD対応: 通常2回×5件=10件 + AIピック1件 = 11件/日
-  # 要約補完: クォータリセット後（17:10 JST）に未完了の要約を処理
+  # 【朝刊・夕刊スタイル】1日2回
+  # Free Tier 20RPD対応: 朝刊5件 + 夕刊6件(AIピック含む) = 11件/日
+  # GitHub Actionsの遅延（1-2時間）を考慮して早めに設定
   schedule:
-    - cron: "0 22 * * *"   # JST 7:00 (UTC 22:00) - 朝刊
-    - cron: "0 9 * * *"    # JST 18:00 (UTC 9:00) - 夕刊
-    - cron: "10 8 * * *"   # JST 17:10 (UTC 8:10) - 要約補完（クォータリセット後）
+    - cron: "0 21 * * *"   # JST 6:00 (UTC 21:00) - 朝刊（実際は7-8時頃実行）
+    - cron: "15 8 * * *"   # JST 17:15 (UTC 8:15) - 夕刊（実際は18-19時頃実行）
   # 手動実行も可能
   workflow_dispatch:
     inputs:
@@ -84,12 +83,10 @@ jobs:
           is_manual = os.environ.get('IS_MANUAL', 'false') == 'true'
           summary_only = os.environ.get('SUMMARY_ONLY', 'false') == 'true'
 
-          if schedule == '0 22 * * *':  # UTC 22:00 = JST 7:00
+          if schedule == '0 21 * * *':  # UTC 21:00 = JST 6:00
               run_type = 'morning'
-          elif schedule == '0 9 * * *':  # UTC 9:00 = JST 18:00
+          elif schedule == '15 8 * * *':  # UTC 8:15 = JST 17:15
               run_type = 'evening'
-          elif schedule == '10 8 * * *':  # UTC 8:10 = JST 17:10
-              run_type = 'summary'
           else:
               run_type = 'manual'
 
@@ -112,9 +109,6 @@ jobs:
               elif run_type == 'evening':
                   # 夕刊実行時：朝刊分を予約
                   return MORNING_QUOTA
-              elif run_type == 'summary':
-                  # 要約補完実行時：夕刊+朝刊分を予約
-                  return EVENING_QUOTA + MORNING_QUOTA
               else:  # manual
                   # 手動実行：全ルーティン分を予約
                   return EVENING_QUOTA + MORNING_QUOTA
@@ -182,7 +176,7 @@ jobs:
           AVAILABLE="${{ steps.quota-check.outputs.available }}"
           echo "利用可能API枠: ${AVAILABLE}件"
 
-          if [[ "${{ github.event.schedule }}" == "10 8 * * *" ]] || [[ "${{ github.event.inputs.summary_only }}" == "true" ]]; then
+          if [[ "${{ github.event.inputs.summary_only }}" == "true" ]]; then
             echo "=== 要約専用モード ==="
             python scripts/fetch-news.py --summary-only --max-calls "${AVAILABLE}"
           else
@@ -254,16 +248,15 @@ jobs:
               print("期限切れの記事はありません")
           EOF
 
-      # 5. AI記事生成（generate-articles.py）- 18:00 JSTのみ実行（夕刊）
-      # UTC 9:00 = JST 18:00
-      # 要約専用モード（17:10 JST）ではスキップ
+      # 5. AI記事生成（generate-articles.py）- 夕刊時のみ実行
+      # JST 17:15 (UTC 8:15) - 夕刊
       # クォータがない場合もスキップ
       - name: Generate AI picks (evening edition only)
         if: |
           steps.quota-check.outputs.quota_ok == 'true' &&
           ((github.event_name == 'workflow_dispatch' && github.event.inputs.summary_only != 'true') ||
           github.event_name == 'push' ||
-          (github.event_name == 'schedule' && github.event.schedule == '0 9 * * *'))
+          (github.event_name == 'schedule' && github.event.schedule == '15 8 * * *'))
         run: python scripts/generate-articles.py
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
