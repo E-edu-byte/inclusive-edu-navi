@@ -9,10 +9,7 @@
       "url": "https://www.bbc.com/japanese/articles/cq843d0v0eyo",
       "imageUrl": "https://ichef.bbci.co.uk/news/1024/branded_japanese/d7cf/live/3718db40-f304-11f0-b2ab-f70ba525289e.jpg",
       "source": "BBCニュース",
-      "mainKeyword": "発達",
-      "isManual": true,
-      "addedAt": "2026-02-14T21:57:28.051961",
-      "expiresAt": "2026-02-21T21:57:28.051963"
+      "mainKeyword": "発達"
     },
     {
       "id": "02cdb2524684",
@@ -199,22 +196,12 @@
       "url": "https://www.mext.go.jp/b_menu/houdou/mext_01599.html",
       "imageUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=300&fit=crop",
       "source": "文部科学省"
-    },
-    {
-      "id": "5c5ad78383ba",
-      "title": "不登校だった人の新たな一歩へ　「もうひとつの卒業式」東京・北区で",
-      "summary": "東京・北区で、不登校を経験した子どもたちのための「もうひとつの卒業式」が開かれました。この式は、学校に行けなかった子どもたちが、それぞれの努力を認められ、自信を持って次のステップへ進むための大切な区切りとなります。多様な学び方を尊重し、一人ひとりの新たな挑戦を社会が応援する、重要な取り組みです。",
-      "category": "多様な学び",
-      "date": "2026-02-07",
-      "url": "https://www.asahi.com/articles/ASV272W2HV27OXIE02XM.html?ref=rss",
-      "imageUrl": "https://imgopt.asahi.com/ogp/AS20260207002923_comm.jpg",
-      "source": "朝日新聞 教育",
-      "mainKeyword": ""
     }
   ],
-  "lastUpdated": "2026-02-14T21:57:28.052737",
+  "lastUpdated": "2026-02-15T06:48:42.665982",
   "totalCount": 18,
   "sources": [
+    "BBCニュース",
     "Yahoo!ニュース",
     "お山デザイン",
     "京都教育大学 学びサポート室",
@@ -226,7 +213,6 @@
     "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
     "ICT教育ニュース",
     "毎日新聞",
-    "文部科学省",
-    "朝日新聞 教育"
+    "文部科学省"
   ]
 }
