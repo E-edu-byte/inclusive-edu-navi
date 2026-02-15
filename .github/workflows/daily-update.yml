@@ -282,14 +282,18 @@ jobs:
 
       # 5.9. Google Analytics データ取得
       - name: Fetch Google Analytics data
-        if: ${{ secrets.GA_SERVICE_ACCOUNT_KEY != '' }}
         run: |
-          echo '${{ secrets.GA_SERVICE_ACCOUNT_KEY }}' > /tmp/ga-key.json
-          export GOOGLE_APPLICATION_CREDENTIALS=/tmp/ga-key.json
-          python scripts/fetch-analytics.py
-          rm /tmp/ga-key.json
+          if [ -n "$GA_SERVICE_ACCOUNT_KEY" ]; then
+            echo "$GA_SERVICE_ACCOUNT_KEY" > /tmp/ga-key.json
+            export GOOGLE_APPLICATION_CREDENTIALS=/tmp/ga-key.json
+            python scripts/fetch-analytics.py
+            rm -f /tmp/ga-key.json
+          else
+            echo "GA_SERVICE_ACCOUNT_KEY が設定されていません。スキップします。"
+          fi
         env:
           GA4_PROPERTY_ID: "473599809"
+          GA_SERVICE_ACCOUNT_KEY: ${{ secrets.GA_SERVICE_ACCOUNT_KEY }}
 
       # 6. 変更があるかチェック
       - name: Check for changes
