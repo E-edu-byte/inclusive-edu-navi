@@ -866,13 +866,8 @@ export default function EditorDashboard() {
         {/* トラッキング */}
         <section className="bg-gray-800 rounded-xl p-6 mb-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-bold text-white">トラッキング</h2>
-            <button
-              onClick={resetTracking}
-              className="text-xs text-gray-400 hover:text-white transition-colors px-3 py-1 border border-gray-600 rounded"
-            >
-              リセット
-            </button>
+            <h2 className="text-lg font-bold text-white">トラッキング（ローカル）</h2>
+            <span className="text-xs text-gray-500">※自分のアクセスのみ</span>
           </div>
 
           {/* アクセス数 */}
