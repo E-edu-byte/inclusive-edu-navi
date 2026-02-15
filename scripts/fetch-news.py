@@ -2539,13 +2539,15 @@ def save_status(articles_processed: int, articles_added: int, api_calls: int, ha
                 "articlesAdded": articles_added,
                 "apiCalls": api_calls,
                 "success": not has_error,
-                "error": error_message
+                "error": error_message,
+                "isManual": False
             },
             "history": existing_status.get("history", [])[-23:] + [{
                 "timestamp": now.isoformat(),
                 "articlesProcessed": articles_processed,
                 "apiCalls": api_calls,
-                "success": not has_error
+                "success": not has_error,
+                "isManual": False
             }]
         }
 

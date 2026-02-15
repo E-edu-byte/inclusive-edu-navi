@@ -35,7 +35,7 @@ def get_quota_period_start():
         return today_reset - timedelta(days=1)
 
 
-def update_status(api_calls: int = 0, articles_processed: int = 0, success: bool = True, add_history: bool = False):
+def update_status(api_calls: int = 0, articles_processed: int = 0, success: bool = True, add_history: bool = False, is_manual: bool = False):
     """ステータスを更新（API使用量を再計算）"""
     try:
         # 既存のステータスを読み込み
@@ -86,13 +86,15 @@ def update_status(api_calls: int = 0, articles_processed: int = 0, success: bool
                 "articlesAdded": articles_processed,
                 "apiCalls": api_calls,
                 "success": success,
-                "error": None
+                "error": None,
+                "isManual": is_manual
             }
             status_data["history"] = existing_status.get("history", [])[-23:] + [{
                 "timestamp": now.isoformat(),
                 "articlesProcessed": articles_processed,
                 "apiCalls": api_calls,
-                "success": success
+                "success": success,
+                "isManual": is_manual
             }]
 
         # ファイルに保存
@@ -118,13 +120,15 @@ def main():
     parser.add_argument('--api-calls', type=int, default=0, help='今回のAPI呼び出し回数')
     parser.add_argument('--articles', type=int, default=0, help='処理した記事数')
     parser.add_argument('--add-history', action='store_true', help='履歴に追加する')
+    parser.add_argument('--manual', action='store_true', help='手動投稿の場合')
 
     args = parser.parse_args()
 
     success = update_status(
         api_calls=args.api_calls,
         articles_processed=args.articles,
-        add_history=args.add_history
+        add_history=args.add_history,
+        is_manual=args.manual
     )
 
     sys.exit(0 if success else 1)

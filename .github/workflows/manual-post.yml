@@ -207,8 +207,8 @@ jobs:
       - name: Update status
         run: |
           if [ "${{ inputs.action }}" = "add" ]; then
-            # add時はAPI1回使用、記事1件処理として記録
-            python scripts/update-status.py --api-calls 1 --articles 1 --add-history
+            # add時はAPI1回使用、記事1件処理として記録（手動フラグ付き）
+            python scripts/update-status.py --api-calls 1 --articles 1 --add-history --manual
           else
             # delete/cleanup時はAPI使用なし、ステータスのみ更新
             python scripts/update-status.py

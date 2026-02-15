@@ -36,6 +36,7 @@ type StatusData = {
     articlesProcessed: number;
     apiCalls: number;
     success: boolean;
+    isManual?: boolean;
   }>;
 };
 
@@ -232,7 +233,7 @@ export default function EditorDashboard() {
     async function fetchAllUrls() {
       try {
         const urls = new Set<string>();
-        const articles: ArticleForDeletion[] = [];
+        const articleMap = new Map<string, ArticleForDeletion>(); // URLをキーに管理（重複排除）
 
         // 除外URL一覧を取得
         const excludedUrls = new Set<string>();
@@ -248,32 +249,14 @@ export default function EditorDashboard() {
           // 除外URLの取得に失敗しても続行
         }
 
-        // articles.json
-        const articlesRes = await fetch(`${BASE_PATH}/data/articles.json`);
-        if (articlesRes.ok) {
-          const data = await articlesRes.json();
-          for (const article of data.articles || []) {
-            if (article.url && !excludedUrls.has(article.url)) {
-              urls.add(article.url);
-              articles.push({
-                title: article.title,
-                url: article.url,
-                source: article.source || '',
-                date: article.date || '',
-                isManual: false,
-              });
-            }
-          }
-        }
-
-        // manual-articles.json
+        // manual-articles.json を先に読み込み（手動記事を優先）
         const manualRes = await fetch(`${BASE_PATH}/data/manual-articles.json`);
         if (manualRes.ok) {
           const data = await manualRes.json();
           for (const article of data.articles || []) {
             if (article.url && !excludedUrls.has(article.url)) {
               urls.add(article.url);
-              articles.push({
+              articleMap.set(article.url, {
                 title: article.title,
                 url: article.url,
                 source: article.source || '',
@@ -284,8 +267,27 @@ export default function EditorDashboard() {
           }
         }
 
+        // articles.json（手動記事と重複するURLはスキップ）
+        const articlesRes = await fetch(`${BASE_PATH}/data/articles.json`);
+        if (articlesRes.ok) {
+          const data = await articlesRes.json();
+          for (const article of data.articles || []) {
+            if (article.url && !excludedUrls.has(article.url) && !articleMap.has(article.url)) {
+              urls.add(article.url);
+              articleMap.set(article.url, {
+                title: article.title,
+                url: article.url,
+                source: article.source || '',
+                date: article.date || '',
+                isManual: false,
+              });
+            }
+          }
+        }
+
         setExistingUrls(urls);
-        // 日付の新しい順にソート
+        // Mapから配列に変換し、日付の新しい順にソート
+        const articles = Array.from(articleMap.values());
         articles.sort((a, b) => b.date.localeCompare(a.date));
         setAllArticles(articles);
       } catch (error) {
@@ -677,61 +679,6 @@ export default function EditorDashboard() {
             </p>
           </div>
 
-          {/* 手動記事一覧 */}
-          <div className="mt-6">
-            <h3 className="text-sm font-medium text-gray-300 mb-3">
-              手動投稿記事一覧
-              {manualArticles?.articles && manualArticles.articles.length > 0 && (
-                <span className="ml-2 text-amber-500">({manualArticles.articles.length}件)</span>
-              )}
-            </h3>
-
-            {manualArticles?.articles && manualArticles.articles.length > 0 ? (
-              <div className="space-y-3">
-                {manualArticles.articles.map((article) => {
-                  const daysLeft = getDaysUntilExpiry(article.expiresAt);
-                  return (
-                    <div key={article.id} className="bg-gray-700 rounded-lg p-4">
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="flex-1 min-w-0">
-                          <h4 className="text-sm font-medium text-white truncate">
-                            {article.title}
-                          </h4>
-                          <p className="text-xs text-gray-400 mt-1">
-                            {article.source} • {article.date}
-                          </p>
-                          <p className="text-xs text-gray-500 mt-1 truncate">
-                            {article.url}
-                          </p>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <span className={`text-xs px-2 py-1 rounded ${
-                            daysLeft <= 2 ? 'bg-red-900 text-red-300' : 'bg-gray-600 text-gray-300'
-                          }`}>
-                            残り{daysLeft}日
-                          </span>
-                          <button
-                            onClick={() => {
-                              const url = `https://github.com/E-edu-byte/inclusive-edu-navi/actions/workflows/manual-post.yml`;
-                              navigator.clipboard.writeText(article.id);
-                              alert(`記事ID「${article.id}」をコピーしました。\n\nGitHub Actionsページで:\n1. Run workflow をクリック\n2. action: delete を選択\n3. article_id に貼り付け\n4. Run workflow を実行`);
-                              window.open(url, '_blank');
-                            }}
-                            className="px-3 py-1.5 text-xs bg-red-900 hover:bg-red-800 text-red-300 rounded transition-colors"
-                          >
-                            削除
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            ) : (
-              <p className="text-gray-500 text-sm">手動投稿された記事はありません</p>
-            )}
-          </div>
-
           {/* 使い方ガイド */}
           <div className="mt-6 p-4 bg-gray-700/50 rounded-lg border border-gray-600">
             <h4 className="text-sm font-medium text-gray-300 mb-2">使い方</h4>
@@ -855,6 +802,7 @@ export default function EditorDashboard() {
                 <thead>
                   <tr className="text-gray-400 text-left border-b border-gray-700">
                     <th className="pb-2 pr-4">日時</th>
+                    <th className="pb-2 pr-4">種別</th>
                     <th className="pb-2 pr-4">記事数</th>
                     <th className="pb-2 pr-4">API呼出</th>
                     <th className="pb-2">結果</th>
@@ -865,6 +813,13 @@ export default function EditorDashboard() {
                     <tr key={index} className="border-b border-gray-700/50">
                       <td className="py-2 pr-4 text-gray-300">
                         {formatDate(entry.timestamp)}
+                      </td>
+                      <td className="py-2 pr-4">
+                        {entry.isManual ? (
+                          <span className="px-1.5 py-0.5 text-[10px] bg-amber-600 text-white rounded">手動</span>
+                        ) : (
+                          <span className="px-1.5 py-0.5 text-[10px] bg-blue-600 text-white rounded">自動</span>
+                        )}
                       </td>
                       <td className="py-2 pr-4 text-gray-300">
                         {entry.articlesProcessed}件
