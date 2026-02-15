@@ -24,7 +24,7 @@ PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 ARTICLES_FILE = os.path.join(PROJECT_ROOT, "public", "data", "articles.json")
 
 # 記事保持日数
-ARTICLE_RETENTION_DAYS = 7
+ARTICLE_RETENTION_DAYS = 30
 
 # 【コア理念キーワード】これらのいずれかを含む記事のみを保持
 CORE_KEYWORDS = [
