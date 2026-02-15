@@ -292,7 +292,7 @@ jobs:
             echo "GA_SERVICE_ACCOUNT_KEY が設定されていません。スキップします。"
           fi
         env:
-          GA4_PROPERTY_ID: "473599809"
+          GA4_PROPERTY_ID: "524851962"
           GA_SERVICE_ACCOUNT_KEY: ${{ secrets.GA_SERVICE_ACCOUNT_KEY }}
 
       # 6. 変更があるかチェック

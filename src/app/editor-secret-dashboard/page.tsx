@@ -910,7 +910,7 @@ export default function EditorDashboard() {
               アクセス解析
             </h2>
             <a
-              href="https://analytics.google.com/analytics/web/#/p473599809/reports/intelligenthome"
+              href="https://analytics.google.com/analytics/web/#/p524851962/reports/intelligenthome"
               target="_blank"
               rel="noopener noreferrer"
               className="text-xs text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1"

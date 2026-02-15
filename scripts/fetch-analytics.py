@@ -20,7 +20,7 @@ PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 ANALYTICS_FILE = os.path.join(PROJECT_ROOT, "public", "data", "analytics.json")
 
 # GA4設定
-GA4_PROPERTY_ID = os.environ.get("GA4_PROPERTY_ID", "473599809")
+GA4_PROPERTY_ID = os.environ.get("GA4_PROPERTY_ID", "524851962")
 
 
 def fetch_analytics_data():
