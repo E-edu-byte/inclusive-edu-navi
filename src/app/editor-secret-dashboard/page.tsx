@@ -416,6 +416,25 @@ export default function EditorDashboard() {
     return 'bg-green-500';
   };
 
+  // 手動投稿のタイムスタンプ一覧を取得
+  const manualTimestamps = new Set<string>(
+    (manualArticles?.articles || []).map(a => {
+      // addedAtの秒以下を切り捨てて比較用に正規化（例: "2026-02-15T16:15" の形式）
+      return a.addedAt?.slice(0, 16) || '';
+    }).filter(Boolean)
+  );
+
+  // 履歴エントリが手動投稿かどうかを判定
+  const isManualEntry = (entry: { timestamp: string; isManual?: boolean }): boolean => {
+    // isManualフィールドがある場合はそれを使用
+    if (typeof entry.isManual === 'boolean') {
+      return entry.isManual;
+    }
+    // isManualフィールドがない場合は、manual-articles.jsonのaddedAtと照合
+    const entryTimePrefix = entry.timestamp?.slice(0, 16) || '';
+    return manualTimestamps.has(entryTimePrefix);
+  };
+
   // URL検証
   const validateUrl = (url: string): string | null => {
     if (!url.trim()) {
