@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { useBookmarks, BookmarkedArticle } from '@/contexts/BookmarkContext';
 import { getCategoryByName } from '@/lib/types';
@@ -47,14 +48,33 @@ function isValidImageUrl(url?: string): boolean {
   return false;
 }
 
-function BookmarkCard({ article }: { article: BookmarkedArticle }) {
+type BookmarkCardProps = {
+  article: BookmarkedArticle;
+  index: number;
+  onDragStart: (index: number) => void;
+  onDragEnter: (index: number) => void;
+  onDragEnd: () => void;
+  isDragging: boolean;
+  isDragOver: boolean;
+};
+
+function BookmarkCard({ article, index, onDragStart, onDragEnter, onDragEnd, isDragging, isDragOver }: BookmarkCardProps) {
   const { removeBookmark } = useBookmarks();
   const hasValidImage = isValidImageUrl(article.imageUrl);
   const fallbackImage = getFallbackImage(article.title);
   const categoryInfo = article.category ? getCategoryByName(article.category) : null;
 
   return (
-    <article className="rounded-xl border border-gray-200 bg-white shadow-sm hover:shadow-md transition-shadow">
+    <article
+      draggable
+      onDragStart={() => onDragStart(index)}
+      onDragEnter={() => onDragEnter(index)}
+      onDragEnd={onDragEnd}
+      onDragOver={(e) => e.preventDefault()}
+      className={`rounded-xl border bg-white shadow-sm transition-all cursor-grab active:cursor-grabbing ${
+        isDragging ? 'opacity-50 scale-[0.98]' : ''
+      } ${isDragOver ? 'border-primary-400 border-2 shadow-md' : 'border-gray-200 hover:shadow-md'}`}
+    >
       <div className="flex flex-col sm:flex-row">
         {/* サムネイル */}
         <div className="sm:flex-shrink-0 sm:w-32 md:w-36">
@@ -192,7 +212,25 @@ function BookmarkCard({ article }: { article: BookmarkedArticle }) {
 }
 
 export default function BookmarksPage() {
-  const { bookmarks, bookmarkCount, maxBookmarks } = useBookmarks();
+  const { bookmarks, bookmarkCount, maxBookmarks, reorderBookmarks } = useBookmarks();
+  const [dragIndex, setDragIndex] = useState<number | null>(null);
+  const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
+
+  const handleDragStart = (index: number) => {
+    setDragIndex(index);
+  };
+
+  const handleDragEnter = (index: number) => {
+    setDragOverIndex(index);
+  };
+
+  const handleDragEnd = () => {
+    if (dragIndex !== null && dragOverIndex !== null && dragIndex !== dragOverIndex) {
+      reorderBookmarks(dragIndex, dragOverIndex);
+    }
+    setDragIndex(null);
+    setDragOverIndex(null);
+  };
 
   return (
     <div className="container-main py-8">
@@ -215,8 +253,25 @@ export default function BookmarksPage() {
       {/* 記事一覧 */}
       {bookmarks.length > 0 ? (
         <div className="space-y-4">
-          {bookmarks.map((article) => (
-            <BookmarkCard key={article.url} article={article} />
+          {bookmarks.length > 1 && (
+            <p className="text-sm text-gray-500 flex items-center gap-2">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+              </svg>
+              ドラッグして順番を変更できます
+            </p>
+          )}
+          {bookmarks.map((article, index) => (
+            <BookmarkCard
+              key={article.url}
+              article={article}
+              index={index}
+              onDragStart={handleDragStart}
+              onDragEnter={handleDragEnter}
+              onDragEnd={handleDragEnd}
+              isDragging={dragIndex === index}
+              isDragOver={dragOverIndex === index && dragIndex !== index}
+            />
           ))}
         </div>
       ) : (

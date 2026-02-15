@@ -21,6 +21,7 @@ type BookmarkContextType = {
   addBookmark: (article: Omit<BookmarkedArticle, 'savedAt'>) => boolean;
   removeBookmark: (url: string) => void;
   isBookmarked: (url: string) => boolean;
+  reorderBookmarks: (fromIndex: number, toIndex: number) => void;
   bookmarkCount: number;
   maxBookmarks: number;
 };
@@ -87,6 +88,15 @@ export function BookmarkProvider({ children }: { children: ReactNode }) {
     return bookmarks.some(b => b.url === url);
   };
 
+  const reorderBookmarks = (fromIndex: number, toIndex: number) => {
+    setBookmarks(prev => {
+      const newBookmarks = [...prev];
+      const [removed] = newBookmarks.splice(fromIndex, 1);
+      newBookmarks.splice(toIndex, 0, removed);
+      return newBookmarks;
+    });
+  };
+
   return (
     <BookmarkContext.Provider
       value={{
@@ -94,6 +104,7 @@ export function BookmarkProvider({ children }: { children: ReactNode }) {
         addBookmark,
         removeBookmark,
         isBookmarked,
+        reorderBookmarks,
         bookmarkCount: bookmarks.length,
         maxBookmarks: MAX_BOOKMARKS,
       }}
