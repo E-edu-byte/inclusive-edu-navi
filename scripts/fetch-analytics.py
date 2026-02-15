@@ -45,14 +45,15 @@ def fetch_analytics_data():
         client = BetaAnalyticsDataClient()
         property_id = f"properties/{GA4_PROPERTY_ID}"
 
-        # 過去30日間のデータを取得
-        end_date = datetime.now()
-        start_date = end_date - timedelta(days=30)
+        # 日付設定
+        today = datetime.now()
+        today_str = today.strftime("%Y-%m-%d")
+        start_date = today - timedelta(days=30)
 
-        # 基本指標の取得
+        # 基本指標の取得（過去30日間）
         basic_request = RunReportRequest(
             property=property_id,
-            date_ranges=[DateRange(start_date=start_date.strftime("%Y-%m-%d"), end_date=end_date.strftime("%Y-%m-%d"))],
+            date_ranges=[DateRange(start_date=start_date.strftime("%Y-%m-%d"), end_date=today_str)],
             metrics=[
                 Metric(name="screenPageViews"),
                 Metric(name="totalUsers"),
@@ -70,12 +71,33 @@ def fetch_analytics_data():
             users = int(row.metric_values[1].value)
             sessions = int(row.metric_values[2].value)
 
-        # クリックイベントの取得（affiliate_click）
+        # 今日の基本指標を取得
+        today_request = RunReportRequest(
+            property=property_id,
+            date_ranges=[DateRange(start_date=today_str, end_date=today_str)],
+            metrics=[
+                Metric(name="screenPageViews"),
+                Metric(name="totalUsers"),
+                Metric(name="sessions"),
+            ],
+        )
+        today_response = client.run_report(today_request)
+
+        today_page_views = 0
+        today_users = 0
+        today_sessions = 0
+        if today_response.rows:
+            row = today_response.rows[0]
+            today_page_views = int(row.metric_values[0].value)
+            today_users = int(row.metric_values[1].value)
+            today_sessions = int(row.metric_values[2].value)
+
+        # クリックイベントの取得（affiliate_click）- 累計
         clicks = {"amazon": 0, "rakuten": 0, "ofuse": 0}
         try:
             click_request = RunReportRequest(
                 property=property_id,
-                date_ranges=[DateRange(start_date=start_date.strftime("%Y-%m-%d"), end_date=end_date.strftime("%Y-%m-%d"))],
+                date_ranges=[DateRange(start_date=start_date.strftime("%Y-%m-%d"), end_date=today_str)],
                 dimensions=[Dimension(name="customEvent:affiliate_type")],
                 metrics=[Metric(name="eventCount")],
                 dimension_filter=FilterExpression(
@@ -96,12 +118,38 @@ def fetch_analytics_data():
         except Exception as e:
             print(f"クリックイベント取得エラー（無視して続行）: {e}")
 
-        # シェアイベントの取得
+        # 今日のクリックイベント
+        today_clicks = {"amazon": 0, "rakuten": 0, "ofuse": 0}
+        try:
+            today_click_request = RunReportRequest(
+                property=property_id,
+                date_ranges=[DateRange(start_date=today_str, end_date=today_str)],
+                dimensions=[Dimension(name="customEvent:affiliate_type")],
+                metrics=[Metric(name="eventCount")],
+                dimension_filter=FilterExpression(
+                    filter=Filter(
+                        field_name="eventName",
+                        string_filter=Filter.StringFilter(value="affiliate_click"),
+                    )
+                ),
+            )
+            today_click_response = client.run_report(today_click_request)
+            for row in today_click_response.rows:
+                affiliate_type = row.dimension_values[0].value.lower()
+                count = int(row.metric_values[0].value)
+                if affiliate_type in today_clicks:
+                    today_clicks[affiliate_type] = count
+                elif affiliate_type == "buymeacoffee":
+                    today_clicks["ofuse"] = count
+        except Exception as e:
+            print(f"今日のクリックイベント取得エラー（無視して続行）: {e}")
+
+        # シェアイベントの取得 - 累計
         shares = {"x": 0, "line": 0}
         try:
             share_request = RunReportRequest(
                 property=property_id,
-                date_ranges=[DateRange(start_date=start_date.strftime("%Y-%m-%d"), end_date=end_date.strftime("%Y-%m-%d"))],
+                date_ranges=[DateRange(start_date=start_date.strftime("%Y-%m-%d"), end_date=today_str)],
                 dimensions=[Dimension(name="customEvent:method")],
                 metrics=[Metric(name="eventCount")],
                 dimension_filter=FilterExpression(
@@ -122,12 +170,38 @@ def fetch_analytics_data():
         except Exception as e:
             print(f"シェアイベント取得エラー（無視して続行）: {e}")
 
+        # 今日のシェアイベント
+        today_shares = {"x": 0, "line": 0}
+        try:
+            today_share_request = RunReportRequest(
+                property=property_id,
+                date_ranges=[DateRange(start_date=today_str, end_date=today_str)],
+                dimensions=[Dimension(name="customEvent:method")],
+                metrics=[Metric(name="eventCount")],
+                dimension_filter=FilterExpression(
+                    filter=Filter(
+                        field_name="eventName",
+                        string_filter=Filter.StringFilter(value="share"),
+                    )
+                ),
+            )
+            today_share_response = client.run_report(today_share_request)
+            for row in today_share_response.rows:
+                method = row.dimension_values[0].value.lower()
+                count = int(row.metric_values[0].value)
+                if method == "twitter":
+                    today_shares["x"] = count
+                elif method == "line":
+                    today_shares["line"] = count
+        except Exception as e:
+            print(f"今日のシェアイベント取得エラー（無視して続行）: {e}")
+
         # 人気ページの取得
         top_pages = []
         try:
             pages_request = RunReportRequest(
                 property=property_id,
-                date_ranges=[DateRange(start_date=start_date.strftime("%Y-%m-%d"), end_date=end_date.strftime("%Y-%m-%d"))],
+                date_ranges=[DateRange(start_date=start_date.strftime("%Y-%m-%d"), end_date=today_str)],
                 dimensions=[Dimension(name="pagePath")],
                 metrics=[Metric(name="screenPageViews")],
                 order_bys=[{"metric": {"metric_name": "screenPageViews"}, "desc": True}],
@@ -143,12 +217,17 @@ def fetch_analytics_data():
 
         return {
             "lastUpdated": datetime.now().isoformat(),
-            "period": f"{start_date.strftime('%Y/%m/%d')} - {end_date.strftime('%Y/%m/%d')}",
+            "period": f"{start_date.strftime('%Y/%m/%d')} - {today.strftime('%Y/%m/%d')}",
             "pageViews": page_views,
+            "todayPageViews": today_page_views,
             "users": users,
+            "todayUsers": today_users,
             "sessions": sessions,
+            "todaySessions": today_sessions,
             "clicks": clicks,
+            "todayClicks": today_clicks,
             "shares": shares,
+            "todayShares": today_shares,
             "topPages": top_pages,
         }
 

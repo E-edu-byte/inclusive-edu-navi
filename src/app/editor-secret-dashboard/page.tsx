@@ -113,14 +113,26 @@ type AnalyticsData = {
   lastUpdated: string | null;
   period: string;
   pageViews: number;
+  todayPageViews?: number;
   users: number;
+  todayUsers?: number;
   sessions: number;
+  todaySessions?: number;
   clicks: {
     amazon: number;
     rakuten: number;
     ofuse: number;
   };
+  todayClicks?: {
+    amazon: number;
+    rakuten: number;
+    ofuse: number;
+  };
   shares: {
+    x: number;
+    line: number;
+  };
+  todayShares?: {
     x: number;
     line: number;
   };
@@ -928,15 +940,36 @@ export default function EditorDashboard() {
               <div className="grid grid-cols-3 gap-4 mb-4">
                 <div className="bg-gray-700 rounded-lg p-4">
                   <span className="text-gray-400 text-xs block mb-1">ページビュー</span>
-                  <span className="text-white font-medium text-lg">{analytics.pageViews.toLocaleString()}</span>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-white font-medium text-lg">{analytics.pageViews.toLocaleString()}</span>
+                    <span className="text-gray-500 text-xs">累計</span>
+                  </div>
+                  <div className="flex items-baseline gap-2 mt-1">
+                    <span className="text-blue-400 font-medium">{(analytics.todayPageViews ?? 0).toLocaleString()}</span>
+                    <span className="text-gray-500 text-xs">今日</span>
+                  </div>
                 </div>
                 <div className="bg-gray-700 rounded-lg p-4">
                   <span className="text-gray-400 text-xs block mb-1">ユーザー数</span>
-                  <span className="text-blue-400 font-medium text-lg">{analytics.users.toLocaleString()}</span>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-white font-medium text-lg">{analytics.users.toLocaleString()}</span>
+                    <span className="text-gray-500 text-xs">累計</span>
+                  </div>
+                  <div className="flex items-baseline gap-2 mt-1">
+                    <span className="text-blue-400 font-medium">{(analytics.todayUsers ?? 0).toLocaleString()}</span>
+                    <span className="text-gray-500 text-xs">今日</span>
+                  </div>
                 </div>
                 <div className="bg-gray-700 rounded-lg p-4">
                   <span className="text-gray-400 text-xs block mb-1">セッション</span>
-                  <span className="text-green-400 font-medium text-lg">{analytics.sessions.toLocaleString()}</span>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-white font-medium text-lg">{analytics.sessions.toLocaleString()}</span>
+                    <span className="text-gray-500 text-xs">累計</span>
+                  </div>
+                  <div className="flex items-baseline gap-2 mt-1">
+                    <span className="text-blue-400 font-medium">{(analytics.todaySessions ?? 0).toLocaleString()}</span>
+                    <span className="text-gray-500 text-xs">今日</span>
+                  </div>
                 </div>
               </div>
 
@@ -946,15 +979,36 @@ export default function EditorDashboard() {
                 <div className="grid grid-cols-3 gap-4">
                   <div className="bg-gray-700 rounded-lg p-4">
                     <span className="text-amber-400 text-xs block mb-1">Amazon</span>
-                    <span className="text-white font-medium text-lg">{analytics.clicks.amazon}</span>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-white font-medium">{analytics.clicks.amazon}</span>
+                      <span className="text-gray-500 text-xs">累計</span>
+                    </div>
+                    <div className="flex items-baseline gap-2 mt-1">
+                      <span className="text-amber-400 font-medium">{analytics.todayClicks?.amazon ?? 0}</span>
+                      <span className="text-gray-500 text-xs">今日</span>
+                    </div>
                   </div>
                   <div className="bg-gray-700 rounded-lg p-4">
                     <span className="text-red-400 text-xs block mb-1">楽天</span>
-                    <span className="text-white font-medium text-lg">{analytics.clicks.rakuten}</span>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-white font-medium">{analytics.clicks.rakuten}</span>
+                      <span className="text-gray-500 text-xs">累計</span>
+                    </div>
+                    <div className="flex items-baseline gap-2 mt-1">
+                      <span className="text-red-400 font-medium">{analytics.todayClicks?.rakuten ?? 0}</span>
+                      <span className="text-gray-500 text-xs">今日</span>
+                    </div>
                   </div>
                   <div className="bg-gray-700 rounded-lg p-4">
                     <span className="text-purple-400 text-xs block mb-1">OFUSE</span>
-                    <span className="text-white font-medium text-lg">{analytics.clicks.ofuse}</span>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-white font-medium">{analytics.clicks.ofuse}</span>
+                      <span className="text-gray-500 text-xs">累計</span>
+                    </div>
+                    <div className="flex items-baseline gap-2 mt-1">
+                      <span className="text-purple-400 font-medium">{analytics.todayClicks?.ofuse ?? 0}</span>
+                      <span className="text-gray-500 text-xs">今日</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -965,11 +1019,25 @@ export default function EditorDashboard() {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-gray-700 rounded-lg p-4">
                     <span className="text-white text-xs block mb-1">X（Twitter）</span>
-                    <span className="text-white font-medium text-lg">{analytics.shares.x}</span>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-white font-medium">{analytics.shares.x}</span>
+                      <span className="text-gray-500 text-xs">累計</span>
+                    </div>
+                    <div className="flex items-baseline gap-2 mt-1">
+                      <span className="text-blue-400 font-medium">{analytics.todayShares?.x ?? 0}</span>
+                      <span className="text-gray-500 text-xs">今日</span>
+                    </div>
                   </div>
                   <div className="bg-gray-700 rounded-lg p-4">
                     <span className="text-[#06C755] text-xs block mb-1">LINE</span>
-                    <span className="text-white font-medium text-lg">{analytics.shares.line}</span>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-white font-medium">{analytics.shares.line}</span>
+                      <span className="text-gray-500 text-xs">累計</span>
+                    </div>
+                    <div className="flex items-baseline gap-2 mt-1">
+                      <span className="text-[#06C755] font-medium">{analytics.todayShares?.line ?? 0}</span>
+                      <span className="text-gray-500 text-xs">今日</span>
+                    </div>
                   </div>
                 </div>
               </div>
