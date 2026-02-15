@@ -6,3 +6,6 @@ beautifulsoup4>=4.12.0
 # AI記事生成用
 google-genai>=1.0.0
 python-dotenv>=1.0.0
+
+# Google Analytics Data API
+google-analytics-data>=0.18.0

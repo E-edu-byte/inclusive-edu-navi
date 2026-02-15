@@ -108,6 +108,28 @@ type ArticleForDeletion = {
   isManual?: boolean;
 };
 
+// GA4アナリティクスデータ型
+type AnalyticsData = {
+  lastUpdated: string | null;
+  period: string;
+  pageViews: number;
+  users: number;
+  sessions: number;
+  clicks: {
+    amazon: number;
+    rakuten: number;
+    ofuse: number;
+  };
+  shares: {
+    x: number;
+    line: number;
+  };
+  topPages: Array<{
+    path: string;
+    views: number;
+  }>;
+};
+
 // 初期トラッキングデータ
 const initialTracking: TrackingData = {
   pageViews: {},
@@ -133,6 +155,7 @@ export default function EditorDashboard() {
   const [status, setStatus] = useState<StatusData | null>(null);
   const [tracking, setTracking] = useState<TrackingData>(initialTracking);
   const [manualArticles, setManualArticles] = useState<ManualArticlesData | null>(null);
+  const [analytics, setAnalytics] = useState<AnalyticsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [postUrl, setPostUrl] = useState('');
   const [postError, setPostError] = useState('');
@@ -229,6 +252,19 @@ export default function EditorDashboard() {
       }
     }
 
+    // GA4アナリティクスデータを取得
+    async function fetchAnalytics() {
+      try {
+        const res = await fetch(`${BASE_PATH}/data/analytics.json`);
+        if (res.ok) {
+          const data = await res.json();
+          setAnalytics(data);
+        }
+      } catch (error) {
+        console.error('手動記事取得エラー:', error);
+      }
+    }
+
     // 全記事のURLを取得（重複チェック用）+ 記事一覧（削除用）
     async function fetchAllUrls() {
       try {
@@ -299,6 +335,7 @@ export default function EditorDashboard() {
     loadTracking();
     fetchManualArticles();
     fetchAllUrls();
+    fetchAnalytics();
   }, []);
 
   // 日時フォーマット
@@ -863,140 +900,115 @@ export default function EditorDashboard() {
           )}
         </section>
 
-        {/* トラッキング */}
+        {/* アクセス解析（Google Analytics） */}
         <section className="bg-gray-800 rounded-xl p-6 mb-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-bold text-white">トラッキング（ローカル）</h2>
-            <span className="text-xs text-gray-500">※自分のアクセスのみ</span>
+            <h2 className="text-lg font-bold text-white flex items-center gap-2">
+              <svg className="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M22.84 2.998c-.018-.087-.054-.168-.103-.24a.757.757 0 0 0-.098-.133.748.748 0 0 0-.131-.1.738.738 0 0 0-.239-.104.741.741 0 0 0-.26-.023H1.992a.75.75 0 0 0-.53.22.75.75 0 0 0-.22.53v17.704a.75.75 0 0 0 .22.53.75.75 0 0 0 .53.22h20.016a.75.75 0 0 0 .53-.22.75.75 0 0 0 .22-.53V3.148a.741.741 0 0 0-.023-.15zM12 19.5a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15z"/>
+              </svg>
+              アクセス解析
+            </h2>
+            <a
+              href="https://analytics.google.com/analytics/web/#/p473599809/reports/intelligenthome"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1"
+            >
+              Google Analytics を開く
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
           </div>
 
-          {/* アクセス数 */}
-          <div className="mb-4">
-            <h3 className="text-sm font-medium text-gray-300 mb-2">アクセス数</h3>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-gray-700 rounded-lg p-4">
-                <span className="text-gray-400 text-xs block mb-1">累計</span>
-                <span className="text-white font-medium text-lg">
-                  {tracking.totalPageViews || 0}
-                </span>
+          {analytics ? (
+            <>
+              {/* 基本指標 */}
+              <div className="grid grid-cols-3 gap-4 mb-4">
+                <div className="bg-gray-700 rounded-lg p-4">
+                  <span className="text-gray-400 text-xs block mb-1">ページビュー</span>
+                  <span className="text-white font-medium text-lg">{analytics.pageViews.toLocaleString()}</span>
+                </div>
+                <div className="bg-gray-700 rounded-lg p-4">
+                  <span className="text-gray-400 text-xs block mb-1">ユーザー数</span>
+                  <span className="text-blue-400 font-medium text-lg">{analytics.users.toLocaleString()}</span>
+                </div>
+                <div className="bg-gray-700 rounded-lg p-4">
+                  <span className="text-gray-400 text-xs block mb-1">セッション</span>
+                  <span className="text-green-400 font-medium text-lg">{analytics.sessions.toLocaleString()}</span>
+                </div>
               </div>
-              <div className="bg-gray-700 rounded-lg p-4">
-                <span className="text-gray-400 text-xs block mb-1">今日</span>
-                <span className="text-blue-400 font-medium text-lg">
-                  {getTodayPageViews()}
-                </span>
-              </div>
-            </div>
-          </div>
 
-          {/* クリック数 */}
-          <div className="mb-4">
-            <h3 className="text-sm font-medium text-gray-300 mb-2">クリック数</h3>
-            <div className="grid grid-cols-3 gap-4">
-              {/* Amazon */}
-              <div className="bg-gray-700 rounded-lg p-4">
-                <span className="text-amber-400 text-xs block mb-2">Amazon</span>
-                <div className="flex justify-between items-center">
-                  <div>
-                    <span className="text-gray-500 text-xs">累計</span>
-                    <span className="text-white font-medium text-sm ml-1">{tracking.totalClicks?.amazon || 0}</span>
+              {/* クリック数 */}
+              <div className="mb-4">
+                <h3 className="text-sm font-medium text-gray-300 mb-2">クリック数</h3>
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="bg-gray-700 rounded-lg p-4">
+                    <span className="text-amber-400 text-xs block mb-1">Amazon</span>
+                    <span className="text-white font-medium text-lg">{analytics.clicks.amazon}</span>
                   </div>
-                  <div>
-                    <span className="text-gray-500 text-xs">今日</span>
-                    <span className="text-amber-400 font-medium text-sm ml-1">{getTodayClicks('amazon')}</span>
+                  <div className="bg-gray-700 rounded-lg p-4">
+                    <span className="text-red-400 text-xs block mb-1">楽天</span>
+                    <span className="text-white font-medium text-lg">{analytics.clicks.rakuten}</span>
+                  </div>
+                  <div className="bg-gray-700 rounded-lg p-4">
+                    <span className="text-purple-400 text-xs block mb-1">OFUSE</span>
+                    <span className="text-white font-medium text-lg">{analytics.clicks.ofuse}</span>
                   </div>
                 </div>
               </div>
 
-              {/* 楽天 */}
-              <div className="bg-gray-700 rounded-lg p-4">
-                <span className="text-red-400 text-xs block mb-2">楽天</span>
-                <div className="flex justify-between items-center">
-                  <div>
-                    <span className="text-gray-500 text-xs">累計</span>
-                    <span className="text-white font-medium text-sm ml-1">{tracking.totalClicks?.rakuten || 0}</span>
+              {/* シェア数 */}
+              <div className="mb-4">
+                <h3 className="text-sm font-medium text-gray-300 mb-2">シェア数</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-gray-700 rounded-lg p-4">
+                    <span className="text-white text-xs block mb-1">X（Twitter）</span>
+                    <span className="text-white font-medium text-lg">{analytics.shares.x}</span>
                   </div>
-                  <div>
-                    <span className="text-gray-500 text-xs">今日</span>
-                    <span className="text-red-400 font-medium text-sm ml-1">{getTodayClicks('rakuten')}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Buy Me a Coffee */}
-              <div className="bg-gray-700 rounded-lg p-4">
-                <span className="text-yellow-400 text-xs block mb-2">Coffee</span>
-                <div className="flex justify-between items-center">
-                  <div>
-                    <span className="text-gray-500 text-xs">累計</span>
-                    <span className="text-white font-medium text-sm ml-1">{tracking.totalClicks?.buymeacoffee || 0}</span>
-                  </div>
-                  <div>
-                    <span className="text-gray-500 text-xs">今日</span>
-                    <span className="text-yellow-400 font-medium text-sm ml-1">{getTodayClicks('buymeacoffee')}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* シェア数 */}
-          <div className="mb-4">
-            <h3 className="text-sm font-medium text-gray-300 mb-2">シェア数</h3>
-            <div className="grid grid-cols-2 gap-4">
-              {/* X */}
-              <div className="bg-gray-700 rounded-lg p-4">
-                <span className="text-white text-xs block mb-2">X（Twitter）</span>
-                <div className="flex justify-between items-center">
-                  <div>
-                    <span className="text-gray-500 text-xs">累計</span>
-                    <span className="text-white font-medium text-sm ml-1">{tracking.totalShares?.x || 0}</span>
-                  </div>
-                  <div>
-                    <span className="text-gray-500 text-xs">今日</span>
-                    <span className="text-blue-400 font-medium text-sm ml-1">{getTodayShares('x')}</span>
+                  <div className="bg-gray-700 rounded-lg p-4">
+                    <span className="text-[#06C755] text-xs block mb-1">LINE</span>
+                    <span className="text-white font-medium text-lg">{analytics.shares.line}</span>
                   </div>
                 </div>
               </div>
 
-              {/* LINE */}
-              <div className="bg-gray-700 rounded-lg p-4">
-                <span className="text-[#06C755] text-xs block mb-2">LINE</span>
-                <div className="flex justify-between items-center">
-                  <div>
-                    <span className="text-gray-500 text-xs">累計</span>
-                    <span className="text-white font-medium text-sm ml-1">{tracking.totalShares?.line || 0}</span>
-                  </div>
-                  <div>
-                    <span className="text-gray-500 text-xs">今日</span>
-                    <span className="text-[#06C755] font-medium text-sm ml-1">{getTodayShares('line')}</span>
+              {/* 人気ページ */}
+              {analytics.topPages && analytics.topPages.length > 0 && (
+                <div className="mb-4">
+                  <h3 className="text-sm font-medium text-gray-300 mb-2">人気ページ TOP5</h3>
+                  <div className="bg-gray-700 rounded-lg p-3">
+                    {analytics.topPages.slice(0, 5).map((page, index) => (
+                      <div key={index} className="flex justify-between text-xs py-1 border-b border-gray-600 last:border-0">
+                        <span className="text-gray-300 truncate max-w-[250px]">{page.path}</span>
+                        <span className="text-gray-400">{page.views.toLocaleString()}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
+              )}
 
-          {/* ページ別ビュー */}
-          {Object.keys(tracking.pageViews).length > 0 && (
-            <div className="mb-4">
-              <h3 className="text-sm font-medium text-gray-300 mb-2">ページ別ビュー</h3>
-              <div className="bg-gray-700 rounded-lg p-3 max-h-40 overflow-y-auto">
-                {Object.entries(tracking.pageViews)
-                  .sort((a, b) => b[1] - a[1])
-                  .slice(0, 10)
-                  .map(([page, count]) => (
-                    <div key={page} className="flex justify-between text-xs py-1 border-b border-gray-600 last:border-0">
-                      <span className="text-gray-300 truncate max-w-[200px]">{page}</span>
-                      <span className="text-gray-400">{count}</span>
-                    </div>
-                  ))}
-              </div>
+              <p className="text-gray-500 text-xs">
+                集計期間: {analytics.period} • 最終更新: {analytics.lastUpdated ? formatDate(analytics.lastUpdated) : '-'}
+              </p>
+            </>
+          ) : (
+            <div className="text-center py-8">
+              <p className="text-gray-400 mb-4">アクセス解析データを準備中...</p>
+              <a
+                href="https://analytics.google.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors"
+              >
+                Google Analytics で確認
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
             </div>
           )}
-
-          <p className="text-gray-500 text-xs">
-            最終リセット: {formatDate(tracking.lastReset)}
-          </p>
         </section>
 
         {/* エラーログ */}

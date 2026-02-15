@@ -128,8 +128,17 @@ export function trackPageView(path: string): void {
   saveTracking(tracking);
 }
 
-// クリックを記録
+// クリックを記録（GA4にも送信）
 export function trackClick(type: ClickType): void {
+  // GA4にイベント送信
+  if (typeof window !== 'undefined' && (window as any).gtag) {
+    (window as any).gtag('event', 'affiliate_click', {
+      event_category: 'engagement',
+      event_label: type,
+      affiliate_type: type,
+    });
+  }
+
   const tracking = getTracking();
   const today = getTodayDate();
 
@@ -167,8 +176,17 @@ export function trackClick(type: ClickType): void {
   saveTracking(tracking);
 }
 
-// シェアを記録
+// シェアを記録（GA4にも送信）
 export function trackShare(type: ShareType): void {
+  // GA4にイベント送信
+  if (typeof window !== 'undefined' && (window as any).gtag) {
+    (window as any).gtag('event', 'share', {
+      event_category: 'engagement',
+      event_label: type,
+      method: type === 'x' ? 'Twitter' : 'LINE',
+    });
+  }
+
   const tracking = getTracking();
   const today = getTodayDate();
 

@@ -1,0 +1,17 @@
+{
+  "lastUpdated": null,
+  "period": "データ取得待ち",
+  "pageViews": 0,
+  "users": 0,
+  "sessions": 0,
+  "clicks": {
+    "amazon": 0,
+    "rakuten": 0,
+    "ofuse": 0
+  },
+  "shares": {
+    "x": 0,
+    "line": 0
+  },
+  "topPages": []
+}
