@@ -9,10 +9,7 @@
       "url": "https://news.yahoo.co.jp/articles/b4375efbcf363f83b5b0abe72f38bd58287f42b2",
       "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260215-00010000-bengojp-000-1-view.jpg?exp=10800",
       "source": "Yahoo!ニュース",
-      "mainKeyword": "発達障害",
-      "isManual": true,
-      "addedAt": "2026-02-15T16:15:10.899549",
-      "expiresAt": "2026-02-22T16:15:10.899551"
+      "mainKeyword": "発達障害"
     },
     {
       "id": "2290e7507f3c",
@@ -23,10 +20,7 @@
       "url": "https://current.ndl.go.jp/car/260677",
       "imageUrl": "https://current.ndl.go.jp/wp-content/uploads/2022/09/OGP.png",
       "source": "カレントアウェアネス・ポータル",
-      "mainKeyword": "失読",
-      "isManual": true,
-      "addedAt": "2026-02-15T08:02:39.050017",
-      "expiresAt": "2026-02-22T08:02:39.050019"
+      "mainKeyword": "失読"
     },
     {
       "id": "153882ed2f01",
@@ -37,10 +31,7 @@
       "url": "https://www.asahi.com/edua/article/15954550?p=3",
       "imageUrl": "https://public0.potaufeu.asahi.com/afd2-p/picture/29894545/05e783dd654896691bbd2550d87c0cb3.jpg",
       "source": "asahi.com",
-      "mainKeyword": "入試配慮",
-      "isManual": true,
-      "addedAt": "2026-02-15T07:49:40.111976",
-      "expiresAt": "2026-02-22T07:49:40.111979"
+      "mainKeyword": "入試配慮"
     },
     {
       "id": "f93aafa1bdfa",
@@ -240,11 +231,13 @@
       "source": "文部科学省"
     }
   ],
-  "lastUpdated": "2026-02-15T16:15:10.900347",
-  "totalCount": 18,
+  "lastUpdated": "2026-02-15T18:50:49.553521",
+  "totalCount": 21,
   "sources": [
-    "BBCニュース",
     "Yahoo!ニュース",
+    "カレントアウェアネス・ポータル",
+    "asahi.com",
+    "BBCニュース",
     "お山デザイン",
     "京都教育大学 学びサポート室",
     "CareNet.com",
