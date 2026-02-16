@@ -7,6 +7,7 @@ import NewsCard from '@/components/NewsCard';
 import RankingBlock from '@/components/RankingBlock';
 import SupportCard from '@/components/SupportCard';
 import FeaturedBooksBlock from '@/components/FeaturedBooksBlock';
+import CommentSection from '@/components/CommentSection';
 import { Article, ArticlesData, BASE_PATH, filterPublishableArticles, fetchTrashedUrls, filterOutTrashedArticles } from '@/lib/types';
 import { useBookmarks } from '@/contexts/BookmarkContext';
 import { supabase, EditorMessage } from '@/lib/supabase';
@@ -19,7 +20,50 @@ export default function Home() {
   const [editorMessages, setEditorMessages] = useState<EditorMessage[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isDonorAuth, setIsDonorAuth] = useState(false);
   const { bookmarkCount, maxBookmarks } = useBookmarks();
+
+  // 認証ロジック: ?key=... パラメータを検知してSupabaseと照合
+  useEffect(() => {
+    // まずlocalStorageから認証状態を復元
+    const savedAuth = localStorage.getItem('donor_auth');
+    if (savedAuth === 'true') {
+      setIsDonorAuth(true);
+    }
+
+    // URLパラメータにkeyがあれば検証
+    const urlParams = new URLSearchParams(window.location.search);
+    const keyParam = urlParams.get('key');
+    if (keyParam) {
+      (async () => {
+        try {
+          const { data, error } = await supabase
+            .from('access_keys')
+            .select('key_string')
+            .limit(1)
+            .single();
+
+          if (data && !error && data.key_string === keyParam) {
+            // 認証成功
+            localStorage.setItem('donor_auth', 'true');
+            setIsDonorAuth(true);
+            // URLをクリーンにリダイレクト（履歴を置き換え）
+            window.history.replaceState({}, '', window.location.pathname);
+          }
+        } catch (e) {
+          console.error('認証エラー:', e);
+        }
+      })();
+    }
+  }, []);
+
+  // コメントセクションへスムーズスクロール
+  const scrollToComments = () => {
+    const commentsSection = document.getElementById('comments');
+    if (commentsSection) {
+      commentsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   // Supabaseから編集長メッセージを取得 & Realtime購読
   useEffect(() => {
@@ -325,6 +369,11 @@ export default function Home() {
             <FeaturedBooksBlock />
           </div>
 
+          {/* コメントセクション */}
+          <div className="mt-8">
+            <CommentSection isDonorAuth={isDonorAuth} />
+          </div>
+
           {/* 記事がない場合 */}
           {articles.length === 0 && (
             <div className="text-center py-8 bg-gray-50 rounded-xl">
@@ -341,6 +390,17 @@ export default function Home() {
           <Sidebar />
         </div>
       </div>
+
+      {/* スマホ用：右端固定バー（コメントへの導線） */}
+      <button
+        onClick={scrollToComments}
+        className="lg:hidden fixed right-0 top-1/2 -translate-y-1/2 z-40 bg-emerald-600 hover:bg-emerald-700 text-white py-4 px-1.5 rounded-l-lg shadow-lg transition-colors"
+        aria-label="読者のコメントをみる"
+      >
+        <span className="writing-vertical text-xs font-medium tracking-wider" style={{ writingMode: 'vertical-rl' }}>
+          コメントをみる
+        </span>
+      </button>
     </div>
   );
 }
