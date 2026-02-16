@@ -2,17 +2,11 @@
 
 import { useState, useEffect } from 'react';
 
-// beforeinstallpromptイベントの型定義
-interface BeforeInstallPromptEvent extends Event {
-  prompt: () => Promise<void>;
-  userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>;
-}
-
 export default function AddToHomeScreen() {
-  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
-  const [showIOSPrompt, setShowIOSPrompt] = useState(false);
+  const [isIOS, setIsIOS] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const [isStandalone, setIsStandalone] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     // 既にPWAとして起動している場合は表示しない
@@ -26,43 +20,22 @@ export default function AddToHomeScreen() {
       setDismissed(true);
     }
 
+    // モバイル判定
+    const mobile = /Android|iPhone|iPad|iPod/.test(navigator.userAgent);
+    setIsMobile(mobile);
+
     // iOS判定
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
-    if (isIOS && isSafari) {
-      setShowIOSPrompt(true);
-    }
-
-    // Android/Chrome用のインストールプロンプト
-    const handleBeforeInstallPrompt = (e: Event) => {
-      e.preventDefault();
-      setDeferredPrompt(e as BeforeInstallPromptEvent);
-    };
-
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-
-    return () => {
-      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-    };
+    const ios = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    setIsIOS(ios);
   }, []);
-
-  const handleInstallClick = async () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === 'accepted') {
-        setDeferredPrompt(null);
-      }
-    }
-  };
 
   const handleDismiss = () => {
     localStorage.setItem('pwa-prompt-dismissed', new Date().toDateString());
     setDismissed(true);
   };
 
-  // 表示条件: スマホ、まだ閉じていない、PWAでない、インストール可能またはiOS
-  if (isStandalone || dismissed || (!deferredPrompt && !showIOSPrompt)) {
+  // 表示条件: スマホ、まだ閉じていない、PWAでない
+  if (isStandalone || dismissed || !isMobile) {
     return null;
   }
 
@@ -74,21 +47,18 @@ export default function AddToHomeScreen() {
             ページをホーム画面に追加して、アプリ風に簡単にみられるようにする
           </p>
           <div className="flex items-center gap-2 flex-shrink-0">
-            {deferredPrompt ? (
-              <button
-                onClick={handleInstallClick}
-                className="px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white text-xs font-medium rounded-lg transition-colors whitespace-nowrap"
-              >
-                追加
-              </button>
-            ) : showIOSPrompt ? (
-              <button
-                onClick={() => alert('Safariのメニュー「共有」→「ホーム画面に追加」をタップしてください')}
-                className="px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white text-xs font-medium rounded-lg transition-colors whitespace-nowrap"
-              >
-                方法
-              </button>
-            ) : null}
+            <button
+              onClick={() => {
+                if (isIOS) {
+                  alert('Safariの「共有」ボタン → 「ホーム画面に追加」をタップしてください');
+                } else {
+                  alert('Chromeのメニュー（︙）→「ホーム画面に追加」をタップしてください');
+                }
+              }}
+              className="px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white text-xs font-medium rounded-lg transition-colors whitespace-nowrap"
+            >
+              方法
+            </button>
             <button
               onClick={handleDismiss}
               className="p-1 text-sky-400 hover:text-sky-600 transition-colors"
