@@ -1,6 +1,20 @@
 {
   "articles": [
     {
+      "id": "37333cca45d2",
+      "title": "ADHDと自閉スペクトラムの共存「AuDHD」とは？気づきと対処法 - Tiimo App",
+      "summary": "ADHDと自閉スペクトラムの特性が重なる「AuDHD」について解説します。その特徴や診断の難しさ、そして日々の暮らしを楽にするための工夫やヒントを紹介。本人や周りの方が特性を理解し、より良い生活を送るための手助けになる情報です。",
+      "category": "合理的配慮・支援",
+      "date": "2026-02-17",
+      "url": "https://www.tiimoapp.com/ja/resource-hub/audhd-autistic-adhd-explained",
+      "imageUrl": "https://cdn.prod.website-files.com/64786b629e5c33d650d54a0a/67acbf67a206ae9e5ee9bbe6_AuDHD.jpg",
+      "source": "tiimoapp.com",
+      "mainKeyword": "AuDHD",
+      "isManual": true,
+      "addedAt": "2026-02-17T08:16:20.209111",
+      "expiresAt": "2026-02-24T08:16:20.209112"
+    },
+    {
       "id": "86710630d478",
       "title": "ADHDは概日リズム障害である：証拠と時間療法の影響 - ナゾロジー",
       "summary": "ADHDは「不注意」や「落ち着きのなさ」といった行動だけでなく、脳の体内時計のズレが原因かもしれないという新しい研究が発表されました。睡眠の悩みなど、これまで理解しにくかったADHDの症状が、生物学的な「時計のズレ」と関係している可能性があり、今後の支援や治療を考える上で役立つ視点です。",
@@ -309,6 +323,6 @@
       "expiresAt": "2026-02-17T10:06:16.147555"
     }
   ],
-  "lastUpdated": "2026-02-17T08:14:04.047074",
+  "lastUpdated": "2026-02-17T08:16:20.209336",
   "note": "手動投稿された記事。自動更新で上書きされない。"
 }
