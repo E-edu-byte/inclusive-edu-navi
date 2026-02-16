@@ -68,38 +68,37 @@ export default function AddToHomeScreen() {
 
   return (
     <div className="lg:hidden mb-4">
-      <div className="bg-gradient-to-r from-sky-50 to-indigo-50 border border-sky-200 rounded-xl p-3 flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2 flex-1 min-w-0">
-          <span className="text-lg flex-shrink-0">📱</span>
-          <p className="text-sm text-sky-800 truncate">
-            ホーム画面に追加してアプリのように使えます
+      <div className="bg-gradient-to-r from-sky-50 to-indigo-50 border border-sky-200 rounded-xl p-3">
+        <div className="flex items-start justify-between gap-2">
+          <p className="text-xs text-sky-800 leading-relaxed flex-1">
+            ページをホーム画面に追加して、アプリ風に簡単にみられるようにする
           </p>
-        </div>
-        <div className="flex items-center gap-2 flex-shrink-0">
-          {deferredPrompt ? (
+          <div className="flex items-center gap-2 flex-shrink-0">
+            {deferredPrompt ? (
+              <button
+                onClick={handleInstallClick}
+                className="px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white text-xs font-medium rounded-lg transition-colors whitespace-nowrap"
+              >
+                追加
+              </button>
+            ) : showIOSPrompt ? (
+              <button
+                onClick={() => alert('Safariのメニュー「共有」→「ホーム画面に追加」をタップしてください')}
+                className="px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white text-xs font-medium rounded-lg transition-colors whitespace-nowrap"
+              >
+                方法
+              </button>
+            ) : null}
             <button
-              onClick={handleInstallClick}
-              className="px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white text-xs font-medium rounded-lg transition-colors whitespace-nowrap"
+              onClick={handleDismiss}
+              className="p-1 text-sky-400 hover:text-sky-600 transition-colors"
+              aria-label="閉じる"
             >
-              追加
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
             </button>
-          ) : showIOSPrompt ? (
-            <button
-              onClick={() => alert('Safariのメニュー「共有」→「ホーム画面に追加」をタップしてください')}
-              className="px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white text-xs font-medium rounded-lg transition-colors whitespace-nowrap"
-            >
-              方法
-            </button>
-          ) : null}
-          <button
-            onClick={handleDismiss}
-            className="p-1 text-sky-400 hover:text-sky-600 transition-colors"
-            aria-label="閉じる"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+          </div>
         </div>
       </div>
     </div>
