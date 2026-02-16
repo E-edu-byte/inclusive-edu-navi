@@ -129,7 +129,7 @@ function BookmarkCard({ article, index, onDragStart, onDragEnter, onDragEnd, onT
           </h3>
 
           {/* 要約 */}
-          <p className="text-sm text-gray-600 leading-relaxed mb-4 flex-grow line-clamp-3">
+          <p className="text-sm text-gray-600 leading-relaxed mb-4 flex-grow">
             {article.summary}
           </p>
 
