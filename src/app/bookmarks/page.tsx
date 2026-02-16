@@ -1,6 +1,5 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { useBookmarks, BookmarkedArticle } from '@/contexts/BookmarkContext';
 import { getCategoryByName } from '@/lib/types';
@@ -51,39 +50,25 @@ function isValidImageUrl(url?: string): boolean {
 type BookmarkCardProps = {
   article: BookmarkedArticle;
   index: number;
-  onDragStart: (index: number) => void;
-  onDragEnter: (index: number) => void;
-  onDragEnd: () => void;
-  onTouchStart: (index: number, e: React.TouchEvent) => void;
-  onTouchMove: (e: React.TouchEvent) => void;
-  onTouchEnd: () => void;
-  isDragging: boolean;
-  isDragOver: boolean;
+  totalCount: number;
+  onMoveUp: (index: number) => void;
+  onMoveDown: (index: number) => void;
 };
 
-function BookmarkCard({ article, index, onDragStart, onDragEnter, onDragEnd, onTouchStart, onTouchMove, onTouchEnd, isDragging, isDragOver }: BookmarkCardProps) {
+function BookmarkCard({ article, index, totalCount, onMoveUp, onMoveDown }: BookmarkCardProps) {
   const { removeBookmark } = useBookmarks();
   const hasValidImage = isValidImageUrl(article.imageUrl);
   const fallbackImage = getFallbackImage(article.title);
   const categoryInfo = article.category ? getCategoryByName(article.category) : null;
 
+  const canMoveUp = index > 0;
+  const canMoveDown = index < totalCount - 1;
+
   return (
-    <article
-      draggable
-      onDragStart={() => onDragStart(index)}
-      onDragEnter={() => onDragEnter(index)}
-      onDragEnd={onDragEnd}
-      onDragOver={(e) => e.preventDefault()}
-      onTouchStart={(e) => onTouchStart(index, e)}
-      onTouchMove={onTouchMove}
-      onTouchEnd={onTouchEnd}
-      className={`rounded-xl border bg-white shadow-sm transition-all cursor-grab active:cursor-grabbing ${
-        isDragging ? 'opacity-50 scale-[0.98]' : ''
-      } ${isDragOver ? 'border-primary-400 border-2 shadow-md' : 'border-gray-200 hover:shadow-md'}`}
-    >
+    <article className="rounded-xl border bg-white shadow-sm border-gray-200 hover:shadow-md transition-all">
       <div className="flex flex-col sm:flex-row">
-        {/* サムネイル */}
-        <div className="sm:flex-shrink-0 sm:w-32 md:w-36">
+        {/* サムネイル（矢印ボタン付き） */}
+        <div className="sm:flex-shrink-0 sm:w-32 md:w-36 relative">
           <div className="h-44 sm:h-full sm:min-h-[160px] overflow-hidden rounded-t-xl sm:rounded-t-none sm:rounded-l-xl">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -106,6 +91,43 @@ function BookmarkCard({ article, index, onDragStart, onDragEnter, onDragEnd, onT
               }}
             />
           </div>
+          {/* 並べ替えボタン（複数記事がある場合のみ表示） */}
+          {totalCount > 1 && (
+            <>
+              {/* 下に移動ボタン（左上） */}
+              <button
+                onClick={() => onMoveDown(index)}
+                disabled={!canMoveDown}
+                className={`absolute top-2 left-2 w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+                  canMoveDown
+                    ? 'bg-white/90 hover:bg-white text-gray-700 hover:text-primary-600 shadow-md'
+                    : 'bg-gray-200/50 text-gray-400 cursor-not-allowed'
+                }`}
+                title="下に移動"
+                aria-label="下に移動"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </button>
+              {/* 上に移動ボタン（右上） */}
+              <button
+                onClick={() => onMoveUp(index)}
+                disabled={!canMoveUp}
+                className={`absolute top-2 right-2 w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+                  canMoveUp
+                    ? 'bg-white/90 hover:bg-white text-gray-700 hover:text-primary-600 shadow-md'
+                    : 'bg-gray-200/50 text-gray-400 cursor-not-allowed'
+                }`}
+                title="上に移動"
+                aria-label="上に移動"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                </svg>
+              </button>
+            </>
+          )}
         </div>
 
         {/* テキストコンテンツ */}
@@ -219,141 +241,21 @@ function BookmarkCard({ article, index, onDragStart, onDragEnter, onDragEnd, onT
   );
 }
 
-// 自動スクロールの設定
-const SCROLL_ZONE = 150; // 画面端からこのピクセル以内でスクロール開始
-const SCROLL_SPEED = 100; // スクロール速度
-
 export default function BookmarksPage() {
   const { bookmarks, bookmarkCount, maxBookmarks, reorderBookmarks } = useBookmarks();
-  const [dragIndex, setDragIndex] = useState<number | null>(null);
-  const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
-  const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // 自動スクロール処理
-  const handleAutoScroll = useCallback((clientY: number) => {
-    const viewportHeight = window.innerHeight;
-
-    // 上端に近い場合
-    if (clientY < SCROLL_ZONE) {
-      const speed = Math.max(1, SCROLL_SPEED * (1 - clientY / SCROLL_ZONE));
-      window.scrollBy(0, -speed);
-    }
-    // 下端に近い場合
-    else if (clientY > viewportHeight - SCROLL_ZONE) {
-      const speed = Math.max(1, SCROLL_SPEED * (1 - (viewportHeight - clientY) / SCROLL_ZONE));
-      window.scrollBy(0, speed);
-    }
-  }, []);
-
-  // ドラッグ中の処理（PC: dragover、スマホ: touchmove）
-  useEffect(() => {
-    if (dragIndex === null) {
-      // ドラッグ終了時にインターバルをクリア
-      if (scrollIntervalRef.current) {
-        clearInterval(scrollIntervalRef.current);
-        scrollIntervalRef.current = null;
-      }
-      return;
-    }
-
-    let lastClientY = 0;
-
-    const handleDragOver = (e: DragEvent) => {
-      lastClientY = e.clientY;
-    };
-
-    const handleTouchMove = (e: TouchEvent) => {
-      if (e.touches.length > 0) {
-        lastClientY = e.touches[0].clientY;
-      }
-    };
-
-    // スクロールインターバルを開始
-    scrollIntervalRef.current = setInterval(() => {
-      if (lastClientY > 0) {
-        handleAutoScroll(lastClientY);
-      }
-    }, 16); // 約60fps
-
-    window.addEventListener('dragover', handleDragOver);
-    window.addEventListener('touchmove', handleTouchMove, { passive: true });
-
-    return () => {
-      window.removeEventListener('dragover', handleDragOver);
-      window.removeEventListener('touchmove', handleTouchMove);
-      if (scrollIntervalRef.current) {
-        clearInterval(scrollIntervalRef.current);
-        scrollIntervalRef.current = null;
-      }
-    };
-  }, [dragIndex, handleAutoScroll]);
-
-  const handleDragStart = (index: number) => {
-    setDragIndex(index);
-  };
-
-  const handleDragEnter = (index: number) => {
-    setDragOverIndex(index);
-  };
-
-  const handleDragEnd = () => {
-    if (dragIndex !== null && dragOverIndex !== null && dragIndex !== dragOverIndex) {
-      reorderBookmarks(dragIndex, dragOverIndex);
-    }
-    setDragIndex(null);
-    setDragOverIndex(null);
-  };
-
-  // タッチイベント用のref（各カードの位置を追跡）
-  const cardRefs = useRef<(HTMLElement | null)[]>([]);
-  const touchYRef = useRef<number>(0);
-  const touchScrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
-
-  const handleTouchStart = (index: number, e: React.TouchEvent) => {
-    setDragIndex(index);
-    touchYRef.current = e.touches[0].clientY;
-
-    // タッチ用のスクロールインターバルを開始
-    if (touchScrollIntervalRef.current) {
-      clearInterval(touchScrollIntervalRef.current);
-    }
-    touchScrollIntervalRef.current = setInterval(() => {
-      if (touchYRef.current > 0) {
-        handleAutoScroll(touchYRef.current);
-      }
-    }, 10); // より高頻度で更新
-  };
-
-  const handleTouchMoveOnCard = (e: React.TouchEvent) => {
-    if (dragIndex === null) return;
-
-    const touch = e.touches[0];
-    touchYRef.current = touch.clientY;
-
-    // どのカードの上にいるか判定
-    const elements = document.elementsFromPoint(touch.clientX, touch.clientY);
-    for (const el of elements) {
-      const cardIndex = cardRefs.current.findIndex(ref => ref && ref.contains(el));
-      if (cardIndex !== -1 && cardIndex !== dragIndex) {
-        setDragOverIndex(cardIndex);
-        break;
-      }
+  // 上に移動（1つ上の記事と入れ替え）
+  const handleMoveUp = (index: number) => {
+    if (index > 0) {
+      reorderBookmarks(index, index - 1);
     }
   };
 
-  const handleTouchEnd = () => {
-    // タッチスクロールインターバルをクリア
-    if (touchScrollIntervalRef.current) {
-      clearInterval(touchScrollIntervalRef.current);
-      touchScrollIntervalRef.current = null;
+  // 下に移動（1つ下の記事と入れ替え）
+  const handleMoveDown = (index: number) => {
+    if (index < bookmarks.length - 1) {
+      reorderBookmarks(index, index + 1);
     }
-    touchYRef.current = 0;
-
-    if (dragIndex !== null && dragOverIndex !== null && dragIndex !== dragOverIndex) {
-      reorderBookmarks(dragIndex, dragOverIndex);
-    }
-    setDragIndex(null);
-    setDragOverIndex(null);
   };
 
   return (
@@ -382,24 +284,18 @@ export default function BookmarksPage() {
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
               </svg>
-              ドラッグして順番を変更できます
+              矢印ボタンで順番を変更できます
             </p>
           )}
           {bookmarks.map((article, index) => (
-            <div key={article.url} ref={(el) => { cardRefs.current[index] = el; }}>
-              <BookmarkCard
-                article={article}
-                index={index}
-                onDragStart={handleDragStart}
-                onDragEnter={handleDragEnter}
-                onDragEnd={handleDragEnd}
-                onTouchStart={handleTouchStart}
-                onTouchMove={handleTouchMoveOnCard}
-                onTouchEnd={handleTouchEnd}
-                isDragging={dragIndex === index}
-                isDragOver={dragOverIndex === index && dragIndex !== index}
-              />
-            </div>
+            <BookmarkCard
+              key={article.url}
+              article={article}
+              index={index}
+              totalCount={bookmarks.length}
+              onMoveUp={handleMoveUp}
+              onMoveDown={handleMoveDown}
+            />
           ))}
         </div>
       ) : (
