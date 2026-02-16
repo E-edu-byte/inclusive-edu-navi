@@ -24,14 +24,36 @@ export default function Home() {
   useEffect(() => {
     // 初期データ取得
     async function fetchEditorMessages() {
-      const { data, error } = await supabase
-        .from('editor_messages')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(5);
+      try {
+        const { data, error } = await supabase
+          .from('editor_messages')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(5);
 
-      if (data && !error) {
-        setEditorMessages(data);
+        if (data && !error && data.length > 0) {
+          setEditorMessages(data);
+          return;
+        }
+      } catch (e) {
+        console.log('Supabase接続エラー、JSONフォールバックを使用');
+      }
+
+      // Supabaseが失敗またはデータがない場合、JSONファイルから読み込み
+      try {
+        const res = await fetch(`${BASE_PATH}/data/editor-message.json`);
+        if (res.ok) {
+          const jsonData = await res.json();
+          if (jsonData.message) {
+            setEditorMessages([{
+              id: 0,
+              message: jsonData.message,
+              created_at: jsonData.lastUpdated || new Date().toISOString()
+            }]);
+          }
+        }
+      } catch (e) {
+        console.log('JSONフォールバックも失敗');
       }
     }
     fetchEditorMessages();
