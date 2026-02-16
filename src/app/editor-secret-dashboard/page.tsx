@@ -181,6 +181,13 @@ export default function EditorDashboard() {
   const [editorMessageError, setEditorMessageError] = useState('');
   const [recentEditorMessages, setRecentEditorMessages] = useState<SupabaseEditorMessage[]>([]);
 
+  // コメント用合言葉の状態
+  const [accessKey, setAccessKey] = useState('');
+  const [accessKeyId, setAccessKeyId] = useState<number | null>(null);
+  const [accessKeySaving, setAccessKeySaving] = useState(false);
+  const [accessKeySaved, setAccessKeySaved] = useState(false);
+  const [accessKeyError, setAccessKeyError] = useState('');
+
   // 認証チェック（localStorage）
   useEffect(() => {
     const checkAuth = async () => {
@@ -375,6 +382,20 @@ export default function EditorDashboard() {
       }
     }
 
+    // Supabaseからコメント用合言葉を取得
+    async function fetchAccessKey() {
+      const { data, error } = await supabase
+        .from('access_keys')
+        .select('*')
+        .limit(1)
+        .single();
+
+      if (data && !error) {
+        setAccessKey(data.key_string || '');
+        setAccessKeyId(data.id);
+      }
+    }
+
     fetchStatus();
     loadTracking();
     fetchManualArticles();
@@ -382,6 +403,7 @@ export default function EditorDashboard() {
     fetchAnalytics();
     fetchEditorMessage();
     fetchRecentEditorMessages();
+    fetchAccessKey();
   }, []);
 
   // 日時フォーマット
@@ -884,6 +906,97 @@ export default function EditorDashboard() {
               </div>
             </div>
           )}
+        </section>
+
+        {/* コメント用合言葉の設定 */}
+        <section className="bg-gray-800 rounded-xl p-6 mb-6">
+          <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+            <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+            </svg>
+            コメント用合言葉の設定
+          </h2>
+
+          <div className="bg-gray-700 rounded-lg p-4">
+            <label className="block text-sm text-gray-300 mb-2">現在の合言葉</label>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={accessKey}
+                onChange={(e) => {
+                  setAccessKey(e.target.value);
+                  setAccessKeySaved(false);
+                  setAccessKeyError('');
+                }}
+                placeholder="合言葉を入力..."
+                className="flex-1 px-3 py-2 bg-gray-600 border border-gray-500 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-green-500"
+              />
+              <button
+                onClick={async () => {
+                  if (!accessKey.trim()) {
+                    setAccessKeyError('合言葉を入力してください');
+                    return;
+                  }
+                  setAccessKeySaving(true);
+                  setAccessKeyError('');
+                  try {
+                    if (accessKeyId) {
+                      // 既存レコードを更新
+                      const { error } = await supabase
+                        .from('access_keys')
+                        .update({ key_string: accessKey.trim() })
+                        .eq('id', accessKeyId);
+
+                      if (error) {
+                        setAccessKeyError(`エラー: ${error.message}`);
+                      } else {
+                        setAccessKeySaved(true);
+                        setTimeout(() => setAccessKeySaved(false), 3000);
+                      }
+                    } else {
+                      // 新規レコードを作成
+                      const { data, error } = await supabase
+                        .from('access_keys')
+                        .insert({ key_string: accessKey.trim() })
+                        .select()
+                        .single();
+
+                      if (error) {
+                        setAccessKeyError(`エラー: ${error.message}`);
+                      } else if (data) {
+                        setAccessKeyId(data.id);
+                        setAccessKeySaved(true);
+                        setTimeout(() => setAccessKeySaved(false), 3000);
+                      }
+                    }
+                  } catch (e) {
+                    setAccessKeyError(`例外: ${e instanceof Error ? e.message : '不明なエラー'}`);
+                  }
+                  setAccessKeySaving(false);
+                }}
+                disabled={accessKeySaving || !accessKey.trim()}
+                className="px-4 py-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-500 text-white font-medium rounded-lg transition-colors"
+              >
+                {accessKeySaving ? '更新中...' : '更新'}
+              </button>
+            </div>
+            {accessKeyError && (
+              <p className="mt-2 text-sm text-red-400 bg-red-900/30 p-2 rounded">{accessKeyError}</p>
+            )}
+            <div className="flex items-center justify-between mt-3">
+              <p className="text-xs text-gray-400">
+                コメント投稿時に必要な合言葉を設定します
+              </p>
+              {accessKeySaved && (
+                <span className="text-xs text-green-400 flex items-center gap-1">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  更新しました!
+                </span>
+              )}
+            </div>
+          </div>
         </section>
 
         {/* 記事の削除 */}
