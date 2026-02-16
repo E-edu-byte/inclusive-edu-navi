@@ -16,14 +16,13 @@ export default function SupportCard() {
       <div className="flex items-center gap-2 mb-3">
         <span className="text-xl" role="img" aria-label="コーヒー">☕️</span>
         <h3 className="text-sm font-bold text-slate-700">
-          サイト継続のために応援する
+          応援・コメントする
         </h3>
       </div>
 
       {/* メッセージ */}
       <p className="text-xs text-slate-500 leading-relaxed mb-4">
-        広告のない、誠実な情報提供を続けるために。
-        サポーターを募集しています。
+        広告なしのサイト運営を続けるために、無理のない範囲の応援をお願いします。
       </p>
 
       {/* リンク */}
@@ -34,8 +33,7 @@ export default function SupportCard() {
         onClick={handleClick}
         className="flex items-center justify-center gap-2 w-full py-2 bg-slate-600 hover:bg-slate-700 text-white text-xs font-medium rounded-lg transition-colors"
       >
-        <span>☕️</span>
-        コーヒー1杯分から
+        100円からサポート・コメントする
       </a>
     </div>
   );
