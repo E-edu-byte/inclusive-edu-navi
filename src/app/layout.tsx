@@ -65,6 +65,15 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <head>
+        {/* PWA対応 */}
+        <link rel="manifest" href="/inclusive/manifest.json" />
+        <meta name="theme-color" content="#0ea5e9" />
+        {/* iOS対応 */}
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="教育ナビ" />
+        <link rel="apple-touch-icon" href="/inclusive/icon.jpg" />
+
         {/* Google Analytics */}
         {GA_MEASUREMENT_ID && (
           <>
@@ -82,6 +91,21 @@ export default function RootLayout({
             </Script>
           </>
         )}
+
+        {/* Service Worker登録 */}
+        <Script id="sw-register" strategy="afterInteractive">
+          {`
+            if ('serviceWorker' in navigator) {
+              navigator.serviceWorker.register('/inclusive/sw.js')
+                .then(function(registration) {
+                  console.log('ServiceWorker registered');
+                })
+                .catch(function(error) {
+                  console.log('ServiceWorker registration failed:', error);
+                });
+            }
+          `}
+        </Script>
       </head>
       <body className={notoSansJP.className}>
         <BookmarkProvider>
