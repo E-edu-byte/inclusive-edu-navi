@@ -61,6 +61,8 @@ jobs:
         env:
           NEXT_PUBLIC_EDITOR_PASSWORD_HASH: ${{ env.NEXT_PUBLIC_EDITOR_PASSWORD_HASH }}
           NEXT_PUBLIC_GA_MEASUREMENT_ID: G-PVPYNH0WQ5
+          NEXT_PUBLIC_SUPABASE_URL: https://uckogseelvlyhkxwisgc.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
 
       # basePath: '/inclusive' に対応するため、out/ を inclusive/ サブディレクトリに再配置
       - name: Restructure for basePath

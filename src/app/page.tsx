@@ -9,36 +9,60 @@ import SupportCard from '@/components/SupportCard';
 import FeaturedBooksBlock from '@/components/FeaturedBooksBlock';
 import { Article, ArticlesData, BASE_PATH, filterPublishableArticles, fetchTrashedUrls, filterOutTrashedArticles } from '@/lib/types';
 import { useBookmarks } from '@/contexts/BookmarkContext';
-
-type EditorMessage = {
-  message: string;
-  lastUpdated: string;
-};
+import { supabase, EditorMessage } from '@/lib/supabase';
 
 export default function Home() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [latestNews, setLatestNews] = useState<Article[]>([]);
   const [pickupNews, setPickupNews] = useState<Article[]>([]);
-  const [editorMessage, setEditorMessage] = useState<EditorMessage | null>(null);
+  const [editorMessages, setEditorMessages] = useState<EditorMessage[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { bookmarkCount, maxBookmarks } = useBookmarks();
 
+  // Supabaseから編集長メッセージを取得 & Realtime購読
+  useEffect(() => {
+    // 初期データ取得
+    async function fetchEditorMessages() {
+      const { data, error } = await supabase
+        .from('editor_messages')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(5);
+
+      if (data && !error) {
+        setEditorMessages(data);
+      }
+    }
+    fetchEditorMessages();
+
+    // Realtime購読
+    const channel = supabase
+      .channel('editor_messages_changes')
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'editor_messages' },
+        (payload) => {
+          // 新しいメッセージを先頭に追加
+          setEditorMessages((prev) => [payload.new as EditorMessage, ...prev].slice(0, 5));
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
   useEffect(() => {
     async function fetchData() {
       try {
-        // 記事データ、ゴミ箱データ、編集長メッセージを並列取得
-        const [articlesRes, trashedUrls, editorMsgRes] = await Promise.all([
+        // 記事データとゴミ箱データを並列取得
+        const [articlesRes, trashedUrls] = await Promise.all([
           fetch(`${BASE_PATH}/data/articles.json`),
-          fetchTrashedUrls(),
-          fetch(`${BASE_PATH}/data/editor-message.json`).catch(() => null)
+          fetchTrashedUrls()
         ]);
 
-        // 編集長メッセージを読み込み
-        if (editorMsgRes && editorMsgRes.ok) {
-          const msgData = await editorMsgRes.json();
-          setEditorMessage(msgData);
-        }
         if (!articlesRes.ok) throw new Error('記事データの取得に失敗しました');
         const articlesData: ArticlesData = await articlesRes.json();
         const articlesArray = articlesData.articles || [];
@@ -142,15 +166,24 @@ export default function Home() {
               </div>
 
               {/* 右側：編集長のひとりごと（PCのみ横並び） */}
-              {editorMessage && editorMessage.message && (
+              {editorMessages.length > 0 && (
                 <div className="lg:w-64 bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl shadow-sm border border-amber-100/50 p-5">
                   <div className="flex items-center gap-2 mb-3">
                     <span className="text-lg">&#128221;</span>
                     <h2 className="text-sm font-bold text-amber-800">編集長のひとりごと</h2>
                   </div>
-                  <p className="text-sm text-amber-900/80 leading-relaxed">
-                    {editorMessage.message}
-                  </p>
+                  <div className="space-y-3">
+                    {editorMessages.slice(0, 3).map((msg, index) => (
+                      <p
+                        key={msg.id}
+                        className={`text-sm leading-relaxed ${
+                          index === 0 ? 'text-amber-900/90 font-medium' : 'text-amber-800/60 text-xs'
+                        }`}
+                      >
+                        {msg.message}
+                      </p>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>

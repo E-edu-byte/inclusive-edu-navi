@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { BASE_PATH } from '@/lib/types';
+import { supabase, EditorMessage as SupabaseEditorMessage } from '@/lib/supabase';
 
 // パスワードハッシュ（ビルド時に環境変数から設定）
 const PASSWORD_HASH = process.env.NEXT_PUBLIC_EDITOR_PASSWORD_HASH || '';
@@ -176,6 +177,8 @@ export default function EditorDashboard() {
   const [selectedArticleUrls, setSelectedArticleUrls] = useState<Set<string>>(new Set());
   const [editorMessage, setEditorMessage] = useState('');
   const [editorMessageSaved, setEditorMessageSaved] = useState(false);
+  const [editorMessagePosting, setEditorMessagePosting] = useState(false);
+  const [recentEditorMessages, setRecentEditorMessages] = useState<SupabaseEditorMessage[]>([]);
 
   // 認証チェック（localStorage）
   useEffect(() => {
@@ -358,12 +361,26 @@ export default function EditorDashboard() {
       }
     }
 
+    // Supabaseから最近の編集長メッセージを取得
+    async function fetchRecentEditorMessages() {
+      const { data, error } = await supabase
+        .from('editor_messages')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(5);
+
+      if (data && !error) {
+        setRecentEditorMessages(data);
+      }
+    }
+
     fetchStatus();
     loadTracking();
     fetchManualArticles();
     fetchAllUrls();
     fetchAnalytics();
     fetchEditorMessage();
+    fetchRecentEditorMessages();
   }, []);
 
   // 日時フォーマット
@@ -784,10 +801,13 @@ export default function EditorDashboard() {
           <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
             <span className="text-xl">&#128221;</span>
             編集長のひとりごと
+            <span className="ml-2 px-2 py-0.5 text-xs bg-green-600 text-white rounded-full">
+              リアルタイム
+            </span>
           </h2>
 
-          <div className="bg-gray-700 rounded-lg p-4">
-            <label className="block text-sm text-gray-300 mb-2">メッセージ内容</label>
+          <div className="bg-gray-700 rounded-lg p-4 mb-4">
+            <label className="block text-sm text-gray-300 mb-2">新しいメッセージ</label>
             <textarea
               value={editorMessage}
               onChange={(e) => {
@@ -795,35 +815,64 @@ export default function EditorDashboard() {
                 setEditorMessageSaved(false);
               }}
               placeholder="トップページに表示するひとことを入力..."
-              rows={3}
+              rows={2}
               className="w-full px-3 py-2 bg-gray-600 border border-gray-500 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-amber-500 resize-none"
             />
             <div className="flex items-center justify-between mt-3">
               <p className="text-xs text-gray-400">
-                トップページの「すべての子どもの学びを支える」の横に表示されます
+                投稿するとトップページにリアルタイムで反映されます
               </p>
               <div className="flex items-center gap-2">
                 {editorMessageSaved && (
-                  <span className="text-xs text-green-400">URLをコピーしました</span>
+                  <span className="text-xs text-green-400">投稿しました!</span>
                 )}
                 <button
-                  onClick={() => {
-                    // GitHub Actions update-editor-message ワークフローを開く
-                    navigator.clipboard.writeText(editorMessage);
-                    setEditorMessageSaved(true);
-                    window.open('https://github.com/E-edu-byte/inclusive-edu-navi/actions/workflows/update-editor-message.yml', '_blank');
+                  onClick={async () => {
+                    if (!editorMessage.trim()) return;
+                    setEditorMessagePosting(true);
+                    const { data, error } = await supabase
+                      .from('editor_messages')
+                      .insert({ message: editorMessage.trim() })
+                      .select()
+                      .single();
+
+                    if (!error && data) {
+                      setRecentEditorMessages((prev) => [data, ...prev].slice(0, 5));
+                      setEditorMessage('');
+                      setEditorMessageSaved(true);
+                      setTimeout(() => setEditorMessageSaved(false), 3000);
+                    }
+                    setEditorMessagePosting(false);
                   }}
-                  className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white font-medium rounded-lg transition-colors text-sm"
+                  disabled={editorMessagePosting || !editorMessage.trim()}
+                  className="px-4 py-2 bg-amber-600 hover:bg-amber-700 disabled:bg-gray-500 text-white font-medium rounded-lg transition-colors text-sm"
                 >
-                  更新
+                  {editorMessagePosting ? '投稿中...' : '投稿'}
                 </button>
               </div>
             </div>
-            <p className="mt-3 text-xs text-gray-400">
-              「更新」をクリックするとメッセージがコピーされ、GitHub Actionsページが開きます。<br />
-              「Run workflow」→ メッセージ欄に貼り付け → 「Run workflow」で実行してください。
-            </p>
           </div>
+
+          {/* 最近のメッセージ一覧 */}
+          {recentEditorMessages.length > 0 && (
+            <div className="bg-gray-700/50 rounded-lg p-4">
+              <h3 className="text-sm font-medium text-gray-300 mb-3">最近のメッセージ</h3>
+              <div className="space-y-2">
+                {recentEditorMessages.map((msg, index) => (
+                  <div
+                    key={msg.id}
+                    className={`p-3 rounded-lg ${index === 0 ? 'bg-amber-900/30 border border-amber-700/50' : 'bg-gray-600/50'}`}
+                  >
+                    <p className="text-sm text-gray-200">{msg.message}</p>
+                    <p className="text-xs text-gray-500 mt-1">
+                      {new Date(msg.created_at).toLocaleString('ja-JP')}
+                      {index === 0 && <span className="ml-2 text-amber-400">(最新)</span>}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </section>
 
         {/* 記事の削除 */}
