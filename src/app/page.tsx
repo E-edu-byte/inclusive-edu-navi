@@ -29,7 +29,7 @@ export default function Home() {
           .from('editor_messages')
           .select('*')
           .order('created_at', { ascending: false })
-          .limit(5);
+          .limit(1);
 
         if (data && !error && data.length > 0) {
           setEditorMessages(data);
@@ -65,8 +65,8 @@ export default function Home() {
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'editor_messages' },
         (payload) => {
-          // 新しいメッセージを先頭に追加
-          setEditorMessages((prev) => [payload.new as EditorMessage, ...prev].slice(0, 5));
+          // 新しいメッセージで置き換え（最新1件のみ）
+          setEditorMessages([payload.new as EditorMessage]);
         }
       )
       .subscribe();
@@ -194,18 +194,9 @@ export default function Home() {
                     <span className="text-lg">&#128221;</span>
                     <h2 className="text-sm font-bold text-amber-800">編集長のひとりごと</h2>
                   </div>
-                  <div className="space-y-3">
-                    {editorMessages.slice(0, 3).map((msg, index) => (
-                      <p
-                        key={msg.id}
-                        className={`text-sm leading-relaxed ${
-                          index === 0 ? 'text-amber-900/90 font-medium' : 'text-amber-800/60 text-xs'
-                        }`}
-                      >
-                        {msg.message}
-                      </p>
-                    ))}
-                  </div>
+                  <p className="text-sm text-amber-900/90 leading-relaxed">
+                    {editorMessages[0].message}
+                  </p>
                 </div>
               )}
             </div>

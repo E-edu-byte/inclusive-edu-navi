@@ -362,13 +362,13 @@ export default function EditorDashboard() {
       }
     }
 
-    // Supabaseから最近の編集長メッセージを取得
+    // Supabaseから最近の編集長メッセージを取得（直近3件）
     async function fetchRecentEditorMessages() {
       const { data, error } = await supabase
         .from('editor_messages')
         .select('*')
         .order('created_at', { ascending: false })
-        .limit(5);
+        .limit(3);
 
       if (data && !error) {
         setRecentEditorMessages(data);
@@ -845,7 +845,7 @@ export default function EditorDashboard() {
                       if (error) {
                         setEditorMessageError(`エラー: ${error.message}`);
                       } else if (data) {
-                        setRecentEditorMessages((prev) => [data, ...prev].slice(0, 5));
+                        setRecentEditorMessages((prev) => [data, ...prev].slice(0, 3));
                         setEditorMessage('');
                         setEditorMessageSaved(true);
                         setTimeout(() => setEditorMessageSaved(false), 3000);
