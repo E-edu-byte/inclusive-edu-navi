@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { useBookmarks, BookmarkedArticle } from '@/contexts/BookmarkContext';
 import { getCategoryByName } from '@/lib/types';
@@ -211,10 +211,66 @@ function BookmarkCard({ article, index, onDragStart, onDragEnter, onDragEnd, isD
   );
 }
 
+// 自動スクロールの設定
+const SCROLL_ZONE = 80; // 画面端からこのピクセル以内でスクロール開始
+const SCROLL_SPEED = 8; // スクロール速度
+
 export default function BookmarksPage() {
   const { bookmarks, bookmarkCount, maxBookmarks, reorderBookmarks } = useBookmarks();
   const [dragIndex, setDragIndex] = useState<number | null>(null);
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
+  const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // 自動スクロール処理
+  const handleAutoScroll = useCallback((clientY: number) => {
+    const viewportHeight = window.innerHeight;
+
+    // 上端に近い場合
+    if (clientY < SCROLL_ZONE) {
+      const speed = Math.max(1, SCROLL_SPEED * (1 - clientY / SCROLL_ZONE));
+      window.scrollBy(0, -speed);
+    }
+    // 下端に近い場合
+    else if (clientY > viewportHeight - SCROLL_ZONE) {
+      const speed = Math.max(1, SCROLL_SPEED * (1 - (viewportHeight - clientY) / SCROLL_ZONE));
+      window.scrollBy(0, speed);
+    }
+  }, []);
+
+  // ドラッグ中の処理
+  useEffect(() => {
+    if (dragIndex === null) {
+      // ドラッグ終了時にインターバルをクリア
+      if (scrollIntervalRef.current) {
+        clearInterval(scrollIntervalRef.current);
+        scrollIntervalRef.current = null;
+      }
+      return;
+    }
+
+    let lastClientY = 0;
+
+    const handleDragOver = (e: DragEvent) => {
+      lastClientY = e.clientY;
+    };
+
+    // スクロールインターバルを開始
+    scrollIntervalRef.current = setInterval(() => {
+      if (lastClientY > 0) {
+        handleAutoScroll(lastClientY);
+      }
+    }, 16); // 約60fps
+
+    window.addEventListener('dragover', handleDragOver);
+
+    return () => {
+      window.removeEventListener('dragover', handleDragOver);
+      if (scrollIntervalRef.current) {
+        clearInterval(scrollIntervalRef.current);
+        scrollIntervalRef.current = null;
+      }
+    };
+  }, [dragIndex, handleAutoScroll]);
 
   const handleDragStart = (index: number) => {
     setDragIndex(index);
