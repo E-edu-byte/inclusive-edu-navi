@@ -16,18 +16,43 @@ export default function CommentsPage() {
   const [comments, setComments] = useState<Comment[]>([]);
   const [loading, setLoading] = useState(true);
   const [isDonorAuth, setIsDonorAuth] = useState(false);
+  const [keyExpired, setKeyExpired] = useState(false);
   const [donorName, setDonorName] = useState('');
   const [content, setContent] = useState('');
   const [posting, setPosting] = useState(false);
   const [postError, setPostError] = useState('');
   const [postSuccess, setPostSuccess] = useState(false);
 
-  // 認証状態を確認
+  // 認証状態を確認（合言葉の照合も行う）
   useEffect(() => {
-    const savedAuth = localStorage.getItem('donor_auth');
-    if (savedAuth === 'true') {
-      setIsDonorAuth(true);
-    }
+    (async () => {
+      const savedKey = localStorage.getItem('donor_auth_key');
+      if (!savedKey) {
+        setIsDonorAuth(false);
+        return;
+      }
+
+      try {
+        const { data, error } = await supabase
+          .from('access_keys')
+          .select('key_string')
+          .limit(1)
+          .single();
+
+        if (data && !error && data.key_string === savedKey) {
+          // 合言葉が一致 → 認証有効
+          setIsDonorAuth(true);
+        } else {
+          // 合言葉が変更された → 認証無効化
+          localStorage.removeItem('donor_auth');
+          localStorage.removeItem('donor_auth_key');
+          setIsDonorAuth(false);
+          setKeyExpired(true);
+        }
+      } catch (e) {
+        console.error('認証チェックエラー:', e);
+      }
+    })();
   }, []);
 
   // コメントを取得
@@ -68,11 +93,45 @@ export default function CommentsPage() {
     };
   }, []);
 
+  // 合言葉の有効性をチェック
+  const checkKeyValidity = async (): Promise<boolean> => {
+    try {
+      const savedKey = localStorage.getItem('donor_auth_key');
+      if (!savedKey) return false;
+
+      const { data, error } = await supabase
+        .from('access_keys')
+        .select('key_string')
+        .limit(1)
+        .single();
+
+      if (data && !error && data.key_string === savedKey) {
+        return true;
+      } else {
+        // 合言葉が変更された
+        localStorage.removeItem('donor_auth');
+        localStorage.removeItem('donor_auth_key');
+        setIsDonorAuth(false);
+        setKeyExpired(true);
+        return false;
+      }
+    } catch (e) {
+      console.error('合言葉チェックエラー:', e);
+      return false;
+    }
+  };
+
   // コメント投稿
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!content.trim()) {
       setPostError('コメントを入力してください');
+      return;
+    }
+
+    // 投稿前に合言葉をチェック
+    const isValid = await checkKeyValidity();
+    if (!isValid) {
       return;
     }
 
@@ -138,9 +197,30 @@ export default function CommentsPage() {
         </p>
       </div>
 
+      {/* 合言葉が変更された場合の案内 */}
+      {keyExpired && (
+        <div className="mb-8 bg-amber-50 rounded-xl p-5 border border-amber-200">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <svg className="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            </div>
+            <div className="flex-1">
+              <p className="text-sm text-amber-800 font-medium">
+                合言葉が更新されました
+              </p>
+              <p className="text-xs text-amber-700 mt-1">
+                最新のOFUSEメッセージから再認証してください
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* コメント投稿フォーム or 案内 */}
       <div className="mb-8">
-        {isDonorAuth ? (
+        {isDonorAuth && !keyExpired ? (
           <form onSubmit={handleSubmit} className="bg-emerald-50 rounded-xl p-5 border border-emerald-200">
             <h2 className="text-sm font-bold text-emerald-800 mb-3">コメントを投稿</h2>
             <div className="mb-3">
@@ -187,7 +267,7 @@ export default function CommentsPage() {
               </button>
             </div>
           </form>
-        ) : (
+        ) : !keyExpired && (
           <div className="bg-purple-50 rounded-xl p-5 border border-purple-200">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">

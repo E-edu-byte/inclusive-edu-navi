@@ -25,36 +25,47 @@ export default function Home() {
 
   // 認証ロジック: ?key=... パラメータを検知してSupabaseと照合
   useEffect(() => {
-    // まずlocalStorageから認証状態を復元
-    const savedAuth = localStorage.getItem('donor_auth');
-    if (savedAuth === 'true') {
-      setIsDonorAuth(true);
-    }
+    (async () => {
+      // Supabaseから現在の合言葉を取得
+      let currentKey = '';
+      try {
+        const { data, error } = await supabase
+          .from('access_keys')
+          .select('key_string')
+          .limit(1)
+          .single();
 
-    // URLパラメータにkeyがあれば検証
-    const urlParams = new URLSearchParams(window.location.search);
-    const keyParam = urlParams.get('key');
-    if (keyParam) {
-      (async () => {
-        try {
-          const { data, error } = await supabase
-            .from('access_keys')
-            .select('key_string')
-            .limit(1)
-            .single();
-
-          if (data && !error && data.key_string === keyParam) {
-            // 認証成功
-            localStorage.setItem('donor_auth', 'true');
-            setIsDonorAuth(true);
-            // URLをクリーンにリダイレクト（履歴を置き換え）
-            window.history.replaceState({}, '', window.location.pathname);
-          }
-        } catch (e) {
-          console.error('認証エラー:', e);
+        if (data && !error) {
+          currentKey = data.key_string;
         }
-      })();
-    }
+      } catch (e) {
+        console.error('合言葉取得エラー:', e);
+      }
+
+      // localStorageから保存された合言葉を確認
+      const savedKey = localStorage.getItem('donor_auth_key');
+      if (savedKey && currentKey && savedKey === currentKey) {
+        // 合言葉が一致 → 認証維持
+        setIsDonorAuth(true);
+      } else if (savedKey && currentKey && savedKey !== currentKey) {
+        // 合言葉が変更された → 認証無効化
+        localStorage.removeItem('donor_auth');
+        localStorage.removeItem('donor_auth_key');
+        setIsDonorAuth(false);
+      }
+
+      // URLパラメータにkeyがあれば検証
+      const urlParams = new URLSearchParams(window.location.search);
+      const keyParam = urlParams.get('key');
+      if (keyParam && currentKey && keyParam === currentKey) {
+        // 認証成功 - 合言葉も保存
+        localStorage.setItem('donor_auth', 'true');
+        localStorage.setItem('donor_auth_key', keyParam);
+        setIsDonorAuth(true);
+        // URLをクリーンにリダイレクト（履歴を置き換え）
+        window.history.replaceState({}, '', window.location.pathname);
+      }
+    })();
   }, []);
 
   // コメントセクションへスムーズスクロール
