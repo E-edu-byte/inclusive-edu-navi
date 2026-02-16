@@ -213,7 +213,7 @@ function BookmarkCard({ article, index, onDragStart, onDragEnter, onDragEnd, isD
 
 // 自動スクロールの設定
 const SCROLL_ZONE = 80; // 画面端からこのピクセル以内でスクロール開始
-const SCROLL_SPEED = 8; // スクロール速度
+const SCROLL_SPEED = 25; // スクロール速度
 
 export default function BookmarksPage() {
   const { bookmarks, bookmarkCount, maxBookmarks, reorderBookmarks } = useBookmarks();
