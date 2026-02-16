@@ -54,11 +54,14 @@ type BookmarkCardProps = {
   onDragStart: (index: number) => void;
   onDragEnter: (index: number) => void;
   onDragEnd: () => void;
+  onTouchStart: (index: number, e: React.TouchEvent) => void;
+  onTouchMove: (e: React.TouchEvent) => void;
+  onTouchEnd: () => void;
   isDragging: boolean;
   isDragOver: boolean;
 };
 
-function BookmarkCard({ article, index, onDragStart, onDragEnter, onDragEnd, isDragging, isDragOver }: BookmarkCardProps) {
+function BookmarkCard({ article, index, onDragStart, onDragEnter, onDragEnd, onTouchStart, onTouchMove, onTouchEnd, isDragging, isDragOver }: BookmarkCardProps) {
   const { removeBookmark } = useBookmarks();
   const hasValidImage = isValidImageUrl(article.imageUrl);
   const fallbackImage = getFallbackImage(article.title);
@@ -71,6 +74,9 @@ function BookmarkCard({ article, index, onDragStart, onDragEnter, onDragEnd, isD
       onDragEnter={() => onDragEnter(index)}
       onDragEnd={onDragEnd}
       onDragOver={(e) => e.preventDefault()}
+      onTouchStart={(e) => onTouchStart(index, e)}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
       className={`rounded-xl border bg-white shadow-sm transition-all cursor-grab active:cursor-grabbing ${
         isDragging ? 'opacity-50 scale-[0.98]' : ''
       } ${isDragOver ? 'border-primary-400 border-2 shadow-md' : 'border-gray-200 hover:shadow-md'}`}
@@ -237,7 +243,7 @@ export default function BookmarksPage() {
     }
   }, []);
 
-  // ドラッグ中の処理
+  // ドラッグ中の処理（PC: dragover、スマホ: touchmove）
   useEffect(() => {
     if (dragIndex === null) {
       // ドラッグ終了時にインターバルをクリア
@@ -254,6 +260,12 @@ export default function BookmarksPage() {
       lastClientY = e.clientY;
     };
 
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        lastClientY = e.touches[0].clientY;
+      }
+    };
+
     // スクロールインターバルを開始
     scrollIntervalRef.current = setInterval(() => {
       if (lastClientY > 0) {
@@ -262,9 +274,11 @@ export default function BookmarksPage() {
     }, 16); // 約60fps
 
     window.addEventListener('dragover', handleDragOver);
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
 
     return () => {
       window.removeEventListener('dragover', handleDragOver);
+      window.removeEventListener('touchmove', handleTouchMove);
       if (scrollIntervalRef.current) {
         clearInterval(scrollIntervalRef.current);
         scrollIntervalRef.current = null;
@@ -281,6 +295,41 @@ export default function BookmarksPage() {
   };
 
   const handleDragEnd = () => {
+    if (dragIndex !== null && dragOverIndex !== null && dragIndex !== dragOverIndex) {
+      reorderBookmarks(dragIndex, dragOverIndex);
+    }
+    setDragIndex(null);
+    setDragOverIndex(null);
+  };
+
+  // タッチイベント用のref（各カードの位置を追跡）
+  const cardRefs = useRef<(HTMLElement | null)[]>([]);
+
+  const handleTouchStart = (index: number, e: React.TouchEvent) => {
+    setDragIndex(index);
+  };
+
+  const handleTouchMoveOnCard = (e: React.TouchEvent) => {
+    if (dragIndex === null) return;
+
+    const touch = e.touches[0];
+    const clientY = touch.clientY;
+
+    // 自動スクロール
+    handleAutoScroll(clientY);
+
+    // どのカードの上にいるか判定
+    const elements = document.elementsFromPoint(touch.clientX, touch.clientY);
+    for (const el of elements) {
+      const cardIndex = cardRefs.current.findIndex(ref => ref && ref.contains(el));
+      if (cardIndex !== -1 && cardIndex !== dragIndex) {
+        setDragOverIndex(cardIndex);
+        break;
+      }
+    }
+  };
+
+  const handleTouchEnd = () => {
     if (dragIndex !== null && dragOverIndex !== null && dragIndex !== dragOverIndex) {
       reorderBookmarks(dragIndex, dragOverIndex);
     }
@@ -318,16 +367,20 @@ export default function BookmarksPage() {
             </p>
           )}
           {bookmarks.map((article, index) => (
-            <BookmarkCard
-              key={article.url}
-              article={article}
-              index={index}
-              onDragStart={handleDragStart}
-              onDragEnter={handleDragEnter}
-              onDragEnd={handleDragEnd}
-              isDragging={dragIndex === index}
-              isDragOver={dragOverIndex === index && dragIndex !== index}
-            />
+            <div key={article.url} ref={(el) => { cardRefs.current[index] = el; }}>
+              <BookmarkCard
+                article={article}
+                index={index}
+                onDragStart={handleDragStart}
+                onDragEnter={handleDragEnter}
+                onDragEnd={handleDragEnd}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMoveOnCard}
+                onTouchEnd={handleTouchEnd}
+                isDragging={dragIndex === index}
+                isDragOver={dragOverIndex === index && dragIndex !== index}
+              />
+            </div>
           ))}
         </div>
       ) : (
