@@ -178,6 +178,7 @@ export default function EditorDashboard() {
   const [editorMessage, setEditorMessage] = useState('');
   const [editorMessageSaved, setEditorMessageSaved] = useState(false);
   const [editorMessagePosting, setEditorMessagePosting] = useState(false);
+  const [editorMessageError, setEditorMessageError] = useState('');
   const [recentEditorMessages, setRecentEditorMessages] = useState<SupabaseEditorMessage[]>([]);
 
   // 認証チェック（localStorage）
@@ -818,6 +819,9 @@ export default function EditorDashboard() {
               rows={2}
               className="w-full px-3 py-2 bg-gray-600 border border-gray-500 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-amber-500 resize-none"
             />
+            {editorMessageError && (
+              <p className="mt-2 text-sm text-red-400 bg-red-900/30 p-2 rounded">{editorMessageError}</p>
+            )}
             <div className="flex items-center justify-between mt-3">
               <p className="text-xs text-gray-400">
                 投稿するとトップページにリアルタイムで反映されます
@@ -830,17 +834,24 @@ export default function EditorDashboard() {
                   onClick={async () => {
                     if (!editorMessage.trim()) return;
                     setEditorMessagePosting(true);
-                    const { data, error } = await supabase
-                      .from('editor_messages')
-                      .insert({ message: editorMessage.trim() })
-                      .select()
-                      .single();
+                    setEditorMessageError('');
+                    try {
+                      const { data, error } = await supabase
+                        .from('editor_messages')
+                        .insert({ message: editorMessage.trim() })
+                        .select()
+                        .single();
 
-                    if (!error && data) {
-                      setRecentEditorMessages((prev) => [data, ...prev].slice(0, 5));
-                      setEditorMessage('');
-                      setEditorMessageSaved(true);
-                      setTimeout(() => setEditorMessageSaved(false), 3000);
+                      if (error) {
+                        setEditorMessageError(`エラー: ${error.message}`);
+                      } else if (data) {
+                        setRecentEditorMessages((prev) => [data, ...prev].slice(0, 5));
+                        setEditorMessage('');
+                        setEditorMessageSaved(true);
+                        setTimeout(() => setEditorMessageSaved(false), 3000);
+                      }
+                    } catch (e) {
+                      setEditorMessageError(`例外: ${e instanceof Error ? e.message : '不明なエラー'}`);
                     }
                     setEditorMessagePosting(false);
                   }}
