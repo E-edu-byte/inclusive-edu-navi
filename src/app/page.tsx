@@ -394,11 +394,11 @@ export default function Home() {
       {/* スマホ用：右端固定バー（コメントへの導線） */}
       <button
         onClick={scrollToComments}
-        className="lg:hidden fixed right-0 top-1/2 -translate-y-1/2 z-40 bg-sky-600 hover:bg-sky-700 text-white py-4 px-1.5 rounded-l-lg shadow-lg transition-colors"
-        aria-label="読者のコメントをみる"
+        className="lg:hidden fixed right-0 top-1/2 -translate-y-1/2 z-40 bg-blue-800 hover:bg-blue-900 text-white py-6 px-1.5 rounded-l-lg shadow-lg transition-colors"
+        aria-label="みんなのコメントをみる"
       >
         <span className="text-xs font-medium tracking-wider" style={{ writingMode: 'vertical-rl' }}>
-          コメントをみる
+          みんなのコメントをみる
         </span>
       </button>
     </div>
