@@ -174,6 +174,8 @@ export default function EditorDashboard() {
   const [existingUrls, setExistingUrls] = useState<Set<string>>(new Set());
   const [allArticles, setAllArticles] = useState<ArticleForDeletion[]>([]);
   const [selectedArticleUrls, setSelectedArticleUrls] = useState<Set<string>>(new Set());
+  const [editorMessage, setEditorMessage] = useState('');
+  const [editorMessageSaved, setEditorMessageSaved] = useState(false);
 
   // 認証チェック（localStorage）
   useEffect(() => {
@@ -343,11 +345,25 @@ export default function EditorDashboard() {
       }
     }
 
+    // 編集長メッセージを取得
+    async function fetchEditorMessage() {
+      try {
+        const res = await fetch(`${BASE_PATH}/data/editor-message.json`);
+        if (res.ok) {
+          const data = await res.json();
+          setEditorMessage(data.message || '');
+        }
+      } catch (error) {
+        console.error('編集長メッセージ取得エラー:', error);
+      }
+    }
+
     fetchStatus();
     loadTracking();
     fetchManualArticles();
     fetchAllUrls();
     fetchAnalytics();
+    fetchEditorMessage();
   }, []);
 
   // 日時フォーマット
@@ -759,6 +775,53 @@ export default function EditorDashboard() {
             </ol>
             <p className="mt-3 text-xs text-amber-500">
               ※ 手動記事は投稿から7日後に自動的に非表示になります（毎日7:00/17:10/18:00 JSTに自動クリーンアップ）
+            </p>
+          </div>
+        </section>
+
+        {/* 編集長のひとりごと */}
+        <section className="bg-gray-800 rounded-xl p-6 mb-6">
+          <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+            <span className="text-xl">&#128221;</span>
+            編集長のひとりごと
+          </h2>
+
+          <div className="bg-gray-700 rounded-lg p-4">
+            <label className="block text-sm text-gray-300 mb-2">メッセージ内容</label>
+            <textarea
+              value={editorMessage}
+              onChange={(e) => {
+                setEditorMessage(e.target.value);
+                setEditorMessageSaved(false);
+              }}
+              placeholder="トップページに表示するひとことを入力..."
+              rows={3}
+              className="w-full px-3 py-2 bg-gray-600 border border-gray-500 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-amber-500 resize-none"
+            />
+            <div className="flex items-center justify-between mt-3">
+              <p className="text-xs text-gray-400">
+                トップページの「すべての子どもの学びを支える」の横に表示されます
+              </p>
+              <div className="flex items-center gap-2">
+                {editorMessageSaved && (
+                  <span className="text-xs text-green-400">URLをコピーしました</span>
+                )}
+                <button
+                  onClick={() => {
+                    // GitHub Actions update-editor-message ワークフローを開く
+                    navigator.clipboard.writeText(editorMessage);
+                    setEditorMessageSaved(true);
+                    window.open('https://github.com/E-edu-byte/inclusive-edu-navi/actions/workflows/update-editor-message.yml', '_blank');
+                  }}
+                  className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white font-medium rounded-lg transition-colors text-sm"
+                >
+                  更新
+                </button>
+              </div>
+            </div>
+            <p className="mt-3 text-xs text-gray-400">
+              「更新」をクリックするとメッセージがコピーされ、GitHub Actionsページが開きます。<br />
+              「Run workflow」→ メッセージ欄に貼り付け → 「Run workflow」で実行してください。
             </p>
           </div>
         </section>

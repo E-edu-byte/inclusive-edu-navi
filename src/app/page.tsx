@@ -10,10 +10,16 @@ import FeaturedBooksBlock from '@/components/FeaturedBooksBlock';
 import { Article, ArticlesData, BASE_PATH, filterPublishableArticles, fetchTrashedUrls, filterOutTrashedArticles } from '@/lib/types';
 import { useBookmarks } from '@/contexts/BookmarkContext';
 
+type EditorMessage = {
+  message: string;
+  lastUpdated: string;
+};
+
 export default function Home() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [latestNews, setLatestNews] = useState<Article[]>([]);
   const [pickupNews, setPickupNews] = useState<Article[]>([]);
+  const [editorMessage, setEditorMessage] = useState<EditorMessage | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { bookmarkCount, maxBookmarks } = useBookmarks();
@@ -21,11 +27,18 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       try {
-        // 記事データとゴミ箱データを並列取得
-        const [articlesRes, trashedUrls] = await Promise.all([
+        // 記事データ、ゴミ箱データ、編集長メッセージを並列取得
+        const [articlesRes, trashedUrls, editorMsgRes] = await Promise.all([
           fetch(`${BASE_PATH}/data/articles.json`),
-          fetchTrashedUrls()
+          fetchTrashedUrls(),
+          fetch(`${BASE_PATH}/data/editor-message.json`).catch(() => null)
         ]);
+
+        // 編集長メッセージを読み込み
+        if (editorMsgRes && editorMsgRes.ok) {
+          const msgData = await editorMsgRes.json();
+          setEditorMessage(msgData);
+        }
         if (!articlesRes.ok) throw new Error('記事データの取得に失敗しました');
         const articlesData: ArticlesData = await articlesRes.json();
         const articlesArray = articlesData.articles || [];
@@ -90,40 +103,56 @@ export default function Home() {
       <div className="flex flex-col lg:flex-row gap-8">
         {/* メインコンテンツ */}
         <div className="flex-1 min-w-0">
-          {/* ヒーローセクション */}
+          {/* ヒーローセクション + 編集長のひとりごと */}
           <section className="mb-8">
-            <div className="relative overflow-hidden bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-50 rounded-xl shadow-sm border border-sky-100/50 p-6 sm:p-8">
-              {/* 装飾: 柔らかい幾何学模様 */}
-              <div className="absolute top-0 right-0 w-32 h-32 sm:w-40 sm:h-40 opacity-20">
-                <svg viewBox="0 0 100 100" className="w-full h-full text-sky-300">
-                  <circle cx="80" cy="20" r="8" fill="currentColor" opacity="0.6" />
-                  <circle cx="60" cy="40" r="5" fill="currentColor" opacity="0.4" />
-                  <circle cx="90" cy="50" r="6" fill="currentColor" opacity="0.5" />
-                  <circle cx="70" cy="70" r="4" fill="currentColor" opacity="0.3" />
-                  <circle cx="50" cy="25" r="3" fill="currentColor" opacity="0.4" />
-                </svg>
-              </div>
-              <div className="absolute bottom-0 left-0 w-24 h-24 sm:w-32 sm:h-32 opacity-15">
-                <svg viewBox="0 0 100 100" className="w-full h-full text-indigo-300">
-                  <circle cx="20" cy="80" r="7" fill="currentColor" opacity="0.5" />
-                  <circle cx="40" cy="60" r="4" fill="currentColor" opacity="0.4" />
-                  <circle cx="10" cy="50" r="5" fill="currentColor" opacity="0.3" />
-                  <circle cx="35" cy="85" r="3" fill="currentColor" opacity="0.4" />
-                </svg>
+            <div className="flex flex-col lg:flex-row gap-4">
+              {/* 左側：メインヒーロー */}
+              <div className="relative overflow-hidden bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-50 rounded-xl shadow-sm border border-sky-100/50 p-6 sm:p-8 lg:flex-1">
+                {/* 装飾: 柔らかい幾何学模様 */}
+                <div className="absolute top-0 right-0 w-32 h-32 sm:w-40 sm:h-40 opacity-20">
+                  <svg viewBox="0 0 100 100" className="w-full h-full text-sky-300">
+                    <circle cx="80" cy="20" r="8" fill="currentColor" opacity="0.6" />
+                    <circle cx="60" cy="40" r="5" fill="currentColor" opacity="0.4" />
+                    <circle cx="90" cy="50" r="6" fill="currentColor" opacity="0.5" />
+                    <circle cx="70" cy="70" r="4" fill="currentColor" opacity="0.3" />
+                    <circle cx="50" cy="25" r="3" fill="currentColor" opacity="0.4" />
+                  </svg>
+                </div>
+                <div className="absolute bottom-0 left-0 w-24 h-24 sm:w-32 sm:h-32 opacity-15">
+                  <svg viewBox="0 0 100 100" className="w-full h-full text-indigo-300">
+                    <circle cx="20" cy="80" r="7" fill="currentColor" opacity="0.5" />
+                    <circle cx="40" cy="60" r="4" fill="currentColor" opacity="0.4" />
+                    <circle cx="10" cy="50" r="5" fill="currentColor" opacity="0.3" />
+                    <circle cx="35" cy="85" r="3" fill="currentColor" opacity="0.4" />
+                  </svg>
+                </div>
+
+                {/* コンテンツ */}
+                <div className="relative z-10">
+                  <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-4 tracking-tight">
+                    すべての子どもの学びを支える
+                  </h1>
+                  <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                    インクルーシブ教育に関する最新のニュース、研究成果、実践事例をわかりやすくお届けします。
+                  </p>
+                </div>
+
+                {/* アクセントライン */}
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-sky-200 via-indigo-200 to-purple-200 opacity-60"></div>
               </div>
 
-              {/* コンテンツ */}
-              <div className="relative z-10">
-                <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-4 tracking-tight">
-                  すべての子どもの学びを支える
-                </h1>
-                <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                  インクルーシブ教育に関する最新のニュース、研究成果、実践事例をわかりやすくお届けします。
-                </p>
-              </div>
-
-              {/* アクセントライン */}
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-sky-200 via-indigo-200 to-purple-200 opacity-60"></div>
+              {/* 右側：編集長のひとりごと（PCのみ横並び） */}
+              {editorMessage && editorMessage.message && (
+                <div className="lg:w-64 bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl shadow-sm border border-amber-100/50 p-5">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-lg">&#128221;</span>
+                    <h2 className="text-sm font-bold text-amber-800">編集長のひとりごと</h2>
+                  </div>
+                  <p className="text-sm text-amber-900/80 leading-relaxed">
+                    {editorMessage.message}
+                  </p>
+                </div>
+              )}
             </div>
           </section>
 
