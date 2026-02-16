@@ -89,7 +89,9 @@ function BookmarkCard({ article, index, onDragStart, onDragEnter, onDragEnd, onT
             <img
               src={hasValidImage ? article.imageUrl : fallbackImage}
               alt=""
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover pointer-events-none select-none"
+              style={{ WebkitTouchCallout: 'none' }}
+              draggable={false}
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 // 既にプレースホルダーなら何もしない
