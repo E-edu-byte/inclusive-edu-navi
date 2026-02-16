@@ -5,8 +5,8 @@ import { supabase } from '@/lib/supabase';
 
 // コメントの型定義
 type Comment = {
-  id: number;
-  nickname: string;
+  id: string;
+  donor_name: string;
   content: string;
   created_at: string;
 };
@@ -18,7 +18,7 @@ type CommentSectionProps = {
 export default function CommentSection({ isDonorAuth }: CommentSectionProps) {
   const [comments, setComments] = useState<Comment[]>([]);
   const [loading, setLoading] = useState(true);
-  const [nickname, setNickname] = useState('');
+  const [donorName, setDonorName] = useState('');
   const [content, setContent] = useState('');
   const [posting, setPosting] = useState(false);
   const [postError, setPostError] = useState('');
@@ -66,8 +66,8 @@ export default function CommentSection({ isDonorAuth }: CommentSectionProps) {
   // コメント投稿
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!nickname.trim() || !content.trim()) {
-      setPostError('ニックネームとコメントを入力してください');
+    if (!content.trim()) {
+      setPostError('コメントを入力してください');
       return;
     }
 
@@ -78,7 +78,7 @@ export default function CommentSection({ isDonorAuth }: CommentSectionProps) {
       const { error } = await supabase
         .from('comments')
         .insert({
-          nickname: nickname.trim(),
+          donor_name: donorName.trim() || '匿名ユーザー',
           content: content.trim(),
         });
 
@@ -122,12 +122,12 @@ export default function CommentSection({ isDonorAuth }: CommentSectionProps) {
         {isDonorAuth ? (
           <form onSubmit={handleSubmit} className="mb-6 bg-white rounded-lg p-4 border border-emerald-200">
             <div className="mb-3">
-              <label className="block text-sm text-gray-600 mb-1">ニックネーム</label>
+              <label className="block text-sm text-gray-600 mb-1">ニックネーム（任意）</label>
               <input
                 type="text"
-                value={nickname}
-                onChange={(e) => setNickname(e.target.value)}
-                placeholder="例：教育好きパパ"
+                value={donorName}
+                onChange={(e) => setDonorName(e.target.value)}
+                placeholder="空欄の場合「匿名ユーザー」になります"
                 maxLength={20}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-emerald-500"
               />
@@ -158,7 +158,7 @@ export default function CommentSection({ isDonorAuth }: CommentSectionProps) {
               )}
               <button
                 type="submit"
-                disabled={posting || !nickname.trim() || !content.trim()}
+                disabled={posting || !content.trim()}
                 className="ml-auto px-4 py-2 bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-300 text-white text-sm font-medium rounded-lg transition-colors"
               >
                 {posting ? '投稿中...' : 'コメントを投稿'}
@@ -204,7 +204,7 @@ export default function CommentSection({ isDonorAuth }: CommentSectionProps) {
             comments.map((comment) => (
               <div key={comment.id} className="bg-white rounded-lg p-4 border border-gray-100">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="font-medium text-gray-800 text-sm">{comment.nickname}</span>
+                  <span className="font-medium text-gray-800 text-sm">{comment.donor_name}</span>
                   <span className="text-xs text-gray-400">{formatDate(comment.created_at)}</span>
                 </div>
                 <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-wrap">{comment.content}</p>

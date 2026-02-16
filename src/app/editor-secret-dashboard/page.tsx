@@ -183,7 +183,7 @@ export default function EditorDashboard() {
 
   // コメント用合言葉の状態
   const [accessKey, setAccessKey] = useState('');
-  const [accessKeyId, setAccessKeyId] = useState<number | null>(null);
+  const [accessKeyId, setAccessKeyId] = useState<string | null>(null);
   const [accessKeySaving, setAccessKeySaving] = useState(false);
   const [accessKeySaved, setAccessKeySaved] = useState(false);
   const [accessKeyError, setAccessKeyError] = useState('');
