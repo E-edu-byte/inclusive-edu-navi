@@ -218,8 +218,8 @@ function BookmarkCard({ article, index, onDragStart, onDragEnter, onDragEnd, onT
 }
 
 // 自動スクロールの設定
-const SCROLL_ZONE = 120; // 画面端からこのピクセル以内でスクロール開始
-const SCROLL_SPEED = 60; // スクロール速度
+const SCROLL_ZONE = 150; // 画面端からこのピクセル以内でスクロール開始
+const SCROLL_SPEED = 100; // スクロール速度
 
 export default function BookmarksPage() {
   const { bookmarks, bookmarkCount, maxBookmarks, reorderBookmarks } = useBookmarks();
@@ -304,19 +304,29 @@ export default function BookmarksPage() {
 
   // タッチイベント用のref（各カードの位置を追跡）
   const cardRefs = useRef<(HTMLElement | null)[]>([]);
+  const touchYRef = useRef<number>(0);
+  const touchScrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleTouchStart = (index: number, e: React.TouchEvent) => {
     setDragIndex(index);
+    touchYRef.current = e.touches[0].clientY;
+
+    // タッチ用のスクロールインターバルを開始
+    if (touchScrollIntervalRef.current) {
+      clearInterval(touchScrollIntervalRef.current);
+    }
+    touchScrollIntervalRef.current = setInterval(() => {
+      if (touchYRef.current > 0) {
+        handleAutoScroll(touchYRef.current);
+      }
+    }, 10); // より高頻度で更新
   };
 
   const handleTouchMoveOnCard = (e: React.TouchEvent) => {
     if (dragIndex === null) return;
 
     const touch = e.touches[0];
-    const clientY = touch.clientY;
-
-    // 自動スクロール
-    handleAutoScroll(clientY);
+    touchYRef.current = touch.clientY;
 
     // どのカードの上にいるか判定
     const elements = document.elementsFromPoint(touch.clientX, touch.clientY);
@@ -330,6 +340,13 @@ export default function BookmarksPage() {
   };
 
   const handleTouchEnd = () => {
+    // タッチスクロールインターバルをクリア
+    if (touchScrollIntervalRef.current) {
+      clearInterval(touchScrollIntervalRef.current);
+      touchScrollIntervalRef.current = null;
+    }
+    touchYRef.current = 0;
+
     if (dragIndex !== null && dragOverIndex !== null && dragIndex !== dragOverIndex) {
       reorderBookmarks(dragIndex, dragOverIndex);
     }
