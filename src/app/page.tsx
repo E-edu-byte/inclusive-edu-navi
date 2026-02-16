@@ -10,6 +10,7 @@ import FeaturedBooksBlock from '@/components/FeaturedBooksBlock';
 import { Article, ArticlesData, BASE_PATH, filterPublishableArticles, fetchTrashedUrls, filterOutTrashedArticles } from '@/lib/types';
 import { useBookmarks } from '@/contexts/BookmarkContext';
 import { supabase, EditorMessage } from '@/lib/supabase';
+import AddToHomeScreen from '@/components/AddToHomeScreen';
 
 export default function Home() {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -149,6 +150,9 @@ export default function Home() {
       <div className="flex flex-col lg:flex-row gap-8">
         {/* メインコンテンツ */}
         <div className="flex-1 min-w-0">
+          {/* スマホ用：ホーム画面に追加の案内 */}
+          <AddToHomeScreen />
+
           {/* ヒーローセクション + 編集長のひとりごと */}
           <section className="mb-8">
             <div className="flex flex-col lg:flex-row gap-4">
