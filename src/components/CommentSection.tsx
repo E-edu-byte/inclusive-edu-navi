@@ -194,7 +194,7 @@ export default function CommentSection({ isDonorAuth }: CommentSectionProps) {
         const newLiked = new Set(likedComments);
         newLiked.add(commentId);
         setLikedComments(newLiked);
-        localStorage.setItem(LIKED_COMMENTS_KEY, JSON.stringify([...newLiked]));
+        localStorage.setItem(LIKED_COMMENTS_KEY, JSON.stringify(Array.from(newLiked)));
       }
     } catch (e) {
       console.error('いいねエラー:', e);
