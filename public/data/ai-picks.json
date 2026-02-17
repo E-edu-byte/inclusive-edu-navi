@@ -1,6 +1,19 @@
 {
   "picks": [
     {
+      "id": "9169713c51a5",
+      "sourceArticleId": "b79e5f983c16",
+      "title": "Time trends in the male to female ratio for autism incidence: population based, prospectively collected, birth cohort study",
+      "url": "https://www.bmj.com/content/392/bmj-2025-084164",
+      "category": "研究",
+      "originalDate": "2026-02-17",
+      "reason": "編集部ピックアップ",
+      "summary": "スウェーデンでの大規模な研究により、ASD（自閉スペクトラム症）の診断における男女比は時間とともに減少し、成人期には差がなくなる可能性が示されました。女子や女性は男子よりも診断が遅れる傾向があり、その理由を調査し、より早く適切な支援につなげることの重要性が示唆されています。",
+      "generatedAt": "2026-02-17T11:51:27.595467",
+      "model": "manual",
+      "isManual": true
+    },
+    {
       "id": "640eb2072622",
       "sourceArticleId": "b53c60b3ad0d",
       "title": "特別支援教育コーディネーターの特別支援学校免許保有率約4割",
@@ -51,20 +64,8 @@
       "generatedAt": "2026-02-17T08:10:07.672985",
       "model": "manual",
       "isManual": true
-    },
-    {
-      "id": "76ad6573420e",
-      "sourceArticleId": "327551fb2909",
-      "title": "障害のある児童・生徒を「養い護る」から「必要な支援行う」打ち出す校名へ…全国的にも増える＜支援学校＞への名称変更を検討「様々な意見聞いて丁寧に進めたい」",
-      "url": "https://www.yomiuri.co.jp/local/kansai/news/20260216-GYO1T00021/",
-      "category": "制度・行政",
-      "originalDate": "2026-02-16",
-      "reason": "支援学校名称変更の動向",
-      "summary": "養護学校の名称が「支援学校」などへ変更される動きは、障害のある子への支援のあり方が変化していることを示します。インクルーシブ教育の理念を反映し、誰もが理解しやすい言葉へと見直されるこの動きは、保護者や教員にとって、今後の教育環境を考える上で重要な指標となります。",
-      "generatedAt": "2026-02-16T20:11:20.904050",
-      "model": "gemini-2.5-flash"
     }
   ],
-  "lastUpdated": "2026-02-17T08:33:21.148447",
+  "lastUpdated": "2026-02-17T11:51:27.595478",
   "totalCount": 5
 }
