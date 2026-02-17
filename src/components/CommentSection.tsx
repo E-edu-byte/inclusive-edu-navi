@@ -11,6 +11,7 @@ type Comment = {
   content: string;
   created_at: string;
   likes: number;
+  donation_amount: number | null;
 };
 
 // いいね済みコメントのlocalStorageキー
@@ -25,6 +26,7 @@ export default function CommentSection({ isDonorAuth }: CommentSectionProps) {
   const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [donorName, setDonorName] = useState('');
+  const [donationAmount, setDonationAmount] = useState('');
   const [content, setContent] = useState('');
   const [posting, setPosting] = useState(false);
   const [postError, setPostError] = useState('');
@@ -145,6 +147,7 @@ export default function CommentSection({ isDonorAuth }: CommentSectionProps) {
         .insert({
           donor_name: donorName.trim() || '匿名ユーザー',
           content: content.trim(),
+          donation_amount: donationAmount ? parseInt(donationAmount, 10) : null,
         });
 
       if (error) {
@@ -262,6 +265,20 @@ export default function CommentSection({ isDonorAuth }: CommentSectionProps) {
               />
             </div>
             <div className="mb-3">
+              <label className="block text-sm text-gray-600 mb-1">応援した額（任意）</label>
+              <div className="flex items-center gap-2">
+                <input
+                  type="number"
+                  value={donationAmount}
+                  onChange={(e) => setDonationAmount(e.target.value)}
+                  placeholder="例: 100"
+                  min="0"
+                  className="w-32 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-emerald-500"
+                />
+                <span className="text-sm text-gray-500">円</span>
+              </div>
+            </div>
+            <div className="mb-3">
               <label className="block text-sm text-gray-600 mb-1">コメント</label>
               <textarea
                 value={content}
@@ -334,7 +351,14 @@ export default function CommentSection({ isDonorAuth }: CommentSectionProps) {
               {comments.map((comment) => (
                 <div key={comment.id} className="bg-white rounded-lg p-4 border border-gray-100">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="font-medium text-gray-800 text-sm">{comment.donor_name}</span>
+                    <div className="flex items-center gap-2">
+                      <span className="font-medium text-gray-800 text-sm">{comment.donor_name}</span>
+                      {comment.donation_amount && (
+                        <span className="text-xs bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded">
+                          {comment.donation_amount}円 Thank you!
+                        </span>
+                      )}
+                    </div>
                     <span className="text-xs text-gray-400">{formatDate(comment.created_at)}</span>
                   </div>
                   <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-wrap">{comment.content}</p>

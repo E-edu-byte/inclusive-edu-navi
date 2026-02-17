@@ -11,6 +11,7 @@ type Comment = {
   content: string;
   created_at: string;
   likes: number;
+  donation_amount: number | null;
 };
 
 // いいね済みコメントのlocalStorageキー
@@ -22,6 +23,7 @@ export default function CommentsPage() {
   const [isDonorAuth, setIsDonorAuth] = useState(false);
   const [keyExpired, setKeyExpired] = useState(false);
   const [donorName, setDonorName] = useState('');
+  const [donationAmount, setDonationAmount] = useState('');
   const [content, setContent] = useState('');
   const [posting, setPosting] = useState(false);
   const [postError, setPostError] = useState('');
@@ -161,6 +163,7 @@ export default function CommentsPage() {
         .insert({
           donor_name: donorName.trim() || '匿名ユーザー',
           content: content.trim(),
+          donation_amount: donationAmount ? parseInt(donationAmount, 10) : null,
         });
 
       if (error) {
@@ -292,6 +295,20 @@ export default function CommentsPage() {
               />
             </div>
             <div className="mb-3">
+              <label className="block text-sm text-gray-600 mb-1">応援した額（任意）</label>
+              <div className="flex items-center gap-2">
+                <input
+                  type="number"
+                  value={donationAmount}
+                  onChange={(e) => setDonationAmount(e.target.value)}
+                  placeholder="例: 100"
+                  min="0"
+                  className="w-32 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-emerald-500 bg-white"
+                />
+                <span className="text-sm text-gray-500">円</span>
+              </div>
+            </div>
+            <div className="mb-3">
               <label className="block text-sm text-gray-600 mb-1">コメント</label>
               <textarea
                 value={content}
@@ -364,7 +381,14 @@ export default function CommentsPage() {
           comments.map((comment) => (
             <div key={comment.id} className="bg-white rounded-xl p-5 border border-gray-200 shadow-sm">
               <div className="flex items-center justify-between mb-3">
-                <span className="font-medium text-gray-800">{comment.donor_name}</span>
+                <div className="flex items-center gap-2">
+                  <span className="font-medium text-gray-800">{comment.donor_name}</span>
+                  {comment.donation_amount && (
+                    <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded">
+                      {comment.donation_amount}円 Thank you!
+                    </span>
+                  )}
+                </div>
                 <span className="text-xs text-gray-400">{formatDate(comment.created_at)}</span>
               </div>
               <p className="text-gray-600 leading-relaxed whitespace-pre-wrap">{comment.content}</p>
