@@ -285,32 +285,10 @@
       "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0212-kizuki2.jpg",
       "source": "ICT教育ニュース",
       "mainKeyword": "多様な学び"
-    },
-    {
-      "id": "6f61fda2b518",
-      "title": "「内申点が取れない…」発達障害の子が公立中で“詰む”残酷な理由。75％の親が「あえて中学受験」を考える切実な事情（with online） - Yahoo!ニュース",
-      "summary": "発達障害のあるお子さんの75%の保護者が中学受験を検討しています。公立中学では、内申点が特性によって取りにくい上、多忙な学校生活も負担になりがちです。子どもの特性に合った環境を求め、高校受験の負担を避けるため、中学受験が注目される選択肢となっています。",
-      "category": "多様な学び",
-      "date": "2026-02-10",
-      "url": "https://news.yahoo.co.jp/articles/06fbb2f28388840edbcfd85f5c0cf5e7fa1c1dc5",
-      "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260210-00000002-withonline-000-1-view.jpg?exp=10800",
-      "source": "Yahoo!ニュース",
-      "mainKeyword": "中学受験"
-    },
-    {
-      "id": "b049f3fc812e",
-      "title": "となりの発達障害：「合理的配慮」はなぜ誤解されるのか　訳語の歴史をたどってみると",
-      "summary": "「合理的配慮」という言葉は、障害のある方が社会生活の障壁を乗り越え、誰もが平等な機会を得られるようにするための対応です。法律で義務化されていますが、なぜ「配慮」が義務なのか疑問に感じる方もいるでしょう。この記事では、この訳語がどのように生まれたのか、その歴史をたどって解説しています。",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-10",
-      "url": "https://mainichi.jp/articles/20260209/k00/00m/040/199000c",
-      "imageUrl": "https://cdn.mainichi.jp/vol1/2026/02/09/20260209k0000m040202000p/0c10.jpg?1",
-      "source": "毎日新聞",
-      "mainKeyword": "合理的配慮"
     }
   ],
-  "lastUpdated": "2026-02-17T19:33:08.574960",
-  "totalCount": 28,
+  "lastUpdated": "2026-02-18T06:59:43.517377",
+  "totalCount": 26,
   "sources": [
     "こどもとIT",
     "Yahoo!ニュース",
@@ -330,7 +308,6 @@
     "リセマム",
     "Kindai Picks",
     "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
-    "ICT教育ニュース",
-    "毎日新聞"
+    "ICT教育ニュース"
   ]
 }

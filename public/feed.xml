@@ -5,7 +5,7 @@
     <link>https://e-edu-byte.github.io/inclusive-edu-navi</link>
     <description>すべての子どもの学びを支える最新情報。インクルーシブ教育に関するニュース、研究、実践事例をお届けします。</description>
     <language>ja</language>
-    <lastBuildDate>Tue, 17 Feb 2026 10:33:55 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 17 Feb 2026 22:00:03 GMT</lastBuildDate>
     <atom:link href="https://e-edu-byte.github.io/inclusive-edu-navi/feed.xml" rel="self" type="application/rss+xml"/>
 
     <item>
@@ -23,7 +23,7 @@
       <link>https://news.yahoo.co.jp/articles/89be50d6dbf5eb8ab32aa2520c1d44c66a0a500d</link>
       <guid>https://news.yahoo.co.jp/articles/89be50d6dbf5eb8ab32aa2520c1d44c66a0a500d</guid>
       <description><![CDATA[「勉強ができない」と誤解されやすい学習困難は、実は「脳の特性」が原因かもしれません。知的発達に遅れがなくても、約6.5%の子が読み書き計算などに困難を抱えています。これが「怠け」と誤解されると子どもの自尊心を傷つけ、適切な支援が受けられないまま苦しむ子も多くいます。親や教員がSOSのサインに気づき、一人ひとりに合った工夫で支援することの重要性を伝えています。]]></description>
-      <category>合理的配慮・支援</category>
+      <category>支援・合理的配慮</category>
       <pubDate>Tue, 17 Feb 2026 00:00:00 GMT</pubDate>
       <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
     </item>
@@ -53,7 +53,7 @@
       <link>https://www.tiimoapp.com/ja/resource-hub/audhd-autistic-adhd-explained</link>
       <guid>https://www.tiimoapp.com/ja/resource-hub/audhd-autistic-adhd-explained</guid>
       <description><![CDATA[ADHDと自閉スペクトラムの特性が重なる「AuDHD」について解説します。その特徴や診断の難しさ、そして日々の暮らしを楽にするための工夫やヒントを紹介。本人や周りの方が特性を理解し、より良い生活を送るための手助けになる情報です。]]></description>
-      <category>合理的配慮・支援</category>
+      <category>支援・合理的配慮</category>
       <pubDate>Tue, 17 Feb 2026 00:00:00 GMT</pubDate>
       <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
     </item>
@@ -73,7 +73,7 @@
       <link>https://news.yahoo.co.jp/articles/a203aee421a45b0c2ee5f8412f68356aa10aff8a</link>
       <guid>https://news.yahoo.co.jp/articles/a203aee421a45b0c2ee5f8412f68356aa10aff8a</guid>
       <description><![CDATA[小学1年生で「先生が怖い」と感じて不登校になったお子さんの事例を紹介します。真面目な先生でも、低学年への対応経験や子どもとの相性が原因で、学校生活に困難が生じることがあります。保護者ができる対策について、著者が自身の経験を語ります。]]></description>
-      <category>不登校・多様な学び</category>
+      <category>多様な学び</category>
       <pubDate>Tue, 17 Feb 2026 00:00:00 GMT</pubDate>
       <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
     </item>
@@ -103,7 +103,7 @@
       <link>https://toyokeizai.net/articles/-/933904?page=5</link>
       <guid>https://toyokeizai.net/articles/-/933904?page=5</guid>
       <description><![CDATA[不登校が12年連続で増え続ける中、日本の教育システムに限界が指摘されています。戦後、GHQの要請で始まった6・3・3制の成り立ちを振り返り、現代の多様な学びや子どものあり方について考えるきっかけとなる記事です。]]></description>
-      <category>不登校・多様な学び</category>
+      <category>多様な学び</category>
       <pubDate>Mon, 16 Feb 2026 00:00:00 GMT</pubDate>
       <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
     </item>
@@ -113,7 +113,7 @@
       <link>https://www.yomiuri.co.jp/local/kansai/news/20260215-GYO1T00031/</link>
       <guid>https://www.yomiuri.co.jp/local/kansai/news/20260215-GYO1T00031/</guid>
       <description><![CDATA[2028年4月、鳥取市に不登校の生徒を受け入れる「学びの多様化学校」が開校します。個々のペースに合わせた独自カリキュラムやオンライン授業に加え、学校心理士中心の支援チームが手厚くサポート。フリースクールとの連携も検討されており、子ども一人ひとりに最適な学びを提供します。]]></description>
-      <category>不登校・多様な学び</category>
+      <category>多様な学び</category>
       <pubDate>Mon, 16 Feb 2026 00:00:00 GMT</pubDate>
       <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
     </item>
@@ -163,7 +163,7 @@
       <link>https://news.yahoo.co.jp/articles/c14540b3f3a7fc6d117eb0329b8bd0329fee88bf?page=1</link>
       <guid>https://news.yahoo.co.jp/articles/c14540b3f3a7fc6d117eb0329b8bd0329fee88bf?page=1</guid>
       <description><![CDATA[合理的配慮に対する「本当に無理？」「あの子だけずるい」「現場が持たない」といった先生や子どものモヤモヤを解消する視点を紹介。全ての子が過ごしやすい教室を目指し、個別の支援だけでなく、事前に学校全体の環境を整える「基礎的環境整備」の重要性を説き、新年度に向けて「ふつう」を見直すきっかけを提案します。]]></description>
-      <category>合理的配慮・支援</category>
+      <category>支援・合理的配慮</category>
       <pubDate>Fri, 13 Feb 2026 00:00:00 GMT</pubDate>
       <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
     </item>
