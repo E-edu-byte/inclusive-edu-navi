@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "49c4fa4f1b56",
+      "title": "不登校の悩みに寄り添い親子の笑顔を取り戻す『不登校なんて怖くない！ 親の心がすーっと軽くなる本』",
+      "summary": "不登校で悩む保護者の不安を和らげ、親子関係を円滑にするための書籍が刊行されました。この本は、不登校の子どもが安心して成長できる環境を家庭で育むための具体的な考え方や対処法を提示しています。",
+      "category": "支援・合理的配慮",
+      "date": "2026-02-17",
+      "url": "https://edu.watch.impress.co.jp/docs/knowledge/kodomoit-booklab/2085358.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2085/358/04.png",
+      "source": "こどもとIT",
+      "mainKeyword": "不登校"
+    },
+    {
       "id": "4bba8c267116",
       "title": "「勉強ができない子」で片付けないで。気づかれにくい“学習障害”…親が見逃してはいけない“SOSのサイン”（with online） - Yahoo!ニュース",
       "summary": "「勉強ができない」と誤解されやすい学習困難は、実は「脳の特性」が原因かもしれません。知的発達に遅れがなくても、約6.5%の子が読み書き計算などに困難を抱えています。これが「怠け」と誤解されると子どもの自尊心を傷つけ、適切な支援が受けられないまま苦しむ子も多くいます。親や教員がSOSのサインに気づき、一人ひとりに合った工夫で支援することの重要性を伝えています。",
@@ -9,10 +20,7 @@
       "url": "https://news.yahoo.co.jp/articles/89be50d6dbf5eb8ab32aa2520c1d44c66a0a500d",
       "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260216-00000001-withonline-000-1-view.jpg?exp=10800",
       "source": "Yahoo!ニュース",
-      "mainKeyword": "学習障害",
-      "isManual": true,
-      "addedAt": "2026-02-17T17:52:40.370752",
-      "expiresAt": "2026-02-24T17:52:40.370754"
+      "mainKeyword": "学習障害"
     },
     {
       "id": "b79e5f983c16",
@@ -23,10 +31,7 @@
       "url": "https://www.bmj.com/content/392/bmj-2025-084164",
       "imageUrl": "https://www.bmj.com/sites/default/files/highwire/bmj/392/8481.cover-source.jpg",
       "source": "The BMJ",
-      "mainKeyword": "ASD男女",
-      "isManual": true,
-      "addedAt": "2026-02-17T11:51:27.593953",
-      "expiresAt": "2026-02-24T11:51:27.593955"
+      "mainKeyword": "ASD男女"
     },
     {
       "id": "b53c60b3ad0d",
@@ -37,10 +42,7 @@
       "url": "https://www.kyoiku-press.com/post-306950/",
       "imageUrl": "https://www.kyoiku-press.com/wp-content/uploads/2018/09/nikkyoweb_logo.jpg",
       "source": "日本教育新聞電子版　NIKKYOWEB",
-      "mainKeyword": "免許",
-      "isManual": true,
-      "addedAt": "2026-02-17T08:33:21.146974",
-      "expiresAt": "2026-02-24T08:33:21.146976"
+      "mainKeyword": "免許"
     },
     {
       "id": "37333cca45d2",
@@ -51,10 +53,7 @@
       "url": "https://www.tiimoapp.com/ja/resource-hub/audhd-autistic-adhd-explained",
       "imageUrl": "https://cdn.prod.website-files.com/64786b629e5c33d650d54a0a/67acbf67a206ae9e5ee9bbe6_AuDHD.jpg",
       "source": "tiimoapp.com",
-      "mainKeyword": "AuDHD",
-      "isManual": true,
-      "addedAt": "2026-02-17T08:16:20.209111",
-      "expiresAt": "2026-02-24T08:16:20.209112"
+      "mainKeyword": "AuDHD"
     },
     {
       "id": "86710630d478",
@@ -65,10 +64,7 @@
       "url": "https://nazology.kusuguru.co.jp/archives/191738",
       "imageUrl": "https://nazology.kusuguru.co.jp/wp-content/uploads/2026/02/31f441b57cf7d122a647ae0cfbde7b45.jpg",
       "source": "ナゾロジー",
-      "mainKeyword": "ADHD",
-      "isManual": true,
-      "addedAt": "2026-02-17T08:14:04.046854",
-      "expiresAt": "2026-02-24T08:14:04.046856"
+      "mainKeyword": "ADHD"
     },
     {
       "id": "20413f03358e",
@@ -79,10 +75,7 @@
       "url": "https://news.yahoo.co.jp/articles/a203aee421a45b0c2ee5f8412f68356aa10aff8a",
       "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260216-01325044-davincin-000-1-view.jpg?exp=10800",
       "source": "Yahoo!ニュース",
-      "mainKeyword": "不登校",
-      "isManual": true,
-      "addedAt": "2026-02-17T08:10:07.671643",
-      "expiresAt": "2026-02-24T08:10:07.671645"
+      "mainKeyword": "不登校"
     },
     {
       "id": "7b265ce2ce67",
@@ -316,13 +309,17 @@
       "mainKeyword": "合理的配慮"
     }
   ],
-  "lastUpdated": "2026-02-17T17:52:40.371875",
-  "totalCount": 21,
+  "lastUpdated": "2026-02-17T19:33:08.574960",
+  "totalCount": 28,
   "sources": [
     "こどもとIT",
+    "Yahoo!ニュース",
+    "The BMJ",
+    "日本教育新聞電子版　NIKKYOWEB",
+    "tiimoapp.com",
+    "ナゾロジー",
     "読売新聞オンライン",
     "東洋経済オンライン",
-    "Yahoo!ニュース",
     "カレントアウェアネス・ポータル",
     "asahi.com",
     "BBCニュース",
