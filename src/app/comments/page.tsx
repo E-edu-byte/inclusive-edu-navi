@@ -277,7 +277,7 @@ export default function CommentsPage() {
               </div>
               <div className="flex-1">
                 <p className="text-sm text-gray-700 font-medium">
-                  コメント投稿は<span className="text-purple-600">OFUSEで寄付いただいた方</span>限定です
+                  OFUSEで応援してコメントしよう。広告のないサイトの運営にご協力ください。
                 </p>
                 <a
                   href="https://ofuse.me/inclusive-navi"

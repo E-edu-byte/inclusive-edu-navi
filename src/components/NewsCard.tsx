@@ -182,9 +182,9 @@ export default function NewsCard({
                 </Link>
               );
             })()}
-            {/* ソースと日付 */}
+            {/* ソースと日付とピックアップ */}
             <span className="text-xs text-gray-500">
-              {source && `${source} • `}{date}
+              {source && `${source} • `}{date} ピックアップ
             </span>
           </div>
 
