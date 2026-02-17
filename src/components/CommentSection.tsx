@@ -392,9 +392,6 @@ export default function CommentSection({ isDonorAuth }: CommentSectionProps) {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </Link>
-                  <p className="text-xs text-gray-400 text-center mt-2">
-                    ※個人や団体を誹謗中傷していると判断されるコメントは削除させていただきます
-                  </p>
                 </div>
               )}
             </>
@@ -408,6 +405,11 @@ export default function CommentSection({ isDonorAuth }: CommentSectionProps) {
             </div>
           )}
         </div>
+
+        {/* 注意書き（常に表示） */}
+        <p className="text-xs text-gray-400 text-center mt-4">
+          ※個人や団体を誹謗中傷していると判断されるコメントは削除させていただきます
+        </p>
       </div>
     </section>
   );
