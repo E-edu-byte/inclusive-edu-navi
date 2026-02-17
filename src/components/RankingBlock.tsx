@@ -1,23 +1,15 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { Article, BASE_PATH, isPublishableSummary } from '@/lib/types';
-import { getGlobalStats } from '@/hooks/useArticleStats';
+import { supabase } from '@/lib/supabase';
 
 type RankedArticle = {
   id: string;
   title: string;
   url: string;
   source: string;
-  totalScore: number;
-};
-
-// スコア計算の重み
-const WEIGHTS = {
-  importance: 1.0, // AI重要度スコア
-  views: 0.5, // 閲覧数
-  bookmarks: 3.0, // しおり数（高配点）
+  clickCount: number;
 };
 
 export default function RankingBlock() {
@@ -37,33 +29,54 @@ export default function RankingBlock() {
           (article: Article) => isPublishableSummary(article.summary)
         );
 
-        // LocalStorageから閲覧数・しおり数を取得
-        const { views, bookmarks } = getGlobalStats();
+        // Supabaseから直近7日間のクリック数を取得
+        const sevenDaysAgo = new Date();
+        sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
 
-        // スコア計算
-        const scored = articles.map((article) => {
-          const importanceScore = article.importanceScore || 50; // デフォルト50点
-          const viewCount = views[article.id] || 0;
-          const bookmarkCount = bookmarks[article.id] || 0;
+        const { data: clickData, error } = await supabase
+          .from('article_clicks')
+          .select('article_id')
+          .gte('clicked_at', sevenDaysAgo.toISOString());
 
-          const totalScore =
-            importanceScore * WEIGHTS.importance +
-            viewCount * WEIGHTS.views +
-            bookmarkCount * WEIGHTS.bookmarks;
+        if (error) {
+          console.error('クリック数取得エラー:', error);
+          return;
+        }
 
-          return {
+        // クリック数を集計
+        const clickCounts: Record<string, number> = {};
+        (clickData || []).forEach((row: { article_id: string }) => {
+          clickCounts[row.article_id] = (clickCounts[row.article_id] || 0) + 1;
+        });
+
+        // 記事データとクリック数をマージ
+        const scored = articles.map((article) => ({
+          id: article.id,
+          title: article.title,
+          url: article.url,
+          source: article.source || '',
+          clickCount: clickCounts[article.id] || 0,
+        }));
+
+        // クリック数順にソートして上位5件
+        const top5 = scored
+          .filter((a) => a.clickCount > 0)
+          .sort((a, b) => b.clickCount - a.clickCount)
+          .slice(0, 5);
+
+        // クリックデータがない場合は最新記事を表示
+        if (top5.length === 0) {
+          const latest5 = articles.slice(0, 5).map((article) => ({
             id: article.id,
             title: article.title,
             url: article.url,
             source: article.source || '',
-            totalScore,
-          };
-        });
-
-        // スコア順にソートして上位5件
-        const top5 = scored.sort((a, b) => b.totalScore - a.totalScore).slice(0, 5);
-
-        setRankedArticles(top5);
+            clickCount: 0,
+          }));
+          setRankedArticles(latest5);
+        } else {
+          setRankedArticles(top5);
+        }
       } catch (error) {
         console.error('ランキング計算エラー:', error);
       } finally {

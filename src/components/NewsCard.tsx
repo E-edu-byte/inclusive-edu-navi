@@ -6,6 +6,7 @@ import { getCategoryByName } from '@/lib/types';
 import { generateAmazonSearchUrl, generateRakutenSearchUrl } from '@/data/articles';
 import { useBookmarks } from '@/contexts/BookmarkContext';
 import { trackClick, trackShare } from '@/hooks/useTracking';
+import { supabase } from '@/lib/supabase';
 
 type NewsCardProps = {
   title: string;
@@ -103,6 +104,16 @@ export default function NewsCard({
         setShowToast(true);
         setTimeout(() => setShowToast(false), 3000);
       }
+    }
+  };
+
+  // 元記事クリックをSupabaseに記録
+  const handleArticleClick = async () => {
+    if (!id) return;
+    try {
+      await supabase.from('article_clicks').insert({ article_id: id });
+    } catch (e) {
+      // エラーは無視（ユーザー体験を妨げない）
     }
   };
 
@@ -204,6 +215,7 @@ export default function NewsCard({
               href={url}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={handleArticleClick}
               className={`inline-flex items-center gap-1.5 px-4 py-2.5 sm:px-3 sm:py-1.5 text-white text-sm font-medium rounded-lg transition-colors ${buttonClass}`}
             >
               元記事を読む
