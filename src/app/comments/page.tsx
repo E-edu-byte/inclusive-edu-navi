@@ -385,7 +385,7 @@ export default function CommentsPage() {
                   <span className="font-medium text-gray-800">{comment.donor_name}</span>
                   {comment.donation_amount && (
                     <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded">
-                      {comment.donation_amount}円 Thank you!
+                      {comment.donation_amount} Thank you!
                     </span>
                   )}
                 </div>

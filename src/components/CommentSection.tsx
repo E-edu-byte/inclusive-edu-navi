@@ -355,7 +355,7 @@ export default function CommentSection({ isDonorAuth }: CommentSectionProps) {
                       <span className="font-medium text-gray-800 text-sm">{comment.donor_name}</span>
                       {comment.donation_amount && (
                         <span className="text-xs bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded">
-                          {comment.donation_amount}円 Thank you!
+                          {comment.donation_amount} Thank you!
                         </span>
                       )}
                     </div>
