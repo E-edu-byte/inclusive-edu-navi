@@ -10,7 +10,11 @@ type Comment = {
   donor_name: string;
   content: string;
   created_at: string;
+  likes: number;
 };
+
+// いいね済みコメントのlocalStorageキー
+const LIKED_COMMENTS_KEY = 'liked_comments';
 
 export default function CommentsPage() {
   const [comments, setComments] = useState<Comment[]>([]);
@@ -22,6 +26,19 @@ export default function CommentsPage() {
   const [posting, setPosting] = useState(false);
   const [postError, setPostError] = useState('');
   const [postSuccess, setPostSuccess] = useState(false);
+  const [likedComments, setLikedComments] = useState<Set<string>>(new Set());
+
+  // いいね済みコメントをlocalStorageから読み込み
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(LIKED_COMMENTS_KEY);
+      if (saved) {
+        setLikedComments(new Set(JSON.parse(saved)));
+      }
+    } catch (e) {
+      console.error('いいね状態の読み込みエラー:', e);
+    }
+  }, []);
 
   // 認証状態を確認（合言葉の照合も行う）
   useEffect(() => {
@@ -157,6 +174,46 @@ export default function CommentsPage() {
       setPostError(`例外: ${e instanceof Error ? e.message : '不明なエラー'}`);
     } finally {
       setPosting(false);
+    }
+  };
+
+  // いいね処理
+  const handleLike = async (commentId: string) => {
+    // 既にいいね済みの場合は何もしない
+    if (likedComments.has(commentId)) return;
+
+    try {
+      // 現在のいいね数を取得
+      const { data: currentComment, error: fetchError } = await supabase
+        .from('comments')
+        .select('likes')
+        .eq('id', commentId)
+        .single();
+
+      if (fetchError || !currentComment) return;
+
+      const newLikes = (currentComment.likes || 0) + 1;
+
+      // いいね数を更新
+      const { error } = await supabase
+        .from('comments')
+        .update({ likes: newLikes })
+        .eq('id', commentId);
+
+      if (!error) {
+        // ローカル状態を更新
+        setComments((prev) =>
+          prev.map((c) => (c.id === commentId ? { ...c, likes: newLikes } : c))
+        );
+
+        // いいね済みリストに追加
+        const newLiked = new Set(likedComments);
+        newLiked.add(commentId);
+        setLikedComments(newLiked);
+        localStorage.setItem(LIKED_COMMENTS_KEY, JSON.stringify([...newLiked]));
+      }
+    } catch (e) {
+      console.error('いいねエラー:', e);
     }
   };
 
@@ -311,6 +368,21 @@ export default function CommentsPage() {
                 <span className="text-xs text-gray-400">{formatDate(comment.created_at)}</span>
               </div>
               <p className="text-gray-600 leading-relaxed whitespace-pre-wrap">{comment.content}</p>
+              {/* いいねボタン */}
+              <div className="mt-3 flex items-center">
+                <button
+                  onClick={() => handleLike(comment.id)}
+                  disabled={likedComments.has(comment.id)}
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                    likedComments.has(comment.id)
+                      ? 'bg-emerald-100 text-emerald-700 cursor-default'
+                      : 'bg-gray-100 text-gray-600 hover:bg-emerald-50 hover:text-emerald-600'
+                  }`}
+                >
+                  <span>👍</span>
+                  <span>{comment.likes || 0}</span>
+                </button>
+              </div>
             </div>
           ))
         ) : (
