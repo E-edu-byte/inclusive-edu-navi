@@ -938,7 +938,7 @@ def retry_incomplete_summaries():
             if new_summary and len(new_summary) > 40 and not is_incomplete_summary(new_summary, source):
                 EXISTING_ARTICLES[idx]['summary'] = new_summary
                 if new_category:
-                    EXISTING_ARTICLES[idx]['category'] = new_category
+                    EXISTING_ARTICLES[idx]['category'] = normalize_category(new_category)
                 retry_success += 1
                 print(f"      → 成功: {new_summary[:30]}...")
 
@@ -1255,6 +1255,56 @@ def truncate_text(text: str, max_length: int = 200) -> str:
     if len(text) <= max_length:
         return text
     return text[:max_length - 3] + "..."
+
+
+# 正規カテゴリ名のリスト
+VALID_CATEGORIES = [
+    "支援・合理的配慮",
+    "多様な学び",
+    "研究",
+    "制度・行政",
+    "ICT・教材",
+    "イベント・研修",
+]
+
+# カテゴリ名の正規化マッピング（AIが生成しがちな誤表記を修正）
+CATEGORY_NORMALIZATION = {
+    "不登校・多様な学び": "多様な学び",
+    "合理的配慮・支援": "支援・合理的配慮",
+    "合理的配慮": "支援・合理的配慮",
+    "支援": "支援・合理的配慮",
+    "ICT": "ICT・教材",
+    "教材": "ICT・教材",
+    "イベント": "イベント・研修",
+    "研修": "イベント・研修",
+    "行政": "制度・行政",
+    "制度": "制度・行政",
+    "政策": "制度・行政",
+}
+
+
+def normalize_category(category: str) -> str:
+    """
+    AIが生成したカテゴリ名を正規のカテゴリ名に正規化する
+    """
+    if not category:
+        return "支援・合理的配慮"
+
+    # 完全一致で正規カテゴリなら そのまま返す
+    if category in VALID_CATEGORIES:
+        return category
+
+    # 正規化マッピングに一致する場合は変換
+    if category in CATEGORY_NORMALIZATION:
+        return CATEGORY_NORMALIZATION[category]
+
+    # 部分一致で正規カテゴリを探す
+    for valid_cat in VALID_CATEGORIES:
+        if valid_cat in category or category in valid_cat:
+            return valid_cat
+
+    # どれにも該当しない場合はデフォルト
+    return "支援・合理的配慮"
 
 
 def generate_ai_summary_and_category(title: str, original_summary: str, source: str, url: str = "", retry_count: int = 0) -> dict:
@@ -1772,7 +1822,7 @@ def fetch_rss_feed(feed_info: dict) -> list:
 
                 # 【要約取得】AIからの要約を取得（フォールバックなし）
                 summary = ai_result.get("summary", "")
-                category = ai_result.get("category", "支援・合理的配慮")
+                category = normalize_category(ai_result.get("category", "支援・合理的配慮"))
                 main_keyword = ai_result.get("mainKeyword", "")
 
                 # 【リトライ必要フラグ】要約が取得できなかった場合はスキップ（後でリトライ）
@@ -2010,7 +2060,7 @@ def fetch_tsukuba_human_news(max_articles: int = 2) -> list:
                     "id": article_id,
                     "title": text,
                     "summary": f"筑波大学人間系のお知らせです。{text}",
-                    "category": "合理的配慮・支援",
+                    "category": "支援・合理的配慮",
                     "date": datetime.now().strftime("%Y-%m-%d"),
                     "url": full_url,
                     "imageUrl": get_university_fallback_image(article_id),
@@ -2159,7 +2209,7 @@ def fetch_kodomo_it_news(max_articles: int = 3) -> list:
                         summary = ai_result.get("summary")
                         print(f"        → 要約生成成功")
                     if ai_result.get("category"):
-                        category = ai_result.get("category")
+                        category = normalize_category(ai_result.get("category"))
                     if ai_result.get("mainKeyword"):
                         main_keyword = ai_result.get("mainKeyword")
 
