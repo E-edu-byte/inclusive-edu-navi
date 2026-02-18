@@ -9,10 +9,7 @@
       "url": "https://natgeo.nikkeibp.co.jp/atcl/news/24/112600639/?ST=m_news",
       "imageUrl": "https://natgeo.nikkeibp.co.jp/atcl/news/24/112600639/ph_thumb.jpg",
       "source": "natgeo.nikkeibp.co.jp",
-      "mainKeyword": "女性ASD",
-      "isManual": true,
-      "addedAt": "2026-02-19T06:27:25.311795",
-      "expiresAt": "2026-02-26T06:27:25.311797"
+      "mainKeyword": "女性ASD"
     },
     {
       "id": "d18a65473421",
@@ -343,22 +340,12 @@
       "imageUrl": "https://prcdn.freetls.fastly.net/release_image/54387/669/54387-669-5b175666dc39904a0161198f6a10b1eb-816x1154.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
       "source": "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
       "mainKeyword": "自閉症"
-    },
-    {
-      "id": "a9a4288fed72",
-      "title": "キズキ、「学校に行っても行かなくても選べる未来」を実現する全国アンケート調査開始",
-      "summary": "キズキという団体が、不登校の中学生・高校生とその保護者を対象に全国アンケート調査を始めました。これは、学校に行くか行かないかにかかわらず、誰もが将来の選択肢を自由に選べる社会を作るためのものです。不登校の子どもたちの声を集め、より良い支援や仕組みを考える上で重要な取り組みと言えます。",
-      "category": "多様な学び",
-      "date": "2026-02-11",
-      "url": "https://ict-enews.net/2026/02/12kizuki-corp-4/",
-      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/0212-kizuki2.jpg",
-      "source": "ICT教育ニュース",
-      "mainKeyword": "多様な学び"
     }
   ],
-  "lastUpdated": "2026-02-19T06:27:25.312787",
+  "lastUpdated": "2026-02-19T07:03:05.095956",
   "totalCount": 31,
   "sources": [
+    "natgeo.nikkeibp.co.jp",
     "ICT教育ニュース",
     "エルピス・ワン",
     "ぶらあぼONLINE | クラシック音楽情報ポータル",
