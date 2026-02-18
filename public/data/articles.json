@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "d18a65473421",
+      "title": "不登校の子どもの進路の情報収集で親が最も課題に感じるのは、子どもに合う選択肢がわからないこと＝Mirai.y調べ＝",
+      "summary": "オンラインフリースクールが不登校の小中学生を持つ保護者へ進路調査を行いました。多くの保護者が、子どもに合う学びの選択肢がわからないことを最大の課題と感じていることが分かりました。この結果は、不登校の子どもたちの多様な学びの場や進路のあり方を考える上で、大切な情報となります。",
+      "category": "多様な学び",
+      "date": "2026-02-18",
+      "url": "https://ict-enews.net/2026/02/18miraialpha/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/02/01_172460-3-6fae2b0c2715938153bcf2df2ea033e3-1920x1280-1-1200x630.webp",
+      "source": "ICT教育ニュース",
+      "mainKeyword": "不登校"
+    },
+    {
       "id": "2019c2e9aa8c",
       "title": "【2/21神戸・無料】映画『ノルマル17歳。ー私たちはADHDー』上映会＆クロストーク｜発達障害・ADHD | エルピス・ワン",
       "summary": "ADHDの女の子たちの「本当の普通」を探す物語を描いた映画『ノルマル17歳。』の上映会とクロストークが、2026年2月21日（土）に神戸で開催されます。発達障害への理解を深める貴重な無料イベントですので、保護者や教員の皆様はぜひご参加ください。",
@@ -9,10 +20,7 @@
       "url": "https://elpis.works/?page_id=1181",
       "imageUrl": "https://i0.wp.com/elpis.works/wp-content/uploads/2025/04/WebThum.jpg?fit=1024%2C576&ssl=1",
       "source": "エルピス・ワン",
-      "mainKeyword": "ADHD",
-      "isManual": true,
-      "addedAt": "2026-02-18T17:03:18.559179",
-      "expiresAt": "2026-02-25T17:03:18.559181"
+      "mainKeyword": "ADHD"
     },
     {
       "id": "a61c156cd370",
@@ -23,10 +31,7 @@
       "url": "https://ebravo.jp/archives/204241",
       "imageUrl": "https://ebravo.jp/wp-content/uploads/2026/02/81a7dd802e2eb326cacfe3585dce386e.jpg",
       "source": "ぶらあぼONLINE | クラシック音楽情報ポータル",
-      "mainKeyword": "音楽体験",
-      "isManual": true,
-      "addedAt": "2026-02-18T16:23:12.181221",
-      "expiresAt": "2026-02-25T16:23:12.181224"
+      "mainKeyword": "音楽体験"
     },
     {
       "id": "b495cb3dc9a7",
@@ -37,10 +42,7 @@
       "url": "https://prtimes.jp/main/html/rd/p/000001257.000048998.html",
       "imageUrl": "https://prcdn.freetls.fastly.net/release_image/48998/1257/48998-1257-2dc039ce3a914c63f418974f4d1b4dfc-1920x1080.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
       "source": "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
-      "mainKeyword": "インクル",
-      "isManual": true,
-      "addedAt": "2026-02-18T16:21:03.800299",
-      "expiresAt": "2026-02-25T16:21:03.800301"
+      "mainKeyword": "インクル"
     },
     {
       "id": "ec33ea83d804",
@@ -51,10 +53,7 @@
       "url": "https://news.yahoo.co.jp/articles/deba96c65af50b98911e413b7550212949398cf7",
       "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260217-00000006-friday-000-1-view.jpg?exp=10800",
       "source": "Yahoo!ニュース",
-      "mainKeyword": "ADHD薬",
-      "isManual": true,
-      "addedAt": "2026-02-18T08:27:47.267829",
-      "expiresAt": "2026-02-25T08:27:47.267831"
+      "mainKeyword": "ADHD薬"
     },
     {
       "id": "49c4fa4f1b56",
@@ -343,11 +342,15 @@
       "mainKeyword": "多様な学び"
     }
   ],
-  "lastUpdated": "2026-02-18T17:03:18.560262",
-  "totalCount": 26,
+  "lastUpdated": "2026-02-18T19:30:46.733052",
+  "totalCount": 31,
   "sources": [
-    "こどもとIT",
+    "ICT教育ニュース",
+    "エルピス・ワン",
+    "ぶらあぼONLINE | クラシック音楽情報ポータル",
+    "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
     "Yahoo!ニュース",
+    "こどもとIT",
     "The BMJ",
     "日本教育新聞電子版　NIKKYOWEB",
     "tiimoapp.com",
@@ -362,8 +365,6 @@
     "CareNet.com",
     "forbesjapan.com",
     "リセマム",
-    "Kindai Picks",
-    "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
-    "ICT教育ニュース"
+    "Kindai Picks"
   ]
 }
