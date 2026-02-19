@@ -9,10 +9,7 @@
       "url": "https://www.npwo.or.jp/info/33278",
       "imageUrl": "https://www.npwo.or.jp/wp-content/uploads/2026/02/hattatsu_bn_260218_1280x720.jpg",
       "source": "NHK厚生文化事業団",
-      "mainKeyword": "就労",
-      "isManual": true,
-      "addedAt": "2026-02-19T14:22:59.427031",
-      "expiresAt": "2026-02-26T14:22:59.427033"
+      "mainKeyword": "就労"
     },
     {
       "id": "41b75e900f95",
@@ -356,9 +353,10 @@
       "mainKeyword": "自閉症"
     }
   ],
-  "lastUpdated": "2026-02-19T14:22:59.428039",
-  "totalCount": 31,
+  "lastUpdated": "2026-02-19T19:29:58.975457",
+  "totalCount": 32,
   "sources": [
+    "NHK厚生文化事業団",
     "natgeo.nikkeibp.co.jp",
     "ICT教育ニュース",
     "エルピス・ワン",
