@@ -9,10 +9,7 @@
       "url": "https://news.yahoo.co.jp/articles/cd9c5dbc889e9a148436920d637b467248530a69",
       "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260219-00276025-aerakidsp-000-1-view.jpg?exp=10800",
       "source": "Yahoo!ニュース",
-      "mainKeyword": "自閉症",
-      "isManual": true,
-      "addedAt": "2026-02-19T20:17:01.677771",
-      "expiresAt": "2026-02-26T20:17:01.677773"
+      "mainKeyword": "自閉症"
     },
     {
       "id": "a970a8cfa4f4",
@@ -23,10 +20,7 @@
       "url": "https://sirabee.com/2026/02/19/20163521627/",
       "imageUrl": "https://img.sirabee.com/wp-content/uploads/2019/10/sirabee20200325toriimiyuki1-scaled.jpg",
       "source": "Sirabee",
-      "mainKeyword": "発達障害",
-      "isManual": true,
-      "addedAt": "2026-02-19T20:02:38.415791",
-      "expiresAt": "2026-02-26T20:02:38.415793"
+      "mainKeyword": "発達障害"
     },
     {
       "id": "c9a3a80a35e3",
@@ -291,106 +285,19 @@
       "imageUrl": "https://www.oyama-design.jp/wp-content/uploads/2025/10/251028-AichiHighSchoolTest-UDFont.png",
       "source": "お山デザイン",
       "mainKeyword": "UDフォント"
-    },
-    {
-      "id": "f362324e9908",
-      "title": "学びサポート室特別国際シンポジウムを開催します。　　　　　　　　Special International Symposium will be held.｜研修・イベント｜京都教育大学 学びサポート室",
-      "summary": "京都教育大学がインクルーシブ教育の国際シンポジウムを開催します。世界的権威のフロリアン先生が来日し、国として成果を上げているスコットランドの事例をもとに、日本の学校で多様性を包摂する学びをどう実現するか議論します。保護者や教員が実践のヒントを得る貴重な機会です。",
-      "category": "イベント・研修",
-      "date": "2026-02-12",
-      "url": "https://manasapo-kyokyo.com/event/post_5825/",
-      "imageUrl": "https://manasapo-kyokyo.com/cms_e3XSzMxu/wp-content/uploads/2024/10/ogp-1200x630.png",
-      "source": "京都教育大学 学びサポート室",
-      "mainKeyword": "フロリアン"
-    },
-    {
-      "id": "0f6a2b445f34",
-      "title": "日本人小児におけるADHDサブタイプと肥満との関係｜CareNet.com",
-      "summary": "日本のADHDのお子さんを対象に、そのタイプ（サブタイプ）と肥満との関連について研究が行われました。ADHDにはいくつかのタイプがあり、それぞれの特徴と肥満との関係が明らかになることが期待されます。お子さんの健康や発達に関心のある保護者や先生方にとって役立つ情報となるでしょう。",
-      "category": "研究",
-      "date": "2026-02-12",
-      "url": "https://www.carenet.com/news/general/carenet/61892",
-      "imageUrl": "https://www.carenet.com/files/news/20251202102552-1.jpg",
-      "source": "CareNet.com",
-      "mainKeyword": "ADHD"
-    },
-    {
-      "id": "0a6756e34151",
-      "title": "ダボス会議が示した3つの教訓：レジリエンス、AI、そしてインクルーシブ成長の必然性 | Forbes JAPAN 公式サイト（フォーブス ジャパン）",
-      "summary": "ダボス会議で、誰もが恩恵を受けられる「インクルーシブ成長」の重要性が示されました。これは、世界的な視点から、教育の現場で「誰一人取り残さない」というインクルーシブ教育の理念が不可欠であることを示唆しています。未来に向けて、多様な子どもたちが自分らしく学び、社会で活躍するための環境づくりが求められています。",
-      "category": "制度・行政",
-      "date": "2026-02-12",
-      "url": "https://forbesjapan.com/articles/detail/91567?read_more=1",
-      "imageUrl": "https://images.forbesjapan.com/media/article/91567/images/main_image_4e9db1ac75920260cde1dc49ae723647f4e69044.jpg",
-      "source": "forbesjapan.com",
-      "mainKeyword": "インクルーシブ"
-    },
-    {
-      "id": "0ab575f6cb63",
-      "title": "特別支援の実践知が教材に、インクルーシブ教育教材コンテスト入賞作が決定",
-      "summary": "インクルーシブ教育を広めるため、特別支援の現場で培われたアイデアを形にした教材のコンテストが行われ、入賞作品が決まりました。この教材は、それぞれの子どもに合った学びを支え、多様な子どもたちが一緒に成長できる学校づくりに貢献します。",
-      "category": "ICT・教材",
-      "date": "2026-02-12",
-      "url": "https://edu.watch.impress.co.jp/docs/news/2083405.html",
-      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2083/405/02.jpg",
-      "source": "こどもとIT",
-      "mainKeyword": "インクルーシブ教育"
-    },
-    {
-      "id": "eb12499dfa8f",
-      "title": "極端な気温で不登校増加…RIETIが有意な関連示唆",
-      "summary": "ある専門機関の分析で、前年に極端な暑さや寒さが増えると、子どもたちの不登校が増える可能性があると分かりました。地球温暖化が進む中で、子どもたちが安心して学校に通えるよう、学びの環境を整える上で大切な手がかりとなります。",
-      "category": "多様な学び",
-      "date": "2026-02-12",
-      "url": "https://resemom.jp/article/2026/02/12/85020.html",
-      "imageUrl": "https://resemom.jp/imgs/ogp_f/391796.jpg",
-      "source": "リセマム",
-      "mainKeyword": "不登校"
-    },
-    {
-      "id": "24974be9e665",
-      "title": "不登校・中退からの再スタート、当事者と保護者が語る進路探しのリアル",
-      "summary": "不登校や中退を経験した本人と保護者が、その後の進路探しで直面した課題や、どのような選択肢があるかを語り合いました。これは、画一的な道にとらわれず、一人ひとりが自分に合った学びや社会参加の道を見つけるための大切な情報であり、多様な進路を社会全体で支えることの重要性を示しています。",
-      "category": "多様な学び",
-      "date": "2026-02-12",
-      "url": "https://edu.watch.impress.co.jp/docs/news/2084765.html",
-      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2084/765/01.png",
-      "source": "こどもとIT",
-      "mainKeyword": "進路"
-    },
-    {
-      "id": "115b98aefb5c",
-      "title": "縦書きが読めない、カタカナが苦手…もしかして学習障害（LD）かも？専門家に聞く特徴と対策 | Kindai Picks",
-      "summary": "縦書きを読むのが苦手、カタカナの区切りが分からないなど、当たり前にできることが極端に難しい場合があります。これは学習障害（LD）のサインかもしれません。近畿大学の専門家が、LDの特徴や、子どもたちが抱える困難について解説しています。保護者や先生方の理解を深める一助となるでしょう。",
-      "category": "研究",
-      "date": "2026-02-12",
-      "url": "https://kindaipicks.com/article/003219",
-      "imageUrl": "https://kindaipicks.com//uploads/202601/7e8838360778c68b23e1febcf2398a24602824ee.jpg",
-      "source": "Kindai Picks",
-      "mainKeyword": "学習障害"
-    },
-    {
-      "id": "b61dc600c7af",
-      "title": "自閉症の子が質問してくれるようになる本電子書籍無料配布開始",
-      "summary": "自閉症のお子さんが質問できるようになるための電子書籍が無料で配布開始されました。本書では、お子さんの「こだわり」を行動修正ではなく発達のサインと捉え、親子の愛着を育むことで会話力や質問へとつなげる視点を紹介。お子さんの発達段階を理解し、コミュニケーションをスムーズにするヒントが詰まっています。",
-      "category": "ICT・教材",
-      "date": "2026-02-12",
-      "url": "https://prtimes.jp/main/html/rd/p/000000669.000054387.html",
-      "imageUrl": "https://prcdn.freetls.fastly.net/release_image/54387/669/54387-669-5b175666dc39904a0161198f6a10b1eb-816x1154.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
-      "source": "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
-      "mainKeyword": "自閉症"
     }
   ],
-  "lastUpdated": "2026-02-19T20:17:01.678900",
-  "totalCount": 32,
+  "lastUpdated": "2026-02-20T07:00:49.119144",
+  "totalCount": 26,
   "sources": [
+    "Yahoo!ニュース",
+    "Sirabee",
     "NHK厚生文化事業団",
     "natgeo.nikkeibp.co.jp",
     "ICT教育ニュース",
     "エルピス・ワン",
     "ぶらあぼONLINE | クラシック音楽情報ポータル",
     "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
-    "Yahoo!ニュース",
     "こどもとIT",
     "The BMJ",
     "日本教育新聞電子版　NIKKYOWEB",
@@ -401,11 +308,6 @@
     "カレントアウェアネス・ポータル",
     "asahi.com",
     "BBCニュース",
-    "お山デザイン",
-    "京都教育大学 学びサポート室",
-    "CareNet.com",
-    "forbesjapan.com",
-    "リセマム",
-    "Kindai Picks"
+    "お山デザイン"
   ]
 }
