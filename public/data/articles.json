@@ -9,10 +9,7 @@
       "url": "https://prtimes.jp/main/html/rd/p/000000008.000158424.html",
       "imageUrl": "https://prcdn.freetls.fastly.net/release_image/158424/8/158424-8-69983e7a1725a2fb4bdfa0e3630fb0ad-640x376.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
       "source": "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
-      "mainKeyword": "自閉症",
-      "isManual": true,
-      "addedAt": "2026-02-20T19:19:40.474932",
-      "expiresAt": "2026-02-27T19:19:40.474934"
+      "mainKeyword": "自閉症"
     },
     {
       "id": "1fff861137ce",
@@ -23,10 +20,7 @@
       "url": "https://www.kyoiku-press.com/post-307017/",
       "imageUrl": "https://www.kyoiku-press.com/wp-content/uploads/2018/09/nikkyoweb_logo.jpg",
       "source": "日本教育新聞電子版　NIKKYOWEB",
-      "mainKeyword": "教職課程",
-      "isManual": true,
-      "addedAt": "2026-02-20T19:15:00.874897",
-      "expiresAt": "2026-02-27T19:15:00.874899"
+      "mainKeyword": "教職課程"
     },
     {
       "id": "24974be9e665",
@@ -49,17 +43,6 @@
       "imageUrl": "https://publish.realmadrid.com/content/dam/portals/realmadrid-com/es-es/news/generic/2026/02/17/fotos/ND-COPA-ALMA-MARRUECOS-FUNDACION-DSC04718.jpg",
       "source": "レアル・マドリード財団がテトゥアンでアフリカ初のインクルーシブ・コパ・アルマを開催",
       "mainKeyword": "インクル"
-    },
-    {
-      "id": "f4485e5ba562",
-      "title": "【精神科医が教える】学校に行きたくない子どもに伝えたいこと（ダイヤモンド・オンライン） - Yahoo!ニュース",
-      "summary": "精神科医が「学校に行きたくない」という気持ちは、心が弱いのではなく正常な反応だと解説しています。無理せず、親や先生、スクールカウンセラーなど、信頼できる大人最低3人に相談することの重要性を伝えています。保護者や教員が子どもを支えるためのヒントになります。",
-      "category": "不登校・多様な学び",
-      "date": "2026-02-20",
-      "url": "https://news.yahoo.co.jp/articles/54037f87c621f9415d7909dca4c858b20ffa576a",
-      "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260220-00383563-diamond-000-1-view.jpg?exp=10800",
-      "source": "Yahoo!ニュース",
-      "mainKeyword": "不登校"
     },
     {
       "id": "59d838c6704b",
@@ -324,33 +307,13 @@
       "imageUrl": "https://ichef.bbci.co.uk/news/1024/branded_japanese/d7cf/live/3718db40-f304-11f0-b2ab-f70ba525289e.jpg",
       "source": "BBCニュース",
       "mainKeyword": "発達"
-    },
-    {
-      "id": "02cdb2524684",
-      "title": "合理的配慮をめぐるモヤモヤ...「本当に無理？」「あの子だけずるい」「現場が持たない」を乗り越える学級経営の視点とは？《新年度前がチャンス》（東洋経済education×ICT） - Yahoo!ニュース",
-      "summary": "合理的配慮に対する「本当に無理？」「あの子だけずるい」「現場が持たない」といった先生や子どものモヤモヤを解消する視点を紹介。全ての子が過ごしやすい教室を目指し、個別の支援だけでなく、事前に学校全体の環境を整える「基礎的環境整備」の重要性を説き、新年度に向けて「ふつう」を見直すきっかけを提案します。",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-13",
-      "url": "https://news.yahoo.co.jp/articles/c14540b3f3a7fc6d117eb0329b8bd0329fee88bf?page=1",
-      "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260213-00933532-toyoedu-000-1-view.jpg?exp=10800",
-      "source": "Yahoo!ニュース",
-      "mainKeyword": "合理的配慮"
-    },
-    {
-      "id": "eb041a37d5ad",
-      "title": "愛知県公立高等学校入学者選抜 学力検査問題で使用されるフォントの正体を探ってみた話",
-      "summary": "愛知県の公立高校入試では、2026年から学力検査問題のフォントがUDフォントに変わります。UDフォントは、文字がより見やすいように工夫されたユニバーサルデザインの書体です。文字の輪を広げたり、濁点を離したりすることで、視力に不安がある方を含め、多くの受験生が読みやすい問題になります。",
-      "category": "ICT・教材",
-      "date": "2026-02-13",
-      "url": "https://www.oyama-design.jp/aichihighschooltest-udfont/",
-      "imageUrl": "https://www.oyama-design.jp/wp-content/uploads/2025/10/251028-AichiHighSchoolTest-UDFont.png",
-      "source": "お山デザイン",
-      "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-02-20T19:19:40.476031",
-  "totalCount": 29,
+  "lastUpdated": "2026-02-21T06:52:17.209428",
+  "totalCount": 28,
   "sources": [
+    "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
+    "日本教育新聞電子版　NIKKYOWEB",
     "こどもとIT",
     "レアル・マドリード財団がテトゥアンでアフリカ初のインクルーシブ・コパ・アルマを開催",
     "Yahoo!ニュース",
@@ -360,16 +323,13 @@
     "ICT教育ニュース",
     "エルピス・ワン",
     "ぶらあぼONLINE | クラシック音楽情報ポータル",
-    "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
     "The BMJ",
-    "日本教育新聞電子版　NIKKYOWEB",
     "tiimoapp.com",
     "ナゾロジー",
     "読売新聞オンライン",
     "東洋経済オンライン",
     "カレントアウェアネス・ポータル",
     "asahi.com",
-    "BBCニュース",
-    "お山デザイン"
+    "BBCニュース"
   ]
 }
