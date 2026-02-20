@@ -377,22 +377,8 @@
       "isManual": true,
       "addedAt": "2026-02-13T21:48:47.055763",
       "expiresAt": "2026-02-20T21:48:47.055765"
-    },
-    {
-      "id": "eb041a37d5ad",
-      "title": "愛知県公立高等学校入学者選抜 学力検査問題で使用されるフォントの正体を探ってみた話",
-      "summary": "愛知県の公立高校入試では、2026年から学力検査問題のフォントがUDフォントに変わります。UDフォントは、文字がより見やすいように工夫されたユニバーサルデザインの書体です。文字の輪を広げたり、濁点を離したりすることで、視力に不安がある方を含め、多くの受験生が読みやすい問題になります。",
-      "category": "ICT・教材",
-      "date": "2026-02-13",
-      "url": "https://www.oyama-design.jp/aichihighschooltest-udfont/",
-      "imageUrl": "https://www.oyama-design.jp/wp-content/uploads/2025/10/251028-AichiHighSchoolTest-UDFont.png",
-      "source": "お山デザイン",
-      "mainKeyword": "UDフォント",
-      "isManual": true,
-      "addedAt": "2026-02-13T08:42:43.968279",
-      "expiresAt": "2026-02-20T08:42:43.968280"
     }
   ],
-  "lastUpdated": "2026-02-20T09:27:47.109250",
+  "lastUpdated": "2026-02-20T19:08:05.706010",
   "note": "手動投稿された記事。自動更新で上書きされない。"
 }

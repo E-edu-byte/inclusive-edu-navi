@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "24974be9e665",
+      "title": "不登校・中退からの再スタート、当事者と保護者が語る進路探しのリアル",
+      "summary": "不登校や中退を経験した生徒とその保護者が、どのように次の学びの場を見つけたか、実際の体験を共有するイベントが開催されました。これは、多様な背景を持つ子どもたちが自分らしい進路を見つけ、社会で活躍できるよう支援するために、具体的な選択肢や工夫を知る機会として重要です。",
+      "category": "多様な学び",
+      "date": "2026-02-20",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2084765.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2084/765/01.png",
+      "source": "こどもとIT",
+      "mainKeyword": "不登校"
+    },
+    {
       "id": "dbea707d92b4",
       "title": "レアル・マドリード財団がテトゥアンでアフリカ初のインクルーシブ・コパ・アルマを開催",
       "summary": "レアル・マドリード財団がアフリカ初の「インクルーシブ・コパ・アルマ」をモロッコで開催しました。障害の有無に関わらず100人以上の子供たちが集い、適応型スポーツを通じて共生や平等を体験。スポーツが多様な子どもたちの絆を深め、互いの違いを尊重する社会変革の手段となることを示す、素晴らしい実践事例です。",
@@ -9,10 +20,7 @@
       "url": "https://www.realmadrid.com/ja-JP/news/club/foundation/la-fundacion-real-madrid-celebra-en-tetuan-la-primera-copa-alma-inclusiva-en-africa-17-02-2026",
       "imageUrl": "https://publish.realmadrid.com/content/dam/portals/realmadrid-com/es-es/news/generic/2026/02/17/fotos/ND-COPA-ALMA-MARRUECOS-FUNDACION-DSC04718.jpg",
       "source": "レアル・マドリード財団がテトゥアンでアフリカ初のインクルーシブ・コパ・アルマを開催",
-      "mainKeyword": "インクル",
-      "isManual": true,
-      "addedAt": "2026-02-20T09:27:47.108985",
-      "expiresAt": "2026-02-27T09:27:47.108987"
+      "mainKeyword": "インクル"
     },
     {
       "id": "f4485e5ba562",
@@ -23,10 +31,7 @@
       "url": "https://news.yahoo.co.jp/articles/54037f87c621f9415d7909dca4c858b20ffa576a",
       "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260220-00383563-diamond-000-1-view.jpg?exp=10800",
       "source": "Yahoo!ニュース",
-      "mainKeyword": "不登校",
-      "isManual": true,
-      "addedAt": "2026-02-20T09:19:22.620579",
-      "expiresAt": "2026-02-27T09:19:22.620581"
+      "mainKeyword": "不登校"
     },
     {
       "id": "59d838c6704b",
@@ -315,9 +320,11 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-02-20T09:27:47.110135",
-  "totalCount": 26,
+  "lastUpdated": "2026-02-20T19:08:04.507435",
+  "totalCount": 29,
   "sources": [
+    "こどもとIT",
+    "レアル・マドリード財団がテトゥアンでアフリカ初のインクルーシブ・コパ・アルマを開催",
     "Yahoo!ニュース",
     "Sirabee",
     "NHK厚生文化事業団",
@@ -326,7 +333,6 @@
     "エルピス・ワン",
     "ぶらあぼONLINE | クラシック音楽情報ポータル",
     "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
-    "こどもとIT",
     "The BMJ",
     "日本教育新聞電子版　NIKKYOWEB",
     "tiimoapp.com",
