@@ -296,21 +296,10 @@
       "imageUrl": "https://public0.potaufeu.asahi.com/afd2-p/picture/29894545/05e783dd654896691bbd2550d87c0cb3.jpg",
       "source": "asahi.com",
       "mainKeyword": "入試配慮"
-    },
-    {
-      "id": "f93aafa1bdfa",
-      "title": "鎮痛成分アセトアミノフェンは妊娠中でも安全、最新研究で判明　トランプ氏による自閉症リスク説を否定 - BBCニュース",
-      "summary": "最新の大規模研究により、鎮痛剤アセトアミノフェンは妊娠中に服用しても安全で、お子さんの自閉症やADHDなど発達上の問題のリスクを高める証拠はないと判明しました。これにより、これまでの懸念や誤った情報が否定され、安心してご使用いただけます。",
-      "category": "研究",
-      "date": "2026-02-14",
-      "url": "https://www.bbc.com/japanese/articles/cq843d0v0eyo",
-      "imageUrl": "https://ichef.bbci.co.uk/news/1024/branded_japanese/d7cf/live/3718db40-f304-11f0-b2ab-f70ba525289e.jpg",
-      "source": "BBCニュース",
-      "mainKeyword": "発達"
     }
   ],
-  "lastUpdated": "2026-02-21T18:04:41.049758",
-  "totalCount": 28,
+  "lastUpdated": "2026-02-22T06:44:08.779814",
+  "totalCount": 27,
   "sources": [
     "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
     "日本教育新聞電子版　NIKKYOWEB",
@@ -329,7 +318,6 @@
     "読売新聞オンライン",
     "東洋経済オンライン",
     "カレントアウェアネス・ポータル",
-    "asahi.com",
-    "BBCニュース"
+    "asahi.com"
   ]
 }
