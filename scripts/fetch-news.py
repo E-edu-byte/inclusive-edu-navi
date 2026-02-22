@@ -131,13 +131,21 @@ RSS_FEEDS = [
         "max_articles": 3,
     },
     # こどもとIT: RSSが不安定なためスクレイピングに移行（fetch_kodomo_it_news関数で取得）
+    # === 東洋経済オンライン ===
+    {
+        "name": "東洋経済オンライン",
+        "url": "https://toyokeizai.net/list/feed/rss",
+        "skip_core_filter": False,  # 厳格フィルタ適用
+        "strict_keywords": ["インクルーシブ", "特別支援", "発達障害", "学習障害", "ADHD", "自閉症", "ASD", "ギフテッド", "不登校", "合理的配慮", "療育", "支援学級", "支援学校", "通級", "障害児", "障がい", "神経多様性"],
+        "max_articles": 3,
+    },
     # === プレスリリース・大学ニュース ===
     {
         "name": "PR TIMES",
         "url": "https://prtimes.jp/index.rdf",
         "skip_core_filter": False,  # 厳格フィルタ適用
-        "strict_keywords": ["インクルーシブ", "特別支援", "障害", "障がい", "発達支援", "発達障害", "不登校", "学習障害", "自閉症", "自閉", "ASD", "療育"],
-        "max_articles": 2,
+        "strict_keywords": ["インクルーシブ", "特別支援", "障害", "障がい", "発達支援", "発達障害", "不登校", "学習障害", "自閉症", "自閉", "ASD", "療育", "ADHD", "ギフテッド", "ユニバーサルデザイン", "バリアフリー"],
+        "max_articles": 4,
     },
     {
         "name": "大学プレスセンター",
