@@ -9,10 +9,7 @@
       "url": "https://news.yahoo.co.jp/articles/2b0a1e90b6c5eadbe9e19ab56647d29e7ef2f184",
       "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260221-00000006-giz-000-1-view.jpg?exp=10800",
       "source": "Yahoo!ニュース",
-      "mainKeyword": "AI不安",
-      "isManual": true,
-      "addedAt": "2026-02-22T09:57:00.749016",
-      "expiresAt": "2026-03-01T09:57:00.749018"
+      "mainKeyword": "AI不安"
     },
     {
       "id": "5ace047b286b",
@@ -312,14 +309,14 @@
       "mainKeyword": "入試配慮"
     }
   ],
-  "lastUpdated": "2026-02-22T09:57:00.749975",
-  "totalCount": 27,
+  "lastUpdated": "2026-02-22T18:04:47.810509",
+  "totalCount": 28,
   "sources": [
+    "Yahoo!ニュース",
     "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
     "日本教育新聞電子版　NIKKYOWEB",
     "こどもとIT",
     "レアル・マドリード財団がテトゥアンでアフリカ初のインクルーシブ・コパ・アルマを開催",
-    "Yahoo!ニュース",
     "Sirabee",
     "NHK厚生文化事業団",
     "natgeo.nikkeibp.co.jp",
