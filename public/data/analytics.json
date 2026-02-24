@@ -1,12 +1,12 @@
 {
-  "lastUpdated": "2026-02-24T08:09:55.919402",
+  "lastUpdated": "2026-02-24T20:11:55.254210",
   "period": "2026/01/25 - 2026/02/24",
-  "pageViews": 455,
-  "todayPageViews": 4,
-  "users": 47,
-  "todayUsers": 1,
-  "sessions": 115,
-  "todaySessions": 3,
+  "pageViews": 460,
+  "todayPageViews": 7,
+  "users": 48,
+  "todayUsers": 3,
+  "sessions": 118,
+  "todaySessions": 6,
   "clicks": {
     "amazon": 0,
     "rakuten": 0,
@@ -28,11 +28,11 @@
   "topPages": [
     {
       "path": "/inclusive/",
-      "views": 240
+      "views": 243
     },
     {
       "path": "/inclusive/editor-secret-dashboard/",
-      "views": 109
+      "views": 110
     },
     {
       "path": "/inclusive/bookmarks/",
@@ -43,11 +43,11 @@
       "views": 10
     },
     {
-      "path": "/inclusive/category/diverse-learning/",
-      "views": 8
+      "path": "/inclusive/news/",
+      "views": 9
     },
     {
-      "path": "/inclusive/news/",
+      "path": "/inclusive/category/diverse-learning/",
       "views": 8
     },
     {
