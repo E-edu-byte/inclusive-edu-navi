@@ -98,54 +98,10 @@
       "imageUrl": "https://media.image.infoseek.co.jp/isnews/photos/mainichi/mainichi_20260220k0000m040098000c_0-enlarge.jpg",
       "source": "Infoseekニュース",
       "mainKeyword": "不登校"
-    },
-    {
-      "id": "5ace047b286b",
-      "title": "タイムラインを青くそめよう。東京都自閉症協会が、世界自閉症啓発デーにむけてBlue Art コンテストを開催！",
-      "summary": "4月2日は世界自閉症啓発デーです。NPO法人東京都自閉症協会は、自閉スペクトラム症への理解を深めるため、青をテーマにしたアートコンテストをXで開催しています。外見では分かりにくい自閉スペクトラム症について知り、誤解や偏見をなくすきっかけ作りに参加しませんか。",
-      "category": "イベント・研修",
-      "date": "2026-02-20",
-      "url": "https://prtimes.jp/main/html/rd/p/000000008.000158424.html",
-      "imageUrl": "https://prcdn.freetls.fastly.net/release_image/158424/8/158424-8-69983e7a1725a2fb4bdfa0e3630fb0ad-640x376.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
-      "source": "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
-      "mainKeyword": "自閉症"
-    },
-    {
-      "id": "1fff861137ce",
-      "title": "教職課程で「障害の社会モデル」必修へ　文科省案",
-      "summary": "文科省は、教員養成課程で「障害の社会モデル」や発達障害教育を必修にする案を発表しました。特別な支援が必要な子どもが増える中、幼・小・中・高の先生方が、より質の高い特別支援教育を提供できるよう、学ぶ内容を充実させる狙いです。未来の先生の専門性が高まり、多様な子どもへの理解と支援が期待されます。",
-      "category": "制度・行政",
-      "date": "2026-02-20",
-      "url": "https://www.kyoiku-press.com/post-307017/",
-      "imageUrl": "https://www.kyoiku-press.com/wp-content/uploads/2018/09/nikkyoweb_logo.jpg",
-      "source": "日本教育新聞電子版　NIKKYOWEB",
-      "mainKeyword": "教職課程"
-    },
-    {
-      "id": "24974be9e665",
-      "title": "不登校・中退からの再スタート、当事者と保護者が語る進路探しのリアル",
-      "summary": "不登校や中退を経験した生徒とその保護者が、どのように次の学びの場を見つけたか、実際の体験を共有するイベントが開催されました。これは、多様な背景を持つ子どもたちが自分らしい進路を見つけ、社会で活躍できるよう支援するために、具体的な選択肢や工夫を知る機会として重要です。",
-      "category": "多様な学び",
-      "date": "2026-02-20",
-      "url": "https://edu.watch.impress.co.jp/docs/news/2084765.html",
-      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2084/765/01.png",
-      "source": "こどもとIT",
-      "mainKeyword": "不登校"
-    },
-    {
-      "id": "dbea707d92b4",
-      "title": "レアル・マドリード財団がテトゥアンでアフリカ初のインクルーシブ・コパ・アルマを開催",
-      "summary": "レアル・マドリード財団がアフリカ初の「インクルーシブ・コパ・アルマ」をモロッコで開催しました。障害の有無に関わらず100人以上の子供たちが集い、適応型スポーツを通じて共生や平等を体験。スポーツが多様な子どもたちの絆を深め、互いの違いを尊重する社会変革の手段となることを示す、素晴らしい実践事例です。",
-      "category": "実践・事例",
-      "date": "2026-02-20",
-      "url": "https://www.realmadrid.com/ja-JP/news/club/foundation/la-fundacion-real-madrid-celebra-en-tetuan-la-primera-copa-alma-inclusiva-en-africa-17-02-2026",
-      "imageUrl": "https://publish.realmadrid.com/content/dam/portals/realmadrid-com/es-es/news/generic/2026/02/17/fotos/ND-COPA-ALMA-MARRUECOS-FUNDACION-DSC04718.jpg",
-      "source": "レアル・マドリード財団がテトゥアンでアフリカ初のインクルーシブ・コパ・アルマを開催",
-      "mainKeyword": "インクル"
     }
   ],
-  "lastUpdated": "2026-02-27T19:08:48.683913",
-  "totalCount": 13,
+  "lastUpdated": "2026-02-28T06:54:37.790272",
+  "totalCount": 9,
   "sources": [
     "東京学芸大学",
     "学びとマナビが、ひびき合う。| 授業支援クラウドならスクールタクト",
@@ -154,8 +110,6 @@
     "Yahoo!ニュース",
     "毎日新聞",
     "ヨミドクター(読売新聞)",
-    "Infoseekニュース",
-    "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
-    "レアル・マドリード財団がテトゥアンでアフリカ初のインクルーシブ・コパ・アルマを開催"
+    "Infoseekニュース"
   ]
 }
