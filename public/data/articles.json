@@ -9,10 +9,7 @@
       "url": "https://prtimes.jp/main/html/rd/p/000000009.000158424.html",
       "imageUrl": "https://prcdn.freetls.fastly.net/release_image/158424/9/158424-9-7c0a6729df43c23d426b42497a742749-2048x1272.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
       "source": "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
-      "mainKeyword": "自閉症",
-      "isManual": true,
-      "addedAt": "2026-02-28T15:43:16.173669",
-      "expiresAt": "2026-03-07T15:43:16.173672"
+      "mainKeyword": "自閉症"
     },
     {
       "id": "ab1666318988",
@@ -23,10 +20,7 @@
       "url": "https://news.yahoo.co.jp/articles/f78710af58aeaf68dae672a8034a13a6a4efb2f7",
       "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260227-22492425-rsk-000-10-view.jpg?exp=10800",
       "source": "Yahoo!ニュース",
-      "mainKeyword": "自閉症",
-      "isManual": true,
-      "addedAt": "2026-02-28T15:41:00.568847",
-      "expiresAt": "2026-03-07T15:41:00.568849"
+      "mainKeyword": "自閉症"
     },
     {
       "id": "be02784eefd7",
@@ -37,10 +31,7 @@
       "url": "https://www.google.com/amp/s/topics.smt.docomo.ne.jp/amp/article/mainichi/nation/mainichi-20260225k0000m040067000c",
       "imageUrl": "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=300&fit=crop",
       "source": "google.com",
-      "mainKeyword": "不明",
-      "isManual": true,
-      "addedAt": "2026-02-28T15:37:00.697822",
-      "expiresAt": "2026-03-07T15:37:00.697824"
+      "mainKeyword": "不明"
     },
     {
       "id": "646e576da3d2",
@@ -142,14 +133,16 @@
       "mainKeyword": "不登校"
     }
   ],
-  "lastUpdated": "2026-02-28T15:43:16.174333",
-  "totalCount": 9,
+  "lastUpdated": "2026-02-28T17:59:15.957650",
+  "totalCount": 12,
   "sources": [
+    "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
+    "Yahoo!ニュース",
+    "google.com",
     "東京学芸大学",
     "学びとマナビが、ひびき合う。| 授業支援クラウドならスクールタクト",
     "こどもとIT",
     "日本教育新聞電子版　NIKKYOWEB",
-    "Yahoo!ニュース",
     "毎日新聞",
     "ヨミドクター(読売新聞)",
     "Infoseekニュース"
