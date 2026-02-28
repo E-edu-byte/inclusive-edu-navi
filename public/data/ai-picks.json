@@ -1,6 +1,19 @@
 {
   "picks": [
     {
+      "id": "501f954e393c",
+      "sourceArticleId": "ab1666318988",
+      "title": "自閉症の男性が「Nゲージ」巨大ジオラマを作成「150分の1の緻密で精巧な街」個性を生かせるよう職場を改善した社長の決断【岡山】（RSK山陽放送） - Yahoo!ニュース",
+      "url": "https://news.yahoo.co.jp/articles/f78710af58aeaf68dae672a8034a13a6a4efb2f7",
+      "category": "実践・事例",
+      "originalDate": "2026-02-28",
+      "reason": "編集部ピックアップ",
+      "summary": "自閉症のある男性が8年かけて精巧なNゲージの巨大ジオラマを作成し、働く会社の工場に設置されています。彼のこだわりや得意なことを理解し、個性を生かせる職場環境が実現した事例です。本人に合った環境で才能が開花する可能性を示唆しています。",
+      "generatedAt": "2026-02-28T15:41:00.569874",
+      "model": "manual",
+      "isManual": true
+    },
+    {
       "id": "664885bb70ce",
       "sourceArticleId": "be02784eefd7",
       "title": "Redirect Notice",
@@ -48,20 +61,8 @@
       "summary": "落語家・柳家花緑さんが40歳過ぎて学習障害と診断された経験を語ります。長年抱えていた困難が障害によるものと知ることで、当事者や保護者、教員が特性を理解し、適切な支援へ繋げるための参考となります。",
       "generatedAt": "2026-02-27T19:09:07.436154",
       "model": "gemini-2.5-flash"
-    },
-    {
-      "id": "37464afa2436",
-      "sourceArticleId": "490e1fa4f03b",
-      "title": "不登校の小中学生に「新たな人間関係を」　高校内に支援ルームの狙い｜Infoseekニュース",
-      "url": "https://news.infoseek.co.jp/article/mainichi_20260220k0000m040098000c/",
-      "category": "不登校・多様な学び",
-      "originalDate": "2026-02-22",
-      "reason": "自治体の不登校支援強化",
-      "summary": "大阪府八尾市と府立高校が不登校の小中学生向けに高校内に支援ルームを開設。不登校の子どもたちに新たな人間関係の場を提供し、安心して学び直せる環境を地域で創る、先進的な取り組みとして注目されます。",
-      "generatedAt": "2026-02-27T19:09:07.436160",
-      "model": "gemini-2.5-flash"
     }
   ],
-  "lastUpdated": "2026-02-28T15:37:00.698758",
+  "lastUpdated": "2026-02-28T15:41:00.569899",
   "totalCount": 5
 }
