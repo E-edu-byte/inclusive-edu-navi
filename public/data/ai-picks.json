@@ -1,6 +1,19 @@
 {
   "picks": [
     {
+      "id": "664885bb70ce",
+      "sourceArticleId": "be02784eefd7",
+      "title": "Redirect Notice",
+      "url": "https://www.google.com/amp/s/topics.smt.docomo.ne.jp/amp/article/mainichi/nation/mainichi-20260225k0000m040067000c",
+      "category": "不明",
+      "originalDate": "2026-02-28",
+      "reason": "編集部ピックアップ",
+      "summary": "記事情報が不足しているため、インクルーシブ教育に関する要約を生成できません。保護者や教員に役立つ要約を作成するためには、記事の本文や詳細な説明文が必要です。お手数ですが、記事内容をご提供ください。",
+      "generatedAt": "2026-02-28T15:37:00.698748",
+      "model": "manual",
+      "isManual": true
+    },
+    {
       "id": "457ece9b366b",
       "sourceArticleId": "fe1acd385398",
       "title": "不登校支援にICT、100％目標　文科省、情報化計画",
@@ -47,20 +60,8 @@
       "summary": "大阪府八尾市と府立高校が不登校の小中学生向けに高校内に支援ルームを開設。不登校の子どもたちに新たな人間関係の場を提供し、安心して学び直せる環境を地域で創る、先進的な取り組みとして注目されます。",
       "generatedAt": "2026-02-27T19:09:07.436160",
       "model": "gemini-2.5-flash"
-    },
-    {
-      "id": "3ff94f3a1d13",
-      "sourceArticleId": "646e576da3d2",
-      "title": "令和８年度特別支援教育特別専攻科（特別支援教育専攻）入学者選抜試験の終了について",
-      "url": "https://www.u-gakugei.ac.jp/pickup-news/2026/02/post-1428.html",
-      "category": "研究",
-      "originalDate": "2026-02-26",
-      "reason": "最新の注目記事",
-      "summary": "特別支援教育を深く学ぶための大学院のような課程（特別専攻科）の入学者試験が終了しました。この課程で学ぶ学生は、将来、障害のある子どもたちをサポートする専門の先生になります。多様な子どもたちが共に学ぶ「インクルーシブ教育」を進める上で、専門知識を持つ先生を育てることは非常に重要です。",
-      "generatedAt": "2026-02-28T06:54:38.871030",
-      "model": "refill"
     }
   ],
-  "lastUpdated": "2026-02-28T06:54:38.871037",
+  "lastUpdated": "2026-02-28T15:37:00.698758",
   "totalCount": 5
 }
