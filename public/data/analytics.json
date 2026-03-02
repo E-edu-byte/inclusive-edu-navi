@@ -1,12 +1,12 @@
 {
-  "lastUpdated": "2026-03-02T06:42:41.439261",
+  "lastUpdated": "2026-03-02T19:33:37.373145",
   "period": "2026/01/31 - 2026/03/02",
-  "pageViews": 491,
-  "todayPageViews": 0,
+  "pageViews": 493,
+  "todayPageViews": 1,
   "users": 48,
-  "todayUsers": 0,
-  "sessions": 135,
-  "todaySessions": 0,
+  "todayUsers": 1,
+  "sessions": 136,
+  "todaySessions": 1,
   "clicks": {
     "amazon": 0,
     "rakuten": 0,
@@ -28,7 +28,7 @@
   "topPages": [
     {
       "path": "/inclusive/",
-      "views": 252
+      "views": 254
     },
     {
       "path": "/inclusive/editor-secret-dashboard/",
