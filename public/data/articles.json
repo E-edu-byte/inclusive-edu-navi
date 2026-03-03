@@ -98,32 +98,10 @@
       "imageUrl": "https://cdn.mainichi.jp/vol1/2026/02/24/20260224pr200m020523000p/0c10.jpg?1",
       "source": "毎日新聞",
       "mainKeyword": "不登校"
-    },
-    {
-      "id": "bde53cc4708c",
-      "title": "不登校やいじめを経験した大学生が企画、「心理的安全性」を学ぶ合宿を広島で開催",
-      "summary": "不登校やいじめを経験した大学生たちが、誰もが安心して自分の意見を言える「心理的安全性」について学ぶ合宿を広島で企画し、開催しました。この取り組みは、つらい経験をした人たちが自分らしくいられる学びの場を作り、その大切さを社会に広める上でとても重要です。",
-      "category": "支援・合理的配慮",
-      "date": "2026-02-24",
-      "url": "https://edu.watch.impress.co.jp/docs/news/event/2087922.html",
-      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2087/922/01.jpg",
-      "source": "こどもとIT",
-      "mainKeyword": "心理的安全性"
-    },
-    {
-      "id": "c632a2748ae6",
-      "title": "［柳家花緑さん］学習障害（１）「苦手」症状に当てはまる | ヨミドクター(読売新聞)",
-      "summary": "落語家の柳家花緑さんが、文字の読み書きに困難を感じ、40歳過ぎて学習障害（限局性学習症）と診断された経験を語ります。長年「苦手」と感じていたことが障害だと知り安堵したという実体験は、同様の困難を抱える子どもや保護者、教員の方々に、気づきと勇気を与えるメッセージとなるでしょう。",
-      "category": "実践・事例",
-      "date": "2026-02-24",
-      "url": "https://www.yomiuri.co.jp/yomidr/article/20260209-GYTET00010/",
-      "imageUrl": "https://www.yomiuri.co.jp/yomidr/wp-content/uploads/2026/02/20260209-GYTET00010_eye.jpg?ver=2026",
-      "source": "ヨミドクター(読売新聞)",
-      "mainKeyword": "学習障害"
     }
   ],
-  "lastUpdated": "2026-03-03T19:09:21.050818",
-  "totalCount": 11,
+  "lastUpdated": "2026-03-04T06:59:15.609675",
+  "totalCount": 9,
   "sources": [
     "ICT教育ニュース",
     "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
@@ -132,7 +110,6 @@
     "学びとマナビが、ひびき合う。| 授業支援クラウドならスクールタクト",
     "こどもとIT",
     "日本教育新聞電子版　NIKKYOWEB",
-    "毎日新聞",
-    "ヨミドクター(読売新聞)"
+    "毎日新聞"
   ]
 }
