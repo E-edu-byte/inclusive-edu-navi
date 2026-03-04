@@ -1,6 +1,20 @@
 {
   "articles": [
     {
+      "id": "4da7df86dbdb",
+      "title": "自閉症を支援する団体の協力を受け、新しいバービーが誕生",
+      "summary": "大手玩具メーカーから、自閉症の特徴を持つバービー人形が登場しました。支援団体と協力し、感覚過敏に配慮した服装やヘッドホン、コミュニケーションを助けるタブレット、スティミング（反復行動）を表現する関節など、細部まで工夫されています。多様性を認め合う社会への一歩となるでしょう。",
+      "category": "ICT・教材",
+      "date": "2026-03-04",
+      "url": "https://www.gizmodo.jp/2026/03/the-first-autistic-barbie-doll.html",
+      "imageUrl": "https://media.loom-app.com/gizmodo/dist/images/2026/02/27/BAR_FNS_2026_S26Merch_KeyArt_Horizontal_RGB.jpg?w=1280&h=630&f=jpg",
+      "source": "gizmodo.jp",
+      "mainKeyword": "自閉症",
+      "isManual": true,
+      "addedAt": "2026-03-04T14:43:01.647993",
+      "expiresAt": "2026-03-11T14:43:01.647995"
+    },
+    {
       "id": "8df9701de6b0",
       "title": "コードタクト、神戸市の全市立小中学校と特別支援学校で授業支援クラウド「スクールタクト」の活用開始",
       "summary": "【要約準備中】この記事の要約は現在準備中です。",
@@ -100,7 +114,7 @@
       "mainKeyword": "不登校"
     }
   ],
-  "lastUpdated": "2026-03-04T06:59:15.609675",
+  "lastUpdated": "2026-03-04T14:43:01.648527",
   "totalCount": 9,
   "sources": [
     "ICT教育ニュース",
