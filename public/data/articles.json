@@ -9,10 +9,7 @@
       "url": "https://news.yahoo.co.jp/articles/339063f6eccd9a1c53b41f13cd99b901e655964d",
       "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260305-00000082-asahi-000-1-view.jpg?exp=10800",
       "source": "Yahoo!ニュース",
-      "mainKeyword": "野球",
-      "isManual": true,
-      "addedAt": "2026-03-05T17:27:28.545089",
-      "expiresAt": "2026-03-12T17:27:28.545091"
+      "mainKeyword": "野球"
     },
     {
       "id": "bde53cc4708c",
@@ -103,14 +100,14 @@
       "mainKeyword": "多様な学び"
     }
   ],
-  "lastUpdated": "2026-03-05T17:27:28.545565",
-  "totalCount": 8,
+  "lastUpdated": "2026-03-05T19:10:56.150341",
+  "totalCount": 9,
   "sources": [
+    "Yahoo!ニュース",
     "こどもとIT",
     "gizmodo.jp",
     "ICT教育ニュース",
     "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
-    "Yahoo!ニュース",
     "東京学芸大学",
     "学びとマナビが、ひびき合う。| 授業支援クラウドならスクールタクト"
   ]
