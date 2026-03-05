@@ -1,6 +1,19 @@
 {
   "picks": [
     {
+      "id": "ce7202de1c38",
+      "sourceArticleId": "e4105136cdd1",
+      "title": "高野連に加盟した特別支援学校に寄付次々　甲子園出場校から練習球も（朝日新聞） - Yahoo!ニュース",
+      "url": "https://news.yahoo.co.jp/articles/339063f6eccd9a1c53b41f13cd99b901e655964d",
+      "category": "実践・事例",
+      "originalDate": "2026-03-05",
+      "reason": "編集部ピックアップ",
+      "summary": "知的障害のある生徒が通う黒瀬特別支援学校みのお分校が、広島県高校野球連盟に初めて加盟しました。生徒の「野球がしたい」という強い思いが実を結び、甲子園出場校などから寄付や応援が次々寄せられています。多様な生徒が活躍できる場が広がり、希望の一歩となりました。",
+      "generatedAt": "2026-03-05T17:27:28.545889",
+      "model": "manual",
+      "isManual": true
+    },
+    {
       "id": "2d770d5ee6c0",
       "sourceArticleId": "fe1acd385398",
       "title": "不登校支援にICT、100％目標　文科省、情報化計画",
@@ -47,20 +60,8 @@
       "summary": "不登校児童生徒が増加する中で注目される「学びの多様化学校」でのICT活用事例は、生徒の心理的安全性と多様な学びの選択肢を提供します。全ての子どもが安心して学べる環境作りのヒントがここにあります。",
       "generatedAt": "2026-03-04T19:07:08.762657",
       "model": "gemini-2.5-flash"
-    },
-    {
-      "id": "a1c6e3f10651",
-      "sourceArticleId": "4da7df86dbdb",
-      "title": "自閉症を支援する団体の協力を受け、新しいバービーが誕生",
-      "url": "https://www.gizmodo.jp/2026/03/the-first-autistic-barbie-doll.html",
-      "category": "ICT・教材",
-      "originalDate": "2026-03-04",
-      "reason": "多様性への理解促進",
-      "summary": "自閉症を支援する団体と協力して作られたバービー人形は、多様性を認め合う社会の象徴です。子どもたちの遊びを通じて、発達特性への理解を自然に深める機会となり、インクルーシブな意識を育むでしょう。",
-      "generatedAt": "2026-03-04T19:07:08.762662",
-      "model": "gemini-2.5-flash"
     }
   ],
-  "lastUpdated": "2026-03-04T19:07:08.762666",
+  "lastUpdated": "2026-03-05T17:27:28.545901",
   "totalCount": 5
 }
