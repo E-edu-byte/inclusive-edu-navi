@@ -1,12 +1,12 @@
 {
-  "lastUpdated": "2026-03-07T06:56:22.579805",
+  "lastUpdated": "2026-03-07T18:03:57.847404",
   "period": "2026/02/05 - 2026/03/07",
-  "pageViews": 507,
-  "todayPageViews": 0,
-  "users": 49,
-  "todayUsers": 0,
-  "sessions": 147,
-  "todaySessions": 0,
+  "pageViews": 515,
+  "todayPageViews": 8,
+  "users": 50,
+  "todayUsers": 2,
+  "sessions": 150,
+  "todaySessions": 3,
   "clicks": {
     "amazon": 0,
     "rakuten": 0,
@@ -28,23 +28,23 @@
   "topPages": [
     {
       "path": "/inclusive/",
-      "views": 259
+      "views": 261
     },
     {
       "path": "/inclusive/editor-secret-dashboard/",
-      "views": 139
+      "views": 141
     },
     {
       "path": "/inclusive/bookmarks/",
       "views": 48
     },
     {
-      "path": "/inclusive/category/support/",
-      "views": 10
+      "path": "/inclusive/news/",
+      "views": 12
     },
     {
-      "path": "/inclusive/news/",
-      "views": 10
+      "path": "/inclusive/category/support/",
+      "views": 11
     },
     {
       "path": "/inclusive/category/diverse-learning/",
@@ -55,15 +55,15 @@
       "views": 7
     },
     {
+      "path": "/inclusive/category/events/",
+      "views": 5
+    },
+    {
       "path": "/inclusive/category/ict/",
       "views": 5
     },
     {
       "path": "/inclusive/category/research/",
-      "views": 5
-    },
-    {
-      "path": "/inclusive/comments/",
       "views": 5
     }
   ]
