@@ -9,10 +9,7 @@
       "url": "https://news.yahoo.co.jp/articles/88d12660a094a76b9822ed03fd3c1368db933300?page=1",
       "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260308-01107852-fnnprimev-000-1-view.jpg?exp=10800",
       "source": "Yahoo!ニュース",
-      "mainKeyword": "5歳健診",
-      "isManual": true,
-      "addedAt": "2026-03-09T23:27:30.081426",
-      "expiresAt": "2026-03-16T23:27:30.081428"
+      "mainKeyword": "5歳健診"
     },
     {
       "id": "78864fce6559",
@@ -24,17 +21,6 @@
       "imageUrl": "https://cdn.mainichi.jp/vol1/2026/03/07/20260307k0000m050019000p/0c10.jpg?1",
       "source": "毎日新聞",
       "mainKeyword": "野球部"
-    },
-    {
-      "id": "1d9af69fa26f",
-      "title": "聴力あるのに“言葉が消える”──100人に1人が「聞き取り困難症」？　「何が何だか分からない」…診断前の苦悩『every.特集』（日テレNEWS NNN） - Yahoo!ニュース",
-      "summary": "聴力に問題ないのに言葉の聞き取りが難しい「聞き取り困難症」。脳の情報処理が原因で、100人に1人が抱えるとも言われます。診断できる機関は少なく、社会的な理解が不足しています。事例では、情報を視覚化して伝える工夫が紹介されており、周囲の理解と協力が重要です。",
-      "category": "合理的配慮・支援",
-      "date": "2026-03-09",
-      "url": "https://news.yahoo.co.jp/articles/f22ec6b4ba0684fcfa98541e5b90c211be30dcdf?page=1",
-      "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260308-08998386-nnn-000-2-view.jpg?exp=10800",
-      "source": "Yahoo!ニュース",
-      "mainKeyword": "聞き取り"
     },
     {
       "id": "f3a458bd8c04",
@@ -101,24 +87,13 @@
       "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/03/bodyimage1.jpg",
       "source": "ICT教育ニュース",
       "mainKeyword": "療育教材"
-    },
-    {
-      "id": "8df9701de6b0",
-      "title": "コードタクト、神戸市の全市立小中学校と特別支援学校で授業支援クラウド「スクールタクト」の活用開始",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "ICT・教材",
-      "date": "2026-03-02",
-      "url": "https://ict-enews.net/2026/03/03codetakt/",
-      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/03/0303-st.webp",
-      "source": "ICT教育ニュース",
-      "mainKeyword": "スクールタクト"
     }
   ],
-  "lastUpdated": "2026-03-09T23:27:30.081936",
-  "totalCount": 9,
+  "lastUpdated": "2026-03-10T06:24:30.495713",
+  "totalCount": 8,
   "sources": [
-    "毎日新聞",
     "Yahoo!ニュース",
+    "毎日新聞",
     "こどもとIT",
     "東京学芸大学",
     "gizmodo.jp",
