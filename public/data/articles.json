@@ -9,10 +9,7 @@
       "url": "https://mainichi.jp/articles/20260306/k00/00m/050/301000c",
       "imageUrl": "https://cdn.mainichi.jp/vol1/2026/03/07/20260307k0000m050019000p/0c10.jpg?1",
       "source": "毎日新聞",
-      "mainKeyword": "野球部",
-      "isManual": true,
-      "addedAt": "2026-03-09T07:55:34.548713",
-      "expiresAt": "2026-03-16T07:55:34.548715"
+      "mainKeyword": "野球部"
     },
     {
       "id": "1d9af69fa26f",
@@ -23,10 +20,7 @@
       "url": "https://news.yahoo.co.jp/articles/f22ec6b4ba0684fcfa98541e5b90c211be30dcdf?page=1",
       "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260308-08998386-nnn-000-2-view.jpg?exp=10800",
       "source": "Yahoo!ニュース",
-      "mainKeyword": "聞き取り",
-      "isManual": true,
-      "addedAt": "2026-03-09T06:39:23.855139",
-      "expiresAt": "2026-03-16T06:39:23.855141"
+      "mainKeyword": "聞き取り"
     },
     {
       "id": "f3a458bd8c04",
@@ -106,12 +100,13 @@
       "mainKeyword": "スクールタクト"
     }
   ],
-  "lastUpdated": "2026-03-09T07:55:34.549211",
-  "totalCount": 7,
+  "lastUpdated": "2026-03-09T18:02:40.627196",
+  "totalCount": 9,
   "sources": [
+    "毎日新聞",
+    "Yahoo!ニュース",
     "こどもとIT",
     "東京学芸大学",
-    "Yahoo!ニュース",
     "gizmodo.jp",
     "ICT教育ニュース"
   ]
