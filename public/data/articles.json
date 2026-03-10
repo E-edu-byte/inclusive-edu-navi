@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "57774b550a56",
+      "title": "N-E.X.T.ハイスクール構想に対応、AI教材「MiraPASS」の特別支援パッケージを提供",
+      "summary": "国の新しい高校教育方針「N-E.X.T.ハイスクール構想」に対応し、AI教材「MiraPASS」の特別支援向けパッケージが登場しました。AIが個々の生徒に合わせた学習をサポートするため、多様な特性を持つ生徒がそれぞれのペースで学びやすくなり、全ての生徒の可能性を広げる一歩となります。",
+      "category": "多様な学び",
+      "date": "2026-03-10",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2091768.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2091/768/main.jpg",
+      "source": "こどもとIT",
+      "mainKeyword": "AI教材"
+    },
+    {
       "id": "84e916c93c92",
       "title": "文字を手で書くことが苦しい「書き障害」の14歳少年による「壮絶な告白」とは…「当事者の子どもの声」を伝える一冊（Bookレビュー）（Book Bang） - Yahoo!ニュース",
       "summary": "14歳の少年が、字を書くことが難しい「書き障害」や発達障害に悩みながらも、タブレットと出会い「書く喜び」を見つけるまでの体験を本にしました。当事者の生の声が、困難を抱える子どもたちへの理解と支援の重要性を訴えかけています。",
@@ -9,10 +20,7 @@
       "url": "https://news.yahoo.co.jp/articles/fc3a2697014f11fc01be4e7977de9bf1f3f5eb4a",
       "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260310-00820671-bookbang-000-1-view.jpg?exp=10800",
       "source": "Yahoo!ニュース",
-      "mainKeyword": "書字",
-      "isManual": true,
-      "addedAt": "2026-03-10T11:35:02.803935",
-      "expiresAt": "2026-03-17T11:35:02.803937"
+      "mainKeyword": "書字"
     },
     {
       "id": "84cb3c8a7d47",
@@ -23,21 +31,18 @@
       "url": "https://prtimes.jp/main/html/rd/p/000000067.000109539.html",
       "imageUrl": "https://prcdn.freetls.fastly.net/release_image/109539/67/109539-67-f14c70976ac615a30a1c6fb559812f21-1241x1755.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
       "source": "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
-      "mainKeyword": "学び方",
-      "isManual": true,
-      "addedAt": "2026-03-10T09:16:31.213325",
-      "expiresAt": "2026-03-17T09:16:31.213326"
+      "mainKeyword": "学び方"
     },
     {
-      "id": "8f670bd84cc0",
-      "title": "『5歳児健診』が推奨される理由とは? 就学前に子どもの特性発見へ「課題見つかっても余裕持って準備できる」（FNNプライムオンライン） - Yahoo!ニュース",
-      "summary": "5歳児健診は、就学前に子どもの発達面や社会性などの特性を早期に発見し、適切な支援や準備につなげるために推奨されています。小学校入学後のミスマッチや困り感を減らし、スムーズな学校生活をサポートします。",
-      "category": "制度・行政",
+      "id": "e85704e391e3",
+      "title": "発達障がいのある不登校小中学生対象 「GLOBAL GAME」、「ソーシャルプロダクツ・アワード2026」で受賞",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "多様な学び",
       "date": "2026-03-09",
-      "url": "https://news.yahoo.co.jp/articles/88d12660a094a76b9822ed03fd3c1368db933300?page=1",
-      "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260308-01107852-fnnprimev-000-1-view.jpg?exp=10800",
-      "source": "Yahoo!ニュース",
-      "mainKeyword": "5歳健診"
+      "url": "https://ict-enews.net/2026/03/10coconova/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/03/0310-gg-960x630.webp",
+      "source": "ICT教育ニュース",
+      "mainKeyword": "発達障がい不登校支援"
     },
     {
       "id": "78864fce6559",
@@ -117,14 +122,15 @@
       "mainKeyword": "療育教材"
     }
   ],
-  "lastUpdated": "2026-03-10T11:35:02.804490",
-  "totalCount": 8,
+  "lastUpdated": "2026-03-10T18:02:19.969038",
+  "totalCount": 11,
   "sources": [
-    "Yahoo!ニュース",
-    "毎日新聞",
     "こどもとIT",
+    "Yahoo!ニュース",
+    "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
+    "ICT教育ニュース",
+    "毎日新聞",
     "東京学芸大学",
-    "gizmodo.jp",
-    "ICT教育ニュース"
+    "gizmodo.jp"
   ]
 }
