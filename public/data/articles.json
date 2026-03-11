@@ -98,39 +98,16 @@
       "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260305-00000082-asahi-000-1-view.jpg?exp=10800",
       "source": "Yahoo!ニュース",
       "mainKeyword": "野球"
-    },
-    {
-      "id": "bde53cc4708c",
-      "title": "不登校やいじめを経験した大学生が企画、「心理的安全性」を学ぶ合宿を広島で開催",
-      "summary": "不登校やいじめを経験した大学生たちが、誰もが安心して本音で話せる「心理的安全性」を学ぶ合宿を広島で企画し開催しました。自分たちの経験を活かし、誰もが安心して過ごせる場を自ら作ることは、多様な背景を持つ子どもたちの学びの環境を考える上でとても大切な試みです。",
-      "category": "多様な学び",
-      "date": "2026-03-04",
-      "url": "https://edu.watch.impress.co.jp/docs/news/event/2087922.html",
-      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2087/922/01.jpg",
-      "source": "こどもとIT",
-      "mainKeyword": "心理的安全性"
-    },
-    {
-      "id": "4da7df86dbdb",
-      "title": "自閉症を支援する団体の協力を受け、新しいバービーが誕生",
-      "summary": "大手玩具メーカーから、自閉症の特徴を持つバービー人形が登場しました。支援団体と協力し、感覚過敏に配慮した服装やヘッドホン、コミュニケーションを助けるタブレット、スティミング（反復行動）を表現する関節など、細部まで工夫されています。多様性を認め合う社会への一歩となるでしょう。",
-      "category": "ICT・教材",
-      "date": "2026-03-04",
-      "url": "https://www.gizmodo.jp/2026/03/the-first-autistic-barbie-doll.html",
-      "imageUrl": "https://media.loom-app.com/gizmodo/dist/images/2026/02/27/BAR_FNS_2026_S26Merch_KeyArt_Horizontal_RGB.jpg?w=1280&h=630&f=jpg",
-      "source": "gizmodo.jp",
-      "mainKeyword": "自閉症"
     }
   ],
-  "lastUpdated": "2026-03-11T18:01:56.012670",
-  "totalCount": 11,
+  "lastUpdated": "2026-03-12T06:25:16.884862",
+  "totalCount": 9,
   "sources": [
     "こどもとIT",
     "Yahoo!ニュース",
     "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
     "ICT教育ニュース",
     "毎日新聞",
-    "東京学芸大学",
-    "gizmodo.jp"
+    "東京学芸大学"
   ]
 }
