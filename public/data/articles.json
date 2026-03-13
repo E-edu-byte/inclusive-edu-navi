@@ -15,20 +15,6 @@
       "expiresAt": "2026-03-20T12:24:12.652501"
     },
     {
-      "id": "fb85b1b9ff16",
-      "title": "Redirect Notice",
-      "summary": "記事の情報が提供されていないため、要約を生成できません。保護者や教員に役立つ要約を作成するには、記事の本文情報が必要です。",
-      "category": "情報不足",
-      "date": "2026-03-13",
-      "url": "https://www.google.com/amp/s/thehill.com/homenews/campaign/5780788-newsom-fires-back-at-trump-over-post-calling-dyslexia-mental-disorder/amp/",
-      "imageUrl": "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=300&fit=crop",
-      "source": "google.com",
-      "mainKeyword": "情報なし",
-      "isManual": true,
-      "addedAt": "2026-03-13T09:25:49.372803",
-      "expiresAt": "2026-03-20T09:25:49.372805"
-    },
-    {
       "id": "5af999c5f79a",
       "title": "オセロで学ぶユニバーサルデザイン、小学校向け無償プログラムを4月1日より受付",
       "summary": "小学校向けに、オセロを使ってユニバーサルデザインを学ぶ無料プログラムの受付が4月1日から始まります。この取り組みは、異なる視点を持つ人々の立場を理解し、誰もが使いやすい工夫を考える力を育むことが重要です。多様性を尊重する社会を築く基礎となるでしょう。",
@@ -117,7 +103,7 @@
       "mainKeyword": "進路相談会"
     }
   ],
-  "lastUpdated": "2026-03-13T12:24:12.653033",
+  "lastUpdated": "2026-03-13T12:25:35.992373",
   "totalCount": 8,
   "sources": [
     "こどもとIT",

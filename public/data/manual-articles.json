@@ -15,20 +15,6 @@
       "expiresAt": "2026-03-20T12:24:12.652501"
     },
     {
-      "id": "fb85b1b9ff16",
-      "title": "Redirect Notice",
-      "summary": "記事の情報が提供されていないため、要約を生成できません。保護者や教員に役立つ要約を作成するには、記事の本文情報が必要です。",
-      "category": "情報不足",
-      "date": "2026-03-13",
-      "url": "https://www.google.com/amp/s/thehill.com/homenews/campaign/5780788-newsom-fires-back-at-trump-over-post-calling-dyslexia-mental-disorder/amp/",
-      "imageUrl": "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=300&fit=crop",
-      "source": "google.com",
-      "mainKeyword": "情報なし",
-      "isManual": true,
-      "addedAt": "2026-03-13T09:25:49.372803",
-      "expiresAt": "2026-03-20T09:25:49.372805"
-    },
-    {
       "id": "84e916c93c92",
       "title": "文字を手で書くことが苦しい「書き障害」の14歳少年による「壮絶な告白」とは…「当事者の子どもの声」を伝える一冊（Bookレビュー）（Book Bang） - Yahoo!ニュース",
       "summary": "14歳の少年が、字を書くことが難しい「書き障害」や発達障害に悩みながらも、タブレットと出会い「書く喜び」を見つけるまでの体験を本にしました。当事者の生の声が、困難を抱える子どもたちへの理解と支援の重要性を訴えかけています。",
@@ -99,6 +85,6 @@
       "expiresAt": "2026-03-16T06:39:23.855141"
     }
   ],
-  "lastUpdated": "2026-03-13T12:24:12.652633",
+  "lastUpdated": "2026-03-13T12:25:35.992704",
   "note": "手動投稿された記事。自動更新で上書きされない。"
 }
