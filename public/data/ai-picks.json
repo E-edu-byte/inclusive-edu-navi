@@ -1,6 +1,19 @@
 {
   "picks": [
     {
+      "id": "daeaf570baee",
+      "sourceArticleId": "02b311cfc062",
+      "title": "小学1年で息子が「IQ154」と発覚したときに母親は何を思ったのか　「ギフテッド」の子ども持つ親の“本音”〈水曜スペシャル〉 | AERA DIGITAL（アエラデジタル）",
+      "url": "https://dot.asahi.com/articles/-/277939?page=1#google_vignette",
+      "category": "実践・事例",
+      "originalDate": "2026-03-13",
+      "reason": "編集部ピックアップ",
+      "summary": "生まれつき特別な才能を持つ「ギフテッド」のお子さんを持つ親御さんの本音に迫る記事です。小学1年生で高いIQが判明した息子さんとの生活で、親が感じた喜びや戸惑い、日々の工夫を紹介。保護者や先生方が、ギフテッドのお子さんへの理解を深めるヒントにしてください。",
+      "generatedAt": "2026-03-13T12:24:12.653349",
+      "model": "manual",
+      "isManual": true
+    },
+    {
       "id": "af8b1495889f",
       "sourceArticleId": "fb85b1b9ff16",
       "title": "Redirect Notice",
@@ -48,20 +61,8 @@
       "summary": "文字を書くことに困難を抱える「書き障害」の少年が、タブレットとの出会いで「書く喜び」を見つけた体験談です。当事者の生の声に触れることで、発達障害や学習障害への理解を深め、個々の特性に応じた合理的配慮の重要性を再認識するきっかけとなるでしょう。",
       "generatedAt": "2026-03-12T18:04:21.665640",
       "model": "gemini-2.5-flash"
-    },
-    {
-      "id": "44f83daf76ee",
-      "sourceArticleId": "57774b550a56",
-      "title": "N-E.X.T.ハイスクール構想に対応、AI教材「MiraPASS」の特別支援パッケージを提供",
-      "url": "https://edu.watch.impress.co.jp/docs/news/2091768.html",
-      "category": "多様な学び",
-      "originalDate": "2026-03-10",
-      "reason": "新教育構想とAIによる個別最適",
-      "summary": "国の新しい高校教育方針「N-E.X.T.ハイスクール構想」に対応し、AI教材が特別支援向けに提供されます。AIが個々の学習進度や特性に合わせて最適化された学びを提供することで、多様な生徒がそれぞれのペースで学び、力を伸ばせる環境づくりに貢献します。",
-      "generatedAt": "2026-03-12T18:04:21.665646",
-      "model": "gemini-2.5-flash"
     }
   ],
-  "lastUpdated": "2026-03-13T09:25:49.373607",
+  "lastUpdated": "2026-03-13T12:24:12.653360",
   "totalCount": 5
 }
