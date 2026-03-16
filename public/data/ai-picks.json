@@ -1,6 +1,19 @@
 {
   "picks": [
     {
+      "id": "ce98f63318e3",
+      "sourceArticleId": "0f90e0b973f2",
+      "title": "読解力で女子に遅れる男子たち　全学年で続く「深刻な格差」（クーリエ・ジャポン） - Yahoo!ニュース",
+      "url": "https://news.yahoo.co.jp/articles/de1172bae86fc9df29c5ab22e4ae7f9fac91b5a4?page=1",
+      "category": "研究",
+      "originalDate": "2026-03-17",
+      "reason": "編集部ピックアップ",
+      "summary": "最新の調査で、全学年において男子の読解力が女子より低いという問題が指摘されています。これは長年見過ごされてきましたが、学業の基礎であり、大学進学など将来にも大きく関わる重要な課題です。女子の数学力向上事例のように、男子の読解力も支援次第で改善できると期待されています。",
+      "generatedAt": "2026-03-17T08:43:24.995670",
+      "model": "manual",
+      "isManual": true
+    },
+    {
       "id": "c6e165e54e9e",
       "sourceArticleId": "78864fce6559",
       "title": "「みんなと同じに戦える」　野球部創部につなげた支援学校球児の手紙 | 毎日新聞",
@@ -47,20 +60,8 @@
       "summary": "文字を書くことが難しい「書き障害」を持つ14歳の少年の体験記です。タブレットとの出会いを通じて「書く喜び」を見つけるまでの当事者の生の声は、発達障害への理解を深め、合理的配慮の重要性を改めて認識させるきっかけとなります。",
       "generatedAt": "2026-03-16T18:15:25.330338",
       "model": "gemini-2.5-flash"
-    },
-    {
-      "id": "fa38866b50a0",
-      "sourceArticleId": "57774b550a56",
-      "title": "N-E.X.T.ハイスクール構想に対応、AI教材「MiraPASS」の特別支援パッケージを提供",
-      "url": "https://edu.watch.impress.co.jp/docs/news/2091768.html",
-      "category": "多様な学び",
-      "originalDate": "2026-03-10",
-      "reason": "新制度対応とAI教材の活用",
-      "summary": "国の「N-E.X.T.ハイスクール構想」に対応したAI教材「MiraPASS」の特別支援パッケージ提供のニュースです。AIが個々の生徒に合わせた学びをサポートする最先端の取り組みは、今後のインクルーシブ教育におけるICT活用の可能性を示唆しています。",
-      "generatedAt": "2026-03-16T18:15:25.330344",
-      "model": "gemini-2.5-flash"
     }
   ],
-  "lastUpdated": "2026-03-17T06:31:02.143401",
+  "lastUpdated": "2026-03-17T08:43:24.995681",
   "totalCount": 5
 }
