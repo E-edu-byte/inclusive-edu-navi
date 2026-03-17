@@ -9,10 +9,18 @@
       "url": "https://news.yahoo.co.jp/articles/de1172bae86fc9df29c5ab22e4ae7f9fac91b5a4?page=1",
       "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260316-00000003-courrier-000-1-view.jpg?exp=10800",
       "source": "Yahoo!ニュース",
-      "mainKeyword": "読解力",
-      "isManual": true,
-      "addedAt": "2026-03-17T08:43:24.994824",
-      "expiresAt": "2026-03-24T08:43:24.994828"
+      "mainKeyword": "読解力"
+    },
+    {
+      "id": "16f5e84b7c9d",
+      "title": "JKK、「第3回インクルーシブ教育教材コンテスト」最優秀賞などを発表",
+      "summary": "全日本学校教材教具協同組合が、どんな子どもでも一緒に学べる「インクルーシブ教育」のための教材コンテストの受賞作品を発表しました。この取り組みは、障害のあるなしに関わらず、すべての子どもたちが楽しく学べる道具やアイデアを広め、より良い学びの場を作ることを目指しています。",
+      "category": "ICT・教材",
+      "date": "2026-03-16",
+      "url": "https://ict-enews.net/2026/03/17jkk/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/03/0317-jkk-1200x630.webp",
+      "source": "ICT教育ニュース",
+      "mainKeyword": "教材"
     },
     {
       "id": "e7c00e998292",
@@ -114,13 +122,14 @@
       "mainKeyword": "学び方"
     }
   ],
-  "lastUpdated": "2026-03-17T08:43:24.995291",
-  "totalCount": 9,
+  "lastUpdated": "2026-03-17T18:09:48.504028",
+  "totalCount": 11,
   "sources": [
+    "Yahoo!ニュース",
+    "ICT教育ニュース",
     "こどもとIT",
     "PRESIDENT Online",
     "AERA DIGITAL（アエラデジタル）",
-    "Yahoo!ニュース",
     "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES"
   ]
 }
