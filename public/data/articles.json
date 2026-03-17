@@ -1,15 +1,15 @@
 {
   "articles": [
     {
-      "id": "0f90e0b973f2",
-      "title": "読解力で女子に遅れる男子たち　全学年で続く「深刻な格差」（クーリエ・ジャポン） - Yahoo!ニュース",
-      "summary": "最新の調査で、全学年において男子の読解力が女子より低いという問題が指摘されています。これは長年見過ごされてきましたが、学業の基礎であり、大学進学など将来にも大きく関わる重要な課題です。女子の数学力向上事例のように、男子の読解力も支援次第で改善できると期待されています。",
-      "category": "研究",
+      "id": "ad523bf774b5",
+      "title": "発達障害デジタルブック、保護者向け無料公開…東京都",
+      "summary": "東京都が、子どもの発達が気になる保護者向けに、発達障害の基礎知識や支援情報をまとめた電子書籍を無料で公開しました。これは、保護者が適切な理解を深め、必要な支援へつながりやすくなることが期待されます。",
+      "category": "支援・合理的配慮",
       "date": "2026-03-17",
-      "url": "https://news.yahoo.co.jp/articles/de1172bae86fc9df29c5ab22e4ae7f9fac91b5a4?page=1",
-      "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260316-00000003-courrier-000-1-view.jpg?exp=10800",
-      "source": "Yahoo!ニュース",
-      "mainKeyword": "読解力"
+      "url": "https://resemom.jp/article/2026/03/17/85503.html",
+      "imageUrl": "https://resemom.jp/imgs/ogp_f/393693.jpg",
+      "source": "リセマム",
+      "mainKeyword": "発達障害"
     },
     {
       "id": "16f5e84b7c9d",
@@ -87,49 +87,15 @@
       "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2092/264/main.jpg",
       "source": "こどもとIT",
       "mainKeyword": "不登校支援"
-    },
-    {
-      "id": "57774b550a56",
-      "title": "N-E.X.T.ハイスクール構想に対応、AI教材「MiraPASS」の特別支援パッケージを提供",
-      "summary": "国の新しい高校教育方針「N-E.X.T.ハイスクール構想」に対応し、AI教材「MiraPASS」の特別支援向けパッケージが登場しました。AIが個々の生徒に合わせた学習をサポートするため、多様な特性を持つ生徒がそれぞれのペースで学びやすくなり、全ての生徒の可能性を広げる一歩となります。",
-      "category": "多様な学び",
-      "date": "2026-03-10",
-      "url": "https://edu.watch.impress.co.jp/docs/news/2091768.html",
-      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2091/768/main.jpg",
-      "source": "こどもとIT",
-      "mainKeyword": "AI教材"
-    },
-    {
-      "id": "84e916c93c92",
-      "title": "文字を手で書くことが苦しい「書き障害」の14歳少年による「壮絶な告白」とは…「当事者の子どもの声」を伝える一冊（Bookレビュー）（Book Bang） - Yahoo!ニュース",
-      "summary": "14歳の少年が、字を書くことが難しい「書き障害」や発達障害に悩みながらも、タブレットと出会い「書く喜び」を見つけるまでの体験を本にしました。当事者の生の声が、困難を抱える子どもたちへの理解と支援の重要性を訴えかけています。",
-      "category": "実践・事例",
-      "date": "2026-03-10",
-      "url": "https://news.yahoo.co.jp/articles/fc3a2697014f11fc01be4e7977de9bf1f3f5eb4a",
-      "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260310-00820671-bookbang-000-1-view.jpg?exp=10800",
-      "source": "Yahoo!ニュース",
-      "mainKeyword": "書字"
-    },
-    {
-      "id": "84cb3c8a7d47",
-      "title": "「学び方は、ひとつじゃない！」読み書き困難な子の体験型イベント『学びのビュッフェ見本市2026』3/27・28港区で開催。新学期を前に、デジタルからアナログまで「自分に合う学習法」を無料で一斉体験！",
-      "summary": "「学び方はひとつじゃない！」読み書きが苦手な子ども向けに、多様な学習法を試せる体験型イベントが港区で開催。デジタルからアナログまで無料で一斉体験でき、新学期前に子どもにぴったりの学び方を見つけて自信を育む機会です。保護者や教員もどうぞ。",
-      "category": "イベント・研修",
-      "date": "2026-03-10",
-      "url": "https://prtimes.jp/main/html/rd/p/000000067.000109539.html",
-      "imageUrl": "https://prcdn.freetls.fastly.net/release_image/109539/67/109539-67-f14c70976ac615a30a1c6fb559812f21-1241x1755.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
-      "source": "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
-      "mainKeyword": "学び方"
     }
   ],
-  "lastUpdated": "2026-03-17T18:09:48.504028",
-  "totalCount": 11,
+  "lastUpdated": "2026-03-18T06:29:42.950172",
+  "totalCount": 8,
   "sources": [
-    "Yahoo!ニュース",
+    "リセマム",
     "ICT教育ニュース",
     "こどもとIT",
     "PRESIDENT Online",
-    "AERA DIGITAL（アエラデジタル）",
-    "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES"
+    "AERA DIGITAL（アエラデジタル）"
   ]
 }
