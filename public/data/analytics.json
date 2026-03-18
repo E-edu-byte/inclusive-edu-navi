@@ -1,12 +1,12 @@
 {
-  "lastUpdated": "2026-03-18T06:30:29.520808",
+  "lastUpdated": "2026-03-18T18:10:32.671071",
   "period": "2026/02/16 - 2026/03/18",
-  "pageViews": 575,
-  "todayPageViews": 0,
+  "pageViews": 579,
+  "todayPageViews": 3,
   "users": 65,
-  "todayUsers": 0,
-  "sessions": 193,
-  "todaySessions": 0,
+  "todayUsers": 1,
+  "sessions": 195,
+  "todaySessions": 1,
   "clicks": {
     "amazon": 0,
     "rakuten": 0,
@@ -28,11 +28,11 @@
   "topPages": [
     {
       "path": "/inclusive/",
-      "views": 283
+      "views": 285
     },
     {
       "path": "/inclusive/editor-secret-dashboard/",
-      "views": 160
+      "views": 161
     },
     {
       "path": "/inclusive/bookmarks/",
@@ -44,7 +44,7 @@
     },
     {
       "path": "/inclusive/news/",
-      "views": 13
+      "views": 14
     },
     {
       "path": "/inclusive/category/support/",
