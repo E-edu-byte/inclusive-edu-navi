@@ -9,10 +9,7 @@
       "url": "https://news.yahoo.co.jp/articles/df58d260353847f490ac021e880c6e65b4cf29ce",
       "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260321-00000155-kyodonews-000-8-view.jpg?exp=10800",
       "source": "Yahoo!ニュース",
-      "mainKeyword": "ADHD薬",
-      "isManual": true,
-      "addedAt": "2026-03-22T06:42:07.224222",
-      "expiresAt": "2026-03-29T06:42:07.224224"
+      "mainKeyword": "ADHD薬"
     },
     {
       "id": "9d960cee1166",
@@ -103,9 +100,10 @@
       "mainKeyword": "進路相談"
     }
   ],
-  "lastUpdated": "2026-03-22T06:42:07.224579",
-  "totalCount": 8,
+  "lastUpdated": "2026-03-22T17:52:46.509953",
+  "totalCount": 9,
   "sources": [
+    "Yahoo!ニュース",
     "こどもとIT",
     "ICT教育ニュース",
     "リセマム"
