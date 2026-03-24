@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "6b2fc8f026dc",
+      "title": "3000人以上の発達障害児を診てきた医師が執筆、『ASD・グレーゾーンの子どもをありのまま育てる方法』",
+      "summary": "医師が、発達障害の特性を持つ子どもたちが自分らしく成長できるよう、その育児方法を解説する本を出版しました。この本は、保護者や支援者が多様な子どもたちの個性を理解し、適切な関わり方を見つける上で重要な情報を提供します。",
+      "category": "支援・合理的配慮",
+      "date": "2026-03-24",
+      "url": "https://edu.watch.impress.co.jp/docs/knowledge/kodomoit-booklab/2095565.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2095/565/01.jpg",
+      "source": "こどもとIT",
+      "mainKeyword": "発達障害"
+    },
+    {
       "id": "19bd247f684a",
       "title": "【独自】ADHDの治療薬、国内で不足　厚労省、供給量増を要請（共同通信） - Yahoo!ニュース",
       "summary": "ADHDの治療に使われる「コンサータ」というお薬が、世界的な需要増により国内で不足しています。この影響で治療を継続できない方もおり、厚生労働省は供給量の増加を求めていますが、不足の解消時期はまだ見通せない状況です。",
@@ -67,11 +78,11 @@
       "mainKeyword": "発達障害"
     }
   ],
-  "lastUpdated": "2026-03-24T06:28:03.916071",
-  "totalCount": 6,
+  "lastUpdated": "2026-03-24T18:10:51.825782",
+  "totalCount": 7,
   "sources": [
-    "Yahoo!ニュース",
     "こどもとIT",
+    "Yahoo!ニュース",
     "ICT教育ニュース",
     "リセマム"
   ]
