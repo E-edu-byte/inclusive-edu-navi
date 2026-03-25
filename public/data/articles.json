@@ -43,46 +43,12 @@
       "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2092/264/main.jpg",
       "source": "こどもとIT",
       "mainKeyword": "不登校支援"
-    },
-    {
-      "id": "bd48f6b3669f",
-      "title": "note、千葉県の全県立学校160校に高機能プラン「note pro」を無償提供",
-      "summary": "noteが千葉県内の全県立学校と県教育委員会に、高機能な情報発信ツール「note pro」を無料で提供すると発表しました。これにより、学校は日々の活動や取り組み、多様な学びの様子などを広く発信できるようになり、学校と生徒、保護者、地域社会との情報共有や連携が深まることが期待されます。",
-      "category": "多様な学び",
-      "date": "2026-03-18",
-      "url": "https://ict-enews.net/2026/03/19note/",
-      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/03/0319-note-1200x630.webp",
-      "source": "ICT教育ニュース",
-      "mainKeyword": "情報発信"
-    },
-    {
-      "id": "0731daf73b11",
-      "title": "オンライン・オルタナティブスクール「aini school」、不登校の子どもが社会復帰へ向かうプロセス発表",
-      "summary": "オンラインのオルタナティブスクール「aini school」が、不登校の子どもたちが社会へ復帰するまでの具体的なプロセスを発表しました。これは、学校以外の学びの場が、子どもたちの成長と社会とのつながりをどのように支援できるかを示し、多様な学びの選択肢の有効性を示す点で重要です。",
-      "category": "多様な学び",
-      "date": "2026-03-18",
-      "url": "https://ict-enews.net/2026/03/13gaiax-2/",
-      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/03/a49a1976181f7c92cbbbaa2c677793a7-1066x630.webp",
-      "source": "ICT教育ニュース",
-      "mainKeyword": "不登校"
-    },
-    {
-      "id": "0e2a19291943",
-      "title": "eboard、不登校支援において先進的な取り組みを行う14自治体を対象に調査した「行政・教育関係者向け報告書」を公開",
-      "summary": "eboardという団体が、不登校の子どもたちを支援する先進的な取り組みを行っている全国の自治体を調査し、その結果をまとめた報告書を公開しました。この報告書は、不登校の子どもたちが安心して学べるように、どのような支援が効果的かをみんなで考えるための大切な資料となります。",
-      "category": "多様な学び",
-      "date": "2026-03-18",
-      "url": "https://ict-enews.net/2026/03/18eboard/",
-      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/03/0318-eb2.jpg",
-      "source": "ICT教育ニュース",
-      "mainKeyword": "不登校支援"
     }
   ],
-  "lastUpdated": "2026-03-25T18:10:11.684596",
-  "totalCount": 7,
+  "lastUpdated": "2026-03-26T06:30:01.965734",
+  "totalCount": 4,
   "sources": [
     "こどもとIT",
-    "Yahoo!ニュース",
-    "ICT教育ニュース"
+    "Yahoo!ニュース"
   ]
 }
