@@ -1,12 +1,12 @@
 {
-  "lastUpdated": "2026-03-26T06:30:52.471628",
+  "lastUpdated": "2026-03-26T18:15:00.929844",
   "period": "2026/02/24 - 2026/03/26",
-  "pageViews": 133,
-  "todayPageViews": 0,
+  "pageViews": 135,
+  "todayPageViews": 2,
   "users": 26,
-  "todayUsers": 0,
-  "sessions": 89,
-  "todaySessions": 0,
+  "todayUsers": 1,
+  "sessions": 90,
+  "todaySessions": 1,
   "clicks": {
     "amazon": 0,
     "rakuten": 0,
@@ -32,7 +32,7 @@
     },
     {
       "path": "/inclusive/",
-      "views": 49
+      "views": 50
     },
     {
       "path": "/inclusive/news/1d9af69fa26f/",
@@ -40,7 +40,7 @@
     },
     {
       "path": "/inclusive/news/",
-      "views": 5
+      "views": 6
     },
     {
       "path": "/inclusive/category/events/",
