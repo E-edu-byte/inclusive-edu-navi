@@ -9,10 +9,7 @@
       "url": "https://news.yahoo.co.jp/articles/e68054238c7e5d12607896532676a7b5e5a08540",
       "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260326-01120925-fnnprimev-000-2-view.jpg?exp=10800",
       "source": "Yahoo!ニュース",
-      "mainKeyword": "発達障害",
-      "isManual": true,
-      "addedAt": "2026-03-27T05:51:07.650566",
-      "expiresAt": "2026-04-03T05:51:07.650568"
+      "mainKeyword": "発達障害"
     },
     {
       "id": "01917cb38663",
@@ -59,10 +56,10 @@
       "mainKeyword": "不登校支援"
     }
   ],
-  "lastUpdated": "2026-03-27T05:51:07.650964",
-  "totalCount": 4,
+  "lastUpdated": "2026-03-27T06:23:43.991817",
+  "totalCount": 5,
   "sources": [
-    "こどもとIT",
-    "Yahoo!ニュース"
+    "Yahoo!ニュース",
+    "こどもとIT"
   ]
 }
