@@ -20,6 +20,7 @@ from datetime import datetime, timedelta
 from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
+import tweepy
 
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -32,6 +33,11 @@ PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 ARTICLES_FILE = os.path.join(PROJECT_ROOT, "public", "data", "articles.json")
 MANUAL_FILE = os.path.join(PROJECT_ROOT, "public", "data", "manual-articles.json")
 AI_PICKS_FILE = os.path.join(PROJECT_ROOT, "public", "data", "ai-picks.json")
+POSTED_FILE = os.path.join(PROJECT_ROOT, "public", "data", "posted-tweets.json")
+
+# X投稿設定
+SITE_URL = "https://news-navi.jp/inclusive"
+HASHTAGS = "#新着ニュース #インクルーシブ教育 #特別支援教育"
 
 # 記事保持日数（7日）
 ARTICLE_RETENTION_DAYS = 7
@@ -284,6 +290,10 @@ def add_manual_article(url):
         # ai-picks.json も更新（手動記事を先頭に追加）
         update_ai_picks_with_manual(new_article)
 
+        # Xに自動投稿
+        print("\n--- X自動投稿 ---")
+        post_to_x(new_article)
+
         return True
 
     return False
@@ -350,6 +360,66 @@ def update_ai_picks_with_manual(manual_article):
 
     save_json(AI_PICKS_FILE, picks_data)
     print(f"✓ ai-picks.json を更新しました（計{picks_data['totalCount']}件）")
+
+
+def post_to_x(article):
+    """記事をXに投稿"""
+    # 環境変数から認証情報を取得
+    api_key = os.getenv('X_API_KEY')
+    api_secret = os.getenv('X_API_SECRET')
+    access_token = os.getenv('X_ACCESS_TOKEN')
+    access_token_secret = os.getenv('X_ACCESS_TOKEN_SECRET')
+
+    if not all([api_key, api_secret, access_token, access_token_secret]):
+        print("⚠ X API認証情報が設定されていません。X投稿をスキップします。")
+        print("  → .env.local に X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET を設定してください")
+        return False
+
+    # ツイート本文を生成
+    title = article.get('title', '')
+    article_id = article.get('id', '')
+    category = article.get('category', '')
+
+    # タイトルが長すぎる場合は短縮
+    max_title_len = 70
+    if len(title) > max_title_len:
+        title = title[:max_title_len-3] + "..."
+
+    article_url = f"{SITE_URL}/article/{article_id}/"
+    tweet_text = f"📰 新着ニュース【{category}】\n\n{title}\n\n👉 {article_url}\n\n{HASHTAGS}"
+
+    try:
+        # Tweepy v2 Client を使用
+        client = tweepy.Client(
+            consumer_key=api_key,
+            consumer_secret=api_secret,
+            access_token=access_token,
+            access_token_secret=access_token_secret
+        )
+
+        # ツイート投稿
+        response = client.create_tweet(text=tweet_text)
+        print(f"✓ Xに投稿しました: https://twitter.com/i/status/{response.data['id']}")
+
+        # 投稿済みIDを記録
+        save_posted_id(article_id)
+        return True
+
+    except tweepy.TweepyException as e:
+        print(f"✗ X投稿エラー: {e}")
+        return False
+
+
+def save_posted_id(article_id):
+    """投稿済み記事IDを保存"""
+    posted_data = load_json(POSTED_FILE) or {"posted_ids": []}
+    posted_ids = posted_data.get("posted_ids", [])
+
+    if article_id not in posted_ids:
+        posted_ids.append(article_id)
+        # 最新500件のみ保持
+        posted_data["posted_ids"] = posted_ids[-500:]
+        save_json(POSTED_FILE, posted_data)
 
 
 def delete_manual_article(article_id):
