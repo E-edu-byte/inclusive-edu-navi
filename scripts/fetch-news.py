@@ -294,11 +294,11 @@ EXCLUDED_URLS: Set[str] = set()
 # 既存記事リスト（追記保存用）
 EXISTING_ARTICLES: list = []
 
-# 最大保持記事数
-MAX_ARTICLES_RETENTION = 100
+# 最大保持記事数（2年分を想定）
+MAX_ARTICLES_RETENTION = 4000
 
-# 記事保持日数（7日経過で自動削除）
-ARTICLE_RETENTION_DAYS = 7
+# 記事保持日数（2年間保持）
+ARTICLE_RETENTION_DAYS = 730
 
 # ========================================
 # 理念に基づくキーワードフィルタリング（厳格版）
