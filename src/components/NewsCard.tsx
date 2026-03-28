@@ -150,6 +150,16 @@ export default function NewsCard({
               src={hasValidImage ? imageUrl : fallbackImage}
               alt=""
               className="w-full h-full object-cover"
+              onLoad={(e) => {
+                // 画像読み込み完了時にサイズをチェック（Yahoo!ニュース等の透明GIF対策）
+                const target = e.target as HTMLImageElement;
+                // 既にフォールバック済みなら何もしない
+                if (target.src.startsWith('data:') || target.src.includes('unsplash.com')) return;
+                // 極端に小さい画像（1x1透明GIF等）はフォールバックに切り替え
+                if (target.naturalWidth <= 10 || target.naturalHeight <= 10) {
+                  target.src = fallbackImage;
+                }
+              }}
               onError={(e) => {
                 // 画像読み込みエラー時はフォールバック画像に切り替え
                 const target = e.target as HTMLImageElement;
