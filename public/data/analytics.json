@@ -1,12 +1,12 @@
 {
-  "lastUpdated": "2026-03-28T06:27:53.048625",
+  "lastUpdated": "2026-03-28T18:00:02.437887",
   "period": "2026/02/26 - 2026/03/28",
-  "pageViews": 115,
-  "todayPageViews": 0,
-  "users": 24,
-  "todayUsers": 0,
-  "sessions": 77,
-  "todaySessions": 0,
+  "pageViews": 172,
+  "todayPageViews": 56,
+  "users": 26,
+  "todayUsers": 4,
+  "sessions": 85,
+  "todaySessions": 7,
   "clicks": {
     "amazon": 0,
     "rakuten": 0,
@@ -28,30 +28,42 @@
   "topPages": [
     {
       "path": "/inclusive/",
-      "views": 46
+      "views": 69
     },
     {
       "path": "/inclusive/editor-secret-dashboard/",
-      "views": 43
+      "views": 45
+    },
+    {
+      "path": "/inclusive/news/",
+      "views": 18
     },
     {
       "path": "/inclusive/news/1d9af69fa26f/",
       "views": 17
     },
     {
-      "path": "/inclusive/news/",
+      "path": "/inclusive/category/diverse-learning/",
       "views": 6
     },
     {
-      "path": "/inclusive/category/events/",
-      "views": 1
+      "path": "/inclusive/category/policy/",
+      "views": 4
     },
     {
       "path": "/inclusive/category/support/",
-      "views": 1
+      "views": 4
     },
     {
-      "path": "/inclusive/news/84e916c93c92/",
+      "path": "/inclusive/category/ict/",
+      "views": 3
+    },
+    {
+      "path": "/inclusive/category/events/",
+      "views": 2
+    },
+    {
+      "path": "/inclusive/bookmarks/",
       "views": 1
     }
   ]

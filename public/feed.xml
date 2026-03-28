@@ -5,7 +5,7 @@
     <link>https://e-edu-byte.github.io/inclusive-edu-navi</link>
     <description>すべての子どもの学びを支える最新情報。インクルーシブ教育に関するニュース、研究、実践事例をお届けします。</description>
     <language>ja</language>
-    <lastBuildDate>Fri, 27 Mar 2026 21:27:51 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 28 Mar 2026 09:00:00 GMT</lastBuildDate>
     <atom:link href="https://e-edu-byte.github.io/inclusive-edu-navi/feed.xml" rel="self" type="application/rss+xml"/>
 
     <item>
@@ -13,7 +13,7 @@
       <link>https://news.yahoo.co.jp/articles/e68054238c7e5d12607896532676a7b5e5a08540</link>
       <guid>https://news.yahoo.co.jp/articles/e68054238c7e5d12607896532676a7b5e5a08540</guid>
       <description><![CDATA[全国で発達障害と診断される大学生が10年で4倍以上に増加し、約1万2000人に。社会的な理解が進み、自身の特性を申告する学生が増えています。大学では、課題提出期限の延長や試験方法の変更など「合理的配慮」を提供し、学生の学びをサポートする取り組みを充実させています。]]></description>
-      <category>合理的配慮・支援</category>
+      <category>支援・合理的配慮</category>
       <pubDate>Fri, 27 Mar 2026 00:00:00 GMT</pubDate>
       <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
     </item>
@@ -45,6 +45,166 @@
       <description><![CDATA[ADHDの治療に使われる「コンサータ」というお薬が、世界的な需要増により国内で不足しています。この影響で治療を継続できない方もおり、厚生労働省は供給量の増加を求めていますが、不足の解消時期はまだ見通せない状況です。]]></description>
       <category>制度・行政</category>
       <pubDate>Sun, 22 Mar 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[マイクラで不登校支援、事例を学ぶ無料講演を4月14日に開催]]></title>
+      <link>https://edu.watch.impress.co.jp/docs/news/event/2092264.html</link>
+      <guid>https://edu.watch.impress.co.jp/docs/news/event/2092264.html</guid>
+      <description><![CDATA[人気ゲーム「マインクラフト」を使って不登校の子どもたちを支援する事例を学ぶ無料講演会が開催されます。これは、学校に行きにくい子どもたちが、ゲームを通じて安心して学び、居場所を見つけるための多様な学び方を考える上で非常に重要です。]]></description>
+      <category>支援・合理的配慮</category>
+      <pubDate>Fri, 20 Mar 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[note、千葉県の全県立学校160校に高機能プラン「note pro」を無償提供]]></title>
+      <link>https://ict-enews.net/2026/03/19note/</link>
+      <guid>https://ict-enews.net/2026/03/19note/</guid>
+      <description><![CDATA[noteが千葉県内の全県立学校と県教育委員会に、高機能な情報発信ツール「note pro」を無料で提供すると発表しました。これにより、学校は日々の活動や取り組み、多様な学びの様子などを広く発信できるようになり、学校と生徒、保護者、地域社会との情報共有や連携が深まることが期待されます。]]></description>
+      <category>多様な学び</category>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[オンライン・オルタナティブスクール「aini school」、不登校の子どもが社会復帰へ向かうプロセス発表]]></title>
+      <link>https://ict-enews.net/2026/03/13gaiax-2/</link>
+      <guid>https://ict-enews.net/2026/03/13gaiax-2/</guid>
+      <description><![CDATA[オンラインのオルタナティブスクール「aini school」が、不登校の子どもたちが社会へ復帰するまでの具体的なプロセスを発表しました。これは、学校以外の学びの場が、子どもたちの成長と社会とのつながりをどのように支援できるかを示し、多様な学びの選択肢の有効性を示す点で重要です。]]></description>
+      <category>多様な学び</category>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[eboard、不登校支援において先進的な取り組みを行う14自治体を対象に調査した「行政・教育関係者向け報告書」を公開]]></title>
+      <link>https://ict-enews.net/2026/03/18eboard/</link>
+      <guid>https://ict-enews.net/2026/03/18eboard/</guid>
+      <description><![CDATA[eboardという団体が、不登校の子どもたちを支援する先進的な取り組みを行っている全国の自治体を調査し、その結果をまとめた報告書を公開しました。この報告書は、不登校の子どもたちが安心して学べるように、どのような支援が効果的かをみんなで考えるための大切な資料となります。]]></description>
+      <category>多様な学び</category>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[発達障害デジタルブック、保護者向け無料公開…東京都]]></title>
+      <link>https://resemom.jp/article/2026/03/17/85503.html</link>
+      <guid>https://resemom.jp/article/2026/03/17/85503.html</guid>
+      <description><![CDATA[東京都が、子どもの発達が気になる保護者向けに、発達障害の基礎知識や支援情報をまとめた電子書籍を無料で公開しました。これは、保護者が適切な理解を深め、必要な支援へつながりやすくなることが期待されます。]]></description>
+      <category>支援・合理的配慮</category>
+      <pubDate>Tue, 17 Mar 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[JKK、「第3回インクルーシブ教育教材コンテスト」最優秀賞などを発表]]></title>
+      <link>https://ict-enews.net/2026/03/17jkk/</link>
+      <guid>https://ict-enews.net/2026/03/17jkk/</guid>
+      <description><![CDATA[全日本学校教材教具協同組合が、どんな子どもでも一緒に学べる「インクルーシブ教育」のための教材コンテストの受賞作品を発表しました。この取り組みは、障害のあるなしに関わらず、すべての子どもたちが楽しく学べる道具やアイデアを広め、より良い学びの場を作ることを目指しています。]]></description>
+      <category>ICT・教材</category>
+      <pubDate>Mon, 16 Mar 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[第3回インクルーシブ教育教材コンテスト、最優秀賞が決定]]></title>
+      <link>https://edu.watch.impress.co.jp/docs/news/2093718.html</link>
+      <guid>https://edu.watch.impress.co.jp/docs/news/2093718.html</guid>
+      <description><![CDATA[第3回インクルーシブ教育教材コンテストで、最も優れた教材が決定しました。このコンテストは、どんな子も一緒に楽しく学べるように、新しい工夫がされた教材を生み出すことが目的です。これにより、すべての子どもたちに適した学びの道具が増え、多様性を尊重する教育の進展に役立ちます。]]></description>
+      <category>ICT・教材</category>
+      <pubDate>Mon, 16 Mar 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[発達や不登校の悩みを相談できる「進路フェア」、3月15日に江戸川区で開催]]></title>
+      <link>https://edu.watch.impress.co.jp/docs/news/event/2091204.html</link>
+      <guid>https://edu.watch.impress.co.jp/docs/news/event/2091204.html</guid>
+      <description><![CDATA[江戸川区で、発達や不登校の悩みを相談できる「進路フェア」が開催されます。このフェアは、一人ひとりの個性や状況に合わせた学びの選択肢や将来の道を見つける大切な機会となります。子どもたちが自分らしく成長できるよう、必要な支援につながるでしょう。]]></description>
+      <category>支援・合理的配慮</category>
+      <pubDate>Mon, 16 Mar 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[不登校は｢人生の詰み｣ではない…学校に行かなくても"社会で自立できる子"が育つ家が大事にする習慣]]></title>
+      <link>https://president.jp/articles/-/109724</link>
+      <guid>https://president.jp/articles/-/109724</guid>
+      <description><![CDATA[不登校の子どもを持つ親がどう接するべきか、学校に行かなくても社会で自立できる子が育つための習慣を専門家が解説しています。これは、学校教育だけが全てではない多様な学び方を認め、全ての子どもが自分の力で生きていく力を育むために大切な考え方を示しています。]]></description>
+      <category>多様な学び</category>
+      <pubDate>Fri, 13 Mar 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[小学1年で息子が「IQ154」と発覚したときに母親は何を思ったのか　「ギフテッド」の子ども持つ親の“本音”〈水曜スペシャル〉 | AERA DIGITAL（アエラデジタル）]]></title>
+      <link>https://dot.asahi.com/articles/-/277939?page=1#google_vignette</link>
+      <guid>https://dot.asahi.com/articles/-/277939?page=1#google_vignette</guid>
+      <description><![CDATA[生まれつき特別な才能を持つ「ギフテッド」のお子さんを持つ親御さんの本音に迫る記事です。小学1年生で高いIQが判明した息子さんとの生活で、親が感じた喜びや戸惑い、日々の工夫を紹介。保護者や先生方が、ギフテッドのお子さんへの理解を深めるヒントにしてください。]]></description>
+      <category>実践・事例</category>
+      <pubDate>Fri, 13 Mar 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[Redirect Notice]]></title>
+      <link>https://www.google.com/amp/s/thehill.com/homenews/campaign/5780788-newsom-fires-back-at-trump-over-post-calling-dyslexia-mental-disorder/amp/</link>
+      <guid>https://www.google.com/amp/s/thehill.com/homenews/campaign/5780788-newsom-fires-back-at-trump-over-post-calling-dyslexia-mental-disorder/amp/</guid>
+      <description><![CDATA[記事の情報が提供されていないため、要約を生成できません。保護者や教員に役立つ要約を作成するには、記事の本文情報が必要です。]]></description>
+      <category>情報不足</category>
+      <pubDate>Fri, 13 Mar 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[オセロで学ぶユニバーサルデザイン、小学校向け無償プログラムを4月1日より受付]]></title>
+      <link>https://edu.watch.impress.co.jp/docs/news/2092888.html</link>
+      <guid>https://edu.watch.impress.co.jp/docs/news/2092888.html</guid>
+      <description><![CDATA[小学校向けに、オセロを使ってユニバーサルデザインを学ぶ無料プログラムの受付が4月1日から始まります。この取り組みは、異なる視点を持つ人々の立場を理解し、誰もが使いやすい工夫を考える力を育むことが重要です。多様性を尊重する社会を築く基礎となるでしょう。]]></description>
+      <category>多様な学び</category>
+      <pubDate>Thu, 12 Mar 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[N-E.X.T.ハイスクール構想に対応、AI教材「MiraPASS」の特別支援パッケージを提供]]></title>
+      <link>https://edu.watch.impress.co.jp/docs/news/2091768.html</link>
+      <guid>https://edu.watch.impress.co.jp/docs/news/2091768.html</guid>
+      <description><![CDATA[国の新しい高校教育方針「N-E.X.T.ハイスクール構想」に対応し、AI教材「MiraPASS」の特別支援向けパッケージが登場しました。AIが個々の生徒に合わせた学習をサポートするため、多様な特性を持つ生徒がそれぞれのペースで学びやすくなり、全ての生徒の可能性を広げる一歩となります。]]></description>
+      <category>多様な学び</category>
+      <pubDate>Tue, 10 Mar 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[文字を手で書くことが苦しい「書き障害」の14歳少年による「壮絶な告白」とは…「当事者の子どもの声」を伝える一冊（Bookレビュー）（Book Bang） - Yahoo!ニュース]]></title>
+      <link>https://news.yahoo.co.jp/articles/fc3a2697014f11fc01be4e7977de9bf1f3f5eb4a</link>
+      <guid>https://news.yahoo.co.jp/articles/fc3a2697014f11fc01be4e7977de9bf1f3f5eb4a</guid>
+      <description><![CDATA[14歳の少年が、字を書くことが難しい「書き障害」や発達障害に悩みながらも、タブレットと出会い「書く喜び」を見つけるまでの体験を本にしました。当事者の生の声が、困難を抱える子どもたちへの理解と支援の重要性を訴えかけています。]]></description>
+      <category>実践・事例</category>
+      <pubDate>Tue, 10 Mar 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[「学び方は、ひとつじゃない！」読み書き困難な子の体験型イベント『学びのビュッフェ見本市2026』3/27・28港区で開催。新学期を前に、デジタルからアナログまで「自分に合う学習法」を無料で一斉体験！]]></title>
+      <link>https://prtimes.jp/main/html/rd/p/000000067.000109539.html</link>
+      <guid>https://prtimes.jp/main/html/rd/p/000000067.000109539.html</guid>
+      <description><![CDATA[「学び方はひとつじゃない！」読み書きが苦手な子ども向けに、多様な学習法を試せる体験型イベントが港区で開催。デジタルからアナログまで無料で一斉体験でき、新学期前に子どもにぴったりの学び方を見つけて自信を育む機会です。保護者や教員もどうぞ。]]></description>
+      <category>イベント・研修</category>
+      <pubDate>Tue, 10 Mar 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[発達障がいのある不登校小中学生対象 「GLOBAL GAME」、「ソーシャルプロダクツ・アワード2026」で受賞]]></title>
+      <link>https://ict-enews.net/2026/03/10coconova/</link>
+      <guid>https://ict-enews.net/2026/03/10coconova/</guid>
+      <description><![CDATA[【要約準備中】この記事の要約は現在準備中です。]]></description>
+      <category>多様な学び</category>
+      <pubDate>Mon, 09 Mar 2026 00:00:00 GMT</pubDate>
       <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
     </item>
 
