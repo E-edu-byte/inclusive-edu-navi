@@ -142,7 +142,7 @@ export default function Header() {
                 href="/news"
                 className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
               >
-                すべてのニュース
+                すべて表示
               </Link>
             </li>
             <li>
