@@ -155,17 +155,6 @@
       "mainKeyword": "ギフテッド"
     },
     {
-      "id": "fb85b1b9ff16",
-      "title": "Redirect Notice",
-      "summary": "記事の情報が提供されていないため、要約を生成できません。保護者や教員に役立つ要約を作成するには、記事の本文情報が必要です。",
-      "category": "情報不足",
-      "date": "2026-03-13",
-      "url": "https://www.google.com/amp/s/thehill.com/homenews/campaign/5780788-newsom-fires-back-at-trump-over-post-calling-dyslexia-mental-disorder/amp/",
-      "imageUrl": "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=300&fit=crop",
-      "source": "google.com",
-      "mainKeyword": "情報なし"
-    },
-    {
       "id": "5af999c5f79a",
       "title": "オセロで学ぶユニバーサルデザイン、小学校向け無償プログラムを4月1日より受付",
       "summary": "小学校向けに、オセロを使ってユニバーサルデザインを学ぶ無料プログラムの受付が4月1日から始まります。この取り組みは、異なる視点を持つ人々の立場を理解し、誰もが使いやすい工夫を考える力を育むことが重要です。多様性を尊重する社会を築く基礎となるでしょう。",
@@ -395,17 +384,6 @@
       "imageUrl": "https://www.yomiuri.co.jp/yomidr/wp-content/uploads/2026/02/20260209-GYTET00010_eye.jpg?ver=2026",
       "source": "ヨミドクター(読売新聞)",
       "mainKeyword": "学習障害"
-    },
-    {
-      "id": "94ce4d66ebe1",
-      "title": "自分、いらない人だったりする…？AI時代の新しいストレス「AIRD」（ギズモード・ジャパン） - Yahoo!ニュース",
-      "summary": "AIの急速な普及により、「仕事を奪われるかも」という不安から生じる新しいストレス「AIRD（AI代替障害）」が広がっています。不安や鬱症状、存在意義の喪失に繋がり、特に若者のキャリア形成に大きな影響を与える可能性があります。AI時代を生きる子どもたちの心のケアや将来の学びを考える上で、保護者や教員にとって重要な情報となるでしょう。",
-      "category": "研究",
-      "date": "2026-02-22",
-      "url": "https://news.yahoo.co.jp/articles/2b0a1e90b6c5eadbe9e19ab56647d29e7ef2f184",
-      "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260221-00000006-giz-000-1-view.jpg?exp=10800",
-      "source": "Yahoo!ニュース",
-      "mainKeyword": "AI不安"
     },
     {
       "id": "490e1fa4f03b",
@@ -749,8 +727,8 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-03-28T17:58:49.389688",
-  "totalCount": 68,
+  "lastUpdated": "2026-03-29T06:22:23.154305",
+  "totalCount": 66,
   "sources": [
     "Yahoo!ニュース",
     "こどもとIT",
@@ -758,11 +736,11 @@
     "リセマム",
     "PRESIDENT Online",
     "AERA DIGITAL（アエラデジタル）",
-    "google.com",
     "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
     "毎日新聞",
     "東京学芸大学",
     "gizmodo.jp",
+    "google.com",
     "学びとマナビが、ひびき合う。| 授業支援クラウドならスクールタクト",
     "日本教育新聞電子版　NIKKYOWEB",
     "ヨミドクター(読売新聞)",
