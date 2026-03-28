@@ -83,7 +83,7 @@ export function filterOutTrashedArticles(articles: Article[], trashedUrls: Set<s
 // basePath設定
 export const BASE_PATH = '/inclusive';
 
-// カテゴリ定義（6カテゴリー）
+// カテゴリ定義（7カテゴリー）
 export const categories: Category[] = [
   {
     id: 'support',
@@ -120,6 +120,12 @@ export const categories: Category[] = [
     name: 'イベント・研修',
     description: 'セミナー、ワークショップ、講演会、研修会情報',
     color: 'bg-pink-100 text-pink-800',
+  },
+  {
+    id: 'practice',
+    name: '実践・事例',
+    description: '学校や家庭での実践報告、当事者の体験談、成功事例の紹介',
+    color: 'bg-amber-100 text-amber-800',
   },
 ];
 
