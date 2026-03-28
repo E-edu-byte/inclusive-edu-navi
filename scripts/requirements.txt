@@ -9,3 +9,6 @@ python-dotenv>=1.0.0
 
 # Google Analytics Data API
 google-analytics-data>=0.18.0
+
+# X (Twitter) API
+tweepy>=4.14.0

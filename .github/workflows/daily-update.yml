@@ -314,7 +314,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add public/data/articles.json public/data/ai-picks.json public/data/status.json public/sitemap.xml public/feed.xml public/data/manual-articles.json public/data/trashed-articles.json public/data/excluded-urls.json public/data/analytics.json
+          git add public/data/articles.json public/data/ai-picks.json public/data/status.json public/sitemap.xml public/feed.xml public/data/manual-articles.json public/data/trashed-articles.json public/data/excluded-urls.json public/data/analytics.json public/data/posted-tweets.json
           git commit -m "chore: daily update - news & AI picks $(date +'%Y-%m-%d %H:%M' -d '+9 hours')"
           # リモートに新しいコミットがある場合はrebaseしてからプッシュ
           git pull --rebase origin main || true
@@ -326,3 +326,24 @@ jobs:
         uses: peter-evans/repository-dispatch@v3
         with:
           event-type: news-updated
+
+      # 9. 新着記事をXに自動投稿
+      - name: Post new articles to X
+        if: steps.git-check.outputs.changed == 'true'
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+        run: |
+          if [ -n "$X_API_KEY" ]; then
+            python scripts/post-tweet.py
+            # 投稿済みIDファイルをコミット
+            if [ -f public/data/posted-tweets.json ]; then
+              git add public/data/posted-tweets.json
+              git diff --staged --quiet || git commit -m "chore: update posted tweets"
+              git push origin main || true
+            fi
+          else
+            echo "X API認証情報が設定されていません。スキップします。"
+          fi
