@@ -1,6 +1,19 @@
 {
   "picks": [
     {
+      "id": "729847fffd85",
+      "sourceArticleId": "09e44f098b4b",
+      "title": "Trump says presidents 'should not have learning disabilities' as he mocks Newsom's dyslexia",
+      "url": "https://www.bbc.com/news/articles/c4gjnwmm984o",
+      "category": "多様な学び",
+      "originalDate": "2026-03-29",
+      "reason": "編集部ピックアップ",
+      "summary": "トランプ氏が学習障害を持つ人について不適切な発言をし、知事の学習困難を嘲笑しました。これに対し、全米学習障害センターは強く非難しています。ディスレクシアは多くの人に影響する身近な学習上の特性であり、理解が求められます。",
+      "generatedAt": "2026-03-29T07:01:17.533768",
+      "model": "manual",
+      "isManual": true
+    },
+    {
       "id": "ff03a37515e5",
       "sourceArticleId": "6c45679facf1",
       "title": "“発達障害”の学生が増加傾向 全国で約1万2000人 10年前の4倍以上に 大学側もサポート充実へ【福岡発】（FNNプライムオンライン） - Yahoo!ニュース",
@@ -47,20 +60,8 @@
       "summary": "文字を手で書くことが困難な「書き障害」を持つ14歳少年の体験談が書籍で紹介されました。当事者の生の声は、学習障害の実態や合理的配慮の必要性について、保護者や教員が深く理解し、子どもたちへの適切な支援を考える上で非常に貴重な視点を提供します。",
       "generatedAt": "2026-03-28T17:59:15.463012",
       "model": "gemini-2.5-flash"
-    },
-    {
-      "id": "d3700ef520ab",
-      "sourceArticleId": "78864fce6559",
-      "title": "「みんなと同じに戦える」　野球部創部につなげた支援学校球児の手紙 | 毎日新聞",
-      "url": "https://mainichi.jp/articles/20260306/k00/00m/050/301000c",
-      "category": "実践・事例",
-      "originalDate": "2026-03-09",
-      "reason": "支援学校野球部創部と合理的配慮",
-      "summary": "知的障害のある生徒の強い願いが実を結び、特別支援学校に硬式野球部が創部された感動的な事例です。これは、障害の有無に関わらず「みんなと同じに挑戦したい」という思いを叶える合理的配慮の具体的な実践であり、インクルーシブ教育の可能性を示す希望となる記事です。",
-      "generatedAt": "2026-03-28T17:59:15.463017",
-      "model": "gemini-2.5-flash"
     }
   ],
-  "lastUpdated": "2026-03-28T17:59:15.463021",
+  "lastUpdated": "2026-03-29T07:01:17.533781",
   "totalCount": 5
 }

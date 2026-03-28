@@ -1,6 +1,20 @@
 {
   "articles": [
     {
+      "id": "09e44f098b4b",
+      "title": "Trump says presidents 'should not have learning disabilities' as he mocks Newsom's dyslexia",
+      "summary": "トランプ氏が学習障害を持つ人について不適切な発言をし、知事の学習困難を嘲笑しました。これに対し、全米学習障害センターは強く非難しています。ディスレクシアは多くの人に影響する身近な学習上の特性であり、理解が求められます。",
+      "category": "多様な学び",
+      "date": "2026-03-29",
+      "url": "https://www.bbc.com/news/articles/c4gjnwmm984o",
+      "imageUrl": "https://ichef.bbci.co.uk/news/1024/branded_news/ca2c/live/35666a50-21a9-11f1-8ccf-c148dae81841.jpg",
+      "source": "bbc.com",
+      "mainKeyword": "学習障害",
+      "isManual": true,
+      "addedAt": "2026-03-29T07:01:17.531852",
+      "expiresAt": "2026-04-05T07:01:17.531854"
+    },
+    {
       "id": "6c45679facf1",
       "title": "“発達障害”の学生が増加傾向 全国で約1万2000人 10年前の4倍以上に 大学側もサポート充実へ【福岡発】（FNNプライムオンライン） - Yahoo!ニュース",
       "summary": "全国で発達障害と診断される大学生が10年で4倍以上に増加し、約1万2000人に。社会的な理解が進み、自身の特性を申告する学生が増えています。大学では、課題提出期限の延長や試験方法の変更など「合理的配慮」を提供し、学生の学びをサポートする取り組みを充実させています。",
@@ -29,6 +43,6 @@
       "expiresAt": "2026-03-29T06:42:07.224224"
     }
   ],
-  "lastUpdated": "2026-03-27T05:51:07.650661",
+  "lastUpdated": "2026-03-29T07:01:17.531974",
   "note": "手動投稿された記事。自動更新で上書きされない。"
 }
