@@ -15,7 +15,7 @@ ARTICLES_FILE = "public/data/articles.json"
 POSTED_FILE = "public/data/posted-tweets.json"  # 投稿済み記事IDを保存
 
 # ハッシュタグ
-HASHTAGS = "#インクルーシブ教育 #特別支援教育"
+HASHTAGS = "#新着ニュース #インクルーシブ教育 #特別支援教育"
 
 
 def load_articles():
@@ -58,8 +58,8 @@ def create_tweet_text(article):
     article_id = article.get('id', '')
     category = article.get('category', '')
 
-    # タイトルが長すぎる場合は短縮
-    max_title_len = 80
+    # タイトルが長すぎる場合は短縮（文字数制限対策）
+    max_title_len = 70
     if len(title) > max_title_len:
         title = title[:max_title_len-3] + "..."
 
