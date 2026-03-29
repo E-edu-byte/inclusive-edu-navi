@@ -1,13 +1,20 @@
 #!/usr/bin/env python3
 """
 新着記事をXに自動投稿するスクリプト
-GitHub Actionsから呼び出される
+GitHub Actionsまたはローカルから呼び出される
 """
 
 import json
 import os
 import sys
 import tweepy
+from dotenv import load_dotenv
+
+# Windows コンソールの文字コード対策
+sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+
+# .env.local から環境変数を読み込む（ローカル実行用）
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '.env.local'))
 
 # 設定
 SITE_URL = "https://news-navi.jp/inclusive"

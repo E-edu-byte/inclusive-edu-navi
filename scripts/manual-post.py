@@ -290,10 +290,6 @@ def add_manual_article(url):
         # ai-picks.json も更新（手動記事を先頭に追加）
         update_ai_picks_with_manual(new_article)
 
-        # Xに自動投稿
-        print("\n--- X自動投稿 ---")
-        post_to_x(new_article)
-
         return True
 
     return False
