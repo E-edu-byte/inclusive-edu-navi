@@ -9,10 +9,7 @@
       "url": "https://www.uhb.jp/news/single.html?id=58114&page=1",
       "imageUrl": "https://www.uhb.jp/news/data/58114/image.jpg?v=1774251438",
       "source": "UHB：北海道文化放送",
-      "mainKeyword": "共学",
-      "isManual": true,
-      "addedAt": "2026-03-30T00:15:56.843680",
-      "expiresAt": "2026-04-06T00:15:56.843682"
+      "mainKeyword": "共学"
     },
     {
       "id": "bc5be42744ff",
@@ -774,9 +771,10 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-03-30T00:15:56.844511",
-  "totalCount": 69,
+  "lastUpdated": "2026-03-30T06:24:07.217374",
+  "totalCount": 70,
   "sources": [
+    "UHB：北海道文化放送",
     "Yahoo!ニュース",
     "教育業界ニュース「ReseEd（リシード）」",
     "bbc.com",
