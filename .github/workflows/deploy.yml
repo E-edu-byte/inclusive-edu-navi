@@ -61,8 +61,12 @@ jobs:
         env:
           NEXT_PUBLIC_EDITOR_PASSWORD_HASH: ${{ env.NEXT_PUBLIC_EDITOR_PASSWORD_HASH }}
           NEXT_PUBLIC_GA_MEASUREMENT_ID: G-PVPYNH0WQ5
+          # インクルーシブ教育ナビ用 Supabase
           NEXT_PUBLIC_SUPABASE_URL: https://uckogseelvlyhkxwisgc.supabase.co
           NEXT_PUBLIC_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVja29nc2VlbHZseWhreHdpc2djIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEyMDMzMzQsImV4cCI6MjA4Njc3OTMzNH0.f23dClG9Y061Ar5q6MPMy4RT_cS1i0kEpZ89Yi35NuE
+          # Daily English Snap 用 Supabase（管理画面で使用）
+          NEXT_PUBLIC_ENGLISH_SUPABASE_URL: https://rbmjybjaunmgcxdbesec.supabase.co
+          NEXT_PUBLIC_ENGLISH_SUPABASE_ANON_KEY: sb_publishable_lygwb1mHZgwOFPR7xNoZQg_33v9XDKg
 
       # basePath: '/inclusive' に対応するため、out/ を inclusive/ サブディレクトリに再配置
       - name: Restructure for basePath
