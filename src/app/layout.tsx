@@ -99,6 +99,14 @@ export default function RootLayout({
           </>
         )}
 
+        {/* Google AdSense */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5844879039024261"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+
         {/* Service Worker登録 */}
         <Script id="sw-register" strategy="afterInteractive">
           {`
