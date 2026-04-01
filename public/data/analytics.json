@@ -1,12 +1,12 @@
 {
-  "lastUpdated": "2026-04-01T18:37:03.981583",
-  "period": "2026/03/02 - 2026/04/01",
-  "pageViews": 228,
-  "todayPageViews": 8,
-  "users": 33,
-  "todayUsers": 2,
-  "sessions": 104,
-  "todaySessions": 3,
+  "lastUpdated": "2026-04-02T06:35:13.473009",
+  "period": "2026/03/03 - 2026/04/02",
+  "pageViews": 234,
+  "todayPageViews": 0,
+  "users": 36,
+  "todayUsers": 0,
+  "sessions": 109,
+  "todaySessions": 0,
   "clicks": {
     "amazon": 0,
     "rakuten": 0,
@@ -28,11 +28,11 @@
   "topPages": [
     {
       "path": "/inclusive/",
-      "views": 104
+      "views": 105
     },
     {
       "path": "/inclusive/editor-secret-dashboard/",
-      "views": 61
+      "views": 64
     },
     {
       "path": "/inclusive/news/",
@@ -59,11 +59,11 @@
       "views": 3
     },
     {
-      "path": "/inclusive/bookmarks/",
-      "views": 2
+      "path": "/inclusive/news/0063db5ff768/",
+      "views": 3
     },
     {
-      "path": "/inclusive/category/events/",
+      "path": "/inclusive/bookmarks/",
       "views": 2
     }
   ]
