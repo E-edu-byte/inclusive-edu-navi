@@ -37,6 +37,19 @@ type EnglishPhrase = {
   created_at: string;
 };
 
+// Daily English Snap のアナリティクス型
+type EnglishAnalytics = {
+  lastUpdated: string;
+  period: string;
+  pageViews: number;
+  todayPageViews: number;
+  users: number;
+  todayUsers: number;
+  sessions: number;
+  todaySessions: number;
+  topPages: Array<{ path: string; views: number }>;
+};
+
 // SHA-256ハッシュ関数（Web Crypto API使用）
 async function sha256(message: string): Promise<string> {
   const msgBuffer = new TextEncoder().encode(message);
@@ -201,6 +214,7 @@ export default function EditorDashboard() {
   const [englishPhrases, setEnglishPhrases] = useState<EnglishPhrase[]>([]);
   const [englishLoading, setEnglishLoading] = useState(true);
   const [deletingPhraseId, setDeletingPhraseId] = useState<string | null>(null);
+  const [englishAnalytics, setEnglishAnalytics] = useState<EnglishAnalytics | null>(null);
 
   const [status, setStatus] = useState<StatusData | null>(null);
   const [tracking, setTracking] = useState<TrackingData>(initialTracking);
@@ -479,6 +493,24 @@ export default function EditorDashboard() {
       }
     }
 
+    // Daily English Snap のアナリティクスを取得
+    async function fetchEnglishAnalytics() {
+      if (!englishSupabase) return;
+      try {
+        const { data, error } = await englishSupabase
+          .from('analytics')
+          .select('data')
+          .eq('id', 'daily-english-snap')
+          .single();
+
+        if (data && !error && data.data) {
+          setEnglishAnalytics(data.data as EnglishAnalytics);
+        }
+      } catch (e) {
+        console.error('English analytics fetch error:', e);
+      }
+    }
+
     fetchStatus();
     loadTracking();
     fetchManualArticles();
@@ -489,6 +521,7 @@ export default function EditorDashboard() {
     fetchAccessKey();
     fetchComments();
     fetchEnglishPhrases();
+    fetchEnglishAnalytics();
   }, []);
 
   // 日時フォーマット
@@ -1620,6 +1653,104 @@ export default function EditorDashboard() {
                   「Run workflow」→「Run workflow」で実行すると、約1分で新しいフレーズが生成されます。
                 </p>
               </div>
+            </section>
+
+            {/* アクセス解析 */}
+            <section className="bg-gray-800 rounded-xl p-6 mb-6">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                  <svg className="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M22.84 2.998c-.018-.087-.054-.168-.103-.24a.757.757 0 0 0-.098-.133.748.748 0 0 0-.131-.1.738.738 0 0 0-.239-.104.741.741 0 0 0-.26-.023H1.992a.75.75 0 0 0-.53.22.75.75 0 0 0-.22.53v17.704a.75.75 0 0 0 .22.53.75.75 0 0 0 .53.22h20.016a.75.75 0 0 0 .53-.22.75.75 0 0 0 .22-.53V3.148a.741.741 0 0 0-.023-.15zM12 19.5a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15z"/>
+                  </svg>
+                  アクセス解析
+                </h2>
+                <a
+                  href="https://analytics.google.com/analytics/web/#/p530834971/reports/intelligenthome"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1"
+                >
+                  Google Analytics を開く
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+
+              {englishAnalytics ? (
+                <>
+                  {/* 基本指標 */}
+                  <div className="grid grid-cols-3 gap-4 mb-4">
+                    <div className="bg-gray-700 rounded-lg p-4">
+                      <span className="text-gray-400 text-xs block mb-1">ページビュー</span>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-white font-medium text-lg">{englishAnalytics.pageViews.toLocaleString()}</span>
+                        <span className="text-gray-500 text-xs">30日間</span>
+                      </div>
+                      <div className="flex items-baseline gap-2 mt-1">
+                        <span className="text-blue-400 font-medium">{englishAnalytics.todayPageViews.toLocaleString()}</span>
+                        <span className="text-gray-500 text-xs">今日</span>
+                      </div>
+                    </div>
+                    <div className="bg-gray-700 rounded-lg p-4">
+                      <span className="text-gray-400 text-xs block mb-1">ユーザー数</span>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-white font-medium text-lg">{englishAnalytics.users.toLocaleString()}</span>
+                        <span className="text-gray-500 text-xs">30日間</span>
+                      </div>
+                      <div className="flex items-baseline gap-2 mt-1">
+                        <span className="text-blue-400 font-medium">{englishAnalytics.todayUsers.toLocaleString()}</span>
+                        <span className="text-gray-500 text-xs">今日</span>
+                      </div>
+                    </div>
+                    <div className="bg-gray-700 rounded-lg p-4">
+                      <span className="text-gray-400 text-xs block mb-1">セッション</span>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-white font-medium text-lg">{englishAnalytics.sessions.toLocaleString()}</span>
+                        <span className="text-gray-500 text-xs">30日間</span>
+                      </div>
+                      <div className="flex items-baseline gap-2 mt-1">
+                        <span className="text-blue-400 font-medium">{englishAnalytics.todaySessions.toLocaleString()}</span>
+                        <span className="text-gray-500 text-xs">今日</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 人気ページ */}
+                  {englishAnalytics.topPages && englishAnalytics.topPages.length > 0 && (
+                    <div className="mb-4">
+                      <h3 className="text-sm font-medium text-gray-300 mb-2">人気ページ TOP5</h3>
+                      <div className="bg-gray-700 rounded-lg p-3">
+                        {englishAnalytics.topPages.slice(0, 5).map((page, index) => (
+                          <div key={index} className="flex justify-between text-xs py-1 border-b border-gray-600 last:border-0">
+                            <span className="text-gray-300 truncate max-w-[250px]">{page.path}</span>
+                            <span className="text-gray-400">{page.views.toLocaleString()}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  <p className="text-gray-500 text-xs">
+                    集計期間: {englishAnalytics.period} • 最終更新: {englishAnalytics.lastUpdated ? formatDate(englishAnalytics.lastUpdated) : '-'}
+                  </p>
+                </>
+              ) : (
+                <div className="text-center py-8">
+                  <p className="text-gray-400 mb-4">アクセス解析データを取得中...</p>
+                  <a
+                    href="https://analytics.google.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors"
+                  >
+                    Google Analytics で確認
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                </div>
+              )}
             </section>
 
             {/* フレーズ一覧 */}
