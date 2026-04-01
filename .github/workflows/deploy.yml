@@ -75,6 +75,10 @@ jobs:
           cp -r ./out/* ./deploy/inclusive/
           # CNAMEはルートに配置（GitHub Pages用）
           cp ./out/CNAME ./deploy/ 2>/dev/null || true
+          # ルートドメイン用ランディングページを配置（AdSense確認用）
+          cp ./public/root-index.html ./deploy/index.html
+          # ルート用ads.txtを配置
+          cp ./public/ads.txt ./deploy/ads.txt 2>/dev/null || true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
