@@ -1,6 +1,16 @@
 {
   "articles": [
     {
+      "id": "c06d5ab6827e",
+      "title": "「世界自閉症啓発デー」を迎えるに当たっての文部科学大臣メッセージについて（令和8年4月2日）",
+      "summary": "文部科学省のプレスリリースです。「世界自閉症啓発デー」を迎えるに当たっての文部科学大臣メッセージについて（令和8年4月2日）",
+      "category": "制度・行政",
+      "date": "2026-04-02",
+      "url": "https://www.mext.go.jp/b_menu/houdou/2024/1415000_00004.htm",
+      "imageUrl": "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=300&fit=crop",
+      "source": "文部科学省"
+    },
+    {
       "id": "13d108a6d6eb",
       "title": "アメリカには「不登校」が存在しない？ 〜多様な学びの選択肢から考える日本の教育〜｜こじみく(下着のプロデューサー)",
       "summary": "日本では不登校が社会問題化し、将来への不安も大きいとされます。しかしアメリカでは、学校以外の学びが多様な選択肢として広く受け入れられ、ホームスクーリングなども一般的です。この記事は、日本の教育における「不登校」への認識や、多様な学び方の可能性について考えさせられます。",
@@ -9,10 +19,18 @@
       "url": "https://comemo.nikkei.com/n/nbd0ab5bcca53",
       "imageUrl": "https://assets.st-note.com/production/uploads/images/263583110/rectangle_large_type_2_824688075f6438bc743ab88ef0047071.png?fit=bounds&quality=85&width=1280",
       "source": "日経COMEMO",
-      "mainKeyword": "多様な学び",
-      "isManual": true,
-      "addedAt": "2026-04-02T08:30:14.996193",
-      "expiresAt": "2026-04-09T08:30:14.996195"
+      "mainKeyword": "多様な学び"
+    },
+    {
+      "id": "c69d4654f665",
+      "title": "岡山県美咲町が保育ICTサービス「CoDMON」とカメラ型午睡チェックシステム「ベビモニ」一括導入",
+      "summary": "岡山県美咲町の公立保育所4施設に導入された保育ICTサービス「コドモン」と午睡チェックシステムは、保育士の事務負担を軽減し、多様なニーズある子どもへの個別支援や安全管理の充実が期待されます。",
+      "category": "ICT・教材",
+      "date": "2026-04-01",
+      "url": "https://ict-enews.net/2026/04/02codmon-19/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/04/0402-cdmn.png",
+      "source": "ICT教育ニュース",
+      "mainKeyword": "保育ICT"
     },
     {
       "id": "56838966529c",
@@ -829,9 +847,12 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-04-02T08:30:14.997025",
-  "totalCount": 74,
+  "lastUpdated": "2026-04-02T18:16:29.391101",
+  "totalCount": 77,
   "sources": [
+    "文部科学省",
+    "日経COMEMO",
+    "ICT教育ニュース",
     "Yahoo!ニュース",
     "こどもとIT",
     "理化学研究所",
@@ -839,7 +860,6 @@
     "UHB：北海道文化放送",
     "教育業界ニュース「ReseEd（リシード）」",
     "bbc.com",
-    "ICT教育ニュース",
     "リセマム",
     "PRESIDENT Online",
     "AERA DIGITAL（アエラデジタル）",
