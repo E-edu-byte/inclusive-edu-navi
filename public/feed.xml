@@ -5,7 +5,7 @@
     <link>https://e-edu-byte.github.io/inclusive-edu-navi</link>
     <description>すべての子どもの学びを支える最新情報。インクルーシブ教育に関するニュース、研究、実践事例をお届けします。</description>
     <language>ja</language>
-    <lastBuildDate>Fri, 03 Apr 2026 21:25:41 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 04 Apr 2026 09:01:17 GMT</lastBuildDate>
     <atom:link href="https://e-edu-byte.github.io/inclusive-edu-navi/feed.xml" rel="self" type="application/rss+xml"/>
 
     <item>
@@ -15,6 +15,16 @@
       <description><![CDATA[出版社である翔泳社が、発達障害に関する本16冊を期間限定で無料公開しました。これにより、多くの人が発達障害について学び、理解を深める機会を得られます。理解が広がることで、様々な特性を持つ人々が安心して暮らせる社会の実現に役立ちます。]]></description>
       <category>書籍</category>
       <pubDate>Fri, 03 Apr 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[モノグサ、「横浜版学習プラットフォーム構築事業」のプロポーザルに採択]]></title>
+      <link>https://ict-enews.net/2026/04/03monoxer-4/</link>
+      <guid>https://ict-enews.net/2026/04/03monoxer-4/</guid>
+      <description><![CDATA[「モノグサ」という会社が、横浜市が新しく作る学習システム（プラットフォーム）のパートナーに選ばれました。横浜市の小中学校や特別支援学校など、すべての子どもたちが使うこのシステムは、一人ひとりに合わせた学びをサポートし、どんな子も自分らしく学べる環境づくりに役立つでしょう。]]></description>
+      <category>ICT・教材</category>
+      <pubDate>Thu, 02 Apr 2026 00:00:00 GMT</pubDate>
       <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
     </item>
 
@@ -193,16 +203,6 @@
       <link>https://ict-enews.net/2026/03/13gaiax-2/</link>
       <guid>https://ict-enews.net/2026/03/13gaiax-2/</guid>
       <description><![CDATA[オンラインのオルタナティブスクール「aini school」が、不登校の子どもたちが社会へ復帰するまでの具体的なプロセスを発表しました。これは、学校以外の学びの場が、子どもたちの成長と社会とのつながりをどのように支援できるかを示し、多様な学びの選択肢の有効性を示す点で重要です。]]></description>
-      <category>多様な学び</category>
-      <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
-      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
-    </item>
-
-    <item>
-      <title><![CDATA[eboard、不登校支援において先進的な取り組みを行う14自治体を対象に調査した「行政・教育関係者向け報告書」を公開]]></title>
-      <link>https://ict-enews.net/2026/03/18eboard/</link>
-      <guid>https://ict-enews.net/2026/03/18eboard/</guid>
-      <description><![CDATA[eboardという団体が、不登校の子どもたちを支援する先進的な取り組みを行っている全国の自治体を調査し、その結果をまとめた報告書を公開しました。この報告書は、不登校の子どもたちが安心して学べるように、どのような支援が効果的かをみんなで考えるための大切な資料となります。]]></description>
       <category>多様な学び</category>
       <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
       <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
