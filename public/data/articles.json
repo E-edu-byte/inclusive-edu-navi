@@ -9,10 +9,7 @@
       "url": "https://newsdig.tbs.co.jp/articles/-/2577538?display=1",
       "imageUrl": "https://newsdig.ismcdn.jp/mwimgs/6/5/1200w/img_65cc590ef000e7c99db1a5aca98b838420613.jpg",
       "source": "TBS NEWS DIG",
-      "mainKeyword": "学習支援",
-      "isManual": true,
-      "addedAt": "2026-04-05T08:53:58.891901",
-      "expiresAt": "2026-04-12T08:53:58.891903"
+      "mainKeyword": "学習支援"
     },
     {
       "id": "3c5740efb4e0",
@@ -883,9 +880,10 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-04-05T08:53:58.892816",
-  "totalCount": 79,
+  "lastUpdated": "2026-04-05T18:01:06.037690",
+  "totalCount": 80,
   "sources": [
+    "TBS NEWS DIG",
     "こどもとIT",
     "ICT教育ニュース",
     "文部科学省",
