@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "5e80caf88adf",
+      "title": "コドモン、宮城県涌谷町の町立こども園が保育ICTサービス「CoDMON」を導入",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "ICT・教材",
+      "date": "2026-04-06",
+      "url": "https://ict-enews.net/2026/04/07codmon-18/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/04/0407-cdmn.png",
+      "source": "ICT教育ニュース",
+      "mainKeyword": ""
+    },
+    {
       "id": "b1ecd1c6f0a5",
       "title": "「漢字だけが極端に苦手。でも大学で学びたい」発達障がいの「合理的配慮」とは？学習障がいがある受験生を通じて考える　専門部署をつくり対応にあたる大学の取り組み | TBS NEWS DIG (1ページ)",
       "summary": "学習障がいのある大学生「ふくさん」の事例から、大学での「合理的配慮」を考えます。筑波大学は、入学前に専門部署が個別相談会を開き、まぶしさへの対応など、学生一人ひとりのニーズに応じた支援を行っています。発達障がいがある学生が安心して学べるよう、大学が積極的に配慮する姿勢を示しています。",
@@ -880,12 +891,12 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-04-07T06:30:23.910929",
-  "totalCount": 80,
+  "lastUpdated": "2026-04-07T18:20:55.386238",
+  "totalCount": 81,
   "sources": [
+    "ICT教育ニュース",
     "TBS NEWS DIG",
     "こどもとIT",
-    "ICT教育ニュース",
     "文部科学省",
     "日経COMEMO",
     "Yahoo!ニュース",
