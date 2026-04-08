@@ -1,6 +1,28 @@
 {
   "articles": [
     {
+      "id": "61584ebe0144",
+      "title": "深谷市の「こどもふっかパーク」、8つの感性に働きかけるインクルーシブ空間を設計",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "支援・合理的配慮",
+      "date": "2026-04-08",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2100065.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2100/065/main.jpg",
+      "source": "こどもとIT",
+      "mainKeyword": ""
+    },
+    {
+      "id": "33270a1942d9",
+      "title": "キズキ、山口県美祢市　不登校児の10人に1人「地域の人」を信頼、地域共助の実態",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "多様な学び",
+      "date": "2026-04-07",
+      "url": "https://ict-enews.net/2026/04/08kizuki-2/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/04/41906-426-25a09c345b7bfc9ff8d088aa5e24596c-2000x1480-1-1200x630.webp",
+      "source": "ICT教育ニュース",
+      "mainKeyword": ""
+    },
+    {
       "id": "b1ecd1c6f0a5",
       "title": "「漢字だけが極端に苦手。でも大学で学びたい」発達障がいの「合理的配慮」とは？学習障がいがある受験生を通じて考える　専門部署をつくり対応にあたる大学の取り組み | TBS NEWS DIG (1ページ)",
       "summary": "学習障がいのある大学生「ふくさん」の事例から、大学での「合理的配慮」を考えます。筑波大学は、入学前に専門部署が個別相談会を開き、まぶしさへの対応など、学生一人ひとりのニーズに応じた支援を行っています。発達障がいがある学生が安心して学べるよう、大学が積極的に配慮する姿勢を示しています。",
@@ -880,12 +902,12 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-04-08T06:35:59.247577",
-  "totalCount": 80,
+  "lastUpdated": "2026-04-08T18:20:00.262318",
+  "totalCount": 82,
   "sources": [
-    "TBS NEWS DIG",
     "こどもとIT",
     "ICT教育ニュース",
+    "TBS NEWS DIG",
     "文部科学省",
     "日経COMEMO",
     "Yahoo!ニュース",
