@@ -9,10 +9,7 @@
       "url": "https://wired.jp/article/people-with-dyslexia-have-enhanced-abilities/",
       "imageUrl": "https://media.wired.jp/photos/62e8d416ac42799491a505d7/16:9/w_1280,c_limit/GettyImages-AB15713.jpg",
       "source": "WIRED.jp",
-      "mainKeyword": "読み書き",
-      "isManual": true,
-      "addedAt": "2026-04-09T09:57:15.194712",
-      "expiresAt": "2026-04-16T09:57:15.194714"
+      "mainKeyword": "読み書き"
     },
     {
       "id": "61584ebe0144",
@@ -916,9 +913,10 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-04-09T09:57:15.195614",
-  "totalCount": 82,
+  "lastUpdated": "2026-04-09T18:41:04.277099",
+  "totalCount": 83,
   "sources": [
+    "WIRED.jp",
     "こどもとIT",
     "ICT教育ニュース",
     "TBS NEWS DIG",
