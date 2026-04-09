@@ -1,6 +1,20 @@
 {
   "articles": [
     {
+      "id": "b71301cec0e1",
+      "title": "読み書きが困難な「ディスレクシア」の特性が、人類の文化的漸進に貢献していた：研究結果",
+      "summary": "読み書きが困難なディスレクシアの特性が、実は人類が新しいものを見つける「探索」の力として、進化に貢献してきた可能性を示す研究です。この特性を活かすには、読み書きにこだわらない新たな教育方法が必要だと提言しています。",
+      "category": "研究",
+      "date": "2026-04-09",
+      "url": "https://wired.jp/article/people-with-dyslexia-have-enhanced-abilities/",
+      "imageUrl": "https://media.wired.jp/photos/62e8d416ac42799491a505d7/16:9/w_1280,c_limit/GettyImages-AB15713.jpg",
+      "source": "WIRED.jp",
+      "mainKeyword": "読み書き",
+      "isManual": true,
+      "addedAt": "2026-04-09T09:57:15.194712",
+      "expiresAt": "2026-04-16T09:57:15.194714"
+    },
+    {
       "id": "61584ebe0144",
       "title": "深谷市の「こどもふっかパーク」、8つの感性に働きかけるインクルーシブ空間を設計",
       "summary": "【要約準備中】この記事の要約は現在準備中です。",
@@ -902,7 +916,7 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-04-09T06:35:00.097299",
+  "lastUpdated": "2026-04-09T09:57:15.195614",
   "totalCount": 82,
   "sources": [
     "こどもとIT",
