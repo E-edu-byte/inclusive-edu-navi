@@ -1,6 +1,27 @@
 {
   "articles": [
     {
+      "id": "63bbc7982d78",
+      "title": "公立特別支援学校における教室不足調査の結果について（令和7年10月1日現在）",
+      "summary": "文部科学省のプレスリリースです。公立特別支援学校における教室不足調査の結果について（令和7年10月1日現在）",
+      "category": "制度・行政",
+      "date": "2026-04-10",
+      "url": "https://www.mext.go.jp/b_menu/houdou/mext_01618.html",
+      "imageUrl": "https://images.unsplash.com/photo-1544717305-2782549b5136?w=400&h=300&fit=crop",
+      "source": "文部科学省"
+    },
+    {
+      "id": "7c1e8083a5a8",
+      "title": "不登校の出席扱い・評価の条件を解説…文科省が保護者向けリーフレット公開",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "多様な学び",
+      "date": "2026-04-10",
+      "url": "https://resemom.jp/article/2026/04/10/85750.html",
+      "imageUrl": "https://resemom.jp/imgs/ogp_f/394724.jpg",
+      "source": "リセマム",
+      "mainKeyword": ""
+    },
+    {
       "id": "b71301cec0e1",
       "title": "読み書きが困難な「ディスレクシア」の特性が、人類の文化的漸進に貢献していた：研究結果",
       "summary": "読み書きが困難なディスレクシアの特性が、実は人類が新しいものを見つける「探索」の力として、進化に貢献してきた可能性を示す研究です。この特性を活かすには、読み書きにこだわらない新たな教育方法が必要だと提言しています。",
@@ -913,14 +934,15 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-04-10T06:39:45.634684",
-  "totalCount": 83,
+  "lastUpdated": "2026-04-10T18:39:29.508238",
+  "totalCount": 85,
   "sources": [
+    "文部科学省",
+    "リセマム",
     "WIRED.jp",
     "こどもとIT",
     "ICT教育ニュース",
     "TBS NEWS DIG",
-    "文部科学省",
     "日経COMEMO",
     "Yahoo!ニュース",
     "理化学研究所",
@@ -928,7 +950,6 @@
     "UHB：北海道文化放送",
     "教育業界ニュース「ReseEd（リシード）」",
     "bbc.com",
-    "リセマム",
     "PRESIDENT Online",
     "AERA DIGITAL（アエラデジタル）",
     "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
