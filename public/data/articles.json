@@ -9,10 +9,7 @@
       "url": "https://news.yahoo.co.jp/articles/dbe571849310e611bdfbd62c2c680acf6c3ac2c5?page=1",
       "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260413-00095348-forbes-000-1-view.jpg?exp=10800",
       "source": "Yahoo!ニュース",
-      "mainKeyword": "",
-      "isManual": true,
-      "addedAt": "2026-04-14T06:18:06.809914",
-      "expiresAt": "2026-04-21T06:18:06.809916"
+      "mainKeyword": ""
     },
     {
       "id": "6d2ae366d52a",
@@ -970,9 +967,10 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-04-14T06:18:06.810830",
-  "totalCount": 87,
+  "lastUpdated": "2026-04-14T06:40:05.401824",
+  "totalCount": 88,
   "sources": [
+    "Yahoo!ニュース",
     "こどもとIT",
     "文部科学省",
     "リセマム",
@@ -980,7 +978,6 @@
     "ICT教育ニュース",
     "TBS NEWS DIG",
     "日経COMEMO",
-    "Yahoo!ニュース",
     "理化学研究所",
     "【発達障害啓発週間】第1回：多様な暮らしの視点から考えるインクルーシブな都市環境づくり～発達特性に着目した、新しい空間デザインの挑戦～｜株式会社コスモスホテルマネジメントのストーリー｜PR TIMES STORY",
     "UHB：北海道文化放送",
