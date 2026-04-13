@@ -1,6 +1,28 @@
 {
   "articles": [
     {
+      "id": "6d2ae366d52a",
+      "title": "不登校経験者が語る無料勉強会、4月22日に栃木県さくら市で開催",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "支援・合理的配慮",
+      "date": "2026-04-13",
+      "url": "https://edu.watch.impress.co.jp/docs/news/event/2101047.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2101/047/main.png",
+      "source": "こどもとIT",
+      "mainKeyword": ""
+    },
+    {
+      "id": "5f36d23a1823",
+      "title": "文部科学省、不登校児童生徒の「出席扱い・成績評価」に関する保護者・教員向けリーフレットを公開",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "支援・合理的配慮",
+      "date": "2026-04-13",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2100063.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2100/063/01.png",
+      "source": "こどもとIT",
+      "mainKeyword": ""
+    },
+    {
       "id": "63bbc7982d78",
       "title": "公立特別支援学校における教室不足調査の結果について（令和7年10月1日現在）",
       "summary": "文部科学省のプレスリリースです。公立特別支援学校における教室不足調査の結果について（令和7年10月1日現在）",
@@ -934,13 +956,13 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-04-13T06:25:40.248847",
-  "totalCount": 85,
+  "lastUpdated": "2026-04-13T19:06:16.989529",
+  "totalCount": 87,
   "sources": [
+    "こどもとIT",
     "文部科学省",
     "リセマム",
     "WIRED.jp",
-    "こどもとIT",
     "ICT教育ニュース",
     "TBS NEWS DIG",
     "日経COMEMO",
