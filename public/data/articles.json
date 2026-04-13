@@ -1,6 +1,20 @@
 {
   "articles": [
     {
+      "id": "5cc4fad4af3d",
+      "title": "実はあなたも気付かず買っている、「障害者のつくる製品が世間で知られていない」問題（Forbes JAPAN） - Yahoo!ニュース",
+      "summary": "「課題解決より、課題発見が大事」「良い問いが、良い答えを生む」この考え方に共感する、リアルな社会問題をいち早く知りたい方への連載「〇〇問題 – 日本NPOセンターが発見した今月の社会課題」。\n\n著者",
+      "category": "ICT・教材",
+      "date": "2026-04-14",
+      "url": "https://news.yahoo.co.jp/articles/dbe571849310e611bdfbd62c2c680acf6c3ac2c5?page=1",
+      "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260413-00095348-forbes-000-1-view.jpg?exp=10800",
+      "source": "Yahoo!ニュース",
+      "mainKeyword": "",
+      "isManual": true,
+      "addedAt": "2026-04-14T06:18:06.809914",
+      "expiresAt": "2026-04-21T06:18:06.809916"
+    },
+    {
       "id": "6d2ae366d52a",
       "title": "不登校経験者が語る無料勉強会、4月22日に栃木県さくら市で開催",
       "summary": "【要約準備中】この記事の要約は現在準備中です。",
@@ -956,7 +970,7 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-04-13T19:06:16.989529",
+  "lastUpdated": "2026-04-14T06:18:06.810830",
   "totalCount": 87,
   "sources": [
     "こどもとIT",

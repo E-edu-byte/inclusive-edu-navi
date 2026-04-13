@@ -1,6 +1,19 @@
 {
   "picks": [
     {
+      "id": "a27e42a2ee32",
+      "sourceArticleId": "5cc4fad4af3d",
+      "title": "実はあなたも気付かず買っている、「障害者のつくる製品が世間で知られていない」問題（Forbes JAPAN） - Yahoo!ニュース",
+      "url": "https://news.yahoo.co.jp/articles/dbe571849310e611bdfbd62c2c680acf6c3ac2c5?page=1",
+      "category": "ICT・教材",
+      "originalDate": "2026-04-14",
+      "reason": "編集部ピックアップ",
+      "summary": "「課題解決より、課題発見が大事」「良い問いが、良い答えを生む」この考え方に共感する、リアルな社会問題をいち早く知りたい方への連載「〇〇問題 – 日本NPOセンターが発見した今月の社会課題」。\n\n著者",
+      "generatedAt": "2026-04-14T06:18:06.812062",
+      "model": "manual",
+      "isManual": true
+    },
+    {
       "id": "dfda81cbe507",
       "sourceArticleId": "b71301cec0e1",
       "title": "読み書きが困難な「ディスレクシア」の特性が、人類の文化的漸進に貢献していた：研究結果",
@@ -48,20 +61,8 @@
       "summary": "文部科学大臣が「世界自閉症啓発デー」に寄せたメッセージは、自閉症への理解を深め、インクルーシブな社会の実現に向けた国の強い意思を示すものです。教育現場や地域社会全体で、多様な特性を持つ子どもたちが安心して学び、生活できる環境をどう築いていくか、その方向性を示す重要な発表として、広く関心を持たれるでしょう。",
       "generatedAt": "2026-04-06T18:42:33.020764",
       "model": "gemini-2.5-flash"
-    },
-    {
-      "id": "2669254d2b58",
-      "sourceArticleId": "63bbc7982d78",
-      "title": "公立特別支援学校における教室不足調査の結果について（令和7年10月1日現在）",
-      "url": "https://www.mext.go.jp/b_menu/houdou/mext_01618.html",
-      "category": "制度・行政",
-      "originalDate": "2026-04-10",
-      "reason": "最新の注目記事",
-      "summary": "文部科学省のプレスリリースです。公立特別支援学校における教室不足調査の結果について（令和7年10月1日現在）",
-      "generatedAt": "2026-04-12T18:06:26.253333",
-      "model": "refill"
     }
   ],
-  "lastUpdated": "2026-04-12T18:06:26.253339",
+  "lastUpdated": "2026-04-14T06:18:06.812074",
   "totalCount": 5
 }
