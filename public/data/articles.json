@@ -1,15 +1,15 @@
 {
   "articles": [
     {
-      "id": "5cc4fad4af3d",
-      "title": "実はあなたも気付かず買っている、「障害者のつくる製品が世間で知られていない」問題（Forbes JAPAN） - Yahoo!ニュース",
-      "summary": "「課題解決より、課題発見が大事」「良い問いが、良い答えを生む」この考え方に共感する、リアルな社会問題をいち早く知りたい方への連載「〇〇問題 – 日本NPOセンターが発見した今月の社会課題」。\n\n著者",
-      "category": "ICT・教材",
+      "id": "2fe5d23a9830",
+      "title": "不登校支援に「働く体験」を　小4～中3向け無料イベントを大阪で実施",
+      "summary": "不登校の小学4年生から中学3年生を対象に、大阪で「働く体験」ができる無料イベントが開催されます。この活動は、子どもたちが社会と触れ合う機会を設け、学校以外の場での学びを通して将来を考えたり、自信を育んだりする大切な支援となります。",
+      "category": "実践・事例",
       "date": "2026-04-14",
-      "url": "https://news.yahoo.co.jp/articles/dbe571849310e611bdfbd62c2c680acf6c3ac2c5?page=1",
-      "imageUrl": "https://newsatcl-pctr.c.yimg.jp/t/amd-img/20260413-00095348-forbes-000-1-view.jpg?exp=10800",
-      "source": "Yahoo!ニュース",
-      "mainKeyword": ""
+      "url": "https://edu.watch.impress.co.jp/docs/news/event/2101490.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2101/490/03.jpg",
+      "source": "こどもとIT",
+      "mainKeyword": "不登校支援"
     },
     {
       "id": "6d2ae366d52a",
@@ -967,10 +967,9 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-04-14T06:40:05.401824",
+  "lastUpdated": "2026-04-14T18:50:57.008071",
   "totalCount": 88,
   "sources": [
-    "Yahoo!ニュース",
     "こどもとIT",
     "文部科学省",
     "リセマム",
@@ -978,6 +977,7 @@
     "ICT教育ニュース",
     "TBS NEWS DIG",
     "日経COMEMO",
+    "Yahoo!ニュース",
     "理化学研究所",
     "【発達障害啓発週間】第1回：多様な暮らしの視点から考えるインクルーシブな都市環境づくり～発達特性に着目した、新しい空間デザインの挑戦～｜株式会社コスモスホテルマネジメントのストーリー｜PR TIMES STORY",
     "UHB：北海道文化放送",
