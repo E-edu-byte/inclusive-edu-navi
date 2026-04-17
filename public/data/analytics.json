@@ -1,12 +1,12 @@
 {
-  "lastUpdated": "2026-04-17T18:49:53.988316",
-  "period": "2026/03/18 - 2026/04/17",
-  "pageViews": 268,
-  "todayPageViews": 2,
+  "lastUpdated": "2026-04-18T06:35:23.134285",
+  "period": "2026/03/19 - 2026/04/18",
+  "pageViews": 266,
+  "todayPageViews": 0,
   "users": 30,
-  "todayUsers": 1,
+  "todayUsers": 0,
   "sessions": 131,
-  "todaySessions": 2,
+  "todaySessions": 0,
   "clicks": {
     "amazon": 0,
     "rakuten": 0,
@@ -32,7 +32,7 @@
     },
     {
       "path": "/inclusive/",
-      "views": 82
+      "views": 81
     },
     {
       "path": "/inclusive/news/0063db5ff768/",
@@ -40,7 +40,7 @@
     },
     {
       "path": "/inclusive/news/",
-      "views": 14
+      "views": 13
     },
     {
       "path": "/inclusive/category/diverse-learning/",
