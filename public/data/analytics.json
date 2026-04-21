@@ -1,11 +1,11 @@
 {
-  "lastUpdated": "2026-04-21T06:39:47.978298",
+  "lastUpdated": "2026-04-21T18:54:58.892645",
   "period": "2026/03/22 - 2026/04/21",
-  "pageViews": 268,
+  "pageViews": 269,
   "todayPageViews": 1,
   "users": 30,
   "todayUsers": 1,
-  "sessions": 133,
+  "sessions": 134,
   "todaySessions": 1,
   "clicks": {
     "amazon": 0,
@@ -28,7 +28,7 @@
   "topPages": [
     {
       "path": "/inclusive/editor-secret-dashboard/",
-      "views": 131
+      "views": 132
     },
     {
       "path": "/inclusive/",
