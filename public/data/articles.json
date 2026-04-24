@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "97c674feea0e",
+      "title": "｢自閉症は母親のせい｣と専門家すら信じていた…発達障害を｢いまだ受け入れがたい地域｣の特徴",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "支援・合理的配慮",
+      "date": "2026-04-24",
+      "url": "https://president.jp/articles/-/111949",
+      "imageUrl": "https://president.ismcdn.jp/mwimgs/b/c/1200wm/img_bcabe2b840cb6f34916ac4b355f78d7b2066856.jpg",
+      "source": "PRESIDENT Online",
+      "mainKeyword": ""
+    },
+    {
       "id": "466f169a6f26",
       "title": "不登校小中学生に職場体験を「はたらくフリースクール」参加費無料",
       "summary": "学校に通っていない小中学生が、無料で様々な仕事を体験できるプログラムが実施されます。これは、子どもたちが社会とつながり、将来を考えるきっかけや自信を得るための大切な機会です。多様な学びの場を提供し、不登校の子どもたちの成長を支援します。",
@@ -978,9 +989,10 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-04-24T06:38:49.604880",
-  "totalCount": 89,
+  "lastUpdated": "2026-04-24T18:56:01.009439",
+  "totalCount": 90,
   "sources": [
+    "PRESIDENT Online",
     "リセマム",
     "こどもとIT",
     "文部科学省",
@@ -994,7 +1006,6 @@
     "UHB：北海道文化放送",
     "教育業界ニュース「ReseEd（リシード）」",
     "bbc.com",
-    "PRESIDENT Online",
     "AERA DIGITAL（アエラデジタル）",
     "プレスリリース・ニュースリリース配信シェアNo.1｜PR TIMES",
     "毎日新聞",
