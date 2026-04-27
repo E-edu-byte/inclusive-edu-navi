@@ -1,11 +1,11 @@
 {
-  "lastUpdated": "2026-04-27T19:28:53.438424",
-  "period": "2026/03/28 - 2026/04/27",
-  "pageViews": 268,
+  "lastUpdated": "2026-04-28T06:48:00.929400",
+  "period": "2026/03/29 - 2026/04/28",
+  "pageViews": 204,
   "todayPageViews": 0,
-  "users": 29,
+  "users": 27,
   "todayUsers": 0,
-  "sessions": 134,
+  "sessions": 124,
   "todaySessions": 0,
   "clicks": {
     "amazon": 0,
@@ -28,43 +28,39 @@
   "topPages": [
     {
       "path": "/inclusive/editor-secret-dashboard/",
-      "views": 134
+      "views": 131
     },
     {
       "path": "/inclusive/",
-      "views": 79
+      "views": 50
     },
     {
       "path": "/inclusive/news/0063db5ff768/",
       "views": 15
     },
     {
-      "path": "/inclusive/news/",
-      "views": 12
+      "path": "/inclusive/news/56838966529c/",
+      "views": 2
     },
     {
-      "path": "/inclusive/category/diverse-learning/",
-      "views": 6
-    },
-    {
-      "path": "/inclusive/category/policy/",
-      "views": 4
-    },
-    {
-      "path": "/inclusive/category/ict/",
-      "views": 3
-    },
-    {
-      "path": "/inclusive/category/support/",
-      "views": 3
+      "path": "/inclusive/news/7b265ce2ce67/",
+      "views": 2
     },
     {
       "path": "/inclusive/bookmarks/",
-      "views": 2
+      "views": 1
     },
     {
-      "path": "/inclusive/news/56838966529c/",
-      "views": 2
+      "path": "/inclusive/news/3e11559b6608/",
+      "views": 1
+    },
+    {
+      "path": "/inclusive/news/6c45679facf1/",
+      "views": 1
+    },
+    {
+      "path": "/inclusive/news/bc5be42744ff/",
+      "views": 1
     }
   ]
 }
