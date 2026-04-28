@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "d7724c1a767f",
+      "title": "さつき、インクルーシブ電子黒板「MIRAI TOUCH」最新モデルをEDIXに出展",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "ICT・教材",
+      "date": "2026-04-28",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2105154.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2105/154/main.png",
+      "source": "こどもとIT",
+      "mainKeyword": "電子黒板"
+    },
+    {
       "id": "a6421b93b6d4",
       "title": "特別支援学校の保護者向けアプリ「すくすく」、相思創造研究所が提供開始",
       "summary": "相思創造研究所が、特別支援学校に通う子どもの保護者向けアプリ「すくすく」の提供を始めました。このアプリは、保護者が子どもの日々の記録や学校との連絡を簡単に行えるようにし、特別な支援が必要な子どもたちの学びと生活をスムーズに支えることを目指しています。",
@@ -1000,8 +1011,8 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-04-28T06:47:12.852961",
-  "totalCount": 91,
+  "lastUpdated": "2026-04-28T19:26:36.432386",
+  "totalCount": 92,
   "sources": [
     "こどもとIT",
     "PRESIDENT Online",
