@@ -1,11 +1,11 @@
 {
-  "lastUpdated": "2026-04-30T19:21:08.487700",
-  "period": "2026/03/31 - 2026/04/30",
-  "pageViews": 153,
+  "lastUpdated": "2026-05-01T06:50:23.240476",
+  "period": "2026/04/01 - 2026/05/01",
+  "pageViews": 147,
   "todayPageViews": 0,
-  "users": 23,
+  "users": 20,
   "todayUsers": 0,
-  "sessions": 108,
+  "sessions": 102,
   "todaySessions": 0,
   "clicks": {
     "amazon": 0,
@@ -32,11 +32,11 @@
     },
     {
       "path": "/inclusive/",
-      "views": 17
+      "views": 14
     },
     {
       "path": "/inclusive/news/0063db5ff768/",
-      "views": 15
+      "views": 13
     },
     {
       "path": "/inclusive/news/56838966529c/",
@@ -45,10 +45,6 @@
     {
       "path": "/inclusive/news/7b265ce2ce67/",
       "views": 2
-    },
-    {
-      "path": "/inclusive/news/6c45679facf1/",
-      "views": 1
     },
     {
       "path": "/inclusive/news/bc5be42744ff/",
