@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "f47fbe137280",
+      "title": "コドモン、香川県さぬき市の公立保育所・幼稚園計9施設が「CoDMON」導入",
+      "summary": "香川県さぬき市の公立保育所と幼稚園で、子どもの管理や保護者との連絡を助けるICTサービス「コドモン」が導入されます。このサービスにより、先生方の業務負担が減り、保護者との情報共有がスムーズになることで、子どもたちへのきめ細やかなサポートや教育の質を高める効果が期待されています。",
+      "category": "ICT・教材",
+      "date": "2026-04-30",
+      "url": "https://ict-enews.net/2026/05/01codmon-14/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/04/0501-cdmn.png",
+      "source": "ICT教育ニュース",
+      "mainKeyword": "保育ICT"
+    },
+    {
       "id": "d7724c1a767f",
       "title": "さつき、インクルーシブ電子黒板「MIRAI TOUCH」最新モデルをEDIXに出展",
       "summary": "【要約準備中】この記事の要約は現在準備中です。",
@@ -1011,15 +1022,15 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-05-01T06:49:35.307811",
-  "totalCount": 92,
+  "lastUpdated": "2026-05-01T18:58:46.542720",
+  "totalCount": 93,
   "sources": [
+    "ICT教育ニュース",
     "こどもとIT",
     "PRESIDENT Online",
     "リセマム",
     "文部科学省",
     "WIRED.jp",
-    "ICT教育ニュース",
     "TBS NEWS DIG",
     "日経COMEMO",
     "Yahoo!ニュース",
