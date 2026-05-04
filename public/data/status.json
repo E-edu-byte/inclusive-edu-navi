@@ -1,12 +1,12 @@
 {
-  "lastUpdated": "2026-05-04T19:14:09.011077",
+  "lastUpdated": "2026-05-04T19:25:43.866178",
   "apiUsage": {
     "used": 0,
     "limit": 20,
     "percentage": 0
   },
   "lastRun": {
-    "timestamp": "2026-05-04T06:33:43.872287",
+    "timestamp": "2026-05-04T19:25:43.866178",
     "articlesProcessed": 0,
     "articlesAdded": 0,
     "apiCalls": 0,
@@ -15,13 +15,6 @@
     "isManual": false
   },
   "history": [
-    {
-      "timestamp": "2026-04-22T18:53:14.219868",
-      "articlesProcessed": 0,
-      "apiCalls": 0,
-      "success": true,
-      "isManual": false
-    },
     {
       "timestamp": "2026-04-23T06:42:45.748780",
       "articlesProcessed": 0,
@@ -178,6 +171,13 @@
     },
     {
       "timestamp": "2026-05-04T06:33:43.872287",
+      "articlesProcessed": 0,
+      "apiCalls": 0,
+      "success": true,
+      "isManual": false
+    },
+    {
+      "timestamp": "2026-05-04T19:25:43.866178",
       "articlesProcessed": 0,
       "apiCalls": 0,
       "success": true,
