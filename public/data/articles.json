@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "51a7e687d6d8",
+      "title": "「対話」から始まるメタバース運用、信頼と温もりで支える富山市の不登校支援",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "支援・合理的配慮",
+      "date": "2026-05-08",
+      "url": "https://edu.watch.impress.co.jp/docs/topic/special/2104751.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2104/751/Toyama_1200_630.jpg",
+      "source": "こどもとIT",
+      "mainKeyword": ""
+    },
+    {
       "id": "347229269a59",
       "title": "発達障害の子供支援セミナーを5月16日に開催、臨床発達心理士が「関わりのヒント」を伝授",
       "summary": "発達障害のある子どもへの接し方を学ぶセミナーが開催されます。専門家が、子どもたちとの良い関わり方のヒントを伝えることで、周囲の人が適切な支援を深める機会となります。これにより、多様な子どもたちが学校や家庭で安心して成長できる社会を目指す上で、とても大切です。",
@@ -1044,8 +1055,8 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-05-07T19:35:46.820073",
-  "totalCount": 95,
+  "lastUpdated": "2026-05-08T06:46:59.266014",
+  "totalCount": 96,
   "sources": [
     "こどもとIT",
     "ICT教育ニュース",
