@@ -1,6 +1,28 @@
 {
   "articles": [
     {
+      "id": "347229269a59",
+      "title": "発達障害の子供支援セミナーを5月16日に開催、臨床発達心理士が「関わりのヒント」を伝授",
+      "summary": "発達障害のある子どもへの接し方を学ぶセミナーが開催されます。専門家が、子どもたちとの良い関わり方のヒントを伝えることで、周囲の人が適切な支援を深める機会となります。これにより、多様な子どもたちが学校や家庭で安心して成長できる社会を目指す上で、とても大切です。",
+      "category": "イベント・研修",
+      "date": "2026-05-07",
+      "url": "https://edu.watch.impress.co.jp/docs/news/event/2106668.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2106/668/main.png",
+      "source": "こどもとIT",
+      "mainKeyword": "発達障害支援"
+    },
+    {
+      "id": "5fc8cbec128b",
+      "title": "多様な学びプロジェクト、長野県諏訪市と連携した不登校支援事業「とまり木オンライン」スタート",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "多様な学び",
+      "date": "2026-05-06",
+      "url": "https://ict-enews.net/2026/05/07tayounamanabi/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/05/0507-tayou2.jpg",
+      "source": "ICT教育ニュース",
+      "mainKeyword": ""
+    },
+    {
       "id": "f47fbe137280",
       "title": "コドモン、香川県さぬき市の公立保育所・幼稚園計9施設が「CoDMON」導入",
       "summary": "香川県さぬき市の公立保育園と幼稚園で、コドモン社のICTサービス「CoDMON」が導入されました。このサービスは、保育や教育、発達に配慮が必要な子どもたちの支援を効率化します。先生の負担を減らし、子ども一人ひとりへの対応をきめ細かくすることで、多様な学びを支える重要な取り組みです。",
@@ -1022,11 +1044,11 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-05-07T06:51:54.999767",
-  "totalCount": 93,
+  "lastUpdated": "2026-05-07T19:35:46.820073",
+  "totalCount": 95,
   "sources": [
-    "ICT教育ニュース",
     "こどもとIT",
+    "ICT教育ニュース",
     "PRESIDENT Online",
     "リセマム",
     "文部科学省",
