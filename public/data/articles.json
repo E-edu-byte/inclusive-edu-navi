@@ -1,6 +1,28 @@
 {
   "articles": [
     {
+      "id": "320c42112b2c",
+      "title": "三菱総研DCS、特別支援学校にコミュニケーションロボットを無償貸し出し",
+      "summary": "三菱総研DCSが特別支援学校へコミュニケーションロボットを無料で貸し出しました。これは、会話や社会との交流が苦手な児童生徒が、ロボットを通じて楽しく学び、コミュニケーション能力を育むための取り組みです。ICTを活用し、多様な子どもたちの学びを支える重要な一歩となります。",
+      "category": "ICT・教材",
+      "date": "2026-05-08",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2107032.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2107/032/01.png",
+      "source": "こどもとIT",
+      "mainKeyword": "コミュニケーションロボット"
+    },
+    {
+      "id": "19710f44a903",
+      "title": "子どもの｢20時就寝｣は何があっても死守すべし…教育の専門家が指摘する｢不登校､暴言､暴力｣の意外な原因【2026年3月BEST】",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "多様な学び",
+      "date": "2026-05-08",
+      "url": "https://president.jp/articles/-/112889",
+      "imageUrl": "https://president.ismcdn.jp/mwimgs/e/e/1200wm/img_ee0f49fd0f0f3fd101fb9f6a5d2bd28e592251.jpg",
+      "source": "PRESIDENT Online",
+      "mainKeyword": "睡眠"
+    },
+    {
       "id": "51a7e687d6d8",
       "title": "「対話」から始まるメタバース運用、信頼と温もりで支える富山市の不登校支援",
       "summary": "【要約準備中】この記事の要約は現在準備中です。",
@@ -1055,12 +1077,12 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-05-08T06:46:59.266014",
-  "totalCount": 96,
+  "lastUpdated": "2026-05-08T18:55:25.295017",
+  "totalCount": 98,
   "sources": [
     "こどもとIT",
-    "ICT教育ニュース",
     "PRESIDENT Online",
+    "ICT教育ニュース",
     "リセマム",
     "文部科学省",
     "WIRED.jp",
