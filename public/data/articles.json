@@ -1,6 +1,28 @@
 {
   "articles": [
     {
+      "id": "f9dc2af1388f",
+      "title": "NIJIN、青森県むつ市・TOPPANとメタバースを活用した不登校支援を紹介",
+      "summary": "NIJINと青森県むつ市、TOPPANが協力し、仮想空間「メタバース」を使って不登校の子どもたちをサポートする取り組みが紹介されました。これは、学校に行きづらい子どもたちが、インターネット上の安全な場所で多様な学びや人との交流を経験できるようになる大切な実践です。",
+      "category": "実践・事例",
+      "date": "2026-05-11",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2107383.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2107/383/main.png",
+      "source": "こどもとIT",
+      "mainKeyword": "不登校支援"
+    },
+    {
+      "id": "30c0bba88fff",
+      "title": "福井県立若杉中が「すらら にほんご」「すらら」を導入、多様な学びを夜間中学から",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "支援・合理的配慮",
+      "date": "2026-05-11",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2107376.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2107/376/01.png",
+      "source": "こどもとIT",
+      "mainKeyword": ""
+    },
+    {
       "id": "90f7cd881508",
       "title": "｢別の人格が精神病院への入院を承諾した｣親に褒めてもらえなかった30代男性に自分を取り戻させた憲法第25条",
       "summary": "発達障害や性的指向の悩みからうつ病が悪化し、精神病院で過ごすことが増えた30代男性の事例です。憲法25条の生存権が、彼が自分を取り戻すきっかけとなりました。この事例は、多様な背景を持つ人々が尊厳を持って生きるために、社会の理解と支援がどれほど重要かを示しています。",
@@ -1088,11 +1110,11 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-05-11T06:39:32.779940",
-  "totalCount": 99,
+  "lastUpdated": "2026-05-11T20:37:30.687422",
+  "totalCount": 101,
   "sources": [
-    "PRESIDENT Online",
     "こどもとIT",
+    "PRESIDENT Online",
     "ICT教育ニュース",
     "リセマム",
     "文部科学省",
