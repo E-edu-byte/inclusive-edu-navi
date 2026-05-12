@@ -1,6 +1,39 @@
 {
   "articles": [
     {
+      "id": "83945189161d",
+      "title": "名古屋市、全小中学校の不登校支援にAI教材「すらら」を導入",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "支援・合理的配慮",
+      "date": "2026-05-12",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2107733.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2107/733/main.png",
+      "source": "こどもとIT",
+      "mainKeyword": ""
+    },
+    {
+      "id": "1c091841ba5c",
+      "title": "AI教材「すらら」、名古屋市教委が全小・中学校の不登校支援に採用",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "多様な学び",
+      "date": "2026-05-11",
+      "url": "https://ict-enews.net/2026/05/12surala-17/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/05/0512-srl-1200x630.webp",
+      "source": "ICT教育ニュース",
+      "mainKeyword": "AI教材"
+    },
+    {
+      "id": "88ed7c404767",
+      "title": "高卒支援会、東京都「子供が輝く応援事業」で高校中退・不登校の若者に“居場所”と“未来”を提供",
+      "summary": "高卒支援会は、東京都の委託事業として、高校を中退したり不登校になったりした若者への支援を強化します。学校や社会との接点がない若者たちに居場所を提供し、再び学びや社会参加のきっかけを作る大切な取り組みです。誰もが安心して成長できる社会を目指します。",
+      "category": "多様な学び",
+      "date": "2026-05-11",
+      "url": "https://ict-enews.net/2026/05/12kousotsu/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/05/0512-kosotu-1200x630.webp",
+      "source": "ICT教育ニュース",
+      "mainKeyword": "不登校支援"
+    },
+    {
       "id": "f9dc2af1388f",
       "title": "NIJIN、青森県むつ市・TOPPANとメタバースを活用した不登校支援を紹介",
       "summary": "NIJINと青森県むつ市、TOPPANが協力し、仮想空間「メタバース」を使って不登校の子どもたちをサポートする取り組みが紹介されました。これは、学校に行きづらい子どもたちが、インターネット上の安全な場所で多様な学びや人との交流を経験できるようになる大切な実践です。",
@@ -1110,12 +1143,12 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-05-12T06:58:16.078660",
-  "totalCount": 101,
+  "lastUpdated": "2026-05-12T19:43:14.331884",
+  "totalCount": 104,
   "sources": [
     "こどもとIT",
-    "PRESIDENT Online",
     "ICT教育ニュース",
+    "PRESIDENT Online",
     "リセマム",
     "文部科学省",
     "WIRED.jp",
