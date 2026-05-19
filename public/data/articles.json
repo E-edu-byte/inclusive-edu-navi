@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "905cd4ccd842",
+      "title": "横浜市、両備システムズの情報共有システムを導入　医療的ケア児の通学支援を強化",
+      "summary": "横浜市は、医療的ケアが必要な子どもたちの通学を支援するため、新しい情報共有システムを導入しました。これにより、学校や医療機関などが子どもの情報を安全かつスムーズに共有できるようになり、安心して学校生活を送るためのサポートがさらに強化されます。",
+      "category": "支援・合理的配慮",
+      "date": "2026-05-19",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2109684.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2109/684/main.jpg",
+      "source": "こどもとIT",
+      "mainKeyword": "医療的ケア児支援"
+    },
+    {
       "id": "83945189161d",
       "title": "名古屋市、全小中学校の不登校支援にAI教材「すらら」を導入",
       "summary": "【要約準備中】この記事の要約は現在準備中です。",
@@ -1143,8 +1154,8 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-05-19T06:58:41.722236",
-  "totalCount": 104,
+  "lastUpdated": "2026-05-19T20:33:23.885787",
+  "totalCount": 105,
   "sources": [
     "こどもとIT",
     "ICT教育ニュース",
