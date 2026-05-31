@@ -1,11 +1,11 @@
 {
-  "lastUpdated": "2026-05-31T19:26:16.005286",
-  "period": "2026/05/01 - 2026/05/31",
-  "pageViews": 15,
+  "lastUpdated": "2026-06-01T06:52:27.963516",
+  "period": "2026/05/02 - 2026/06/01",
+  "pageViews": 11,
   "todayPageViews": 0,
   "users": 4,
   "todayUsers": 0,
-  "sessions": 11,
+  "sessions": 9,
   "todaySessions": 0,
   "clicks": {
     "amazon": 0,
@@ -27,12 +27,12 @@
   },
   "topPages": [
     {
-      "path": "/inclusive/editor-secret-dashboard/",
-      "views": 6
-    },
-    {
       "path": "/inclusive/",
       "views": 5
+    },
+    {
+      "path": "/inclusive/editor-secret-dashboard/",
+      "views": 2
     },
     {
       "path": "/inclusive/news/7b265ce2ce67/",

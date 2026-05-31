@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "359373408579",
+      "title": "【EDIXで見つけたAI】特別支援学校の「個別の指導計画」作成をAIで支援、Polaris.AI",
+      "summary": "特別支援学校で、生徒一人ひとりに合わせた学習計画（個別の指導計画）を作る作業をAIが手伝うシステム「Polaris.AI」が発表されました。このAI活用により、先生方の事務負担が減り、子どもたちに合わせた質の高い教育の検討に多くの時間を割けるため、多様な学びの実現に繋がると期待されます。",
+      "category": "ICT・教材",
+      "date": "2026-06-01",
+      "url": "https://edu.watch.impress.co.jp/docs/report/2112781.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2112/781/03.JPG",
+      "source": "こどもとIT",
+      "mainKeyword": "AI"
+    },
+    {
       "id": "a10dcb16fd2e",
       "title": "記録管理システム「すくすく」、特別支援学級と通級指導教室に対応",
       "summary": "記録管理システム「すくすく」が、特別支援学級と通級指導教室の子どもたちの記録管理に対応しました。これにより、一人ひとりの学習や支援の状況を効率良く管理・共有できるようになり、より適切で継続的なサポートを提供しやすくなります。",
@@ -1231,8 +1242,8 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-05-31T19:25:00.406013",
-  "totalCount": 112,
+  "lastUpdated": "2026-06-01T06:51:37.390638",
+  "totalCount": 113,
   "sources": [
     "こどもとIT",
     "NHK NEWS WEB",

@@ -5,8 +5,18 @@
     <link>https://e-edu-byte.github.io/inclusive-edu-navi</link>
     <description>すべての子どもの学びを支える最新情報。インクルーシブ教育に関するニュース、研究、実践事例をお届けします。</description>
     <language>ja</language>
-    <lastBuildDate>Sun, 31 May 2026 10:26:14 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 31 May 2026 21:52:26 GMT</lastBuildDate>
     <atom:link href="https://e-edu-byte.github.io/inclusive-edu-navi/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title><![CDATA[【EDIXで見つけたAI】特別支援学校の「個別の指導計画」作成をAIで支援、Polaris.AI]]></title>
+      <link>https://edu.watch.impress.co.jp/docs/report/2112781.html</link>
+      <guid>https://edu.watch.impress.co.jp/docs/report/2112781.html</guid>
+      <description><![CDATA[特別支援学校で、生徒一人ひとりに合わせた学習計画（個別の指導計画）を作る作業をAIが手伝うシステム「Polaris.AI」が発表されました。このAI活用により、先生方の事務負担が減り、子どもたちに合わせた質の高い教育の検討に多くの時間を割けるため、多様な学びの実現に繋がると期待されます。]]></description>
+      <category>ICT・教材</category>
+      <pubDate>Mon, 01 Jun 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
 
     <item>
       <title><![CDATA[記録管理システム「すくすく」、特別支援学級と通級指導教室に対応]]></title>
@@ -195,16 +205,6 @@
       <description><![CDATA[【要約準備中】この記事の要約は現在準備中です。]]></description>
       <category>多様な学び</category>
       <pubDate>Wed, 06 May 2026 00:00:00 GMT</pubDate>
-      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
-    </item>
-
-    <item>
-      <title><![CDATA[コドモン、香川県さぬき市の公立保育所・幼稚園計9施設が「CoDMON」導入]]></title>
-      <link>https://ict-enews.net/2026/05/01codmon-14/</link>
-      <guid>https://ict-enews.net/2026/05/01codmon-14/</guid>
-      <description><![CDATA[香川県さぬき市の公立保育園と幼稚園で、コドモン社のICTサービス「CoDMON」が導入されました。このサービスは、保育や教育、発達に配慮が必要な子どもたちの支援を効率化します。先生の負担を減らし、子ども一人ひとりへの対応をきめ細かくすることで、多様な学びを支える重要な取り組みです。]]></description>
-      <category>多様な学び</category>
-      <pubDate>Thu, 30 Apr 2026 00:00:00 GMT</pubDate>
       <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
     </item>
 
