@@ -1,17 +1,6 @@
 {
   "articles": [
     {
-      "id": "0e0c0321938e",
-      "title": "Fastly、日本事業責任者に奥 るみが就任",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "支援・合理的配慮",
-      "date": "2026-06-01",
-      "url": "https://prtimes.jp/main/html/rd/p/000000071.000037639.html",
-      "imageUrl": "https://prcdn.freetls.fastly.net/release_image/37639/71/37639-71-b098a9f7e1bce12fd8effed7690431ed-1999x1999.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
-      "source": "PR TIMES",
-      "mainKeyword": ""
-    },
-    {
       "id": "359373408579",
       "title": "【EDIXで見つけたAI】特別支援学校の「個別の指導計画」作成をAIで支援、Polaris.AI",
       "summary": "特別支援学校で、生徒一人ひとりに合わせた学習計画（個別の指導計画）を作る作業をAIが手伝うシステム「Polaris.AI」が発表されました。このAI活用により、先生方の事務負担が減り、子どもたちに合わせた質の高い教育の検討に多くの時間を割けるため、多様な学びの実現に繋がると期待されます。",
@@ -1253,10 +1242,9 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-06-01T22:47:35.374391",
-  "totalCount": 114,
+  "lastUpdated": "2026-06-02T07:56:15.091998",
+  "totalCount": 113,
   "sources": [
-    "PR TIMES",
     "こどもとIT",
     "NHK NEWS WEB",
     "ICT教育ニュース",
