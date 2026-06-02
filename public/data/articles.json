@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "f00a3d1ad68a",
+      "title": "そりゃ不登校の子が増えて当然だわ…元中学教師が｢子供をいきなり学校に戻してはいけない｣というワケ",
+      "summary": "不登校の子どもが増える中、元教師が急に学校に戻すのは良くないと提言しました。これは、親が子どもの状況を客観視しにくいからこそ、子どもに寄り添った支援が大切であることを示しています。子どもが再び学びに向かうための大切な視点です。",
+      "category": "多様な学び",
+      "date": "2026-06-02",
+      "url": "https://president.jp/articles/-/113772",
+      "imageUrl": "https://president.ismcdn.jp/mwimgs/5/3/1200wm/img_535d64149d77bc1428bed5bcb6a4b6571596544.jpg",
+      "source": "PRESIDENT Online",
+      "mainKeyword": "不登校支援"
+    },
+    {
       "id": "359373408579",
       "title": "【EDIXで見つけたAI】特別支援学校の「個別の指導計画」作成をAIで支援、Polaris.AI",
       "summary": "特別支援学校で、生徒一人ひとりに合わせた学習計画（個別の指導計画）を作る作業をAIが手伝うシステム「Polaris.AI」が発表されました。このAI活用により、先生方の事務負担が減り、子どもたちに合わせた質の高い教育の検討に多くの時間を割けるため、多様な学びの実現に繋がると期待されます。",
@@ -1242,14 +1253,14 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-06-02T07:56:15.091998",
-  "totalCount": 113,
+  "lastUpdated": "2026-06-02T21:15:44.660538",
+  "totalCount": 114,
   "sources": [
+    "PRESIDENT Online",
     "こどもとIT",
     "NHK NEWS WEB",
     "ICT教育ニュース",
     "朝日新聞 教育",
-    "PRESIDENT Online",
     "リセマム",
     "文部科学省",
     "WIRED.jp",
