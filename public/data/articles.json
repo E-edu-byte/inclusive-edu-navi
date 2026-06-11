@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "af7a52b74724",
+      "title": "フローレンス、子の不登校などに伴う「休暇・休職制度」を新設",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "多様な学び",
+      "date": "2026-06-11",
+      "url": "https://prtimes.jp/main/html/rd/p/000000396.000028029.html",
+      "imageUrl": "https://prcdn.freetls.fastly.net/release_image/28029/396/28029-396-6c9ae395d22260cfe76f77387d3ad77d-1920x1280.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+      "source": "PR TIMES",
+      "mainKeyword": ""
+    },
+    {
       "id": "4517ffbcb872",
       "title": "ADHDは要注意！無限に時間を溶かす「ショート動画」の中毒性…インスタやTikTokに依存する若者の現状と脳科学者が教える対策",
       "summary": "ショート動画は、ADHDの特性を持つ人が特に依存しやすく、意図せず多くの時間を費やしてしまう問題が起きています。これは脳の報酬系と深く関わっており、学業や日常生活に大きな影響を与える可能性があるため、その仕組みを知り、適切な対策を考えることが大変重要です。",
@@ -1297,9 +1308,10 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-06-11T21:18:01.176789",
-  "totalCount": 118,
+  "lastUpdated": "2026-06-12T07:47:26.879080",
+  "totalCount": 119,
   "sources": [
+    "PR TIMES",
     "近大PICKS",
     "こどもとIT",
     "理化学研究所",
