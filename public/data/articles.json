@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "98cf753e449a",
+      "title": "コーセー、「インフィニティ　ザ リペア」のパッケージが「第50回木下賞」を受賞　～脳卒中による後遺症をもつ方の声をヒアリング、すべての人が負担なく使えるユニバーサルデザインが高評価～",
+      "summary": "化粧品メーカーのコーセーが、脳卒中による後遺症を持つ方の意見を元に、誰でも使いやすい容器を開発し、賞を受賞しました。これは、年齢や障害の有無にかかわらず、みんなが便利に使える工夫（ユニバーサルデザイン）の素晴らしい例として評価されたものです。",
+      "category": "実践・事例",
+      "date": "2026-06-12",
+      "url": "https://prtimes.jp/main/html/rd/p/000000776.000041232.html",
+      "imageUrl": "https://prcdn.freetls.fastly.net/release_image/41232/776/41232-776-7500ffc89a06fd22f2fd5f44ca75c4c1-3900x2600.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+      "source": "PR TIMES",
+      "mainKeyword": "ユニバーサルデザイン"
+    },
+    {
       "id": "af7a52b74724",
       "title": "フローレンス、子の不登校などに伴う「休暇・休職制度」を新設",
       "summary": "【要約準備中】この記事の要約は現在準備中です。",
@@ -1308,8 +1319,8 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-06-12T07:47:26.879080",
-  "totalCount": 119,
+  "lastUpdated": "2026-06-12T20:53:38.559751",
+  "totalCount": 120,
   "sources": [
     "PR TIMES",
     "近大PICKS",
