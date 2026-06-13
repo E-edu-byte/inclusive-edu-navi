@@ -1,9 +1,9 @@
 {
-  "lastUpdated": "2026-06-13T19:41:16.362870",
-  "period": "2026/05/14 - 2026/06/13",
-  "pageViews": 8,
+  "lastUpdated": "2026-06-14T06:57:45.536035",
+  "period": "2026/05/15 - 2026/06/14",
+  "pageViews": 6,
   "todayPageViews": 0,
-  "users": 4,
+  "users": 3,
   "todayUsers": 0,
   "sessions": 8,
   "todaySessions": 0,
@@ -36,10 +36,6 @@
     },
     {
       "path": "/inclusive/news/7b265ce2ce67/",
-      "views": 2
-    },
-    {
-      "path": "/inclusive/bookmarks/",
       "views": 1
     }
   ]
