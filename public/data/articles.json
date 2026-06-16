@@ -1,6 +1,39 @@
 {
   "articles": [
     {
+      "id": "2a9bde73c9ba",
+      "title": "『特別支援教育を担当する先生向けの生成AI活用ガイド』、子供の「好き」を生かす実践例を紹介",
+      "summary": "特別支援教育を担当する先生向けに、生成AIの活用ガイドが作られました。これは、子どもたちの「好き」という気持ちを大切にしながら、一人ひとりに合った学びを支援するために重要です。AIを使うことで、先生の負担を減らし、より質の高い教育を提供できるようになります。",
+      "category": "ICT・教材",
+      "date": "2026-06-16",
+      "url": "https://edu.watch.impress.co.jp/docs/knowledge/kodomoit-booklab/2116618.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2116/618/01.png",
+      "source": "こどもとIT",
+      "mainKeyword": "生成AI"
+    },
+    {
+      "id": "3f06b7c9db2e",
+      "title": "会社勤めなら一生ヒラだった…発達障害のニトリ創業者が｢短所が消え去る｣と話す\"妻に教わった逆転の発想\"",
+      "summary": "ニトリ創業者の似鳥昭雄さんが発達障害という自身の特性と向き合い、短所ではなく長所を最大限に伸ばすことでビジネスを成功させた事例です。これは、個々の多様な特性を肯定的に捉え、苦手なことよりも得意なことを活かすことで、誰もが社会で輝けることを示しています。",
+      "category": "実践・事例",
+      "date": "2026-06-16",
+      "url": "https://president.jp/articles/-/114543",
+      "imageUrl": "https://president.ismcdn.jp/mwimgs/c/5/1200wm/img_c567f5c607db4bd241c464c9988f273d586783.jpg",
+      "source": "PRESIDENT Online",
+      "mainKeyword": "長所を活かす"
+    },
+    {
+      "id": "9b3d2d396426",
+      "title": "タイピングを「見える指」で習得、「Gold Finger School クラウド」が期間限定で無料に",
+      "summary": "指の動きを見ながらタイピングを学べる「Gold Finger School クラウド」が、期間限定で無料で提供されます。このサービスは、キーボード操作が苦手な子どもたちが視覚的なサポートでパソコンの基本スキルを習得し、情報学習の機会を広げる上で重要です。",
+      "category": "ICT・教材",
+      "date": "2026-06-16",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2117365.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2117/365/main.png",
+      "source": "こどもとIT",
+      "mainKeyword": "タイピング学習"
+    },
+    {
       "id": "98cf753e449a",
       "title": "コーセー、「インフィニティ　ザ リペア」のパッケージが「第50回木下賞」を受賞　～脳卒中による後遺症をもつ方の声をヒアリング、すべての人が負担なく使えるユニバーサルデザインが高評価～",
       "summary": "化粧品メーカーのコーセーが、脳卒中による後遺症を持つ方の意見を元に、誰でも使いやすい容器を開発し、賞を受賞しました。これは、年齢や障害の有無にかかわらず、みんなが便利に使える工夫（ユニバーサルデザイン）の素晴らしい例として評価されたものです。",
@@ -1319,15 +1352,15 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-06-16T07:56:53.883436",
-  "totalCount": 120,
+  "lastUpdated": "2026-06-16T22:05:45.459409",
+  "totalCount": 123,
   "sources": [
+    "こどもとIT",
+    "PRESIDENT Online",
     "PR TIMES",
     "近大PICKS",
-    "こどもとIT",
     "理化学研究所",
     "ICT教育ニュース",
-    "PRESIDENT Online",
     "NHK NEWS WEB",
     "朝日新聞 教育",
     "リセマム",
