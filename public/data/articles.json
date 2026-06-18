@@ -1,17 +1,6 @@
 {
   "articles": [
     {
-      "id": "9b3d2d396426",
-      "title": "タイピングを「見える指」で習得、「Gold Finger School クラウド」が期間限定で無料に",
-      "summary": "【要約準備中】この記事の要約は現在準備中です。",
-      "category": "ICT・教材",
-      "date": "2026-06-18",
-      "url": "https://edu.watch.impress.co.jp/docs/news/2117365.html",
-      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2117/365/main.png",
-      "source": "こどもとIT",
-      "mainKeyword": "視覚支援"
-    },
-    {
       "id": "2a9bde73c9ba",
       "title": "『特別支援教育を担当する先生向けの生成AI活用ガイド』、子供の「好き」を生かす実践例を紹介",
       "summary": "特別支援教育を担当する先生向けに、生成AIの活用ガイドが作られました。これは、子どもたちの「好き」という気持ちを大切にしながら、一人ひとりに合った学びを支援するために重要です。AIを使うことで、先生の負担を減らし、より質の高い教育を提供できるようになります。",
@@ -1352,8 +1341,8 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-06-18T20:58:55.985217",
-  "totalCount": 123,
+  "lastUpdated": "2026-06-19T07:51:52.141448",
+  "totalCount": 122,
   "sources": [
     "こどもとIT",
     "PRESIDENT Online",
