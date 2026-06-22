@@ -1,15 +1,15 @@
 {
   "articles": [
     {
-      "id": "9b3d2d396426",
-      "title": "タイピングを「見える指」で習得、「Gold Finger School クラウド」が期間限定で無料に",
-      "summary": "タイピングを視覚的に学ぶ「Gold Finger School クラウド」が、期間限定で無料で提供されることになりました。このシステムは、指の動きを「見える化」することで、従来のタイピング練習が難しい子どもでも習得しやすく、多様な学習スタイルを持つ生徒のICTスキル習得を支援します。",
+      "id": "f1acb32c3cc8",
+      "title": "6/22発売！新刊『発達障害の人のための生成AI仕事術 「苦手」をAIに預ける新しい働き方』",
+      "summary": "発達障害のある人が、生成AIを活用して仕事の苦手な部分を補い、自分らしく働くための新しい本が出版されました。この本は、多様な人々がそれぞれの特性を生かして社会参加するためのヒントを提供し、より働きやすい環境を考えるきっかけになります。",
       "category": "ICT・教材",
       "date": "2026-06-22",
-      "url": "https://edu.watch.impress.co.jp/docs/news/2117365.html",
-      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2117/365/main.png",
-      "source": "こどもとIT",
-      "mainKeyword": "タイピング"
+      "url": "https://prtimes.jp/main/html/rd/p/000000710.000034873.html",
+      "imageUrl": "https://prcdn.freetls.fastly.net/release_image/34873/710/34873-710-367f661b285981f2a138b893c0259d05-1748x2480.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+      "source": "PR TIMES",
+      "mainKeyword": "発達障害"
     },
     {
       "id": "2a9bde73c9ba",
@@ -1352,12 +1352,12 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-06-22T22:44:36.003259",
+  "lastUpdated": "2026-06-23T07:43:09.123880",
   "totalCount": 123,
   "sources": [
+    "PR TIMES",
     "こどもとIT",
     "PRESIDENT Online",
-    "PR TIMES",
     "近大PICKS",
     "理化学研究所",
     "ICT教育ニュース",
