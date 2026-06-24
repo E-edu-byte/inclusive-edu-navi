@@ -1,6 +1,28 @@
 {
   "articles": [
     {
+      "id": "a56946951867",
+      "title": "「できた」「楽しい」を学びの自信に、learningBOXが特別支援学級で体験授業を実施",
+      "summary": "デジタル学習システムlearningBOXが特別支援学級で体験授業を実施しました。子どもたちは「できた」「楽しい」と感じ、学びへの自信を深めました。この取り組みは、多様な特性を持つ子どもたちが、それぞれのペースで学習し、成功体験を通じて意欲を高めることの重要性を示しています。",
+      "category": "ICT・教材",
+      "date": "2026-06-24",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2119511.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2119/511/main.jpg",
+      "source": "こどもとIT",
+      "mainKeyword": "デジタル学習"
+    },
+    {
+      "id": "be44d7fcdbcb",
+      "title": "learningBOX、兵庫・たつの市立中学で特別支援学級向け「eラーニング体験授業」を実施",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "支援・合理的配慮",
+      "date": "2026-06-23",
+      "url": "https://ict-enews.net/2026/06/24learningbox-3/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/06/0624-lb-1200x630.webp",
+      "source": "ICT教育ニュース",
+      "mainKeyword": ""
+    },
+    {
       "id": "f1acb32c3cc8",
       "title": "6/22発売！新刊『発達障害の人のための生成AI仕事術 「苦手」をAIに預ける新しい働き方』",
       "summary": "発達障害のある人が、生成AIを活用して仕事の苦手な部分を補い、自分らしく働くための新しい本が出版されました。この本は、多様な人々がそれぞれの特性を生かして社会参加するためのヒントを提供し、より働きやすい環境を考えるきっかけになります。",
@@ -1352,15 +1374,15 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-06-24T07:08:03.137010",
-  "totalCount": 123,
+  "lastUpdated": "2026-06-24T20:18:02.897778",
+  "totalCount": 125,
   "sources": [
-    "PR TIMES",
     "こどもとIT",
+    "ICT教育ニュース",
+    "PR TIMES",
     "PRESIDENT Online",
     "近大PICKS",
     "理化学研究所",
-    "ICT教育ニュース",
     "NHK NEWS WEB",
     "朝日新聞 教育",
     "リセマム",
