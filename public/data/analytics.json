@@ -1,9 +1,9 @@
 {
-  "lastUpdated": "2026-06-25T20:10:06.823295",
-  "period": "2026/05/26 - 2026/06/25",
-  "pageViews": 7,
+  "lastUpdated": "2026-06-26T07:16:43.651341",
+  "period": "2026/05/27 - 2026/06/26",
+  "pageViews": 8,
   "todayPageViews": 0,
-  "users": 4,
+  "users": 3,
   "todayUsers": 0,
   "sessions": 8,
   "todaySessions": 0,
@@ -32,7 +32,7 @@
     },
     {
       "path": "/inclusive/editor-secret-dashboard/",
-      "views": 3
+      "views": 4
     }
   ]
 }
