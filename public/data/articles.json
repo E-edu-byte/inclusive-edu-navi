@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "e4c0ca43994d",
+      "title": "授業中に消えた10歳男児、滝で見つかり死亡　特別支援学校長が謝罪",
+      "summary": "石川県の特別支援学校で、授業中にいなくなった10歳の男の子が、学校近くの滝で発見され、亡くなりました。この痛ましい事故は、支援が必要な子どもたちの安全をどう守るか、学校の危機管理体制や見守りのあり方を改めて考える重要なきっかけとなります。",
+      "category": "実践・事例",
+      "date": "2026-07-01",
+      "url": "https://www.asahi.com/articles/ASV71436CV71PJLB00JM.html?ref=rss",
+      "imageUrl": "https://imgopt.asahi.com/ogp/AS20260701004344_comm.jpg",
+      "source": "朝日新聞 教育",
+      "mainKeyword": "安全管理"
+    },
+    {
       "id": "502361a78cd2",
       "title": "ICT CONNECT21、多様な学びSIG設立…東大で記念イベント8/30",
       "summary": "ICT CONNECT21という団体が、学校に行けない子どもたちを支援し、一人ひとりに合った学び方を広めるための新しいグループ「多様な学びSIG」を設立しました。これは、すべての子どもが自分らしい方法で学び、成長できる社会を作る上でとても大切な取り組みです。設立を記念するイベントも開かれます。",
@@ -1429,9 +1440,10 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-07-01T20:33:36.647761",
-  "totalCount": 130,
+  "lastUpdated": "2026-07-02T07:13:22.850524",
+  "totalCount": 131,
   "sources": [
+    "朝日新聞 教育",
     "リセマム",
     "PR TIMES",
     "PRESIDENT Online",
@@ -1441,7 +1453,6 @@
     "近大PICKS",
     "理化学研究所",
     "NHK NEWS WEB",
-    "朝日新聞 教育",
     "文部科学省",
     "WIRED.jp",
     "TBS NEWS DIG",
