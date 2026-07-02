@@ -5,8 +5,18 @@
     <link>https://e-edu-byte.github.io/inclusive-edu-navi</link>
     <description>すべての子どもの学びを支える最新情報。インクルーシブ教育に関するニュース、研究、実践事例をお届けします。</description>
     <language>ja</language>
-    <lastBuildDate>Thu, 02 Jul 2026 11:03:33 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 02 Jul 2026 22:01:09 GMT</lastBuildDate>
     <atom:link href="https://e-edu-byte.github.io/inclusive-edu-navi/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title><![CDATA[北九州市がAI型教材「キュビナ」を正式採用、市立全小中学校と特別支援学校で利用]]></title>
+      <link>https://edu.watch.impress.co.jp/docs/news/2122071.html</link>
+      <guid>https://edu.watch.impress.co.jp/docs/news/2122071.html</guid>
+      <description><![CDATA[北九州市は、AI（人工知能）教材「キュビナ」を、市内の全小中学校と特別支援学校で導入しました。これにより、生徒一人ひとりの学習進度や特性に合わせて教材が変わり、得意・苦手に関わらず自分のペースで学べます。多様な子どもたちの個別最適な学びを支援する大切な一歩です。]]></description>
+      <category>ICT・教材</category>
+      <pubDate>Fri, 03 Jul 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
 
     <item>
       <title><![CDATA[名古屋市、富士ソフトの教育メタバースで不登校支援を本格化]]></title>
@@ -193,16 +203,6 @@
       <link>https://ict-enews.net/2026/06/03surala-20/</link>
       <guid>https://ict-enews.net/2026/06/03surala-20/</guid>
       <description><![CDATA[すららネットは、AIを活用した学習教材を、学校に通いづらい子どもたちを支援する自治体の事業に提供しました。これにより、子どもたちはそれぞれの状況に合わせて、自宅などでも自分のペースで学習できるようになり、多様な学びの機会が広がります。]]></description>
-      <category>多様な学び</category>
-      <pubDate>Tue, 02 Jun 2026 00:00:00 GMT</pubDate>
-      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
-    </item>
-
-    <item>
-      <title><![CDATA[そりゃ不登校の子が増えて当然だわ…元中学教師が｢子供をいきなり学校に戻してはいけない｣というワケ]]></title>
-      <link>https://president.jp/articles/-/113772</link>
-      <guid>https://president.jp/articles/-/113772</guid>
-      <description><![CDATA[不登校の子どもが増える中、元教師が急に学校に戻すのは良くないと提言しました。これは、親が子どもの状況を客観視しにくいからこそ、子どもに寄り添った支援が大切であることを示しています。子どもが再び学びに向かうための大切な視点です。]]></description>
       <category>多様な学び</category>
       <pubDate>Tue, 02 Jun 2026 00:00:00 GMT</pubDate>
       <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
