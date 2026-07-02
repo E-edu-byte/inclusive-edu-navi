@@ -5,8 +5,28 @@
     <link>https://e-edu-byte.github.io/inclusive-edu-navi</link>
     <description>すべての子どもの学びを支える最新情報。インクルーシブ教育に関するニュース、研究、実践事例をお届けします。</description>
     <language>ja</language>
-    <lastBuildDate>Wed, 01 Jul 2026 22:14:15 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 02 Jul 2026 11:03:33 GMT</lastBuildDate>
     <atom:link href="https://e-edu-byte.github.io/inclusive-edu-navi/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title><![CDATA[名古屋市、富士ソフトの教育メタバースで不登校支援を本格化]]></title>
+      <link>https://edu.watch.impress.co.jp/docs/news/2121826.html</link>
+      <guid>https://edu.watch.impress.co.jp/docs/news/2121826.html</guid>
+      <description><![CDATA[名古屋市が富士ソフトのバーチャル空間「メタバース」を使い、不登校の生徒支援を本格化させます。学校に行けない子どもたちが、自宅から安全に他の生徒と交流しながら学べる新しい場所を提供し、学習を続け社会とつながるきっかけとすることが目的です。]]></description>
+      <category>実践・事例</category>
+      <pubDate>Thu, 02 Jul 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[エッジ、デジタル教科書制度改正を受け文科省審議官に要望書を提出]]></title>
+      <link>https://ict-enews.net/2026/07/02npo-edge-2/</link>
+      <guid>https://ict-enews.net/2026/07/02npo-edge-2/</guid>
+      <description><![CDATA[「エッジ」という団体が文部科学省に、紙の教科書を学習障害などで読むのが難しい子どもたちも使いやすくしてほしいと要望書を出しました。すべての子どもたちが学びやすい環境を整えるための具体的な支援を求めています。]]></description>
+      <category>ICT・教材</category>
+      <pubDate>Wed, 01 Jul 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
 
     <item>
       <title><![CDATA[授業中に消えた10歳男児、滝で見つかり死亡　特別支援学校長が謝罪]]></title>
@@ -185,26 +205,6 @@
       <description><![CDATA[不登校の子どもが増える中、元教師が急に学校に戻すのは良くないと提言しました。これは、親が子どもの状況を客観視しにくいからこそ、子どもに寄り添った支援が大切であることを示しています。子どもが再び学びに向かうための大切な視点です。]]></description>
       <category>多様な学び</category>
       <pubDate>Tue, 02 Jun 2026 00:00:00 GMT</pubDate>
-      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
-    </item>
-
-    <item>
-      <title><![CDATA[【EDIXで見つけたAI】特別支援学校の「個別の指導計画」作成をAIで支援、Polaris.AI]]></title>
-      <link>https://edu.watch.impress.co.jp/docs/report/2112781.html</link>
-      <guid>https://edu.watch.impress.co.jp/docs/report/2112781.html</guid>
-      <description><![CDATA[特別支援学校で、生徒一人ひとりに合わせた学習計画（個別の指導計画）を作る作業をAIが手伝うシステム「Polaris.AI」が発表されました。このAI活用により、先生方の事務負担が減り、子どもたちに合わせた質の高い教育の検討に多くの時間を割けるため、多様な学びの実現に繋がると期待されます。]]></description>
-      <category>ICT・教材</category>
-      <pubDate>Mon, 01 Jun 2026 00:00:00 GMT</pubDate>
-      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
-    </item>
-
-    <item>
-      <title><![CDATA[記録管理システム「すくすく」、特別支援学級と通級指導教室に対応]]></title>
-      <link>https://edu.watch.impress.co.jp/docs/news/2112745.html</link>
-      <guid>https://edu.watch.impress.co.jp/docs/news/2112745.html</guid>
-      <description><![CDATA[記録管理システム「すくすく」が、特別支援学級と通級指導教室の子どもたちの記録管理に対応しました。これにより、一人ひとりの学習や支援の状況を効率良く管理・共有できるようになり、より適切で継続的なサポートを提供しやすくなります。]]></description>
-      <category>ICT・教材</category>
-      <pubDate>Fri, 29 May 2026 00:00:00 GMT</pubDate>
       <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
     </item>
 
