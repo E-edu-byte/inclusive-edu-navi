@@ -1,6 +1,39 @@
 {
   "articles": [
     {
+      "id": "120882900961",
+      "title": "日本医師会が発達障害を解説する動画を公開、公式YouTubeで特性や支援を紹介",
+      "summary": "日本医師会が、発達障害の特性や必要な支援について解説する動画をYouTubeで公開しました。この取り組みは、発達障害への正しい理解を広げ、支援が必要な人が適切な情報に触れる機会を増やす上でとても大切です。",
+      "category": "支援・合理的配慮",
+      "date": "2026-07-10",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2124014.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2124/014/sub1.png",
+      "source": "こどもとIT",
+      "mainKeyword": "発達障害"
+    },
+    {
+      "id": "35484a2b981c",
+      "title": "富⼠ソフト、教育メタバース「FAMcampus」活用した埼玉県の不登校支援事業2年目の運用開始",
+      "summary": "富士ソフトの教育メタバース「FAMcampus」を使った埼玉県の不登校支援事業が2年目を迎えました。これは、学校に通えない子どもたちが、仮想空間の学校で安心して学び続けられるようにするものです。ICTを活用し、多様な学びの機会を提供する重要な取り組みと言えます。",
+      "category": "多様な学び",
+      "date": "2026-07-09",
+      "url": "https://ict-enews.net/2026/07/10fsi/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/07/61382-193-645d8a499a14b56dc209fce4452f3fc0-3900x2194-1-1200x630.webp",
+      "source": "ICT教育ニュース",
+      "mainKeyword": "不登校支援"
+    },
+    {
+      "id": "a58b13ae1ae8",
+      "title": "「不登校離職」5人に1人の母親が退職を経験、不登校はもう子どもだけの問題ではない =キーデザイン調べ=",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "多様な学び",
+      "date": "2026-07-09",
+      "url": "https://ict-enews.net/2026/07/10npo-keydesign/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/07/0710-kd0.jpg",
+      "source": "ICT教育ニュース",
+      "mainKeyword": "不登校"
+    },
+    {
       "id": "ac87b851abef",
       "title": "埼玉県、不登校支援メタバースの参加可能人数を4,000人へ",
       "summary": "埼玉県は、不登校の生徒が仮想空間で交流や学習ができる「メタバース」の参加人数を4,000人に増やしました。学校に行きにくい子どもたちが自宅などから安心して社会とつながり、多様な学びの機会を得られるよう、孤立を防ぐ新しい居場所作りの一環です。",
@@ -1517,8 +1550,8 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-07-10T07:14:17.312650",
-  "totalCount": 138,
+  "lastUpdated": "2026-07-10T20:21:00.083955",
+  "totalCount": 141,
   "sources": [
     "こどもとIT",
     "ICT教育ニュース",
