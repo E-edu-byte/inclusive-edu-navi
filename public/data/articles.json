@@ -1,6 +1,39 @@
 {
   "articles": [
     {
+      "id": "ef0fe6290b22",
+      "title": "奈良県の不登校支援メタバース、FAMcampusで2年目の運用開始",
+      "summary": "奈良県が、学校に行きづらい子どもたちのために、仮想空間「FAMcampus」を使った支援を2年目も始めました。これは、自宅からでも安心して学びや交流ができる新しい居場所を提供し、多様な学び方を保障する大切な取り組みです。",
+      "category": "実践・事例",
+      "date": "2026-07-15",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2125351.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2125/351/20260714_1.png",
+      "source": "こどもとIT",
+      "mainKeyword": "不登校支援"
+    },
+    {
+      "id": "54bfa1402e7e",
+      "title": "不登校・行き渋り経験のある小学生保護者の8割強が中学進学に不安=ベネッセ調べ=",
+      "summary": "不登校や学校に行き渋る小学生の保護者の8割以上が、子どもが中学校へ進学することに不安を感じていると、ベネッセの調査で分かりました。この結果は、不登校の子どもたちが次のステップに進む際に、どのような心の準備や支援が必要なのか、社会全体で考えるべき大切な課題であることを示しています。",
+      "category": "多様な学び",
+      "date": "2026-07-15",
+      "url": "https://ict-enews.net/2026/07/15benesse-14/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/07/0715-bns-1200x630.jpg",
+      "source": "ICT教育ニュース",
+      "mainKeyword": "不登校"
+    },
+    {
+      "id": "8126ceffc95c",
+      "title": "不登校・行き渋り家庭の84％が中学進学に不安、ベネッセが保護者調査",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "多様な学び",
+      "date": "2026-07-15",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2125164.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2125/164/02.jpg",
+      "source": "こどもとIT",
+      "mainKeyword": "不登校支援"
+    },
+    {
       "id": "120882900961",
       "title": "日本医師会が発達障害を解説する動画を公開、公式YouTubeで特性や支援を紹介",
       "summary": "日本医師会が、発達障害の特性や必要な支援について解説する動画をYouTubeで公開しました。この取り組みは、発達障害への正しい理解を広げ、支援が必要な人が適切な情報に触れる機会を増やす上でとても大切です。",
@@ -1550,8 +1583,8 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-07-15T06:47:55.533674",
-  "totalCount": 141,
+  "lastUpdated": "2026-07-15T19:16:33.111817",
+  "totalCount": 144,
   "sources": [
     "こどもとIT",
     "ICT教育ニュース",
