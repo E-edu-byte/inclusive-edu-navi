@@ -1,11 +1,11 @@
 {
-  "lastUpdated": "2026-07-16T19:23:09.784591",
-  "period": "2026/06/16 - 2026/07/16",
-  "pageViews": 7,
+  "lastUpdated": "2026-07-17T06:57:45.767036",
+  "period": "2026/06/17 - 2026/07/17",
+  "pageViews": 6,
   "todayPageViews": 0,
   "users": 4,
   "todayUsers": 0,
-  "sessions": 7,
+  "sessions": 6,
   "todaySessions": 0,
   "clicks": {
     "amazon": 0,
@@ -27,11 +27,11 @@
   },
   "topPages": [
     {
-      "path": "/inclusive/editor-secret-dashboard/",
-      "views": 4
+      "path": "/inclusive/",
+      "views": 3
     },
     {
-      "path": "/inclusive/",
+      "path": "/inclusive/editor-secret-dashboard/",
       "views": 3
     }
   ]
