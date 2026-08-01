@@ -1,11 +1,11 @@
 {
-  "lastUpdated": "2026-08-01T19:11:56.168932",
-  "period": "2026/07/02 - 2026/08/01",
-  "pageViews": 4,
+  "lastUpdated": "2026-08-02T06:45:24.219720",
+  "period": "2026/07/03 - 2026/08/02",
+  "pageViews": 3,
   "todayPageViews": 0,
   "users": 3,
   "todayUsers": 0,
-  "sessions": 4,
+  "sessions": 3,
   "todaySessions": 0,
   "clicks": {
     "amazon": 0,
@@ -32,7 +32,7 @@
     },
     {
       "path": "/inclusive/editor-secret-dashboard/",
-      "views": 2
+      "views": 1
     }
   ]
 }
