@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "329c94f0ffd3",
+      "title": "タイピングとAI英単語で個別最適な学び、learningBOXが特別支援学級でICT授業を実施",
+      "summary": "学習システムlearningBOXが、特別支援学級でICTを使った授業を行いました。タイピング練習やAI英単語学習を通じて、子ども一人ひとりのペースに合わせた学びを実現。多様なニーズを持つ子どもたちが、それぞれの方法で効果的に学べる機会を提供し、教育の可能性を広げる大切な取り組みです。",
+      "category": "実践・事例",
+      "date": "2026-08-04",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2130225.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2130/225/main.jpg",
+      "source": "こどもとIT",
+      "mainKeyword": "個別最適な学び"
+    },
+    {
       "id": "f693c8dc2916",
       "title": "東京都、2027年度使用教科書を採択…小・中学校は前年度と同一",
       "summary": "東京都は、2027年度から小学校、中学校、特別支援学校で使う教科書を決定しました。多くの学校で、現在と同じ教科書が引き続き採用されます。この決定は、子どもたちが学ぶ内容や方法の基礎となるもので、すべての子どもたちに質の高い学びを保障するために非常に重要です。",
@@ -1660,12 +1671,12 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-08-04T06:59:14.840637",
-  "totalCount": 151,
+  "lastUpdated": "2026-08-04T19:50:14.134143",
+  "totalCount": 152,
   "sources": [
+    "こどもとIT",
     "リセマム",
     "ICT教育ニュース",
-    "こどもとIT",
     "PRESIDENT Online",
     "朝日新聞 教育",
     "PR TIMES",
