@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "5acb74b16b9c",
+      "title": "ヒアリングから制作・発表まで、不登校の小中高生がデザインの仕事を体験",
+      "summary": "学校に行けない小中高生が、デザイン会社で企画から発表までの一連の仕事を体験しました。この取り組みは、不登校の子どもたちが社会とつながり、自分の得意なことや将来の夢を見つける大切な機会を提供した点で重要です。",
+      "category": "実践・事例",
+      "date": "2026-08-05",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2130720.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2130/720/01.png",
+      "source": "こどもとIT",
+      "mainKeyword": "不登校"
+    },
+    {
       "id": "329c94f0ffd3",
       "title": "タイピングとAI英単語で個別最適な学び、learningBOXが特別支援学級でICT授業を実施",
       "summary": "学習システムlearningBOXが、特別支援学級でICTを使った授業を行いました。タイピング練習やAI英単語学習を通じて、子ども一人ひとりのペースに合わせた学びを実現。多様なニーズを持つ子どもたちが、それぞれの方法で効果的に学べる機会を提供し、教育の可能性を広げる大切な取り組みです。",
@@ -1671,8 +1682,8 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-08-05T07:04:28.442910",
-  "totalCount": 152,
+  "lastUpdated": "2026-08-05T19:47:25.370522",
+  "totalCount": 153,
   "sources": [
     "こどもとIT",
     "リセマム",
