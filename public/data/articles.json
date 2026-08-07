@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "b10310910067",
+      "title": "富⼠ソフト、教育メタバース「FAMcampus」を活用した不登校支援が大府市で4年目の運用開始",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "多様な学び",
+      "date": "2026-08-06",
+      "url": "https://ict-enews.net/2026/08/07fsi/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/08/61382-215-6ec3e791cb32a103675ae2fe0a623903-1920x1080-1-1200x630.webp",
+      "source": "ICT教育ニュース",
+      "mainKeyword": "不登校支援"
+    },
+    {
       "id": "5acb74b16b9c",
       "title": "ヒアリングから制作・発表まで、不登校の小中高生がデザインの仕事を体験",
       "summary": "学校に行けない小中高生が、デザイン会社で企画から発表までの一連の仕事を体験しました。この取り組みは、不登校の子どもたちが社会とつながり、自分の得意なことや将来の夢を見つける大切な機会を提供した点で重要です。",
@@ -1682,12 +1693,12 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-08-06T19:49:06.852869",
-  "totalCount": 153,
+  "lastUpdated": "2026-08-07T09:59:50.382636",
+  "totalCount": 154,
   "sources": [
+    "ICT教育ニュース",
     "こどもとIT",
     "リセマム",
-    "ICT教育ニュース",
     "PRESIDENT Online",
     "朝日新聞 教育",
     "PR TIMES",
