@@ -1,6 +1,28 @@
 {
   "articles": [
     {
+      "id": "85f6c78644db",
+      "title": "不登校は「誰にでも起こりうる」が68％、一方で支援制度の認知は低く",
+      "summary": "不登校は誰にでも起こりうると多くの人が認識している一方、不登校の子どもを支援する制度はあまり知られていないことが分かりました。支援が必要な時に制度が利用されない可能性があり、制度の認知度を高めることが重要です。",
+      "category": "多様な学び",
+      "date": "2026-08-18",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2133543.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2133/543/01.png",
+      "source": "こどもとIT",
+      "mainKeyword": "不登校支援"
+    },
+    {
+      "id": "cd7ef9279c38",
+      "title": "不登校をめぐる「誤解」を12人の専門家とひも解く、ベネッセ高等学院長が初の著書",
+      "summary": "ベネッセ高等学院長が、不登校に関する誤解を解き明かす本を出版しました。12人の専門家が協力し、不登校の原因や背景を解説しています。この本は、不登校の子どもたちへの理解を深め、彼らを支える社会のあり方を考える上でとても重要です。",
+      "category": "書籍",
+      "date": "2026-08-18",
+      "url": "https://edu.watch.impress.co.jp/docs/knowledge/kodomoit-booklab/2133245.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2133/245/02.jpg",
+      "source": "こどもとIT",
+      "mainKeyword": "不登校"
+    },
+    {
       "id": "5f8808e1ebfc",
       "title": "保護者だけでも相談OK、学研WILL学園が不登校の中高生向け無料オンライン相談を実施",
       "summary": "学研WILL学園が、学校に行きにくい中学生や高校生、そしてその保護者に向けて、無料でオンライン相談を始めました。自宅から気軽に専門家へ相談できるため、不登校の子どもたちが自分に合った学び方や将来について考える上で、大切な支援の機会となります。",
@@ -1748,8 +1770,8 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-08-18T06:16:50.384188",
-  "totalCount": 159,
+  "lastUpdated": "2026-08-18T17:54:59.219375",
+  "totalCount": 161,
   "sources": [
     "こどもとIT",
     "NHK NEWS WEB",
