@@ -1,6 +1,28 @@
 {
   "articles": [
     {
+      "id": "30dc7b831c75",
+      "title": "AI・データサイエンスや不登校支援を学ぶ、鳴門教育大学が大学院説明会を9月13日に開催",
+      "summary": "鳴門教育大学が、AIやデータサイエンス、不登校支援を学べる大学院の説明会を開きます。不登校支援は、すべての子どもが安心して学べる環境を整えるインクルーシブ教育にとって重要です。この説明会は、教育現場で多様な子どもたちを支える専門家を育てる機会となります。",
+      "category": "多様な学び",
+      "date": "2026-08-19",
+      "url": "https://edu.watch.impress.co.jp/docs/news/event/2133684.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2133/684/01.jpg",
+      "source": "こどもとIT",
+      "mainKeyword": "不登校支援"
+    },
+    {
+      "id": "65b642416548",
+      "title": "不登校の子どもは35万人。正しく知っていた人は10人に1人 =明光みらい調べ=",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "多様な学び",
+      "date": "2026-08-19",
+      "url": "https://ict-enews.net/2026/08/19meikomirai/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/08/0819-meiko-1200x630.webp",
+      "source": "ICT教育ニュース",
+      "mainKeyword": "不登校"
+    },
+    {
       "id": "85f6c78644db",
       "title": "不登校は「誰にでも起こりうる」が68％、一方で支援制度の認知は低く",
       "summary": "不登校は誰にでも起こりうると多くの人が認識している一方、不登校の子どもを支援する制度はあまり知られていないことが分かりました。支援が必要な時に制度が利用されない可能性があり、制度の認知度を高めることが重要です。",
@@ -1770,12 +1792,12 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-08-19T06:14:48.158490",
-  "totalCount": 161,
+  "lastUpdated": "2026-08-19T17:55:28.497334",
+  "totalCount": 163,
   "sources": [
     "こどもとIT",
-    "NHK NEWS WEB",
     "ICT教育ニュース",
+    "NHK NEWS WEB",
     "リセマム",
     "PRESIDENT Online",
     "朝日新聞 教育",
