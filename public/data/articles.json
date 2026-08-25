@@ -1,6 +1,39 @@
 {
   "articles": [
     {
+      "id": "3e5ae8a2dd98",
+      "title": "カタリバ、「みんなの不登校支援ダイアログ2026」を9月27日に開催",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "多様な学び",
+      "date": "2026-08-25",
+      "url": "https://ict-enews.net/2026/08/25katariba/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/08/0825-katariba-1200x630.webp",
+      "source": "ICT教育ニュース",
+      "mainKeyword": ""
+    },
+    {
+      "id": "f17cd7f0275f",
+      "title": "TikTok、不登校生動画甲子園の授賞式を開催　延べ100万人以上がリアルタイムで視聴",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "支援・合理的配慮",
+      "date": "2026-08-25",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2135366.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2135/366/main.jpg",
+      "source": "こどもとIT",
+      "mainKeyword": ""
+    },
+    {
+      "id": "35ed6840afea",
+      "title": "徳島県立板野支援学校とSky、校務スマート化支援アプリ「SKYMENU Mobile」実証研究を開始",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "ICT・教材",
+      "date": "2026-08-25",
+      "url": "https://ict-enews.net/2026/08/25skygroup-2/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/08/0825-sky2.jpg",
+      "source": "ICT教育ニュース",
+      "mainKeyword": ""
+    },
+    {
       "id": "2d727b64a837",
       "title": "不登校支援の課題を官民で学び合う、カタリバが交流イベントを9月27日に開催",
       "summary": "NPO法人カタリバが、不登校の子どもたちへの支援について、国や自治体、民間団体で課題を学び合う交流イベントを9月27日に開催します。不登校が増える中、多様な立場の関係者が協力し、より良い支援方法を共に考える重要な機会となります。",
@@ -1858,11 +1891,11 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-08-25T06:19:45.828887",
-  "totalCount": 169,
+  "lastUpdated": "2026-08-25T18:00:33.148513",
+  "totalCount": 172,
   "sources": [
-    "こどもとIT",
     "ICT教育ニュース",
+    "こどもとIT",
     "NHK NEWS WEB",
     "リセマム",
     "PRESIDENT Online",
