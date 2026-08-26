@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "409bcb65303a",
+      "title": "不登校は「失われた時間」ではなく、別の何かが動き出す時間",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "多様な学び",
+      "date": "2026-08-26",
+      "url": "https://resemom.jp/article/2026/08/26/87303.html",
+      "imageUrl": "https://resemom.jp/imgs/ogp_f/400682.png",
+      "source": "リセマム",
+      "mainKeyword": ""
+    },
+    {
       "id": "3e5ae8a2dd98",
       "title": "カタリバ、「みんなの不登校支援ダイアログ2026」を9月27日に開催",
       "summary": "【要約準備中】この記事の要約は現在準備中です。",
@@ -1891,13 +1902,13 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-08-26T06:18:33.494385",
-  "totalCount": 172,
+  "lastUpdated": "2026-08-26T18:02:41.780866",
+  "totalCount": 173,
   "sources": [
+    "リセマム",
     "ICT教育ニュース",
     "こどもとIT",
     "NHK NEWS WEB",
-    "リセマム",
     "PRESIDENT Online",
     "朝日新聞 教育",
     "PR TIMES",
