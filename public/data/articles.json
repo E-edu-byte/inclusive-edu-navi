@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "dc59584037df",
+      "title": "不登校・葛藤・再起――2026年のARBOLの全てが詰まった3rd EP『Blue Heaven』8月26日リリース。新潟から放つ、ターニングポイントの6曲",
+      "summary": "ARBOLというアーティストが、不登校や心の葛藤、そこからの再出発をテーマにした新しい音楽作品をリリースしました。この作品は、学校に行けない経験をした人々に寄り添い、多様な生き方や再起への勇気を与える大切なメッセージを伝えています。",
+      "category": "多様な学び",
+      "date": "2026-08-28",
+      "url": "https://prtimes.jp/main/html/rd/p/000000478.000141380.html",
+      "imageUrl": "https://prcdn.freetls.fastly.net/release_image/141380/478/141380-478-32c9a102b08783b6bca3287f52f2b6fc-3900x3900.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+      "source": "PR TIMES",
+      "mainKeyword": "不登校"
+    },
+    {
       "id": "4d9162880bbb",
       "title": "子どもの不登校に「介護休業」条件に適合で活用可能、知らない親8割=サイボウズ調べ=",
       "summary": "【要約準備中】この記事の要約は現在準備中です。",
@@ -1913,16 +1924,16 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-08-28T14:02:02.490575",
-  "totalCount": 174,
+  "lastUpdated": "2026-08-29T05:13:03.596596",
+  "totalCount": 175,
   "sources": [
+    "PR TIMES",
     "ICT教育ニュース",
     "リセマム",
     "こどもとIT",
     "NHK NEWS WEB",
     "PRESIDENT Online",
     "朝日新聞 教育",
-    "PR TIMES",
     "科学技術振興機構 (JST)",
     "近大PICKS",
     "理化学研究所",
