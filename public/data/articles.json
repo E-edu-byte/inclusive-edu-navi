@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "4d9162880bbb",
+      "title": "子どもの不登校に「介護休業」条件に適合で活用可能、知らない親8割=サイボウズ調べ=",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "多様な学び",
+      "date": "2026-08-27",
+      "url": "https://ict-enews.net/2026/08/28cybozu-2/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/08/0828-cb0.jpg",
+      "source": "ICT教育ニュース",
+      "mainKeyword": ""
+    },
+    {
       "id": "409bcb65303a",
       "title": "不登校は「失われた時間」ではなく、別の何かが動き出す時間",
       "summary": "【要約準備中】この記事の要約は現在準備中です。",
@@ -1902,11 +1913,11 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-08-28T04:04:50.356161",
-  "totalCount": 173,
+  "lastUpdated": "2026-08-28T14:02:02.490575",
+  "totalCount": 174,
   "sources": [
-    "リセマム",
     "ICT教育ニュース",
+    "リセマム",
     "こどもとIT",
     "NHK NEWS WEB",
     "PRESIDENT Online",
