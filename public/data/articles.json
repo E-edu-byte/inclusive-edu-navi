@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "ae6706e4c872",
+      "title": "BayLeaf、オンラインフリースクール女子校「桂樹（けいじゅ）」開校",
+      "summary": "BayLeafという会社が、インターネットを使って学ぶ女子向けのフリースクール「桂樹」を始めました。これは、学校に行きづらいと感じる女の子たちが、自宅から安心して勉強できる新しい選択肢が増えたことを意味します。不登校の子どもが増える中、多様な学びの場はとても重要です。",
+      "category": "多様な学び",
+      "date": "2026-09-03",
+      "url": "https://ict-enews.net/2026/09/03bayleaf/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/09/0903-bl.webp",
+      "source": "ICT教育ニュース",
+      "mainKeyword": "オンラインフリースクール"
+    },
+    {
       "id": "adcff036c7e9",
       "title": "不登校を経験した生徒134人が企画・運営、東京みらい中学校で文化祭",
       "summary": "【要約準備中】この記事の要約は現在準備中です。",
@@ -1946,11 +1957,11 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-09-03T07:54:45.579379",
-  "totalCount": 177,
+  "lastUpdated": "2026-09-03T21:50:24.051195",
+  "totalCount": 178,
   "sources": [
-    "こどもとIT",
     "ICT教育ニュース",
+    "こどもとIT",
     "PR TIMES",
     "リセマム",
     "NHK NEWS WEB",
