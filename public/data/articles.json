@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "a39a1f5545c7",
+      "title": "目的は｢病の治療｣だけではない…ジャーナリストが危惧する世界で年間5兆円も爆売れする｢クスリ｣の正体",
+      "summary": "厚生労働省の調査により、発達障害と診断された人が増えていることが分かり、ジャーナリストは、その背景にある薬の使われ方や診断基準について疑問を呈しています。これは、発達障害への適切な支援を考える上で、診断のあり方や薬の影響を深く理解する必要があるためです。",
+      "category": "支援・合理的配慮",
+      "date": "2026-09-04",
+      "url": "https://president.jp/articles/-/117409",
+      "imageUrl": "https://president.ismcdn.jp/mwimgs/0/1/1200wm/img_01d09aed1d9d402441446c49b8da416d578831.jpg",
+      "source": "PRESIDENT Online",
+      "mainKeyword": "発達障害"
+    },
+    {
       "id": "ae6706e4c872",
       "title": "BayLeaf、オンラインフリースクール女子校「桂樹（けいじゅ）」開校",
       "summary": "BayLeafという会社が、インターネットを使って学ぶ女子向けのフリースクール「桂樹」を始めました。これは、学校に行きづらいと感じる女の子たちが、自宅から安心して勉強できる新しい選択肢が増えたことを意味します。不登校の子どもが増える中、多様な学びの場はとても重要です。",
@@ -1957,15 +1968,15 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-09-04T21:44:34.419501",
-  "totalCount": 178,
+  "lastUpdated": "2026-09-05T07:39:50.297803",
+  "totalCount": 179,
   "sources": [
+    "PRESIDENT Online",
     "ICT教育ニュース",
     "こどもとIT",
     "PR TIMES",
     "リセマム",
     "NHK NEWS WEB",
-    "PRESIDENT Online",
     "朝日新聞 教育",
     "科学技術振興機構 (JST)",
     "近大PICKS",
