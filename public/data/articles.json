@@ -1,6 +1,39 @@
 {
   "articles": [
     {
+      "id": "9b4d9f9015c2",
+      "title": "eboard、特別支援教育向けに自治体一括申請を開始",
+      "summary": "オンライン学習サービス「eboard」が、特別支援教育が必要な子どもたちのために、自治体がまとめて利用を申し込めるようになりました。これにより、多くの学校で一人ひとりの学びの多様性に対応した教材が導入しやすくなり、子どもたちがそれぞれのペースで学びを進める機会が増えることが期待されます。",
+      "category": "ICT・教材",
+      "date": "2026-09-09",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2139084.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2139/084/main.png",
+      "source": "こどもとIT",
+      "mainKeyword": "ICT教材"
+    },
+    {
+      "id": "c46cdb31315d",
+      "title": "ICT教材eboard、特別支援教育で「自治体一括アカウント申請」の受付開始",
+      "summary": "ICT教材の「eboard」が、特別支援教育で使うための無料アカウントを、自治体や教育委員会がまとめて申請できるようにしました。これにより、これまで学校ごとだった手続きが簡単になり、より多くの子どもたちがICT教材を使えるようになります。それぞれの学びをサポートするのに役立つでしょう。",
+      "category": "ICT・教材",
+      "date": "2026-09-08",
+      "url": "https://ict-enews.net/2026/09/09eboard-3/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/09/0909-eb-1200x630.webp",
+      "source": "ICT教育ニュース",
+      "mainKeyword": "eboard"
+    },
+    {
+      "id": "256ade0c3726",
+      "title": "東京大学大学院教育学研究科 インクルーシブな未来創造社会連携講座特任准教授（特定有期雇用教職員）の公募について",
+      "summary": "東京大学が、多様な人が共に生きる社会を目指す「インクルーシブ」な未来を作るための先生を募集しています。これは、専門家が研究や教育を進めることで、誰もが学びやすい社会の実現を加速させる重要な動きです。",
+      "category": "研究",
+      "date": "2026-09-08",
+      "url": "https://www.p.u-tokyo.ac.jp/info-public-solicitation/%e6%9d%b1%e4%ba%ac%e5%a4%a7%e5%ad%a6%e5%a4%a7%e5%ad%a6%e9%99%a2%e6%95%99%e8%82%b2%e5%ad%a6%e7%a0%94%e7%a9%b6%e7%a7%91-%e3%82%a4%e3%83%b3%e3%82%af%e3%83%ab%e3%83%bc%e3%82%b7%e3%83%96%e3%81%aa%e6%9c%aa/",
+      "imageUrl": "https://www.p.u-tokyo.ac.jp/wp-content/uploads/2025/12/eyecatch-noimage02-1024x538.webp",
+      "source": "東京大学 教育学研究科",
+      "mainKeyword": "インクルーシブ教育"
+    },
+    {
       "id": "a39a1f5545c7",
       "title": "目的は｢病の治療｣だけではない…ジャーナリストが危惧する世界で年間5兆円も爆売れする｢クスリ｣の正体",
       "summary": "厚生労働省の調査により、発達障害と診断された人が増えていることが分かり、ジャーナリストは、その背景にある薬の使われ方や診断基準について疑問を呈しています。これは、発達障害への適切な支援を考える上で、診断のあり方や薬の影響を深く理解する必要があるためです。",
@@ -1968,12 +2001,13 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-09-09T08:03:49.672812",
-  "totalCount": 179,
+  "lastUpdated": "2026-09-09T21:59:49.128313",
+  "totalCount": 182,
   "sources": [
-    "PRESIDENT Online",
-    "ICT教育ニュース",
     "こどもとIT",
+    "ICT教育ニュース",
+    "東京大学 教育学研究科",
+    "PRESIDENT Online",
     "PR TIMES",
     "リセマム",
     "NHK NEWS WEB",
