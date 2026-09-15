@@ -1,6 +1,28 @@
 {
   "articles": [
     {
+      "id": "5bd1acbcb6e7",
+      "title": "AIで「子供に合う教材」を形に、特別支援教員向け無料講座を仙台・東京・宮崎で開催",
+      "summary": "AIを使って、子ども一人ひとりに合った教材を作るための無料講座が、特別支援教育の先生たち向けに開かれました。この取り組みは、AI技術で個々の学習ニーズに合わせた教材を開発し、多様な子どもたちがより効果的に、自分らしく学べるようにすることを目指しており、教育の質の向上に繋がります。",
+      "category": "ICT・教材",
+      "date": "2026-09-15",
+      "url": "https://edu.watch.impress.co.jp/docs/news/event/2140940.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2140/940/main.png",
+      "source": "こどもとIT",
+      "mainKeyword": "AI教材"
+    },
+    {
+      "id": "3a4ea99c89ac",
+      "title": "PAPAMOとつくば市、“療育難民”の子どもたちにオンライン発達支援 評価指標の改善を確認",
+      "summary": "PAPAMOとつくば市が連携し、発達に課題を抱える子どもたちへオンラインでの発達支援を開始しました。専門的な支援を受けにくい子どもたちが自宅からサポートを受けられるようになり、支援の効果を測る評価基準も改善されました。これにより、より多くの場所で質の高い支援が提供されることが期待されます。",
+      "category": "実践・事例",
+      "date": "2026-09-10",
+      "url": "https://prtimes.jp/main/html/rd/p/000000047.000076936.html",
+      "imageUrl": "https://prcdn.freetls.fastly.net/release_image/76936/47/76936-47-9a2f4929f5d40bab365612fc9c2b22e1-1999x1333.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+      "source": "PR TIMES",
+      "mainKeyword": "オンライン発達支援"
+    },
+    {
       "id": "9b4d9f9015c2",
       "title": "eboard、特別支援教育向けに自治体一括申請を開始",
       "summary": "オンライン学習サービス「eboard」が、特別支援教育が必要な子どもたちのために、自治体がまとめて利用を申し込めるようになりました。これにより、多くの学校で一人ひとりの学びの多様性に対応した教材が導入しやすくなり、子どもたちがそれぞれのペースで学びを進める機会が増えることが期待されます。",
@@ -2001,14 +2023,14 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-09-15T08:36:39.251830",
-  "totalCount": 182,
+  "lastUpdated": "2026-09-15T22:36:03.368506",
+  "totalCount": 184,
   "sources": [
     "こどもとIT",
+    "PR TIMES",
     "ICT教育ニュース",
     "東京大学 教育学研究科",
     "PRESIDENT Online",
-    "PR TIMES",
     "リセマム",
     "NHK NEWS WEB",
     "朝日新聞 教育",
