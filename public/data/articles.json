@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "69619113cab2",
+      "title": "PISA2025、日本は科学・読解・数学でOECD1位に",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "支援・合理的配慮",
+      "date": "2026-09-16",
+      "url": "https://edu.watch.impress.co.jp/docs/news/2139604.html",
+      "imageUrl": "https://edu.watch.impress.co.jp/img/kit/list/2139/604/0001.png",
+      "source": "こどもとIT",
+      "mainKeyword": ""
+    },
+    {
       "id": "5bd1acbcb6e7",
       "title": "AIで「子供に合う教材」を形に、特別支援教員向け無料講座を仙台・東京・宮崎で開催",
       "summary": "AIを使って、子ども一人ひとりに合った教材を作るための無料講座が、特別支援教育の先生たち向けに開かれました。この取り組みは、AI技術で個々の学習ニーズに合わせた教材を開発し、多様な子どもたちがより効果的に、自分らしく学べるようにすることを目指しており、教育の質の向上に繋がります。",
@@ -2023,8 +2034,8 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-09-16T08:19:52.260164",
-  "totalCount": 184,
+  "lastUpdated": "2026-09-16T22:31:13.415566",
+  "totalCount": 185,
   "sources": [
     "こどもとIT",
     "PR TIMES",
