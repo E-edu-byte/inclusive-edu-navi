@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "fde34127d9e8",
+      "title": "小田急ロマンスカーが走る教室に　不登校だった元運転士2人が企画",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "多様な学び",
+      "date": "2026-09-22",
+      "url": "https://www.asahi.com/articles/ASV9Q31QBV9QULFA004M.html?ref=rss",
+      "imageUrl": "https://imgopt.asahi.com/ogp/AS20260922002152_comm.jpg",
+      "source": "朝日新聞 教育",
+      "mainKeyword": ""
+    },
+    {
       "id": "69619113cab2",
       "title": "PISA2025、日本は科学・読解・数学でOECD1位に",
       "summary": "【要約準備中】この記事の要約は現在準備中です。",
@@ -2034,9 +2045,10 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-09-22T08:44:14.266715",
-  "totalCount": 185,
+  "lastUpdated": "2026-09-22T22:25:37.764538",
+  "totalCount": 186,
   "sources": [
+    "朝日新聞 教育",
     "こどもとIT",
     "PR TIMES",
     "ICT教育ニュース",
@@ -2044,7 +2056,6 @@
     "PRESIDENT Online",
     "リセマム",
     "NHK NEWS WEB",
-    "朝日新聞 教育",
     "科学技術振興機構 (JST)",
     "近大PICKS",
     "理化学研究所",
