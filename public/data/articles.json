@@ -1,6 +1,39 @@
 {
   "articles": [
     {
+      "id": "affdd148a502",
+      "title": "小学生の不登校、きっかけ1位は「人間関係」ではなく「分からない」=スダチ調べ=",
+      "summary": "小学生が学校に行けなくなる主な理由について、不登校支援団体が調査しました。その結果、友人関係よりも、授業についていけない「分からない」ことが一番のきっかけだと判明。この発見は、子どもたちへの効果的な支援方法を考える上で重要であり、学びのつまずきに早く気づく大切さを示しています。",
+      "category": "多様な学び",
+      "date": "2026-09-24",
+      "url": "https://ict-enews.net/2026/09/24sudachi/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/09/0924-sudachi.jpg",
+      "source": "ICT教育ニュース",
+      "mainKeyword": "不登校の原因"
+    },
+    {
+      "id": "9f72e6274e3f",
+      "title": "運動好きの子のための「将棋」― 小学校教員がつくった「ブラウザサッカー将棋」",
+      "summary": "【要約準備中】この記事の要約は現在準備中です。",
+      "category": "ICT・教材",
+      "date": "2026-09-24",
+      "url": "https://ict-enews.net/2026/09/24soccer/",
+      "imageUrl": "https://ict-enews.net/wp-content/uploads/2026/09/0924-soccer.jpg",
+      "source": "ICT教育ニュース",
+      "mainKeyword": "ブラウザサッカー将棋"
+    },
+    {
+      "id": "5e0dacac055f",
+      "title": "小学生の不登校理由1位「わからない」42.3％",
+      "summary": "小学生が学校に行きづらくなる理由として、「よくわからない」が最も多いことが調査で明らかになりました。学年が上がると友達関係のトラブルが理由となる割合が増える傾向も示されています。この調査結果は、子どもたちの不登校の背景を理解し、一人ひとりに合ったサポートを考える上で重要な視点を提供します。",
+      "category": "多様な学び",
+      "date": "2026-09-24",
+      "url": "https://resemom.jp/article/2026/09/24/87633.html",
+      "imageUrl": "https://resemom.jp/imgs/ogp_f/401852.png",
+      "source": "リセマム",
+      "mainKeyword": "不登校理由"
+    },
+    {
       "id": "fde34127d9e8",
       "title": "小田急ロマンスカーが走る教室に　不登校だった元運転士2人が企画",
       "summary": "【要約準備中】この記事の要約は現在準備中です。",
@@ -2045,16 +2078,16 @@
       "mainKeyword": "UDフォント"
     }
   ],
-  "lastUpdated": "2026-09-24T08:21:07.594158",
-  "totalCount": 186,
+  "lastUpdated": "2026-09-24T22:35:14.409911",
+  "totalCount": 189,
   "sources": [
+    "ICT教育ニュース",
+    "リセマム",
     "朝日新聞 教育",
     "こどもとIT",
     "PR TIMES",
-    "ICT教育ニュース",
     "東京大学 教育学研究科",
     "PRESIDENT Online",
-    "リセマム",
     "NHK NEWS WEB",
     "科学技術振興機構 (JST)",
     "近大PICKS",

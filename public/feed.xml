@@ -5,8 +5,38 @@
     <link>https://e-edu-byte.github.io/inclusive-edu-navi</link>
     <description>すべての子どもの学びを支える最新情報。インクルーシブ教育に関するニュース、研究、実践事例をお届けします。</description>
     <language>ja</language>
-    <lastBuildDate>Wed, 23 Sep 2026 23:22:05 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 24 Sep 2026 13:36:16 GMT</lastBuildDate>
     <atom:link href="https://e-edu-byte.github.io/inclusive-edu-navi/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title><![CDATA[小学生の不登校、きっかけ1位は「人間関係」ではなく「分からない」=スダチ調べ=]]></title>
+      <link>https://ict-enews.net/2026/09/24sudachi/</link>
+      <guid>https://ict-enews.net/2026/09/24sudachi/</guid>
+      <description><![CDATA[小学生が学校に行けなくなる主な理由について、不登校支援団体が調査しました。その結果、友人関係よりも、授業についていけない「分からない」ことが一番のきっかけだと判明。この発見は、子どもたちへの効果的な支援方法を考える上で重要であり、学びのつまずきに早く気づく大切さを示しています。]]></description>
+      <category>多様な学び</category>
+      <pubDate>Thu, 24 Sep 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[運動好きの子のための「将棋」― 小学校教員がつくった「ブラウザサッカー将棋」]]></title>
+      <link>https://ict-enews.net/2026/09/24soccer/</link>
+      <guid>https://ict-enews.net/2026/09/24soccer/</guid>
+      <description><![CDATA[【要約準備中】この記事の要約は現在準備中です。]]></description>
+      <category>ICT・教材</category>
+      <pubDate>Thu, 24 Sep 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
+
+    <item>
+      <title><![CDATA[小学生の不登校理由1位「わからない」42.3％]]></title>
+      <link>https://resemom.jp/article/2026/09/24/87633.html</link>
+      <guid>https://resemom.jp/article/2026/09/24/87633.html</guid>
+      <description><![CDATA[小学生が学校に行きづらくなる理由として、「よくわからない」が最も多いことが調査で明らかになりました。学年が上がると友達関係のトラブルが理由となる割合が増える傾向も示されています。この調査結果は、子どもたちの不登校の背景を理解し、一人ひとりに合ったサポートを考える上で重要な視点を提供します。]]></description>
+      <category>多様な学び</category>
+      <pubDate>Thu, 24 Sep 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
 
     <item>
       <title><![CDATA[小田急ロマンスカーが走る教室に　不登校だった元運転士2人が企画]]></title>
@@ -175,36 +205,6 @@
       <description><![CDATA[【要約準備中】この記事の要約は現在準備中です。]]></description>
       <category>ICT・教材</category>
       <pubDate>Tue, 25 Aug 2026 00:00:00 GMT</pubDate>
-      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
-    </item>
-
-    <item>
-      <title><![CDATA[不登校支援の課題を官民で学び合う、カタリバが交流イベントを9月27日に開催]]></title>
-      <link>https://edu.watch.impress.co.jp/docs/news/event/2134844.html</link>
-      <guid>https://edu.watch.impress.co.jp/docs/news/event/2134844.html</guid>
-      <description><![CDATA[NPO法人カタリバが、不登校の子どもたちへの支援について、国や自治体、民間団体で課題を学び合う交流イベントを9月27日に開催します。不登校が増える中、多様な立場の関係者が協力し、より良い支援方法を共に考える重要な機会となります。]]></description>
-      <category>多様な学び</category>
-      <pubDate>Mon, 24 Aug 2026 00:00:00 GMT</pubDate>
-      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
-    </item>
-
-    <item>
-      <title><![CDATA[ベネッセ、不登校生徒の「主体的な学び」の支援に向けた生成AI活用の研究成果を公開]]></title>
-      <link>https://ict-enews.net/2026/08/24benesse-13/</link>
-      <guid>https://ict-enews.net/2026/08/24benesse-13/</guid>
-      <description><![CDATA[ベネッセは、学校に行けない生徒さん（不登校生徒）が自分から積極的に学ぶことを支援するため、生成AIを使った研究の成果を発表しました。この取り組みは、AIが一人ひとりに合った学習方法を提供し、学校以外の場所でも質の高い教育を受ける機会を広げる上で、とても重要です。]]></description>
-      <category>研究</category>
-      <pubDate>Mon, 24 Aug 2026 00:00:00 GMT</pubDate>
-      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
-    </item>
-
-    <item>
-      <title><![CDATA[Geminiで特別支援教材を作成、eboardが9月27日に大阪で無料講座]]></title>
-      <link>https://edu.watch.impress.co.jp/docs/news/event/2134843.html</link>
-      <guid>https://edu.watch.impress.co.jp/docs/news/event/2134843.html</guid>
-      <description><![CDATA[AIの「Gemini」を使って、発達に特性のある子どもたちに向けた教材を作る無料講座が大阪で開催されます。これにより、個々のニーズに合わせた学習資料を効率よく作成できるようになり、より多くの子どもたちが学びやすい環境を整える大切な取り組みです。]]></description>
-      <category>ICT・教材</category>
-      <pubDate>Mon, 24 Aug 2026 00:00:00 GMT</pubDate>
       <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
     </item>
 
