@@ -5,8 +5,18 @@
     <link>https://e-edu-byte.github.io/inclusive-edu-navi</link>
     <description>すべての子どもの学びを支える最新情報。インクルーシブ教育に関するニュース、研究、実践事例をお届けします。</description>
     <language>ja</language>
-    <lastBuildDate>Thu, 24 Sep 2026 13:36:16 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 24 Sep 2026 23:42:31 GMT</lastBuildDate>
     <atom:link href="https://e-edu-byte.github.io/inclusive-edu-navi/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title><![CDATA[マウスコンピューターと信州大が挑む校務DX、小・中・特別支援学校の先生が語る「校務PC」に必要なものとは？]]></title>
+      <link>https://edu.watch.impress.co.jp/docs/topic/special/2138155.html</link>
+      <guid>https://edu.watch.impress.co.jp/docs/topic/special/2138155.html</guid>
+      <description><![CDATA[マウスコンピューターと信州大学は、学校の先生方の業務をデジタル化するプロジェクトを進めています。小・中・特別支援学校の先生たちが、学校で使うパソコンに必要な条件を話し合いました。これは先生方の負担を減らし、子どもたちへの教育をより充実させるためにとても重要です。]]></description>
+      <category>ICT・教材</category>
+      <pubDate>Fri, 25 Sep 2026 00:00:00 GMT</pubDate>
+      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
+    </item>
 
     <item>
       <title><![CDATA[小学生の不登校、きっかけ1位は「人間関係」ではなく「分からない」=スダチ調べ=]]></title>
@@ -14,16 +24,6 @@
       <guid>https://ict-enews.net/2026/09/24sudachi/</guid>
       <description><![CDATA[小学生が学校に行けなくなる主な理由について、不登校支援団体が調査しました。その結果、友人関係よりも、授業についていけない「分からない」ことが一番のきっかけだと判明。この発見は、子どもたちへの効果的な支援方法を考える上で重要であり、学びのつまずきに早く気づく大切さを示しています。]]></description>
       <category>多様な学び</category>
-      <pubDate>Thu, 24 Sep 2026 00:00:00 GMT</pubDate>
-      <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
-    </item>
-
-    <item>
-      <title><![CDATA[運動好きの子のための「将棋」― 小学校教員がつくった「ブラウザサッカー将棋」]]></title>
-      <link>https://ict-enews.net/2026/09/24soccer/</link>
-      <guid>https://ict-enews.net/2026/09/24soccer/</guid>
-      <description><![CDATA[【要約準備中】この記事の要約は現在準備中です。]]></description>
-      <category>ICT・教材</category>
       <pubDate>Thu, 24 Sep 2026 00:00:00 GMT</pubDate>
       <source url="https://e-edu-byte.github.io/inclusive-edu-navi">インクルーシブ教育ナビ</source>
     </item>
